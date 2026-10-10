@@ -1,5 +1,16 @@
 -- shared_pvp_mine_shop_overbuy.lua
 
+-- 계정/세션 프로퍼티는 계정에 해당 컬럼이 아직 없으면 nil, 값이 비어 있으면
+-- 문자열 'None' 으로 온다. 그대로 비교/연산/string.format 에 넘기면 Lua 에러가
+-- 나므로(상점 구매 흐름이 통째로 끊긴다) 항상 숫자로 정규화해서 읽는다.
+function GET_SHOP_PROP_NUMBER(obj, propName, defaultValue)
+    defaultValue = tonumber(defaultValue) or 0
+    if obj == nil or propName == nil or propName == 'None' or propName == '' then
+        return defaultValue
+    end
+    return tonumber(TryGetProp(obj, propName, defaultValue)) or defaultValue
+end
+
 function GET_OVERBUY_NEED_COUNT(base, over_count, ratio, recipecls)  
     base = base + (((base * ratio) * over_count) / 10000)
     return math.floor(base)
@@ -22,7 +33,7 @@ function IS_OVERBUY_ITEM(shopType, recipecls, aObj)
     
     local need_acc_property = TryGetProp(recipecls, 'AccountNeedProperty', 'None')
 
-    if need_acc_property ~= 'None' and TryGetProp(aObj, need_acc_property, 0) <= 0 then
+    if need_acc_property ~= 'None' and GET_SHOP_PROP_NUMBER(aObj, need_acc_property, 0) <= 0 then
         if TryGetProp(recipecls, 'MaxOverBuyCount', 0) > 0 then
             local overbuy_prop = TryGetProp(recipecls, 'OverBuyProperty', 'None')  
             if overbuy_prop ~= 'None' then
@@ -43,7 +54,7 @@ function IS_EXCEED_OVERBUY_COUNT(shopType, acc, cls, itemCnt)  -- 아이템을 �
     if prop_name == 'None' then
         return true
     end
-    local now = TryGetProp(acc, prop_name, 0)
+    local now = GET_SHOP_PROP_NUMBER(acc, prop_name, 0)
     now = now + itemCnt
     
     if now > max then
@@ -64,11 +75,11 @@ function GET_CURRENT_OVERBUY_COUNT(shopType, base_value, recipecls, aObj)
         OverBuyRatioFunc_name = TryGetProp(recipecls, 'OverBuyRatioFunc', 'None')
     end
 
-    if need_acc_property ~= 'None' and TryGetProp(aObj, need_acc_property, 0) <= 0 then                    
+    if need_acc_property ~= 'None' and GET_SHOP_PROP_NUMBER(aObj, need_acc_property, 0) <= 0 then                    
         if TryGetProp(recipecls, 'MaxOverBuyCount', 0) > 0 then
             local overbuy_prop = TryGetProp(recipecls, 'OverBuyProperty', 'None')  
             if overbuy_prop ~= 'None' then
-                local current_overbuy = TryGetProp(aObj, overbuy_prop, TryGetProp(recipecls, 'MaxOverBuyCount', 0))               
+                local current_overbuy = GET_SHOP_PROP_NUMBER(aObj, overbuy_prop, TryGetProp(recipecls, 'MaxOverBuyCount', 0))               
 
                 if _G[OverBuyRatioFunc_name] ~= nil then
                     local over_count = _G[OverBuyRatioFunc_name](base_value, current_overbuy + 1, tonumber(TryGetProp(recipecls, 'OverBuyRatio', 5000)), recipecls)
@@ -97,11 +108,11 @@ function GET_TOTAL_AMOUNT_OVERBUY(shopType, base_value, recipecls, aObj, count)
         OverBuyRatioFunc_name = TryGetProp(recipecls, 'OverBuyRatioFunc', 'None')
     end
 
-    if need_acc_property ~= 'None' and TryGetProp(aObj, need_acc_property, 0) <= 0 then
+    if need_acc_property ~= 'None' and GET_SHOP_PROP_NUMBER(aObj, need_acc_property, 0) <= 0 then
         if TryGetProp(recipecls, 'MaxOverBuyCount', 0) > 0 then
             local overbuy_prop = TryGetProp(recipecls, 'OverBuyProperty', 'None')  
             if overbuy_prop ~= 'None' then                
-                local current_overbuy = TryGetProp(aObj, overbuy_prop, TryGetProp(recipecls, 'MaxOverBuyCount', 0))                
+                local current_overbuy = GET_SHOP_PROP_NUMBER(aObj, overbuy_prop, TryGetProp(recipecls, 'MaxOverBuyCount', 0))                
                 local over_count = 0
                 local idx = current_overbuy
 

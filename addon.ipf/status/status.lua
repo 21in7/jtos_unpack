@@ -265,6 +265,7 @@ function STATUS_ONLOAD(frame, obj, argStr, argNum)
     ACHIEVE_RESET(frame);
     CHATBALLOON_INIT(frame);
     HUD_SKIN_INIT(frame);
+    FACIAL_EXPORESSION_INIT(frame);
     STATUS_REPUTATION_INIT();
 
     STATUS_TAB_CHANGE(frame);
@@ -1452,24 +1453,37 @@ function STATUS_ATTRIBUTE_VALUE_RANGE_NEW(pc, opc, frame, gboxctrl, attributeNam
     return y + controlSet:GetHeight();
 end
 
+g_status_hidden_job_expanded = false
+
 function STATUS_HIDDEN_JOB_UNLOCK_VIEW(pc, opc, frame, gboxctrl, y)
     local jobList, jobListCnt = GetClassList('Job');
     local etcObj = GetMyEtcObject();
     local aObj = GetMyAccountObj();
+
+    -- 기존 히든잡 리스트 컨트롤 제거 (접힘 상태 처리)
     for i = 0, jobListCnt - 1 do
         local jobIES = GetClassByIndexFromList(jobList, i);
-        if jobIES ~= nil then
-            if jobIES.HiddenJob == 'YES' then
-                local flag = false
-                if jobIES.ClassName == 'Char4_12' then
-                    local jobCircle = session.GetJobGrade(GetClassNumber('Job', 'Char4_2', 'ClassID'))
-                    if jobCircle >= 3 then
-                        flag = true
-                    end
-                else
+        if jobIES ~= nil and jobIES.HiddenJob == 'YES' then
+            gboxctrl:RemoveChild('HIDDEN_JOB_' .. jobIES.ClassName)
+        end
+    end
+
+    -- 해금된 히든잡 목록 수집
+    local unlockedJobs = {}
+    for i = 0, jobListCnt - 1 do
+        local jobIES = GetClassByIndexFromList(jobList, i);
+        if jobIES ~= nil and jobIES.HiddenJob == 'YES' then
+            local flag = false
+            if jobIES.ClassName == 'Char4_12' then
+                local jobCircle = session.GetJobGrade(GetClassNumber('Job', 'Char4_2', 'ClassID'))
+                if jobCircle >= 3 then
                     flag = true
                 end
-                
+            else
+                flag = true
+            end
+
+            if flag == true then
                 local jobName
                 if config.GetServiceNation() == 'GLOBAL_JP' or config.GetServiceNation() == 'KOR' or config.GetServiceNation() == 'GLOBAL_KOR' then
                     jobName = jobIES.Name
@@ -1477,25 +1491,54 @@ function STATUS_HIDDEN_JOB_UNLOCK_VIEW(pc, opc, frame, gboxctrl, y)
                     jobName = jobIES.EngName
                 end
 					
-                if flag == true and((etcObj["HiddenJob_" .. jobIES.ClassName] == 300 and jobIES.PreFunction ~= 'None' ) or IS_KOR_TEST_SERVER()) then
-                    local hidden_job = gboxctrl:CreateControl('richtext', 'HIDDEN_JOB_' .. jobIES.ClassName, 10, y, 100, 25);
-                    hidden_job:SetText('{@sti8}' .. ScpArgMsg("HIDDEN_JOB_UNLOCK_VIEW_MSG1", "JOBNAME", jobName))
-                    y = y + 25
+
+                local isUnlocked = false
+                if (etcObj["HiddenJob_" .. jobIES.ClassName] == 300 and jobIES.PreFunction ~= 'None') or IS_KOR_TEST_SERVER() then
+                    isUnlocked = true
                 end
-                
-                if UQ_GET_JOB_SETTING_JOB(jobIES.ClassName) ~= nil or jobIES.SpecialJob =="YES" then
-                    if aObj["UnlockQuest_" .. jobIES.ClassName] ~= nil then
-                        if flag == true and((aObj["UnlockQuest_" .. jobIES.ClassName] == 1 and jobIES.PreFunction ~= 'None' ) or IS_KOR_TEST_SERVER()) then
-                            local hidden_job = gboxctrl:CreateControl('richtext', 'HIDDEN_JOB_' .. jobIES.ClassName, 10, y, 100, 25);
-                            hidden_job:SetText('{@sti8}' .. ScpArgMsg("HIDDEN_JOB_UNLOCK_VIEW_MSG1", "JOBNAME", jobName))
-                            y = y + 25
-                        end
+                if (UQ_GET_JOB_SETTING_JOB(jobIES.ClassName) ~= nil or jobIES.SpecialJob == "YES") and aObj["UnlockQuest_" .. jobIES.ClassName] ~= nil then
+                    if (aObj["UnlockQuest_" .. jobIES.ClassName] == 1 and jobIES.PreFunction ~= 'None') or IS_KOR_TEST_SERVER() then
+                        isUnlocked = true
                     end
+                end
+
+                if isUnlocked then
+                    table.insert(unlockedJobs, { ClassName = jobIES.ClassName, Name = jobName })
                 end
             end
         end
     end
+
+    if #unlockedJobs == 0 then
+        return y
+    end
+
+    -- 헤더 토글 버튼
+    local arrowStr = g_status_hidden_job_expanded and ' [▲]' or ' [▼]'
+    local headerBtn = gboxctrl:CreateControl('button', 'HIDDEN_JOB_TOGGLE_BTN', 10, y, 435, 35)
+    tolua.cast(headerBtn, 'ui::CButton')
+    local unlockStr = '{@sti8}' .. ScpArgMsg("HIDDEN_JOB_UNLOCK_VIEW_MSG1", "JOBNAME", '')
+    
+    headerBtn:SetText('{@sti8}{s18}'..unlockStr..'[' .. #unlockedJobs .. ScpArgMsg("CountOfThings")..']' .. arrowStr)
+    headerBtn:SetEventScript(ui.LBUTTONUP, 'STATUS_HIDDEN_JOB_TOGGLE')
+    headerBtn:SetSkinName("test_skin_01_btn")
+    y = y + 35
+
+    -- 펼쳐진 상태일 때 목록 표시
+    if g_status_hidden_job_expanded then
+        for _, job in ipairs(unlockedJobs) do
+            local hidden_job = gboxctrl:CreateControl('richtext', 'HIDDEN_JOB_' .. job.ClassName, 20, y, 415, 35)
+            hidden_job:SetText('{@sti8}' .. ScpArgMsg("HIDDEN_JOB_UNLOCK_VIEW_MSG1", "JOBNAME", job.Name))
+            y = y + 25
+        end
+    end
+
     return y
+end
+
+function STATUS_HIDDEN_JOB_TOGGLE()
+    g_status_hidden_job_expanded = not g_status_hidden_job_expanded
+    STATUS_INFO()
 end
 
 function STATUS_ITEM_GEAR_SCORE(pc, opc, frame, gboxctrl, y)        
@@ -3105,7 +3148,6 @@ if frame == nil then return; end
             addon.BroadMsg("HUD_SKIN_APPLY", item_value, 0);
         end
         addon.BroadMsg("STAT_UPDATE", "",0);
-
     end
 end
 
@@ -3160,19 +3202,85 @@ function HUD_SKIN_TIME_INFO_UPDATE(frame, index)
                 local SkinDate = TryGetProp(acc, AccProp, "None");
                 if SkinDate ~= nil and SkinDate ~= "None" then
 
-                    local sysTime = geTime.GetServerSystemTime();
                     local endTime = imcTime.GetSysTimeByStr(SkinDate);
-                    local difSec = imcTime.GetDifSec(endTime, sysTime);
+                    if endTime.wYear ~= 2999 then
+                        local sysTime = geTime.GetServerSystemTime();
+                        local difSec = imcTime.GetDifSec(endTime, sysTime);
 
-                    hudskin_slot:SetFrontImage('clock_inven');
-                    icon:SetDrawLifeTimeText(0);
-                    icon:SetUserValue("REMAINSEC", difSec);
-                    icon:SetUserValue("STARTSEC", imcTime.GetAppTime());
-                    icon:SetDrawLifeTimeText(1);
-                    icon:SetOnLifeTimeUpdateScp('ICON_UPDATE_CHATBALLOON_REMAIN_LIFETIME');                   
+                        hudskin_slot:SetFrontImage('clock_inven');
+                        icon:SetDrawLifeTimeText(0);
+                        icon:SetUserValue("REMAINSEC", difSec);
+                        icon:SetUserValue("STARTSEC", imcTime.GetAppTime());
+                        icon:SetDrawLifeTimeText(1);
+                        icon:SetOnLifeTimeUpdateScp('ICON_UPDATE_CHATBALLOON_REMAIN_LIFETIME');
+                    end
                 end
             end
         end
     end
 
+end
+
+------------------------------ 얼굴 표정 설정 ------------------------------
+-- facial_expression
+function FACIAL_EXPORESSION_INIT(frame)
+    if frame == nil then return; end
+    local facial_expression_list = GET_CHILD_RECURSIVELY(frame, "facial_expression_list", "ui::CDropList");
+    if facial_expression_list ~= nil then
+        local select_item_idx = 0;
+        facial_expression_list:EnableHitTest(1);
+        facial_expression_list:ClearItems();
+        -- default item
+        local item_idx = 1;
+        local default_text = frame:GetUserConfig("DEFAULT_FACE_TEXT");
+        facial_expression_list:AddItem(item_idx, default_text, -1);
+        item_idx = item_idx + 1;
+        -- Face Item
+        local select_idx = frame:GetUserIValue("FACIAL_EXPRESSION_SELECT_IDX");
+        local list, cnt = GetClassList("facial_expression_list");
+        if list ~= nil and cnt > 0 then
+            for i = 0, cnt - 1 do
+                local cls = GetClassByIndexFromList(list, i);
+                if cls ~= nil then
+                    local name = TryGetProp(cls, "Name", "None");
+                    if name ~= nil and name ~= "None" then
+                        -- add item
+                        local face_name = TranArgMsg(name);
+                        facial_expression_list:AddItem(item_idx, face_name, i);
+                        -- compare select name
+                        if select_idx ~= nil and select_idx == i then
+                            facial_expression_list:SelectItem(item_idx - 1);
+                            select_item_idx = i;
+                        end
+                        item_idx = item_idx + 1;
+                    end
+                end
+            end
+            -- select face
+            if select_idx == -1 then select_item_idx = -1; end
+            FACIAL_EXPORESSION_APPLY(select_item_idx);
+        end
+    end
+end
+
+-- select
+function FACIAL_EXPORESSION_SELECT(frame)
+    if frame == nil then return; end
+    local facial_expression_list = GET_CHILD_RECURSIVELY(frame, "facial_expression_list");
+    if facial_expression_list ~= nil then
+        -- select
+        local idx = facial_expression_list:GetSelItemValue();
+        FACIAL_EXPORESSION_APPLY(idx);
+        -- user value
+        local parent_frame = frame:GetTopParentFrame();
+        if parent_frame ~= nil then
+            parent_frame:SetUserValue("FACIAL_EXPRESSION_SELECT_IDX", idx);
+        end
+    end
+end
+
+-- apply
+function FACIAL_EXPORESSION_APPLY(idx)
+    if idx == nil then return; end
+    face.SetFacialExpression(idx + 1);
 end

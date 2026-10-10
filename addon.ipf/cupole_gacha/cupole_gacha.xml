@@ -11,6 +11,10 @@
 	<option closebutton="false"/>
 	<animation frameOpenAnim="" frameCloseAnim="" margin="0 0 0 0"/>
 	 <userconfig DefaultSzX="191" DefaultSzY="260" DefaultRatioY="1" DefaultRatioX="1" RatioY="0.8" RatioX="1" DefMarginX="0" DefMarginY="0" MarginX="0" MarginY="10"/>
+    <!-- Independent result-card framing in the same actor units as MAIN_PREVIEW. -->
+    <userconfig GACHA_PREVIEW_HEIGHT="560" GACHA_PREVIEW_DISTANCE="700" GACHA_PREVIEW_LATITUDE="23" GACHA_PREVIEW_DIRECTION="270" GACHA_PREVIEW_ACTOR_SCALE="3" GACHA_PREVIEW_ORTHOGRAPHIC="1"/>
+    <userconfig GACHA_PREVIEW_HEIGHT_cupole_Heidy_SR="700" GACHA_PREVIEW_HEIGHT_cupole_Oti_R="700"
+        GACHA_PREVIEW_DISTANCE_Kupole_Summer_Zesty_UR="750" GACHA_PREVIEW_DISTANCE_Kupole_Naktis_UR="750"/>
     <controls>
     <!-- 관리탭 -->
         <groupbox name="managerTab" rect="0 0 1920 1080" margin="0 0 0 0" layout_gravity="left top" draw="true" skin=""/>

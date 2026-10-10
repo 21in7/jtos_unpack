@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="archeology_identify" x="0" y="0" width="520" height="580">
+    <frame fullheight="false" fasthide="true" layout_gravity="center center"/>
+    <skin frameskin="none"/>
+    <draw drawtitlebar="false"/>
+    <layer layerlevel="100"/>
+    <option closebutton="false"/>
+    <sound opensound="button_click_stats_OK"/>
+    <effect open="character_item_window_open" close="character_item_window_close"/>
+    <script OpenScp="OPEN_ARCHEOLOGY_IDENTIFY" CloseScp="CLOSE_ARCHEOLOGY_IDENTIFY"/>
+    <userconfig PROCESSING_LABEL="처리 중…"/>
+    <userconfig IDENTIFY_LABEL="옵션 감정"/>
+    <controls>
+        <groupbox name="bg" rect="0 0 500 560" margin="0 15 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin="archeology_ui_main_frame"/>
+        <button name="prefixBtn" parent="bg" margin="0 0 0 8" rect="0 0 180 40" skin="test_red_button" layout_gravity="center bottom" LBtnUpScp="ARCHEOLOGY_IDENTIFY_RANDOM_BTN" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_cursor_over_3" clicksound="button_click_big" format="{@st41b}{s18}%s{/}" param1="label" param1_def="옵션 감정"/>
+        <button name="close" rect="0 0 42 42" margin="0 24 20 0" layout_gravity="right top" LBtnUpScp="ui.CloseFrame(&apos;archeology_identify&apos;)" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="archeology_ui_close_btn" oversound="button_over" texttooltip="{@st59}감정 창을 닫습니다.{/}"/>
+        <richtext name="title" margin="0 26 0 0" rect="0 0 320 32" caption="{@st42}{s22}유물 감정{/}" textalign="center center" resizebytext="false" spacey="0" maxwidth="320" fontname="white_18_ol" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="center top"/>
+        <groupbox name="register_panel" rect="0 0 460 190" margin="30 72 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false" skin="archeology_ui_panel_light"/>
+        <groupbox name="register_header" parent="register_panel" rect="0 0 240 42" margin="0 6 0 0" layout_gravity="center top" draw="false" hittestbox="false" skin="None"/>
+        <richtext name="register_title" parent="register_header" rect="0 0 210 24" margin="0 9 0 0" layout_gravity="center top" caption="{@st42b}{s17}유물 등록{/}" textalign="center center" hittest="false"/>
+        <groupbox name="slot_bg" parent="register_panel" rect="0 0 112 112" margin="22 58 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <slot name="slot" parent="slot_bg" margin="0 0 0 0" rect="0 0 88 88" movepop="false" oversound="button_cursor_over_3" dropsound="icon_get_down" picksound="icon_pick_up" skin="invenslot2" texttooltip="{@st59}감정할 유물을 올려주세요{/}" layout_gravity="center center" DropScp="ARCHEOLOGY_IDENTIFY_ITEM_DROP" RBtnUpScp="ARCHEOLOGY_IDENTIFY_ITEM_REMOVE"/>
+        <picture name="slot_plus" rect="0 0 36 36" margin="0 0 0 0" parent="slot" layout_gravity="center center" hittest="false" image="plus_button_plusimag" stretch="true"/>
+        <richtext name="slotGuide" parent="register_panel" margin="148 98 0 0" rect="0 0 286 38" caption="{@st66d}{s13}인벤토리에서 우클릭하거나 드래그해{nl}감정할 유물을 등록하세요.{/}" textalign="left center" resizebytext="false" spacey="2" maxwidth="286" fontname="brown_16_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="left top"/>
+        <richtext name="itemName" parent="register_panel" margin="148 62 0 0" rect="0 0 286 32" format="{@st66d}{s16}%s{/}" param1="name" param1_def="유물을 등록하세요." textalign="left center" resizebytext="false" spacey="0" maxwidth="286" fontname="brown_18_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="left top"/>
+        <groupbox name="cost_panel" parent="register_panel" rect="0 0 286 45" margin="148 136 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false" skin="archeology_ui_description_panel"/>
+        <richtext name="modeText" parent="cost_panel" margin="0 3 0 0" rect="0 0 260 20" format="{@st66d}{s13}%s{/}" param1="mode" param1_def="" textalign="center center" resizebytext="false" spacey="0" maxwidth="260" fontname="brown_16_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="center top"/>
+        <richtext name="costText" parent="cost_panel" margin="0 23 0 0" rect="0 0 260 24" format="{@st66d}{s14}%s{/}" param1="cost" param1_def="" textalign="center center" resizebytext="false" spacey="0" maxwidth="260" fontname="brown_16_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="center top"/>
+        <groupbox name="result_panel" rect="0 0 460 246" margin="30 274 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false" skin="archeology_ui_panel_dark"/>
+        <groupbox name="result_head" parent="result_panel" rect="0 0 240 42" margin="0 6 0 0" layout_gravity="center top" draw="false" hittestbox="false" scrollbar="false" skin="None"/>
+        <richtext name="prefixTitle" margin="0 7 0 0" rect="0 0 210 26" parent="result_head" caption="{@st42b}{s17}감정 결과{/}" textalign="center center" resizebytext="false" spacey="0" maxwidth="210" fontname="white_16_ol" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="center center"/>
+        <richtext name="prefixText" parent="result_panel" margin="0 42 0 0" rect="0 0 410 34" format="{@st42}{s14}%s{/}" param1="text" param1_def="" textalign="center center" resizebytext="false" spacey="2" maxwidth="410" fontname="white_16_ol" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="center top"/>
+        <groupbox name="option_panel" parent="result_panel" rect="0 0 420 142" margin="0 78 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="false" skin="archeology_ui_description_panel"/>
+        <richtext name="identifiedTitle" parent="option_panel" margin="16 7 0 0" rect="0 0 388 22" caption="{@st66d}{s13}감정된 옵션 {#9C978D}{s12}(제단 효과율·증폭 적용 전 값){/}{/}{/}" textalign="left center" resizebytext="false" spacey="0" maxwidth="388" fontname="brown_16_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="left top"/>
+        <richtext name="resultText" parent="option_panel" margin="24 35 0 0" rect="0 0 372 100" format="{@st66d}{s14}%s%s%s%s{/}" param1="option1" param1_def="" param2="option2" param2_def="" param3="option3" param3_def="" param4="option4" param4_def="" textalign="left top" resizebytext="false" spacey="2" maxwidth="372" fontname="brown_16_b" fixwidth="true" updateparent="false" drawbackground="false" slideshow="false" layout_gravity="left top"/>
+    </controls>
+</uiframe>

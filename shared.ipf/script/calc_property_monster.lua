@@ -1,7 +1,7 @@
 ﻿-- util
 
 -- 필드 몬스터 방어력 일괄 조정
-local function revise_mon_def(self, def)
+function revise_mon_def(self, def)
     if GetExProp(self, 'IsChallengeModeMon') == 1 
         or GetExProp(self, 'IsChallengeModeMon_HardMode') == 1 
         or GetExProp(self, 'IS_SUMMONED_MONSTER') == 1 
@@ -33,7 +33,7 @@ local function revise_mon_def(self, def)
     return def
 end
 
-local function revise_mon_hp(self, hp)
+function revise_mon_hp(self, hp)
     if GetExProp(self, 'IsChallengeModeMon') == 1 
         or GetExProp(self, 'IsChallengeModeMon_HardMode') == 1 
         or GetExProp(self, 'IS_SUMMONED_MONSTER') == 1 

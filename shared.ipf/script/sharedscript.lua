@@ -2,8 +2,8 @@
 
 local json = require('json')
 
-SEASON_COIN_NAME = 'AustejaCertificate'
-SEASON_COIN_PREFIX_NAME = 'AustejaCertificateCoin'
+SEASON_COIN_NAME = 'SauleCertificate'
+SEASON_COIN_PREFIX_NAME = 'SauleCertificateCoin'
 
 function replace(text, to_be_replaced, replace_with)
 	local retText = text
@@ -36,7 +36,7 @@ function shuffle(tbl)
       local j = math.random(i)
       ret[i], ret[j] = ret[j], ret[i]
     end
-
+    
     return ret
 end
 
@@ -416,11 +416,39 @@ date_time.get_lua_datetime_from_str = function(str)
     return date_time.get_lua_datetime(date_time.get_date_time(str))
 end
 
-date_time.get_lua_datetime = function(_year, _month, _day, _hour, _min, _sec)
+date_time.get_lua_datetime = function(_year, _month, _day, _hour, _min, _sec)    
     if _year == nil or _month == nil or _day == nil or _hour == nil or _min == nil or _sec == nil then
         return nil
 	end
-    return os.time { year = _year, month = _month, day = _day, hour = _hour, min = _min, sec = _sec }
+    
+    -- 2. [수정] 숫자로 확실하게 변환 (문자열이 들어올 경우 대비)
+    local y = tonumber(_year)
+    local m = tonumber(_month)
+    local d = tonumber(_day)
+    local h = tonumber(_hour)
+    local min = tonumber(_min)
+    local s = tonumber(_sec)    
+
+    if y == nil or m == nil or d == nil or h == nil or min == nil or s == nil then
+        return nil
+    end
+
+    if y < 1970 then
+        y = 2000
+        m = 1
+        d = 1
+        h = 0
+        min = 0
+        s = 0
+    end
+
+    local status, result = pcall(os.time, { year = y, month = m, day = d, hour = h, min = min, sec = s })
+
+    if status then        
+        return result
+    else        
+        return os.time({ year = 2000, month = 1, day = 1, hour = 0, min = 0, sec = 0 })
+    end    
 end
 
 -- 루아 시간으로 현재시간을 가져온다.
@@ -545,6 +573,49 @@ date_time.get_diff_sec = function(str_end, str_start)
     return end_time - start_time
 end
 
+-- 다음날(리셋 시간) 06시를 가져온다.
+date_time.get_next_6am_str = function(now_timestamp)
+    -- 1. 현재 시간을 루아 타임스탬프(숫자)로 가져옵니다.
+    -- local now_timestamp = date_time.get_lua_now_datetime()
+    -- if now_timestamp == nil then
+    --     return nil -- 현재 시간을 가져올 수 없는 경우
+    -- end
+
+    -- 2. 현재 시간의 날짜 구성요소(년, 월, 일)를 가져옵니다.
+    local now_components = os.date('*t', now_timestamp)
+
+    -- 3. '오늘 오전 6시'의 타임스탬프를 계산합니다.
+    local today_6am_timestamp = date_time.get_lua_datetime(
+        now_components.year,
+        now_components.month,
+        now_components.day,
+        6, -- hour
+        0, -- min
+        0  -- sec
+    )
+    
+    if today_6am_timestamp == nil then
+        return nil -- 날짜 계산 오류
+    end
+
+    local target_timestamp
+    
+    -- 4. 현재 시간과 '오늘 오전 6시'를 비교합니다.
+    if now_timestamp < today_6am_timestamp then
+        -- 4-a. 현재가 '오늘 오전 6시' 이전 (예: 29일 04:30)
+        -- 목표는 '오늘 오전 6시' (예: 29일 06:00)
+        target_timestamp = today_6am_timestamp
+    else
+        -- 4-b. 현재가 '오늘 오전 6시'와 같거나 이후 (예: 28일 14:44)
+        -- 목표는 '내일 오전 6시'
+        -- '오늘 오전 6시' 타임스탬프에 24시간(86400초)을 더합니다.
+        target_timestamp = today_6am_timestamp + 86400 -- (24 * 60 * 60)
+    end
+
+    -- 5. 목표 타임스탬프를 'yyyy-mm-dd hh:mm:ss' 문자열로 변환하여 반환합니다.
+    return date_time.lua_datetime_to_str(target_timestamp)
+end
+
 -- 레티샤 시작 시간과 종료 시간을 가져온다 yyyy-mm-dd hh:mm:ss 
 function get_leticia_start_and_end_time_num()    
 	local startTime = TryGetProp(GetClassByType('reward_tp', 1), "StartTime", "None")
@@ -615,7 +686,7 @@ function make_skill_gem_list()
     local idx = 0
     if skill_gem_list == nil then        
         skill_gem_list = {}                
-        local clsList, count =  GetClassList("Item")        
+        local clsList, count = GetClassList("Item")
         for idx = 0, count - 1 do
             local cls = GetClassByIndexFromList(clsList, idx)            
             if cls ~= nil then                
@@ -2310,7 +2381,7 @@ function CHANGE_BOSSDROPLIST(self, equipDropList)
 end
 
 function GET_RECIPE_REQITEM_CNT(cls, propname,pc)
-    local recipeType = TryGetProp(cls, 'RecipeType', 'None')
+    local recipeType = TryGetProp(cls, 'RecipeType', 'None')    
     if recipeType == 'None' then
         recipeType = 'Drag'
     end
@@ -2436,6 +2507,9 @@ function STR_KILO_CHANGE(num)
 end
 
 function SCR_POSSIBLE_UI_OPEN_CHECK(pc, questIES, subQuestZoneList, chType)
+    if pc == nil then
+        return ;
+    end
     local ret = "HIDE"
     if questIES.PossibleUI_Notify == 'NO' then
         return ret, subQuestZoneList
@@ -2461,7 +2535,7 @@ function SCR_POSSIBLE_UI_OPEN_CHECK(pc, questIES, subQuestZoneList, chType)
         maxLv = 5
     end
 
-    if questIES.Level >= pc.Lv - 5 and questIES.Level <= pc.Lv + maxLv then
+    if sobjIES ~= nil and questIES.Level >= pc.Lv - 5 and questIES.Level <= pc.Lv + maxLv then
         if pc.Lv < 100 and questIES.QStartZone ~= 'None' and sobjIES.QSTARTZONETYPE ~= 'None' and questIES.QStartZone ~= sobjIES.QSTARTZONETYPE then
             subQuestFlag = 4
         else
@@ -2632,7 +2706,7 @@ end
 -- 이 함수는 이제 사용하지 말 것 --
 -- 그래도 혹시 어디서 참조할지 몰라서 남겨두긴 함 --
 function GET_COMMAED_STRING(num)    
-    -- unsigned long 범위내에서 가능하게 수정함
+    -- unsigned long 범위내에서 가능하게 수정함    
     if num == nil or num == 'None' then
         return "0";
     end
@@ -3094,8 +3168,8 @@ function SCR_MAIN_QUEST_WARP_CHECK(pc, questState, questIES, questName)
 
         if tQuestState == 'POSSIBLE' then
             local tquestIES = GetClass('QuestProgressCheck', tQuest.ClassName)
-                if tquestIES.QStartZone ~= 'None' and sObj.QSTARTZONETYPE ~= 'None' and tquestIES.QStartZone ~= sObj.QSTARTZONETYPE then
-                elseif tQuest.ClassName == questName then
+            if tquestIES.QStartZone ~= 'None' and sObj.QSTARTZONETYPE ~= 'None' and tquestIES.QStartZone ~= sObj.QSTARTZONETYPE then
+            elseif tQuest.ClassName == questName then
                 if tQuest.CheckQuestName ~= "None" then
                     if #preQuestState > 1 then
                         local flag = 0
@@ -3111,7 +3185,7 @@ function SCR_MAIN_QUEST_WARP_CHECK(pc, questState, questIES, questName)
                         end
                     else
                         if preQuestState[1] == preQuestStateCheck[1] then
-                    return 'YES'
+                            return 'YES'
                         else
                             return 'NO'
                         end
@@ -3119,9 +3193,9 @@ function SCR_MAIN_QUEST_WARP_CHECK(pc, questState, questIES, questName)
                 else
                     return 'YES'
                 end
-                elseif tquestIES.QStartZone ~= 'None' and sObj.QSTARTZONETYPE ~= 'None' and tquestIES.QStartZone == sObj.QSTARTZONETYPE then
-                    return 'NO'
-                end
+            elseif tquestIES.QStartZone ~= 'None' and sObj.QSTARTZONETYPE ~= 'None' and tquestIES.QStartZone == sObj.QSTARTZONETYPE then
+                return 'NO'
+            end
         end
         if tQuest.ClassName == questName then
             if tQuest.CheckQuestName ~= "None" then
@@ -3134,16 +3208,16 @@ function SCR_MAIN_QUEST_WARP_CHECK(pc, questState, questIES, questName)
                     end
                     if flag > 0 then
                         return 'YES'
-            else
-                return 'NO'
-            end
+                    else
+                        return 'NO'
+                    end
                 else
                     if preQuestState[1] == preQuestStateCheck[1] then
                         return 'YES'
                     else
                         return 'NO'
                     end
-        end
+                end
 --                if preQuestState == preQuestStateCheck then
 --                print(questName, tQuest.ClassName, 'in')
 --                    return 'YES'
@@ -3151,9 +3225,9 @@ function SCR_MAIN_QUEST_WARP_CHECK(pc, questState, questIES, questName)
 --                    return 'NO'
 --                end
             else
-            return 'YES'
+                return 'YES'
+            end
         end
-    end
     end
     return 'NO'
 end
@@ -3289,19 +3363,19 @@ end
 
 function JOB_LUCHADOR_PRE_CHECK(pc, jobCount)
 
-        local aObj
-        if IsServerSection() == 0 then
-            aObj = GetMyAccountObj();
-        else
-            aObj = GetAccountObj(pc);
+    local aObj
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char1_23', 0)
+        if value == 1 or IS_KOR_TEST_SERVER() == true then
+            return 'YES'
         end
-        
-        if aObj ~= nil then
-            local value = TryGetProp(aObj, 'UnlockQuest_Char1_23', 0)
-            if value == 1 or IS_KOR_TEST_SERVER() == true then
-                return 'YES'
-            end
-        end
+    end
 
     return 'NO'
 end
@@ -3361,7 +3435,7 @@ function JOB_LAMA_PRE_CHECK(pc, jobCount)
             if value == 1 or IS_KOR_TEST_SERVER() == true then
                 return 'YES'
             end
-        end
+        end 
     end
 
     return 'NO'
@@ -3724,6 +3798,401 @@ function JOB_HERMIT_C_PRE_CHECK(pc, jobCount)
     
     if aObj ~= nil then
         local value = TryGetProp(aObj, 'UnlockQuest_Char4_27', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_HERMIT_A_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+    aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char3_28', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_GRIMMARK_T_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char5_23', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_GRIMMARK_S_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char1_29', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_GRIMMARK_A_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char3_29', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_KNELLER_C_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char4_28', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_KNELLER_W_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char2_30', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_KNELLER_T_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char5_24', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_ESCRIMEUR_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char1_30', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_COMMODORE_A_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char3_30', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_COMMODORE_T_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char5_25', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_INCENDIAR_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char2_31', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_COMMODORE_S_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char1_31', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_SHARDBRINGER_T_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char5_26', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_SHARDBRINGER_C_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char4_29', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_OFFICIANT_W_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char2_33', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_OFFICIANT_C_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char4_31', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_SHARDBRINGER_W_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char2_32', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_SAGITTA_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char3_31', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_FANATICUS_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char4_30', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_EXECUTOR_S_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char1_32', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+
+function JOB_EXECUTOR_T_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char5_27', 0)
+        if value == 1 then
+            return 'YES'
+        end
+    end
+
+    return 'NO'
+end
+function JOB_EXECUTOR_A_PRE_CHECK(pc, jobCount)
+    local aObj = nil
+    if IsServerSection() == 0 then
+        aObj = GetMyAccountObj();
+    else
+        aObj = GetAccountObj(pc);
+    end
+    
+    if aObj ~= nil then
+        local value = TryGetProp(aObj, 'UnlockQuest_Char3_32', 0)
         if value == 1 then
             return 'YES'
         end
@@ -4194,7 +4663,7 @@ function EXIST_NEXT_LEVEL_SKILL_GEM(item)
     end
 
     local class_name = 'GEM_Lv' .. tostring(TryGetProp(item, 'NumberArg1', 0) + 1) .. '_' .. name        
-    if skill_gem_class_name_list[TryGetProp(item, 'NumberArg1', 0) + 1][class_name] == nil then   
+    if skill_gem_class_name_list[TryGetProp(item, 'NumberArg1', 0) + 1][class_name] == nil then        
         return false
     else
         return true
@@ -4232,9 +4701,9 @@ function GET_GUILD_MEMBER_JOIN_AUTO_GUILD_IDX()
     return GET_AUTO_MEMBER_JOIN_GUILD_IDX(groupid, nation)      
 end
 
-function GET_AUTO_MEMBER_JOIN_GUILD_IDX(groupid, nation)
+function GET_AUTO_MEMBER_JOIN_GUILD_IDX(groupid, nation)    
     -- groupid = tonumber(groupid)
-
+    
     local str = nation .. '_' .. groupid
     local cls = GetClass("growth_support_guild", str)
     if cls ~= nil then
@@ -4357,12 +4826,12 @@ function IS_TOS_HERO_ZONE(pc)
 	return 'NO'
 end
 
-function IS_LEFT_SUBFRAME_ACC(item)
+function IS_LEFT_SUBFRAME_ACC(item)    
     local str = TryGetProp(item, 'StringArg', 'None')
     local ClsName = TryGetProp(item, 'ClassName', 'None')
-    local class_type = TryGetProp(item, 'ClassType', 'None')
+    local class_type = TryGetProp(item, 'ClassType', 'None')    
     if class_type == 'Ring' or class_type == 'Neck' then        
-        if TryGetProp(item, 'ItemGrade', 0) >= 6 then
+        if TryGetProp(item, 'ItemGrade', 0) >= 6 then            
             return true
         end
     end
@@ -4436,7 +4905,7 @@ function ENABLE_WARP_CHECK(pc)
 	if IsBuffApplied(pc, 'BountyHunt_BUFF') == 'YES' then
 		return false;
 	end
-
+    
     if IsBuffApplied(pc, 'Buff_GoldMolaMola_Battle') == 'YES' then
         return false
     end
@@ -4455,7 +4924,7 @@ function ENABLE_WARP_CHECK(pc)
                     local index = table.find(keyword_list, "DisableWarp");
                     if index ~= 0 then
                         return false;
-	end
+                    end
                 end
             end
         end
@@ -4550,7 +5019,7 @@ function make_collection_item_list()
 		local cls = GetClassByIndexFromList(list, i);
 		if cls ~= nil then
 			if TryGetProp(cls, "Journal", "FALSE") == "TRUE" then
-				for j = 1, 9 do
+				for j = 1, 10 do
 					local prop_name = "ItemName_"..tostring(j);
 					local name = TryGetProp(cls, prop_name, "None");
 					local collection_name = TryGetProp(cls, 'Name', 'None')
@@ -4642,7 +5111,7 @@ function TUTORIAL_QUEST_EXCEPTION_BY_TYPE(pc, QuestClassID)
     if isStartLine3 == "StartLine3" then
         return true;
     end
-
+    
     return false
 end
 
@@ -4668,6 +5137,14 @@ end
 
 function IS_JUMP_MAP_BUFF_APPLIED(pc)
     if IsBuffApplied(pc, 'EVENT_2105_CAMPING_JUMP') == "YES" then
+        return 1;
+    end
+
+    return 0;
+end
+
+function IS_ARCHEOLOGY_DUNGEON_BUFF_APPLIED(pc)
+    if IsBuffApplied(pc, 'Archeology_Portal_Buff') == "YES" then
         return 1;
     end
 
@@ -4846,12 +5323,12 @@ end
 -- 트오세 W - 낚시, 팀배틀리그
 function CHECK_TOSW_FISHING_AND_TBL_RESTRICT_TIME()
     local nation = GET_POPOBOOST_SERVER();
-    local start = '2023-02-17 00:00:00';
-    local finish = '2023-02-18 10:00:00';
+    local start = '2026-08-31 00:00:00';
+    local finish = '2026-09-01 10:00:00';
 
     if nation == 3 then
-        start = '2025-07-07 00:00:00';
-        finish = '2025-07-15 23:59:59'
+        start = '2026-08-31 00:00:00';
+        finish = '2026-09-01 10:00:00';
     end
 
     if date_time.is_between_time(start, finish) == true then
@@ -4864,26 +5341,27 @@ end
 function CHECK_TOS_WEEKLY_CONTENTS_RESTRICT_TIME()
     local nation = GET_POPOBOOST_SERVER();
 
-    local start = '2025-07-01 00:00:00';
-    local finish = '2025-07-02 10:00:00';
+    local start = '2026-08-31 00:00:00';
+    local finish = '2026-09-01 10:00:00';
+
     if nation == 1 then
-        start = '2025-03-03 00:00:00';
-        finish = '2025-03-05 10:00:00';
+        start = '2025-09-22 00:00:00';
+        finish = '2025-09-23 22:00:00';
     end
 
     if nation == 2 then
         start = '2025-03-03 00:00:00';
         finish = '2025-03-11 10:00:00';
-end
+    end
 
     if nation == 3 then
-        start = '2025-07-01 00:00:00';
-        finish = '2025-07-02 10:00:00';    
+        start = '2026-08-31 00:00:00';
+        finish = '2026-09-01 10:00:00';    
     end
 
     if date_time.is_between_time(start, finish) == true then
-                    return true;
-                end
+        return true;
+    end
     return false;
 end
 
@@ -5027,7 +5505,7 @@ end
 
 function GET_BLACK_MARKET_RETURN_ITEM_ID()
 -- CertificateCoin_1000000p
-    return 1000000, '11201238'  -- 뒤에서 부터 1번    
+    return 1000000, '11202091'  -- 뒤에서 부터 1번    
 end
 
 -- client only
@@ -5107,3 +5585,79 @@ function GET_BORUTA_REWARD(event_id)
     
     return reward, max_rank
 end
+
+-- 추가로 획득 가능한 길드 마일리지를 반환(주간)
+function GET_EVENT_GUILD_MILEAGE_POINT()
+    if GetServiceNation() == 'GLOBAL' or GetServiceNation() == 'GLOBAL_KOR' or GetServiceNation() == 'GLOBAL_JP' then
+        if date_time.is_between_time('2026-01-13 11:00:00', '2026-02-03 11:00:00') == true then
+            return 200
+        end
+    end
+    
+    return 0
+end
+
+function GetMyGuildObject()
+	local guild_obj = nil
+	local guild = session.party.GetPartyInfo(PARTY_GUILD)
+	if guild ~= nil then
+		guild_obj = GetIES(guild:GetObject())
+        end
+	return guild_obj
+end
+
+function GetRemainingPenaltyTime(join_time, cur_time, period_days)
+    -- 1. 날짜 문자열을 파싱하여 os.time용 테이블로 변환하는 내부 함수
+    local function parse_time(time_str)
+        local y, m, d, H, M, S = time_str:match("(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)")
+        return os.time({year=y, month=m, day=d, hour=H, min=M, sec=S})
+    end
+
+    -- 2. 문자열을 Timestamp(초 단위)로 변환
+    local join_ts = parse_time(join_time)
+    local cur_ts = parse_time(cur_time)
+
+    -- 3. period_days일을 초 단위로 계산 (30일 * 24시간 * 60분 * 60초)
+    local thirty_days_sec = period_days * 24 * 60 * 60
+    
+    -- 4. 가입일로부터 period_days일 후의 시간(만료 시간) 계산
+    local expire_ts = join_ts + thirty_days_sec
+
+    -- 5. 비교 및 결과 반환
+    if cur_ts >= expire_ts then
+        -- period_days일이 지났음
+        return true, 0, 0, 0
+    else
+        -- period_days일이 지나지 않음 -> 남은 시간 계산
+        local remain_sec = expire_ts - cur_ts
+        
+        local days = math.floor(remain_sec / 86400) -- 1일 = 86400초
+        remain_sec = remain_sec % 86400
+        
+        local hours = math.floor(remain_sec / 3600) -- 1시간 = 3600초
+        remain_sec = remain_sec % 3600
+        
+        local mins = math.floor(remain_sec / 60)    -- 1분 = 60초
+        
+        -- 포맷팅 (예: 29일 3시간 15분)        
+        return false, days, hours, mins
+    end
+end
+
+
+function IS_VALID_RECYCLE_ITEM(invitem)    
+    if TryGetProp(invitem, 'TeamBelonging', 0) == 1 then
+        return false, 'DontSellTaembelongingItem'
+    end
+
+    if TryGetProp(invitem, 'CharacterBelonging', 0) == 1 then
+        return false, 'DontSellCharacterbelongingItem'
+    end
+
+    if TryGetProp(invitem, 'LifeTime', 0) > 0 then
+        return false, 'TimelimitedItemsCannotBeUsed'
+    end
+
+    return true, 'None'
+end
+

@@ -1,0 +1,4 @@
+ClassID,MainMaterialCount,MainMaterialAddCount,SubMaterialCount1,SubMaterialAddCount1,SubMaterialCount2,SubMaterialAddCount2,SubMaterialCount3,SubMaterialAddCount3,ClassName,MaterialCardGroup,MainMaterialItemName,SubMaterialItemName1,SubMaterialItemName2,SubMaterialItemName3
+1,20,2,4,1,4,1,0,0,"card_zmei_left","UTIL","misc_ep18_card","misc_0530","misc_ore15",""
+2,20,2,4,1,4,1,0,0,"card_zmei_right","UTIL","misc_ep18_card","misc_0530","misc_ore15",""
+3,20,2,4,1,4,1,0,0,"card_zmei_center","UTIL","misc_ep18_card","misc_0530","misc_ore15",""

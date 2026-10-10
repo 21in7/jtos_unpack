@@ -811,6 +811,8 @@ function GET_INDUNENTER_DROPBOX_LIST_MOUSE_OVER(index, classname)
     tolua.cast(itemFrame, 'ui::CTooltipFrame');
 
     local newobj = CreateIES('Item', classname);
+    if newobj == nil then return end;
+    
     itemFrame:SetTooltipType('wholeitem');
     newobj = tolua.cast(newobj, 'size_t');
     itemFrame:SetToolTipObject(newobj);
@@ -833,6 +835,8 @@ function GET_INDUNENTER_DROPBOX_LIST_TOOLTIP_VIEW(index, classname)
     tolua.cast(itemFrame, 'ui::CTooltipFrame');
 
     local newobj = CreateIES('Item', classname);
+    if newobj == nil then return end;
+
     itemFrame:SetTooltipType('wholeitem');
     newobj = tolua.cast(newobj, 'size_t');
     itemFrame:SetToolTipObject(newobj);

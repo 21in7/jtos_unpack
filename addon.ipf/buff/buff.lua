@@ -9,6 +9,11 @@ s_buff_ui["slotcount"] = {};
 s_buff_ui["txt_x_offset"] = 1;
 s_buff_ui["txt_y_offset"] = 1;
 
+local UNIT_DAY  = ScpArgMsg("Auto_il");
+local UNIT_HOUR = ScpArgMsg("Auto_SiKan");
+local UNIT_MIN  = ScpArgMsg("Auto_Bun");
+local UNIT_SEC  = ScpArgMsg("Auto_Cho");
+
 
 function BUFF_CHECK_SEPARATELIST(buffID)
 	if buffID == nil then return; end
@@ -78,43 +83,40 @@ function GET_BUFF_TIME_TXT(time, istooltip, isOtherCast)
 	end
 
 	sec = math.floor(sec - min * 60);
-	local txt = "{#FFFF00}{ol}{s12}";
-	if isOtherCast == true then
-		txt = "{#FFFF00}{ol}{s8}";
-	end
+	local txt = isOtherCast == true and "{#FFFF00}{ol}{s8}" or "{#FFFF00}{ol}{s12}";
 
 	if day > 0 then
 		if istooltip == 1 then
-			txt = txt .. day .. ScpArgMsg("Auto_il");
+			txt = txt .. day .. UNIT_DAY;
 		else
 		    if day == 1 then
-		        return "{#FFFF00}{ol}{s12}" .. hour + day*24 .. ScpArgMsg("Auto_SiKan");
+		        return txt .. (hour + day*24) .. UNIT_HOUR;
 		    else
-    			return "{#FFFF00}{ol}{s12}" .. day .. ScpArgMsg("Auto_il");
+    			return txt .. day .. UNIT_DAY;
     		end
 		end
 	end
 
 	if hour > 0 then
 		if istooltip == 1 then
-			txt = txt .. hour .. ScpArgMsg("Auto_SiKan");
+			txt = txt .. hour .. UNIT_HOUR;
 		else
 		    if hour == 1 then
-		        return "{#FFFF00}{ol}{s12}" .. min + hour*60 .. ScpArgMsg("Auto_Bun");
+		        return txt .. (min + hour*60) .. UNIT_MIN;
 		    else
-    			return "{#FFFF00}{ol}{s12}" .. hour .. ScpArgMsg("Auto_SiKan");
+    			return txt .. hour .. UNIT_HOUR;
     		end
 		end
 	end
 
 	if min > 0 then
 		if istooltip == 1 then
-			txt = txt .. min .. ScpArgMsg("Auto_Bun")
+			txt = txt .. min .. UNIT_MIN;
 		else
 		    if min == 1 then
-		        return "{#FFFF00}{ol}{s12}" .. sec + min * 60 .. ScpArgMsg("Auto_Cho");
+		        return txt .. (sec + min * 60) .. UNIT_SEC;
 		    else
-    			return "{#FFFF00}{ol}{s12}" .. min .. ScpArgMsg("Auto_Bun");
+    			return txt .. min .. UNIT_MIN;
     		end
 		end
 	end
@@ -123,7 +125,7 @@ function GET_BUFF_TIME_TXT(time, istooltip, isOtherCast)
 		sec = 0;
 	end
 
-	return txt .. sec .. ScpArgMsg("Auto_Cho");
+	return txt .. sec .. UNIT_SEC;
 end
 
 function REMOVE_BUF(frame, data, argStr, argNum)
@@ -143,21 +145,23 @@ function GET_BUFF_ICON_NAME(buffCls)
 	return imageName;
 end
 
-function SET_BUFF_SLOT(slot, capt, class, buffType, handle, slotlist, buffIndex, isOtherCast)
+function SET_BUFF_SLOT(slot, capt, class, buffType, handle, slotlist, buffIndex, isOtherCast, buff)
 	local icon = slot:GetIcon();
 	local imageName = GET_BUFF_ICON_NAME(class);
 	if imageName ~= "icon_None" then
 		icon:Set(imageName, 'BUFF', buffType, 0);
 	end
 	if buffIndex ~= nil then
-		icon:SetUserValue("BuffIndex", buffIndex);	
+		icon:SetUserValue("BuffIndex", buffIndex);
 	end
 
 	if tonumber(handle) == nil then
 		return;
 	end
 
-	local buff = info.GetBuff(tonumber(handle), buffType, buffIndex);
+	if buff == nil then
+		buff = info.GetBuff(tonumber(handle), buffType, buffIndex);
+	end
 	if nil == buff then
 		return;
 	end
@@ -219,6 +223,9 @@ function SET_BUFF_SLOT(slot, capt, class, buffType, handle, slotlist, buffIndex,
 	elseif class.ClassName == 'Water_jewel_complete_Buff' then
 		icon:SetTooltipType('Water_jewel_Buff')		
 		icon:SetTooltipArg(handle, buffType, buff.arg1);	
+	elseif class.ClassName == 'guild_dignity_Buff' then  
+		icon:SetTooltipType('guild_dignity_Buff')
+		icon:SetTooltipArg(handle, buffType, buff.arg1);
 	else
 	    icon:SetTooltipType('buff');
 	    if buffIndex ~= nil then
@@ -308,27 +315,21 @@ function BUFF_TOTAL_COUNT_CHECK(frame, msg, buffType, handle, buff_ui, buffIndex
 		apply_limit_count_buff = 0;
 	end
 
-	local buffcount_totalcnt = frame:GetUserIValue("BUFF_COUNT_TOTAL_CNT"); 
-	local buff_totalcnt = frame:GetUserIValue("BUFF_TOTAL_CNT"); 
-	local debuff_totalcnt = frame:GetUserIValue("DEBUFF_TOTAL_CNT"); 
 	local totalCount = 0;
 	local buff_ui_index = 0;
 	if buffCls.Group1 == "Debuff" then
-		debuff_totalcnt = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
+		totalCount = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
 		buff_ui_index = 2;
-		frame:SetUserValue("DEBUFF_TOTAL_CNT", debuff_totalcnt);
-		totalCount = debuff_totalcnt;
+		frame:SetUserValue("DEBUFF_TOTAL_CNT", totalCount);
 	else
 		if apply_limit_count_buff == 1 then
-			buffcount_totalcnt = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
+			totalCount = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
 			buff_ui_index = 0;
-			frame:SetUserValue("BUFF_COUNT_TOTAL_CNT", buffcount_totalcnt);
-			totalCount = buffcount_totalcnt;
+			frame:SetUserValue("BUFF_COUNT_TOTAL_CNT", totalCount);
 		else
-				buff_totalcnt = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
+			totalCount = info.GetBuffcountByProperty(handle, buffCls.Group1, apply_limit_count_buff, 1, 0);
 			buff_ui_index = 1;
-			frame:SetUserValue("BUFF_TOTAL_CNT", buff_totalcnt);
-			totalCount = buff_totalcnt;
+			frame:SetUserValue("BUFF_TOTAL_CNT", totalCount);
 		end
 	end
 
@@ -392,7 +393,7 @@ function COMMON_BUFF_MSG(frame, msg, buffType, handle, buff_ui, buffIndex)
 	local ApplyLimitCountBuff = "YES";
 
 	local isOtherCastBuff = false;
-	local buff = info.GetBuff(handle, buffType);
+	local buff = info.GetBuff(handle, buffType, buffIndex);
 	if buff ~= nil then
 		local casterHandle = buff:GetHandle();
 		if casterHandle ~= nil and casterHandle ~= handle then
@@ -438,24 +439,43 @@ function COMMON_BUFF_MSG(frame, msg, buffType, handle, buff_ui, buffIndex)
 
 	if msg == 'ADD' then
         local skip = false
-        if class ~= nil then
+
+        -- 동일 buffType+buffIndex 슬롯이 이미 존재하면 업데이트만 수행 (아이콘 증식 방지)
+        for j = 0, slotcount - 1 do
+            local i = GET_BUFF_SLOT_INDEX(j, colcnt);
+            local slot = slotlist[i];
+            if slot:IsVisible() == 1 then
+                local icon = slot:GetIcon();
+                local iconInfo = icon:GetInfo();
+                if iconInfo ~= nil and iconInfo.type == buffType then
+                    local existBuffIndex = icon:GetUserIValue("BuffIndex");
+                    if existBuffIndex == buffIndex then
+                        SET_BUFF_SLOT(slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff, buff);
+                        skip = true;
+                        break;
+                    end
+                end
+            end
+        end
+
+        if skip == false and class ~= nil then
             if TryGetProp(class, 'OnlyOneBuff', 'None') == 'YES' and TryGetProp(class, 'Duplicate', 1) == 0 then
                 local exist_slot, i = get_exist_debuff_in_slotlist(slotlist, buffType)
                 if exist_slot ~= nil then
 					if exist_slot:IsVisible() == 0 then
-                        SET_BUFF_SLOT(exist_slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff);
+                        SET_BUFF_SLOT(exist_slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff, buff);
                     end
-                    skip = true                  
+                    skip = true
                 end
             end
         end
-        
+
 		if skip == false then
 			for j = 0, slotcount - 1 do
 				local i = GET_BUFF_SLOT_INDEX(j, colcnt);
 				local slot = slotlist[i];
 				if slot:IsVisible() == 0 then
-				    SET_BUFF_SLOT(slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff);                    
+				    SET_BUFF_SLOT(slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff, buff);
 				    break;
 			    end
 		    end
@@ -486,8 +506,8 @@ function COMMON_BUFF_MSG(frame, msg, buffType, handle, buff_ui, buffIndex)
 			local oldIcon = slot:GetIcon();
 			if slot:IsVisible() == 1 then
 				local iconInfo = oldIcon:GetInfo();
-				if iconInfo.type == buffType and oldIcon:GetUserIValue("BuffIndex") == buffIndex then                
-					SET_BUFF_SLOT(slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff);
+				if iconInfo.type == buffType and oldIcon:GetUserIValue("BuffIndex") == buffIndex then
+					SET_BUFF_SLOT(slot, captionlist[i], class, buffType, handle, slotlist, buffIndex, isOtherCastBuff, buff);
 					break;
 				end
 			end
@@ -539,7 +559,7 @@ function ARRANGE_BUFF_SLOT(frame, buff_ui)
 	local default_sub_slot_y_offset = tonumber(frame:GetUserConfig("DEFAULT_SUB_SLOT_Y_OFFSET"));
 
 	-- buff count -----------------------------------------------------------------
-	local buffCount = GET_CHILD_RECURSIVELY(frame, "buffcountslot", "ui::CSlotSet");
+	local buffCount = buff_ui["slotsets"][0];
 	if buffCount == nil then return; end
 
 	local col_buffcount = buffCount:GetCol();
@@ -561,7 +581,7 @@ function ARRANGE_BUFF_SLOT(frame, buff_ui)
 	visibleRow_buffcount = visibleRow_buffcount + 1;
 	-------------------------------------------------------------------------------
 	-- buff count sub -------------------------------------------------------------
-	local buffSub = GET_CHILD_RECURSIVELY(frame, "buffcountslot_sub", "ui::CSlotSet");
+	local buffSub = buff_ui["slotsets"][3];
 	if buffSub == nil then return; end
 
 	local col_buffsub = buffSub:GetCol();
@@ -586,7 +606,7 @@ function ARRANGE_BUFF_SLOT(frame, buff_ui)
 	SET_BUFF_CAPTION_OFFSET(frame, buffSub, buff_ui, 3);
 	-------------------------------------------------------------------------------
 	-- buff -----------------------------------------------------------------------
-	local buff = GET_CHILD_RECURSIVELY(frame, "buffslot", "ui::CSlotSet");
+	local buff = buff_ui["slotsets"][1];
 	if buff == nil then return; end
 	
 	local col_buff = buff:GetCol();
@@ -611,7 +631,7 @@ function ARRANGE_BUFF_SLOT(frame, buff_ui)
 	SET_BUFF_CAPTION_OFFSET(frame, buff, buff_ui, 1);
 	-------------------------------------------------------------------------------
     -- debuff ---------------------------------------------------------------------
-	local debuff = GET_CHILD_RECURSIVELY(frame, "debuffslot", "ui::CSlotSet");
+	local debuff = buff_ui["slotsets"][2];
 	if debuff == nil then return; end
 
 	local col_debuff = debuff:GetCol();
@@ -674,15 +694,15 @@ function COPY_BUFF_SLOT_INFO(bslot, aslot, btext, atext)
 		return
 	end		
 
+	local buffIndex = bicon:GetUserIValue("BuffIndex");
 	local isOtherCastBuff = false;
-	local buff = info.GetBuff(handle, buffType);
+	local buff = info.GetBuff(handle, buffType, buffIndex);
 	if buff ~= nil and buff:GetHandle() ~= handle then
 		isOtherCastBuff = true;
 	end
 
 	local class  = GetClassByType('Buff', buffType);
-	local buffIndex = bicon:GetUserIValue("BuffIndex");
-	SET_BUFF_SLOT(aslot, atext, class, buffType, handle, slotlist, buffIndex, isOtherCastBuff);
+	SET_BUFF_SLOT(aslot, atext, class, buffType, handle, slotlist, buffIndex, isOtherCastBuff, buff);
 	CLEAR_BUFF_SLOT(bslot, btext);
 end
 

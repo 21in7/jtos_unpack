@@ -1,0 +1,4 @@
+ClassID,EffectOrder,Enabled,ClassName,CardClassName,SetClassName,TriggerType,StackPolicy,ConditionHandler,ActionHandler,LifecyclePolicy,DisplayPolicy,TooltipHandler,OptionText
+100000,10,1,"ebcv2_uriel_boss_damage","Legend_card_Uriel","","Passive","SumStar","","EQUIPBOSSCARD_V2_ACTION_SET_OWNER_EXPROP","WhileEquipped","Show","","보스 몬스터에게 주는 대미지 {@st66d_y}{s16}[{CalculatedValue}]{/}{/}% 증가"
+100001,20,1,"ebcv2_uriel_boss_damage_reduction","Legend_card_Uriel","","Passive","SumStar","","EQUIPBOSSCARD_V2_ACTION_SET_OWNER_EXPROP","WhileEquipped","Show","","보스 몬스터에게 받는 대미지 {@st66d_y}{s16}[{CalculatedValue}]{/}{/}% 감소"
+100002,30,1,"ebcv2_uriel_mspd","Legend_card_Uriel","","Passive","SumStar","","EQUIPBOSSCARD_V2_ACTION_LEGACY","WhileEquipped","Show","","이동 속도 {@st66d_y}{s16}[{CalculatedValue}]{/}{/} 증가"

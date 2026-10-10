@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by IMCGames Co., Ltd (IMCGames Co., Ltd) -->
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
 <List>
 	<ItemList ItemClassName="wing_redlight_balloon">
 		<Layer effect="F_light165_red_loop" TargetNode="wing_Dummy_effect" scale="1.1" offset="0;0">
@@ -4199,7 +4199,7 @@
 					<Sound SoundName="None" SoundVolume="1"/>
 				</Property>
 			</Creation>
-		</Layer>		
+		</Layer>
 		<Layer effect="BodyAura_Light_Purple_01" TargetNode="Dummy_wing" scale="0.2" offset="-7;5">
 			<Creation>
 				<Property PlayMoment="None">
@@ -4335,7 +4335,7 @@
 					<Sound SoundName="None" SoundVolume="1"/>
 				</Property>
 			</Creation>
-		</Layer>		
+		</Layer>
 	</ItemList>
 	<ItemList ItemClassName="AETHERBLADER_BLADE">
 		<Layer effect="BodyAura_DivineAvatar_White_01" TargetNode="Dummy_effect_sword" scale="1" offset="0;0">
@@ -4366,7 +4366,103 @@
 				</Property>
 			</Creation>
 		</Layer>
-	</ItemList>	
+	</ItemList>
+	<ItemList ItemClassName="winter2512_thstaff">
+		<Layer effect="BodyAura_Torchlight_Blue_01" TargetNode="Dummy_effect" scale="1" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="winter2512_bow">
+		<Layer effect="BodyAura_Torchlight_Blue_01" TargetNode="Dummy_effect" scale="1" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="winter2512_pistol">
+		<Layer effect="BodyAura_Torchlight_Blue_01" TargetNode="Dummy_effect" scale="0.5" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="winter2512_thhammer">
+		<Layer effect="BodyAura_Torchlight_Blue_01" TargetNode="Dummy_effect" scale="1" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="winter2512_thsword">
+		<Layer effect="BodyAura_Torchlight_Blue_01" TargetNode="Dummy_effect" scale="1" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="costume_Char2_31">
+		<Layer effect="BodyAura_Ember_Orange_01" TargetNode="Bip01 Spine" scale="1.0" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" ReinforceEffectState="None" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" AlwaysVisible="YES" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="costume_ep18darkenforcerpriest_m">
+		<Layer effect="BodyAura_DarkDisintegration_Purple_02" TargetNode="Bip01 Spine" scale="0.8" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" ReinforceEffectState="None" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" AlwaysVisible="YES" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="costume_ep18darkenforcerpriest_f">
+		<Layer effect="BodyAura_DarkDisintegration_Purple_02" TargetNode="Bip01 Spine" scale="0.8" offset="0;0">
+			<Creation>
+				<Property PlayMoment="None">
+					<Option ReinforceValue="0" ReinforceEffectState="None" UseAttach="YES" Use2DEffect="NO" IgnoreAnimEventEffect="NO" SubWeaponPistol="NO" AlwaysVisible="YES" UnityEffect="YES"/>
+					<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
+	<ItemList ItemClassName="uriel_sword">
+	<Layer effect="BodyAura_Torchlight_Orange_01" TargetNode="Dummy_trail01" scale="0.25" offset="0;5">
+			<Creation>
+				<Property PlayMoment="None">
+				<Option ReinforceValue="0"
+						ReinforceEffectState="None"
+						UseAttach="YES"
+						Use2DEffect="NO"
+						IgnoreAnimEventEffect="NO"
+						SubWeaponPistol="NO"
+						UnityEffect="YES"/>
+				<Sound SoundName="None" SoundVolume="1"/>
+				</Property>
+			</Creation>
+		</Layer>
+	</ItemList>
 </List>
 <!--프로퍼티 설명
 

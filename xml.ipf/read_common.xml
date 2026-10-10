@@ -1,5 +1,6 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by imc (imc) -->
-<Category>
+﻿<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by imc (imc) -->
+<Category>	
+	<ReadXml Name="guild_dress_room"/>
 	<ReadXml Name="bonescale"/>
 	<ReadXml Name="item_goddess_reinforce"/>
 	<ReadXml Name="item_goddess_reinforce_470"/>
@@ -10,11 +11,19 @@
 	<ReadXml Name="item_goddess_reinforce_520"/>
 	<ReadXml Name="item_goddess_reinforce_530"/>
 	<ReadXml Name="item_goddess_reinforce_540"/>
-	<ReadXml Name="pharmacy_material_type"/>	
+	<ReadXml Name="item_goddess_reinforce_550"/>
+	<ReadXml Name="item_goddess_reinforce_560"/>	
+	<ReadXml Name="pharmacy_material_type"/>
 	<ReadXml Name="skill_Simony"/>
 	<ReadXml Name="archeology_property"/>
+	<ReadXml Name="archeology_cc_mark_policy"/>
 	<ReadXml Name="archeology_map_list"/>
+	<ReadXml Name="archeology_map_trait"/>
 	<ReadXml Name="archeology_reward_list"/>
+	<ReadXml Name="archeology_monster_drop"/>
+	<ReadXml Name="archeology_drop_policy"/>
+	<ReadXml Name="archeology_ecology"/>
+	<ReadXml Name="archeology_portal_difficulty"/>
 	<ReadXml Name="buff_ignore"/>
 	<ReadXml Name="buff"/>
 	<ReadXml Name="buff_monster"/>
@@ -231,6 +240,10 @@
 	<ReadXml Name="specialcostume"/>
 	<ReadXml Name="Indun_reward_item"/>
 	<ReadXml Name="equipbosscard"/>
+	<ReadXml Name="equipbosscard_effect"/>
+	<ReadXml Name="equipbosscard_effect_param"/>
+	<ReadXml Name="equipbosscard_set"/>
+	<ReadXml Name="equipbosscard_set_member"/>
 	<ReadXml Name="reward_indun"/>
 	<ReadXml Name="legend_card_reinforce"/>
 	<ReadXml Name="levelinformmessage"/>
@@ -450,7 +463,21 @@
 	<ReadXml Name="archeology_exhibition_item"/>
 	<ReadXml Name="upgrade_item_value"/>
 	<ReadXml Name="archeology_exhibition_exp"/>
+	<ReadXml Name="archeology_option_list"/>
 	<ReadXml Name="boruta_reward"/>
 	<ReadXml Name="growth_support_guild"/>
 	<ReadXml Name="demonlair_user_select_info"/>
+	<ReadXml Name="head_partial_anim_mapping"/>
+	<ReadXml Name="facial_expression_list"/>
+	<ReadXml Name="WeatherSetting"/>
+	<ReadXml Name="event_collection"/>
+	<ReadXml Name="bosscardupgrade"/>
+	<ReadXml Name="post_fx_filter"/>
+	<ReadXml Name="resonance_skill"/>
+	<ReadXml Name="resonance_reinforce"/>
+	<ReadXml Name="skill_resonance"/>
+	<ReadXml Name="indunInfo_button"/>
+	<ReadXml Name="induninfo_button_action"/>
+	<ReadXml Name="indun_step"/>
+	<ReadXml Name="archeology_base_list"/>
 </Category>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<uiframe name="indunenter_select_step" x="0" y="0" width="800" height="670" create="open">
+	<frame titlepos="0 0" layout_gravity="center center" margin="-100 -100 0 0"/>
+	<input moveable="true" hittestframe="true" moveintitlebar="false"/>
+	<option margin="-100 -100 0 0" closebutton="false" hideable="false"/>
+	<sound opensound="win_open" closesound="win_close" margin="-100 -100 0 0"/>
+	<skin frameskin="false"/>
+	<draw drawtitlebar="false" margin="-100 -100 0 0"/>
+	<animation frameOpenAnim="chat_balloon_start" frameCloseAnim="chat_balloon_end" margin="-100 -100 0 0"/>
+	<layer layerlevel="100" margin="-100 -100 0 0"/>
+	<script OpenScp="INDUNENTER_SELECT_STEP_UI_RESET" CloseScp="INDUNENTER_SELECT_STEP_CLOSE"/>
+	<userconfig SLOT_SKIN="invenslot2" SLOT_SIZE="65" MULTI_DEFAULT="0" MULTI_MIN="0" SMALLMODE_WIDTH="400" FIND_WAIT_TIME="10" NO_MATCH_SKIN="indun_people_btn" YES_MATCH_SKIN="indun_people_img" PLUS_BTN_IMAGE="btn_plus" MINUS_BTN_IMAGE="btn_minus" RANDOM_ICON="indun_bossrandom" MATCH_FINDED_SOUND="sys_pvp_battle_party_user_full" MEMBER_FINDED_SOUND="sys_pvp_battle_party_user_in" UNDERSTAFF_CHECK_SOUND="sys_pvp_battle_party_user_4" TOOLTIP_POSX="5" TOOLTIP_POSY="42"/>
+	<controls>
+		<groupbox name="main_gb" rect="0 0 800 670" margin="0 0 0 0" layout_gravity="left top" hittestbox="false" scrollbar="false" skin="indun_skin"/>
+		<!-- header -->
+		<groupbox name="header_gb" parent="main_gb" rect="0 0 800 40" margin="0 0 0 0" layout_gravity="left top" hittestbox="false" scrollbar="false" skin="none"/>
+		<button name="close_btn" parent="header_gb" rect="0 0 40 40" margin="0 8 0 0" layout_gravity="right top" image="indun_close_btn" LBtnUpScp="INDUNENTER_SELECT_STEP_CLOSEBUTTON_PRESSED"/>
+		<button name="small_btn" parent="header_gb" rect="0 0 40 40" margin="0 8 35 0" layout_gravity="right top" image="indun_small_btn" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_SMALL"/>
+		<richtext name="indun_name_text" parent="header_gb" rect="0 0 400 40" margin="0 5 0 0" layout_gravity="center center" fontname="white_20_ol" caption="공명의 성소" hittest="false"/>
+		<!-- indun & restrict view -->
+		<picture name="indun_pic" parent="main_gb" rect="0 0 295 490" margin="10 45 0 0" layout_gravity="left top" image="027_boss_Gaigalas" stretch="true" hittestbox="false"/>
+		<groupbox name="restrict_gb" parent="main_gb" rect="0 0 280 80" margin="10 45 0 0" layout_gravity="left top" draw="false" image="text_bg_black" scrollbar="false"/>
+		<groupbox name="restrict_skill_gb" rect="0 0 196 40" parent="restrict_gb" margin="0 0 0 0" layout_gravity="left top" draw="false" image="text_bg_black" scrollbar="false"/>
+		<richtext name="restrict_skill_text" rect="0 0 200 30" parent="restrict_skill_gb" margin="5 0 0 0" layout_gravity="left center" caption="{img NOTICE_Dm_! 30 30}{@st43}{s16}스킬 제한{/}" hittest="false"/>
+		<groupbox name="restrict_item_gb" rect="0 0 196 40" parent="restrict_gb" margin="0 0 0 0" layout_gravity="left top" draw="false" image="text_bg_black" scrollbar="false"/>
+		<richtext name="restrict_item_text" rect="0 0 200 30" parent="restrict_item_gb" margin="5 0 0 0" layout_gravity="left center" caption="{img NOTICE_Dm_! 30 30}{@st43}{s16}입장 제한{/}" hittest="false"/>
+		<groupbox name="restrict_dungeon_gb" rect="0 0 196 40" parent="restrict_gb" margin="0 0 0 0" layout_gravity="left top" draw="false" image="text_bg_black" scrollbar="false"/>
+		<richtext name="restrict_dungeon_text" rect="0 0 200 30" parent="restrict_dungeon_gb" margin="5 0 0 0" layout_gravity="left center" caption="{img NOTICE_Dm_! 30 30}{@st43}{s16}던전 적용 사항{/}" hittest="false"/>
+		<!-- detail view -->
+		<groupbox name="detail_gb" parent="main_gb" rect="0 0 480 510" margin="0 45 0 0" layout_gravity="right top" draw="false" scrollbar="false"/>
+		<!-- detail view - count -->
+		<groupbox name="count_gb" parent="detail_gb" rect="0 0 450 30" margin="5 10 0 0" layout_gravity="left top" draw="false" hittestbox="false" scrollbar="false"/>
+		<picture name="count_pic" parent="count_gb" rect="0 0 27 27" margin="0 0 0 0" layout_gravity="left top" image="indun_entrance"/>
+		<picture name="count_cycle_pic" parent="count_gb" rect="0 0 52 20" margin="0 0 80 0" layout_gravity="right center" image="indun_icon_event_l_eng"/>
+		<richtext name="count_text" parent="count_gb" rect="0 0 190 30" margin="30 0 0 0" layout_gravity="left center" fontname="brown_18_b" caption="던전 입장"/>
+		<richtext name="count_data_text" parent="count_gb" rect="0 0 190 30" margin="0 0 0 0" layout_gravity="right center" textalign="right center" fontname="brown_18_b" format="%s/%s회" param1="now" param2="max"/>
+		<richtext name="count_data2_text" parent="count_gb" rect="0 0 190 30" margin="0 0 0 0" layout_gravity="right center" textalign="right center" fontname="brown_18_b" format="%s회 가능" param1="now" param1_def="0"/>
+		<richtext name="count_item_data_text" parent="count_gb" rect="0 0 190 30" margin="0 0 0 0" layout_gravity="right center" textalign="right center" fontname="brown_18_b" format="%s개" param1="ivnadmissionitem"/>
+		<!-- detail view - level -->
+		<groupbox name="level_gb" parent="detail_gb" rect="0 0 450 30" margin="5 53 0 0" layout_gravity="left top" draw="false" hittestbox="false" scrollbar="false"/>
+		<picture name="level_pic" parent="level_gb" rect="0 0 27 27" margin="0 0 0 0" layout_gravity="left top" image="indun_entrance_level"/>
+		<richtext name="level_title_text" parent="level_gb" rect="0 0 190 30" margin="30 0 0 0" layout_gravity="left center" fontname="brown_18_b" caption="입장 레벨"/>
+		<richtext name="level_data_text" parent="level_gb" rect="0 0 190 30" margin="0 0 0 0" layout_gravity="right center" fontname="brown_18_b" caption="레벨"/>
+		<!-- detail view - monster -->
+		<groupbox name="monster_gb" parent="detail_gb" rect="0 0 452 100" margin="0 95 0 0" layout_gravity="left top" draw="false" hittestbox="false" scrollbar="false"/>
+		<button name="right_btn" parent="monster_gb" rect="0 0 40 50" margin="0 42 10 0" layout_gravity="right top" image="button_right_select2" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_MON_CLICK_RIGHT"/>
+		<button name="left_btn" parent="monster_gb" rect="0 0 40 50" margin="10 42 0 0" layout_gravity="left top" image="button_left_select2" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_MON_CLICK_LEFT"/>
+		<picture name="monster_title_pic" parent="monster_gb" rect="0 0 27 27" margin="5 5 0 0" layout_gravity="left top" image="indun_bossmonster"/>
+		<richtext name="monster_title_text" parent="monster_gb" rect="0 0 190 30" margin="35 5 0 0" layout_gravity="left top" fontname="brown_18_b" caption="대표 등장 몬스터" autofontsizebywidth="140"/>
+		<groupbox name="monster_slotset_gb" parent="monster_gb" rect="0 0 340 65" margin="55 5 0 0" layout_gravity="left bottom" draw="false" scrollbar="false"/>
+		<slotset name="monster_slotset" parent="monster_slotset_gb" rect="0 0 340 60" margin="5 0 0 0" layout_gravity="left top" row="1" col="12" size="65 65" skin="invenslot2" spc="2 2" enabledrop="false" enablepop="false"/>
+		<!-- detail view - reward -->
+		<groupbox name="reward_gb" parent="detail_gb" rect="0 0 412 110" margin="0 210 0 0" layout_gravity="left top" draw="false" hittestbox="false" scrollbar="false"/>
+		<picture name="reward_pic" parent="reward_gb" rect="0 0 27 27" margin="5 8 0 0" layout_gravity="left top" image="indun_item"/>
+		<richtext name="reward_text" parent="reward_gb" rect="0 8 190 30" margin="35 0 0 0" layout_gravity="left top" caption="획득 아이템" fontname="brown_18_b"/>
+		<picture name="weapon_btn" parent="reward_gb" rect="0 0 68 68" margin="55 35 0 0" layout_gravity="left top" image="indun_weapon" oversound="button_over" stretch="true" LBtnUpScp="INDUNENTER_SELECT_STEP_MAKE_DROPBOX"/>
+		<picture name="subweapon_btn" parent="reward_gb" rect="0 0 68 68" margin="125 35 0 0" layout_gravity="left top" image="indun_shield" oversound="button_over" stretch="true" LBtnUpScp="INDUNENTER_SELECT_STEP_MAKE_DROPBOX"/>
+		<picture name="armor_btn" parent="reward_gb" rect="0 0 68 68" margin="195 35 0 0" layout_gravity="left top" image="indun_armour" oversound="button_over" stretch="true" LBtnUpScp="INDUNENTER_SELECT_STEP_MAKE_DROPBOX"/>
+		<picture name="acc_btn" parent="reward_gb" rect="0 0 68 68" margin="265 35 0 0" layout_gravity="left top" image="indun_acc" oversound="button_over" stretch="true" LBtnUpScp="INDUNENTER_SELECT_STEP_MAKE_DROPBOX"/>
+		<picture name="material_btn" parent="reward_gb" rect="0 0 68 68" margin="335 35 0 0" layout_gravity="left top" image="indun_material" oversound="button_over" stretch="true" LBtnUpScp="INDUNENTER_SELECT_STEP_MAKE_DROPBOX"/>
+		<!-- detail view - step select -->
+		<richtext name="step_select_title" parent="detail_gb" rect="0 0 300 30" margin="8 335 0 0" layout_gravity="left top" caption="난이도 단계 선택" fontname="brown_18_b" hittest="false"/>
+		<groupbox name="step_gb" parent="detail_gb" rect="0 0 455 60" margin="0 365 0 0" layout_gravity="left top" draw="false" hittestbox="false" scrollbar="false"/>
+		<groupbox name="step_info_gb" parent="detail_gb" rect="0 0 455 70" margin="0 420 0 0" layout_gravity="left top" skin="equipment_info_title" hittestbox="false" scrollbar="false"/>
+		<picture name="step_selected_btn" parent="step_info_gb" rect="0 0 70 70" margin="5 0 0 0" layout_gravity="left top" image="achievement_stage_bg" stretch="true"/>
+		<richtext name="step_selected_text" parent="step_selected_btn" rect="0 0 70 70" margin="0 15 0 0" layout_gravity="center top" textalign="center center" format="{@st42b}{s16}%s단계{/}" param1="step" param1_def="1" hittest="false"/>
+		<richtext name="gear_score_text" parent="step_info_gb" rect="0 0 245 40" margin="85 0 0 0" layout_gravity="left center" textalign="center center" format="{@st42b}{s18}권장 기어 스코어 : %s{/}" param1="gearscore" param1_def="50,000" hittest="false"/>
+		<richtext name="reward_bonus_text" parent="step_info_gb" rect="0 0 175 40" margin="300 0 0 0" layout_gravity="left center" textalign="center center" format="{@st100orange_16}{s18}보상 획득량 +%s%{/}" param1="ratio" param1_def="10" hittest="false"/>
+		<!-- bottom view -->
+		<groupbox name="bottom_gb" parent="main_gb" rect="0 0 780 130" margin="12 0 0 5" layout_gravity="left bottom" hittestbox="false" skin="indun_bottom_skin" scrollbar="false"/>
+		<!-- bottom view - enter btn -->
+		<button name="with_btn" parent="bottom_gb" rect="0 0 180 55" margin="0 10 190 0" layout_gravity="right top" skin="test_gray_button" oversound="button_over" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_PARTYMATCH" texttooltip="파티원의 참여를 기다립니다.{nl}레벨대가 맞는 파티원에게는 메세지가 전송됩니다."/>
+		<richtext name="with_party_auto_text" parent="with_btn" rect="0 0 180 50" margin="0 0 0 0" layout_gravity="center center" textalign="center center" caption="파티원과 자동매칭" fontname="white_16_ol" hittest="false"/>
+		<richtext name="with_cur_member_text" parent="with_btn" rect="0 0 180 50" margin="0 0 0 0" layout_gravity="center center" textalign="left center" format="현재 모인 멤버로 자동매칭" fontname="white_16_ol" hittest="false" draw="false"/>
+		<button name="enter_right_btn" parent="bottom_gb" rect="0 0 180 55" margin="0 65 10 0" layout_gravity="right top" skin="test_red_button" oversound="button_over" format="{@st41b}{s16}바로입장%s{/}" param1="image" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_ENTERRIGHT"/>
+		<button name="automatch_btn" parent="bottom_gb" rect="0 0 180 55" margin="0 10 10 0" layout_gravity="right top" skin="test_red_button" oversound="button_over" resizebytext="false" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_AUTOMATCH"/>
+		<richtext name="automatch_text" parent="automatch_btn" rect="0 0 180 55" margin="0 0 0 0" layout_gravity="center center" textalign="center center" format="자동매칭%s" param1="image" fontname="white_16_ol" hittest="false"/>
+		<richtext name="automatch_time" parent="automatch_btn" rect="0 0 180 55" margin="0 0 0 0" layout_gravity="center center" textalign="center center" caption="00:00" fontname="white_16_b" hittest="false" draw="false"/>
+		<button name="reenter_btn" parent="bottom_gb" rect="0 0 180 55" margin="0 10 10 0" layout_gravity="right top" skin="test_pvp_btn" caption="{@st66b}{s16}자동매칭{nl}재입장{/}{/}" oversound="button_over" resizebytext="false" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_REENTER" texttooltip="이전에 매칭된 곳으로 입장합니다."/>
+		<button name="understaff_enter_allow_btn" parent="bottom_gb" rect="0 0 180 55" margin="0 65 190 0" layout_gravity="right top" skin="test_gray_button" caption="{@st41b}{s16}4인 이하 입장{/}" oversound="button_over" resizebytext="false" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_REQ_UNDERSTAFF_ENTER_ALLOW"/>
+        <!-- bottom view - member -->
+		<groupbox name="member_cnt_box" parent="bottom_gb" rect="0 0 250 35" skin="notice_more" margin="0 10 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false"/>
+		<richtext name="member_cnt_text" parent="member_cnt_box" rect="0 0 300 35" margin="15 0 0 0" layout_gravity="left center" textalign="left center" fontname="black_16_b" format="현재 입장 인원: %s" param1="cnt" param1_def="정보를 요청 중 입니다."/>
+		<richtext name="party_ask_text" parent="member_cnt_box" rect="0 0 300 35" margin="15 0 0 0" layout_gravity="left center" textalign="left center" fontname="black_16_b" format="%s" param1="value" param1_def="파티원의 참여를 기다리고 있습니다."/>
+		<groupbox name="member_box" parent="bottom_gb" rect="0 0 370 85" margin="10 0 0 5" layout_gravity="left bottom" draw="false" hittestbox="true" scrollbar="false"/>
+		<picture name="party_line" parent="member_box" rect="0 0 15 50" margin="40 -10 0 0" layout_gravity="left center" image="indun_partyline" stretch="true"/>
+		<!-- main - small -->
+		<groupbox name="main_small_gb" rect="0 0 400 250" margin="0 0 0 0" layout_gravity="left top" skin="indun_skin" hittestbox="false"/>
+		<groupbox name="small_header_gb" parent="main_small_gb" rect="0 0 400 40" layout_gravity="left top" hittestbox="false" scrollbar="false" skin="none"/>
+		<richtext name="small_indun_name_text" parent="small_header_gb" rect="0 0 260 40" margin="0 5 0 0" layout_gravity="center center" fontname="white_18_ol" caption="공명의 성소" hittest="false"/>
+		<button name="small_maximize_btn" parent="small_header_gb" rect="0 0 21 21" margin="0 8 42 0" layout_gravity="right top" image="indun_small_btn" oversound="button_over" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_SMALL"/>
+		<button name="small_close_btn" parent="small_header_gb" rect="0 0 40 40" margin="0 8 5 0" layout_gravity="right top" image="indun_close_btn" LBtnUpScp="INDUNENTER_SELECT_STEP_CLOSEBUTTON_PRESSED"/>
+		<groupbox name="auto_match_gb" parent="main_small_gb" rect="0 0 400 90" layout_gravity="center top" margin="0 40 0 0" draw="false" hittestbox="false"/>
+		<groupbox name="match_pc_gb" parent="auto_match_gb" rect="0 0 300 90" layout_gravity="center center" margin="0 15 0 0" draw="false" hittestbox="false"/>
+		<richtext name="match_time" parent="auto_match_gb" rect="0 0 100 90" layout_gravity="center top" margin="0 55 0 0" caption="00:15" fontname="black_20_b"/>
+		<groupbox name="match_success_gb" parent="main_small_gb" rect="0 0 400 90" layout_gravity="center top" margin="0 40 0 0" draw="false" hittestbox="false"/>
+		<richtext name="match_success_text" parent="match_success_gb" rect="0 0 400 90" layout_gravity="center top" caption="잠시 후 이동됩니다" fontname="black_20_b" margin="0 25 0 0"/>
+		<gauge name="match_success_gauge" parent="match_success_gb" rect="0 0 320 10" margin="40 0 0 10" layout_gravity="left bottom" skin="gauge_produce_blue"/>
+		<button name="small_understaff_enter_allow_btn" parent="main_small_gb" rect="0 0 200 55" layout_gravity="center bottom" margin="0 0 0 65" oversound="button_over" format="{@st41b}4인 이하 입장" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_REQ_UNDERSTAFF_ENTER_ALLOW" skin="test_gray_button"/>
+		<button name="cancel_auto_match" parent="main_small_gb" rect="0 0 200 55" layout_gravity="center bottom" margin="0 0 0 10" oversound="button_over" format="{@st66b}매칭 취소" skin="test_pvp_btn" LBtnUpScp="ON_INDUNENTER_SELECT_STEP_SMALL_AUTOMATCH_CANCEL"/>
+	</controls>
+</uiframe>

@@ -2,7 +2,7 @@
 
 
 local parameter_list = nil
-local end_lv = 540
+local end_lv = 560
 function make_parameter_list()
 	if parameter_list ~= nil then
 		return
@@ -33,6 +33,10 @@ function make_parameter_list()
 	parameter_list[540] = {} 
 	parameter_list[540]['MAX_NORMAL_SOCKET_COUNT'] = 2 -- 색상 젬 소켓 최대 개수
 	parameter_list[540]['MAX_AETHER_SOCKET_COUNT'] = 1 -- 에테르 젬 소켓 최대 개수	
+
+	parameter_list[560] = {} 
+	parameter_list[560]['MAX_NORMAL_SOCKET_COUNT'] = 2 -- 색상 젬 소켓 최대 개수
+	parameter_list[560]['MAX_AETHER_SOCKET_COUNT'] = 1 -- 에테르 젬 소켓 최대 개수	
 end
 make_parameter_list()
 
@@ -113,6 +117,10 @@ function setting_lv_normal_socket_material(mat_list_by_lv, lv)
 		mat_list_by_lv[lv][2][season_coin] = 1575
 	elseif lv == 540 then
 		season_coin = 'AustejaCertificate'
+		mat_list_by_lv[lv][1][season_coin] = 675
+		mat_list_by_lv[lv][2][season_coin] = 1575
+	elseif lv == 560 then
+		season_coin = 'SauleCertificate'
 		mat_list_by_lv[lv][1][season_coin] = 675
 		mat_list_by_lv[lv][2][season_coin] = 1575
 	end

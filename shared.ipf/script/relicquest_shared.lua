@@ -27,6 +27,7 @@ function GET_RELICQUEST_MAP_LIST_RESULT(pc, group)
     local fieldTB15 = { 'ep15_1_f_abbey_1', 'ep15_1_f_abbey_2', 'ep15_1_f_abbey_3', 'ep15_2_d_nicopolis_1', 'ep15_2_d_nicopolis_2'}
     local fieldTB16 = { "f_coral_32_1", "f_rokas_36_1", "f_pilgrimroad_36_2", "ep16_2_d_fantasylibrary_48_3", "ep16_2_d_fantasylibrary_48_4", "ep16_2_d_fantasylibrary_48_5" }
     local fieldTB17 = { "ep17_1_d_limestonecave_52_1", "ep17_1_d_limestonecave_52_2", "ep17_1_d_limestonecave_52_3", "ep17_1_d_limestonecave_52_4", "ep17_1_d_limestonecave_52_5", "ep17_2_f_katyn_10", "ep17_2_f_katyn_12", "ep17_2_f_katyn_14"}
+    local fieldTB18 = { "ep18_1_f_tableland_72", "ep18_1_f_tableland_73", "ep18_1_f_tableland_74"}
 
     local indunTypeTB13 = {"MythicDungeon_Auto", "MythicDungeon_Auto_Hard", "Challenge_Auto", "Raid", "UniqueRaid", "FieldBossRaid", "MissionIndun", "DefenceMission" }
 
@@ -43,6 +44,9 @@ function GET_RELICQUEST_MAP_LIST_RESULT(pc, group)
         return true;
     end
     if table.find(fieldTB17, NowZone) > 0 then
+        return true;
+    end
+    if table.find(fieldTB18, NowZone) > 0 then
         return true;
     end
 

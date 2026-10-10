@@ -18,3 +18,4 @@ ClassID,SizeRank,Radius,ArrowRadius,HitRadius,TargetMakeRadius,Width,Height,Knoc
 17,2,50,25,50,20,0,0,1,1,1,"XL_LHIT"
 18,2,0,0,0,0,0,0,1,1,1,"HIDDEN"
 19,2,15,15,7,15,0,0,1,1,30,"PC"
+20,10,160,100,160,180,0,0,1,1,60,"EX"

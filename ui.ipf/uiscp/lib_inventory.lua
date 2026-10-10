@@ -515,6 +515,72 @@ end
 function INVENTORY_SET_CUSTOM_RBTNDOWN(scriptName)
 	local frame = ui.GetFrame("inventory");
 	frame:SetUserValue("CUSTOM_RBTN_SCP", scriptName);
+	-- 소유 UI를 지정하지 않는 기존 호출은 소유자 검사를 받지 않는다(동작 유지).
+	frame:SetUserValue("CUSTOM_RBTN_OWNER", 'None');
+end
+
+-- 인벤 커스텀 우클릭 훅은 전역 값 하나뿐이라, UI 여러 개가 겹쳐 뜨면 서로를
+-- 덮어쓰고 마지막에 닫힌 UI가 남의 훅까지 지워버린다. 반대로 UI가 CloseScp 를
+-- 타지 않고 숨겨지면 훅이 그대로 남아 인벤 우클릭 아이템 사용이 통째로 막힌다.
+-- 그래서 이전 훅을 보존하고(PUSH/POP), 훅을 건 UI 이름도 같이 들고 다닌다.
+function INVENTORY_PUSH_CUSTOM_RBTNDOWN(ownerFrame, scriptName)
+	local frame = ui.GetFrame("inventory");
+	local current = frame:GetUserValue("CUSTOM_RBTN_SCP");
+	-- 같은 UI가 다시 PUSH 할 때 원래 훅을 잃지 않도록 자기 자신은 저장하지 않는다.
+	if ownerFrame ~= nil and current ~= scriptName then
+		ownerFrame:SetUserValue("PREV_INVENTORY_RBTN_SCP", current);
+		ownerFrame:SetUserValue("PREV_INVENTORY_RBTN_OWNER", frame:GetUserValue("CUSTOM_RBTN_OWNER"));
+	end
+	frame:SetUserValue("CUSTOM_RBTN_SCP", scriptName);
+	if ownerFrame ~= nil then
+		frame:SetUserValue("CUSTOM_RBTN_OWNER", ownerFrame:GetName());
+	else
+		frame:SetUserValue("CUSTOM_RBTN_OWNER", 'None');
+	end
+end
+
+function INVENTORY_POP_CUSTOM_RBTNDOWN(ownerFrame, scriptName)
+	local frame = ui.GetFrame("inventory");
+	local current = frame:GetUserValue("CUSTOM_RBTN_SCP");
+	-- 다른 UI가 이미 훅을 가져갔으면 건드리지 않는다.
+	-- 인벤을 먼저 닫아 훅이 지워진 경우(None)는 복원 대상이다.
+	if current ~= scriptName and current ~= 'None' and current ~= '' then
+		return;
+	end
+	local previous = 'None';
+	local previousOwner = 'None';
+	if ownerFrame ~= nil then
+		previous = ownerFrame:GetUserValue("PREV_INVENTORY_RBTN_SCP");
+		previousOwner = ownerFrame:GetUserValue("PREV_INVENTORY_RBTN_OWNER");
+	end
+	if previous == nil or previous == '' or previous == scriptName then
+		previous = 'None';
+		previousOwner = 'None';
+	end
+	if previousOwner == nil or previousOwner == '' then
+		previousOwner = 'None';
+	end
+	frame:SetUserValue("CUSTOM_RBTN_SCP", previous);
+	frame:SetUserValue("CUSTOM_RBTN_OWNER", previousOwner);
+end
+
+-- 훅을 건 UI가 이미 닫혀 있으면 죽은 훅이므로 지우고 무시한다.
+function INVENTORY_GET_ACTIVE_CUSTOM_RBTNDOWN()
+	local frame = ui.GetFrame("inventory");
+	local scriptName = frame:GetUserValue("CUSTOM_RBTN_SCP");
+	if scriptName == nil or scriptName == '' or scriptName == 'None' then
+		return nil;
+	end
+	local ownerName = frame:GetUserValue("CUSTOM_RBTN_OWNER");
+	if ownerName ~= nil and ownerName ~= '' and ownerName ~= 'None' then
+		local owner = ui.GetFrame(ownerName);
+		if owner == nil or owner:IsVisible() == 0 then
+			frame:SetUserValue("CUSTOM_RBTN_SCP", 'None');
+			frame:SetUserValue("CUSTOM_RBTN_OWNER", 'None');
+			return nil;
+		end
+	end
+	return _G[scriptName];
 end
 
 function INVENTORY_SET_CUSTOM_RDBTNDOWN(scriptName)

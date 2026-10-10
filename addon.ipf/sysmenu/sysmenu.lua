@@ -86,6 +86,7 @@ function SYSMENU_ON_MSG(frame, msg, argStr, argNum)
 	end
 
 	if msg =='GAME_START' or msg == 'ACHIEVE_REWARD' or msg == "ACHIEVE_REWARD_ALL" or msg == "ACHIEVE_NEW" then
+		ADVENTURE_BOOK_ACHIEVE_CONTENT.INVALIDATE_CACHE()
 		SYSMENU_JOURNAL_NOTICE(frame);
 	end
 
@@ -136,14 +137,14 @@ function SYSMENU_CHECK_HIDE_VAR_ICONS(frame)
     local guildRank = frame:GetChild('guildRank');
     local offsetX = extraBag:GetX() - guildRank:GetX()
 	local rightMargin = guildRank:GetMargin().right + offsetX;
-	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "guildinfo", "guildinfo", "sysmenu_guild", rightMargin, offsetX, "Guild");
+	-- rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "guildinfo", "guildinfo", "sysmenu_guild", rightMargin, offsetX, "Guild");
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "ancient_card_list", "ancient_card_list", "Ancient_Menu", rightMargin, offsetX);	   
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "customdrag", "customdrag", "sysmenu_alchemist", rightMargin, offsetX);
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "necronomicon", "necronomicon", "sysmenu_card", rightMargin, offsetX);
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "grimoire", "grimoire", "sysmenu_neacro", rightMargin, offsetX);
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "cupole", "cupole_item", "sysmenu_cupole_info", rightMargin, offsetX);
 	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "poisonpot", "poisonpot", "sysmenu_wugushi", rightMargin, offsetX);	 
-	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "pcbang_shop", "pcbang_shop", pcbangIcon, rightMargin, offsetX);	   
+	rightMargin = SYSMENU_CREATE_VARICON(frame, extraBag, "pcbang_shop", "pcbang_shop", pcbangIcon, rightMargin, offsetX);
 end
 
 function SYSMENU_CREATE_VARICON(frame, status, ctrlName, frameName, imageName, rightMargin, offsetX, hotkeyName)

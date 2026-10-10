@@ -5,3 +5,5 @@ ClassID,ClassName,AccountProperty,IconName
 3,"Weekly_BorderSkin_Unique","HUD_SKIN_DATE_UNIQUE_GRADE","weekboss_hud_skin_unique"
 4,"Weekly_BorderSkin_Legend","HUD_SKIN_DATE_LEGEND_GRADE","weekboss_hud_skin_legend"
 5,"Weekly_BorderSkin_Goddess","HUD_SKIN_DATE_GODDESS_GRADE","weekboss_hud_skin_goddess"
+6,"Archeology_HUD_Skin","HUD_SKIN_DATE_ARCHEOLOGY","icon_item_archeology_hud_skin"
+7,"Resonance_Zawra_HUD_Skin","HUD_SKIN_DATE_RESONANCE_ZAWRA","icon_item_Resonance_Zawra_hud_skin"

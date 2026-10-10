@@ -502,9 +502,9 @@ function POPOBOOST_PRESS_EVENT_PARTICIPATE(frame)
     end
     local opt = { CompareTextDesc = ClMsg('RellayWantParticipatePoPoBoost') }
     if GET_POPOBOOST_SERVER() ~= 1 then
-        WARNINGMSGBOX_EX_FRAME_OPEN(frame, 'None', 'popoboostparticipate;CantRollbackEventParticipate/POPOBOOST_SUCCESS_EVENT_PARTICIPATE', 0, opt);
+        WARNINGMSGBOX_EX_FRAME_OPEN(frame, 'None', 'popoboostparticipate;CantRollbackEventParticipate#Confirm_English/POPOBOOST_SUCCESS_EVENT_PARTICIPATE', 0, opt);
     else
-        WARNINGMSGBOX_EX_FRAME_OPEN(frame, 'None', 'TOSHeroMapPattern_None;CantRollbackEventParticipate/POPOBOOST_SUCCESS_EVENT_PARTICIPATE', 0, opt);
+        WARNINGMSGBOX_EX_FRAME_OPEN(frame, 'None', 'TOSHeroMapPattern_None;CantRollbackEventParticipate#Confirm_English/POPOBOOST_SUCCESS_EVENT_PARTICIPATE', 0, opt);
     end
 end
 
@@ -727,11 +727,7 @@ end
 function POPOBOOST_GODDESS_ROULETTE(frame,arg)
     ui.CloseFrame('popoboost');
     local frame = ui.GetFrame("goddess_roulette")
-    if config.GetServiceNation() == "PAPAYA" then
-        GODDESS_ROULETTE_OPEN(frame, nil, nil, 5)
-    else
-        GODDESS_ROULETTE_OPEN(frame, nil, nil, 4)
-    end
+    GODDESS_ROULETTE_OPEN(frame, nil, nil, 4)
 end
 
 function POPOBOOST_REWARD_CHANGE_BY_GEARSCORE(frame, ctrl, str, num)

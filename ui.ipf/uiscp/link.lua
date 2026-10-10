@@ -153,6 +153,13 @@ function MAKE_LINK_MAP_TEXT(mapName, x, z)
 
 end
 
+function MAKE_LINK_MAP_TEXT_GUILD_ACTIVITY(mapName, x, z)
+
+	local mapprop = geMapTable.GetMapProp(mapName);
+	return string.format("{a SLM %d#%d#%d}{img link_map 24 24}%s[%d,%d]{/}{/}{/}", mapprop.type, x, z, mapprop:GetName(), x, z);	
+
+end
+
 function MAKE_LINK_MAP_TEXT_NO_POS(mapName, x, z)
 
 	local mapprop = geMapTable.GetMapProp(mapName);

@@ -34,16 +34,28 @@ local function make_shared_upgrade_equip_table()
         material_table['NoTrade_EP17_penetration_belt_' .. i .. '_high']['AustejaCertificate'] = 5000
         material_table['NoTrade_EP17_penetration_belt_' .. i .. '_high']['misc_BlessedStone_2'] = 2
         material_table['NoTrade_EP17_penetration_belt_' .. i .. '_high']['misc_ore29'] = 300
+
+
+
+        material_table['EP18_penetration_belt_' .. i .. '_high'] = {}
+        material_table['EP18_penetration_belt_' .. i .. '_high']['SauleCertificate'] = 5000
+        material_table['EP18_penetration_belt_' .. i .. '_high']['misc_BlessedStone_2'] = 2
+        material_table['EP18_penetration_belt_' .. i .. '_high']['misc_ore30'] = 300
+
+        material_table['NoTrade_EP18_penetration_belt_' .. i .. '_high'] = {}
+        material_table['NoTrade_EP18_penetration_belt_' .. i .. '_high']['SauleCertificate'] = 5000
+        material_table['NoTrade_EP18_penetration_belt_' .. i .. '_high']['misc_BlessedStone_2'] = 2
+        material_table['NoTrade_EP18_penetration_belt_' .. i .. '_high']['misc_ore30'] = 300
     end
 
     for i = 1, 7 do
         material_table['EP16_fierce_shoulder_' .. i .. '_high'] = {}
-        material_table['EP16_fierce_shoulder_' .. i .. '_high']['AustejaCertificate'] = 5000
+        material_table['EP16_fierce_shoulder_' .. i .. '_high']['JurateCertificate'] = 5000
         material_table['EP16_fierce_shoulder_' .. i .. '_high']['misc_BlessedStone_1'] = 2
         material_table['EP16_fierce_shoulder_' .. i .. '_high']['misc_ore28'] = 300
 
         material_table['NoTrade_EP16_fierce_shoulder_' .. i .. '_high'] = {}
-        material_table['NoTrade_EP16_fierce_shoulder_' .. i .. '_high']['AustejaCertificate'] = 5000
+        material_table['NoTrade_EP16_fierce_shoulder_' .. i .. '_high']['JurateCertificate'] = 5000
         material_table['NoTrade_EP16_fierce_shoulder_' .. i .. '_high']['misc_BlessedStone_1'] = 2
         material_table['NoTrade_EP16_fierce_shoulder_' .. i .. '_high']['misc_ore28'] = 300
 
@@ -56,6 +68,16 @@ local function make_shared_upgrade_equip_table()
         material_table['NoTrade_EP17_fierce_shoulder_' .. i .. '_high']['AustejaCertificate'] = 5000
         material_table['NoTrade_EP17_fierce_shoulder_' .. i .. '_high']['misc_BlessedStone_2'] = 2
         material_table['NoTrade_EP17_fierce_shoulder_' .. i .. '_high']['misc_ore29'] = 300
+
+        material_table['EP18_fierce_shoulder_' .. i .. '_high'] = {}
+        material_table['EP18_fierce_shoulder_' .. i .. '_high']['SauleCertificate'] = 5000
+        material_table['EP18_fierce_shoulder_' .. i .. '_high']['misc_BlessedStone_2'] = 2
+        material_table['EP18_fierce_shoulder_' .. i .. '_high']['misc_ore30'] = 300
+
+        material_table['NoTrade_EP18_fierce_shoulder_' .. i .. '_high'] = {}
+        material_table['NoTrade_EP18_fierce_shoulder_' .. i .. '_high']['SauleCertificate'] = 5000
+        material_table['NoTrade_EP18_fierce_shoulder_' .. i .. '_high']['misc_BlessedStone_2'] = 2
+        material_table['NoTrade_EP18_fierce_shoulder_' .. i .. '_high']['misc_ore30'] = 300
 
     end
 
@@ -99,7 +121,8 @@ local function make_shared_upgrade_equip_table()
         material_table[name]['misc_ore28'] = 100
     end
 
-    item_list = {
+    -- 방패는 GroupName이 Armor라서 런타임 판별 시 방어구로 오분류됨 -> 무기/방어구 리스트를 분리해서 처리
+    local weapon_item_list = {
                         "EP17_RAID_SWORD",
                         "EP17_RAID_THSWORD",
                         "EP17_RAID_STAFF",
@@ -116,7 +139,10 @@ local function make_shared_upgrade_equip_table()
                         "EP17_RAID_RAPIER",
                         "EP17_RAID_CANNON",
                         "EP17_RAID_MUSKET",
-                        "EP17_RAID_TRINKET",
+                        "EP17_RAID_TRINKET"
+                    }
+
+    local armor_item_list = {
                         "EP17_RAID_CLOTH_TOP",
                         "EP17_RAID_CLOTH_LEG",
                         "EP17_RAID_CLOTH_FOOT",
@@ -129,21 +155,77 @@ local function make_shared_upgrade_equip_table()
                         "EP17_RAID_PLATE_LEG",
                         "EP17_RAID_PLATE_FOOT",
                         "EP17_RAID_PLATE_HAND"
-                    }   
-                    
-    for i = 1, #item_list do
-        local name = item_list[i]
+                    }
+
+    for i = 1, #weapon_item_list do
+        local name = weapon_item_list[i]
         material_table[name] = {}
         material_table[name]['AustejaCertificate'] = 2000
         material_table[name]['misc_BlessedStone_2'] = 1
         material_table[name]['misc_ore29'] = 100
-        
-        local cls = GetClass('Item', name)
-        if TryGetProp(cls, 'GroupName', 'None') == 'Armor' then
-            material_table[name]['misc_boss_202509_armor_NoTrade'] = 2
-        else
-            material_table[name]['misc_boss_202509_weapon_NoTrade'] = 2
-        end
+        material_table[name]['misc_boss_202509_weapon_NoTrade'] = 2
+    end
+
+    for i = 1, #armor_item_list do
+        local name = armor_item_list[i]
+        material_table[name] = {}
+        material_table[name]['AustejaCertificate'] = 2000
+        material_table[name]['misc_BlessedStone_2'] = 1
+        material_table[name]['misc_ore29'] = 100
+        material_table[name]['misc_boss_202509_armor_NoTrade'] = 2
+    end
+
+    weapon_item_list = {
+                        "EP18_RAID_SWORD",
+                        "EP18_RAID_THSWORD",
+                        "EP18_RAID_STAFF",
+                        "EP18_RAID_THBOW",
+                        "EP18_RAID_BOW",
+                        "EP18_RAID_MACE",
+                        "EP18_RAID_THMACE",
+                        "EP18_RAID_SHIELD",
+                        "EP18_RAID_SPEAR",
+                        "EP18_RAID_THSPEAR",
+                        "EP18_RAID_DAGGER",
+                        "EP18_RAID_THSTAFF",
+                        "EP18_RAID_PISTOL",
+                        "EP18_RAID_RAPIER",
+                        "EP18_RAID_CANNON",
+                        "EP18_RAID_MUSKET",
+                        "EP18_RAID_TRINKET"
+                    }
+
+    armor_item_list = {
+                        "EP18_RAID_CLOTH_TOP",
+                        "EP18_RAID_CLOTH_LEG",
+                        "EP18_RAID_CLOTH_FOOT",
+                        "EP18_RAID_CLOTH_HAND",
+                        "EP18_RAID_LEATHER_TOP",
+                        "EP18_RAID_LEATHER_LEG",
+                        "EP18_RAID_LEATHER_FOOT",
+                        "EP18_RAID_LEATHER_HAND",
+                        "EP18_RAID_PLATE_TOP",
+                        "EP18_RAID_PLATE_LEG",
+                        "EP18_RAID_PLATE_FOOT",
+                        "EP18_RAID_PLATE_HAND"
+                    }
+
+    for i = 1, #weapon_item_list do
+        local name = weapon_item_list[i]
+        material_table[name] = {}
+        material_table[name]['SauleCertificate'] = 2000
+        material_table[name]['misc_BlessedStone_2'] = 1
+        material_table[name]['misc_ore30'] = 100
+        material_table[name]['misc_boss_EP18_weapon_NoTrade'] = 2
+    end
+
+    for i = 1, #armor_item_list do
+        local name = armor_item_list[i]
+        material_table[name] = {}
+        material_table[name]['SauleCertificate'] = 2000
+        material_table[name]['misc_BlessedStone_2'] = 1
+        material_table[name]['misc_ore30'] = 100
+        material_table[name]['misc_boss_EP18_armor_NoTrade'] = 2
     end
 end
 

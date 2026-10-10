@@ -144,6 +144,12 @@
 	<BGM PlayListName="master_Blitz_Hunter" Volume="130" FileName1="tos_Initium_The_Way_to_Heaven.mp3"/>
 	<BGM PlayListName="master_Aether_Blader" Volume="130" FileName1="tos_Cinenote_Sword_of_Wilderness.mp3"/>
 	<BGM PlayListName="master_Hermit" Volume="130" FileName1="tos_SFA_Hermit_Klasica.mp3"/>
+	<BGM PlayListName="master_Grimmark" Volume="130" FileName1="tos_SoundTeMP_Wind_Slasher.mp3"/>
+	<BGM PlayListName="master_Kneller" Volume="130" FileName1="tos_SFA_Kneller_a_Relm.mp3"/>
+	<BGM PlayListName="master_Commodore" Volume="130" FileName1="tos_Cinenote_Foward.mp3"/>
+	<BGM PlayListName="master_Shardbringer" Volume="130" FileName1="tos_SFA_1pt_remains.mp3"/>
+	<BGM PlayListName="master_Executor" Volume="130" FileName1="tos_SFA_Dienos_Advento_Rock_MM"/>
+	<BGM PlayListName="master_Officiant" Volume="130" FileName1="tos_SFA_Primo_Circle_Synthetically_Classic"/>
 	<BGM PlayListName="NPC_CHRISTMASTREE01" Volume="120" FileName1="Orgel_No_Matter_Christmas.mp3"/>
 	<BGM PlayListName="NPC_CHRISTMASTREE02" Volume="120" FileName1="Orgel_Dont_Cry.mp3"/>
 	<BGM PlayListName="raid_velcoffer" Volume="120" FileName1="tos_Drogo_Uno_Impetu.mp3" FileName2="tos_Drogo_Velvet_Penetration.mp3" FileName3="tos_Gaudium_Wrong_Theory.mp3"/>
@@ -177,6 +183,9 @@
 	<BGM PlayListName="f_episode_15_1_3" Volume="140" FileName1="tos_7clouds_Nevero.mp3"/>
 	<BGM PlayListName="f_episode_15_2_1" Volume="130" FileName1="tos_SFA_Dienos_advento_world.mp3"/>
 	<BGM PlayListName="f_episode_15_2_2" Volume="140" FileName1="tos_SFA_The_Last_Parade.mp3"/>
+	<BGM PlayListName="ep18_2_f_rokas_40" Volume="130" FileName1="tos_SFA_Two_Suns.mp3" FileName2="tos_Cinenote_Action_05_Long_Distance.mp3"/>
+	<BGM PlayListName="ep18_2_f_rokas_41" Volume="130" FileName1="tos_Cinenote_Desolation_Action_01.mp3" FileName2="tos_Cinenote_Action_05_Long_Distance.mp3"/>
+	<BGM PlayListName="ep18_d_shadow_raid_main_01" Volume="130" FileName1="tos_Cinenote_Fighting_Spirit_Game_04.mp3"/>
 	<BGM PlayListName="raid_delmore_1" Volume="130" FileName1="tos_SFA_The_Mirror_of_Fate.mp3"/>
 	<BGM PlayListName="raid_delmore_2" Volume="130" FileName1="tos_Symphonix_miles_to_go.mp3"/>
 	<BGM PlayListName="raid_earring" Volume="130" FileName1="tos_SFA_Perseguir_la_cola.mp3"/>
@@ -191,6 +200,11 @@
 	<BGM PlayListName="raid_darkneringa" Volume="130" FileName1="tos_SFA_Synonymer_till_gissel.mp3"/>
 	<BGM PlayListName="raid_crystalgolem" Volume="130" FileName1="tos_SFA_Due_Solo_Gakudan_mix.mp3"/>
 	<BGM PlayListName="raid_redania" Volume="130" FileName1="tos_Initium_Into_the_Event_Horizon.mp3"/>
+	<BGM PlayListName="raid_laimara" Volume="130" FileName1="tos_SFA_The_Kingdom_Overcomes.mp3" FileName2="tos_SFA_The_Maze_of_Desire.mp3"/>
+	<BGM PlayListName="raid_zmei_1" Volume="130" FileName1="tos_Initium_Farrell.mp3"/>
+	<BGM PlayListName="raid_zmei_2" Volume="130" FileName1="tos_Cinenote_Warfare.mp3"/>
+	<BGM PlayListName="raid_resonance_seir_forest_1" Volume="130" FileName1="tos_Cinenote_Drailed.mp3"/>
+	<BGM PlayListName="raid_resonance_seir_forest_2" Volume="130" FileName1="tos_SFA_Ora_Pro_Nobis.mp3"/>
 	<BGM PlayListName="boss_spreader" Volume="130" FileName1="tos_Cinenote_Action7_Spreader.mp3"/>
 	<BGM PlayListName="boss_falouros" Volume="130" FileName1="tos_Cinenote_Battle3_Falouros.mp3"/>
 	<BGM PlayListName="track" Volume="90" FileName1="track.mp3"/>

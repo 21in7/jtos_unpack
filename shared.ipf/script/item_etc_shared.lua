@@ -12,12 +12,12 @@ function GET_LIMITATION_TO_BUY(tpItemID)
         return 'NO', 0;
     end
 
-    local accountLimitCount = TryGetProp(tpItemObj, 'AccountLimitCount');
+    local accountLimitCount = TryGetProp(tpItemObj, 'AccountLimitCount', 0);
     if accountLimitCount ~= nil and accountLimitCount > 0 then
         return 'ACCOUNT', accountLimitCount;
     end
 
-    local monthLimitCount = TryGetProp(tpItemObj, 'MonthLimitCount');    
+    local monthLimitCount = TryGetProp(tpItemObj, 'MonthLimitCount', 0);
     if monthLimitCount ~= nil and monthLimitCount > 0 then
         return 'MONTH', monthLimitCount;
     end
@@ -332,13 +332,24 @@ function IS_REGISTER_ENABLE_COSTUME(item)
     if item == nil then
         return false
     end
-
+    
+    if TryGetProp(item, "LifeTime", 0) > 0 then
+        return false, "TimelimitedItemsCannotBeUsed"
+    end
+    
     if TryGetProp(item, "TeamBelonging", 0) == 1 then
         local itemName =  TryGetProp(item, "StringArg", "None");
-        if itemName == "snigo_costume" then
+        local itemName2 =  TryGetProp(item, "StringArg2", "None");
+
+        if itemName == "snigo_costume" or itemName2 == "snigo_costume"
+            or itemName == "uriel_costume" or itemName2 == "uriel_costume" then
             return true;
         end
         return false, "CantRegisterCuzTeamBelonging"
+    end
+
+    if TryGetProp(item, "CharacterBelonging", 0) == 1 then
+        return false, "CantExecCuzCharacterBelonging"
     end
 
     return true

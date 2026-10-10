@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<uiframe name="cupole_upgrade" x="0" y="0" width="1980" height="1080">
+    <frame layout_gravity="center center" margin="0 0 0 0" draw="true"/>
+    <script OpenScp="" CloseScp=""/>
+    <layer layerlevel="102"/>
+    <skin frameskin=" "/>
+    <draw drawtitlebar="false" topmostlayerbyclick="true"/>
+    <input moveable="false" hittestframe="true" moveintitlebar="false" catchmovepos="false"/>
+    <sound opensound="window_open" closesound="window_close"/>
+    <option closebutton="false"/>
+    <controls>
+        <!-- 신규 큐폴 창과 같은 양피지/청록 계층 -->
+        <groupbox name="managerTab" rect="0 0 1100 650" margin="-45 0 0 0" layout_gravity="center center" draw="true" hittestbox="true" scrollbar="false" skin=""/>
+        <picture name="WindowBG" parent="managerTab" rect="0 0 1080 630" margin="0 0 0 0" layout_gravity="center center" draw="true" hittest="false" stretch="true" image="kupole_r_sr"/>
+        <picture name="OuterFrameArt" parent="managerTab" rect="0 0 1100 650" margin="0 0 0 0" layout_gravity="center center" draw="true" hittest="false" stretch="true" image="cupole_small_frame"/>
+        <picture name="OuterFrameCloseArt" rect="16 16 128 128" margin="969 6 0 0" layout_gravity="left top" parent="managerTab" image="cupole_ui_close_corner_v2" stretch="true"/>
+        <picture name="TitleRibbon" parent="managerTab" rect="0 0 390 84" margin="0 0 0 0" layout_gravity="center top" draw="true" hittest="false" stretch="true" image="cupole_ui_title_ribbon"/>
+        <richtext name="Title" parent="TitleRibbon" rect="0 0 300 48" margin="0 0 0 0" layout_gravity="center center" caption="{@st43}{#FFF1C7}{s22}큐폴 호감도 상승" hittest="false" fixwidth="true" textalign="center center"/>
+        <groupbox name="CupoleBg" parent="managerTab" rect="0 0 1040 142" margin="0 90 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="false" skin=""/>
+        <richtext name="BeforeRankText" parent="CupoleBg" rect="0 0 190 24" margin="165 0 0 0" layout_gravity="left top" hittest="false" fixwidth="true" format="{@st66d}{#762C3D}{s15}현재 호감도 %s" param1="rank" param1_def="0" textalign="center center"/>
+        <richtext name="MaterialLabel" parent="CupoleBg" rect="0 0 180 24" margin="365 0 0 0" layout_gravity="left top" hittest="false" fixwidth="true" caption="{@st66d}{#173E50}{s15}필요 재료" textalign="center center"/>
+        <richtext name="AfterRankText" parent="CupoleBg" rect="0 0 190 24" margin="685 0 0 0" layout_gravity="left top" hittest="false" fixwidth="true" format="{@st66d}{#355F56}{s15}상승 후 호감도 %s" param1="rank" param1_def="1" textalign="center center"/>
+        <richtext name="plus" parent="CupoleBg" rect="0 0 40 40" margin="340 58 0 0" layout_gravity="left top" hittest="false" fixwidth="true" caption="{@st66d}{#762C3D}{s28}+" textalign="center center"/>
+        <picture name="UpgradeArrow" parent="CupoleBg" rect="0 0 56 56" margin="592 50 0 0" layout_gravity="left top" hittest="false" image="gold_arrow_right" stretch="true"/>
+        <groupbox name="SkillBg" parent="managerTab" rect="0 0 1040 358" margin="0 240 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="false" skin=""/>
+        <groupbox name="BeforeBG" parent="SkillBg" rect="0 0 480 350" margin="20 4 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="true" scrollbarskinname="verticalscrollbar" skin=""/>
+        <picture name="PanelArt" parent="BeforeBG" rect="0 0 480 300" margin="0 0 0 0" layout_gravity="left top" draw="true" hittest="false" stretch="true" image="cupole_green_panel"/>
+        <richtext name="SectionTitle" parent="BeforeBG" rect="0 0 190 32" margin="0 15 0 0" layout_gravity="center top" caption="{@st66d}{#762C3D}{s18}현재 효과" hittest="false" fixwidth="true" textalign="center center"/>
+        <richtext name="WithEffect" parent="BeforeBG" rect="0 0 202 64" layout_gravity="left top" margin="44 55 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s15}동행 효과{/}{nl}{@st66d}{#314A55}{s14}%s" param1="explain" param1_def=""/>
+        <richtext name="haveEffect" parent="BeforeBG" rect="0 0 202 64" layout_gravity="left top" margin="253 55 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s15}보유 효과{/}{nl}{@st66d}{#314A55}{s14}%s" param1="explain" param1_def=""/>
+        <picture name="EffectDivider" parent="BeforeBG" rect="0 0 424 2" margin="28 90 0 0" layout_gravity="left top" hittest="false" stretch="true" image="Deco_line"/>
+        <richtext name="SkillEffect" parent="BeforeBG" rect="0 0 394 176" layout_gravity="left top" margin="44 100 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s16}스킬{/}{nl}{@st66d}{#314A55}{s14}%s" param1="explain" param1_def=""/>
+        <groupbox name="AfterBG" parent="SkillBg" rect="0 0 480 350" margin="540 4 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="true" scrollbarskinname="verticalscrollbar" skin=""/>
+        <picture name="PanelArt" parent="AfterBG" rect="0 0 480 300" margin="0 0 0 0" layout_gravity="left top" draw="true" hittest="false" stretch="true" image="cupole_green_panel"/>
+        <richtext name="SectionTitle" parent="AfterBG" rect="0 0 190 32" margin="0 15 0 0" layout_gravity="center top" caption="{@st66d}{#355F56}{s18}상승 후 효과" hittest="false" fixwidth="true" textalign="center center"/>
+        <richtext name="WithEffect" parent="AfterBG" rect="0 0 202 64" layout_gravity="left top" margin="44 55 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s15}동행 효과{/}{nl}{@st66d}{#355F56}{s14}%s" param1="explain" param1_def=""/>
+        <richtext name="haveEffect" parent="AfterBG" rect="0 0 202 64" layout_gravity="left top" margin="253 55 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s15}보유 효과{/}{nl}{@st66d}{#355F56}{s14}%s" param1="explain" param1_def=""/>
+        <picture name="EffectDivider" parent="AfterBG" rect="0 0 424 2" margin="28 90 0 0" layout_gravity="left top" hittest="false" stretch="true" image="Deco_line"/>
+        <richtext name="SkillEffect" parent="AfterBG" rect="0 0 394 176" layout_gravity="left top" margin="44 100 0 0" hittest="false" fixwidth="true" resizebytext="true" format="{@st66d}{#173E50}{s16}스킬{/}{nl}{@st66d}{#355F56}{s14}%s" param1="explain" param1_def=""/>
+        <button name="Reinforce" parent="managerTab" rect="0 0 140 52" margin="90 0 0 28" layout_gravity="center bottom" LBtnUpScp="EVENT_CUPOLE_RANK_UP_BTN" skin="cupole_border_btn" stretch="true" caption="{@st66d}{s18}호감도 상승" textalign="center center"/>
+        <button name="cancle" parent="managerTab" rect="0 0 140 52" margin="-90 0 0 28" layout_gravity="center bottom" LBtnUpScp="ui.CloseFrame(&apos;cupole_upgrade&apos;)" skin="cupole_border2_btn" stretch="true" caption="{@st66d}{s18}취소" textalign="center center"/>
+        <button name="closeBtn" parent="managerTab" rect="0 0 0 0" margin="0 17 10 0" layout_gravity="right top" image="testclose_button" stretch="true" texttooltip="호감도 상승 UI를 닫습니다." LBtnUpScp="ui.CloseFrame(&apos;cupole_upgrade&apos;)" clicksound="button_click_big" oversound="button_over"/>
+    </controls>
+</uiframe>

@@ -363,8 +363,8 @@ function BUFF_TOOLTIP_EVENT_2210_KLAPEDA_GHOST_COSTUME_BUFF(buff, cls)
 end
 
 function UPDATE_Water_jewel_Buff_TOOLTIP(frame, handle, numarg1, numarg2)
-	
-	local buff = nil;    
+
+	local buff = nil;
     if tonumber(numarg2) > 0 then
         buff = info.GetBuff(handle, numarg1, numarg2);
     else
@@ -390,32 +390,137 @@ function UPDATE_Water_jewel_Buff_TOOLTIP(frame, handle, numarg1, numarg2)
 
 	local comment = frame:GetChild("comment");
 
-	local tooltipfunc = _G["BUFF_TOOLTIP_" .. cls.ClassName];	
+	local tooltipfunc = _G["BUFF_TOOLTIP_" .. cls.ClassName];
 	local tooltip = "";
 	if tooltipfunc == nil then
 		tooltip = cls.ToolTip;
 	else
 		local newName;
-		tooltip, newName = tooltipfunc(buff, cls);		
+		tooltip, newName = tooltipfunc(buff, cls);
 		if newName ~= nil then
 			nametxt = newName;
 		end
 	end
-	
+
 	local dmg = GET_COMMAED_STRING(numarg2)
 		local str = ScpArgMsg('absorbamount', 'num', dmg)
 	if buffTime == 0.0 then
-		
+
 		comment:SetText("{@st59}".. tooltip .. '{nl}' .. str);
 	else
 		local txt = tooltip  .. '{nl}' .. str
 		..
 		"{nl}"
 		.. ScpArgMsg("Auto_NameunSiKan_:_") .. GET_BUFF_TIME_TXT(buffTime, 1);
-		
-		comment:SetText("{@st59}"..txt);		
+
+		comment:SetText("{@st59}"..txt);
 	end
-	
+
 	frame:Resize(frame:GetOriginalWidth(), frame:GetOriginalHeight());
-	name:SetText("{@st41}".. nametxt);		
+	name:SetText("{@st41}".. nametxt);
+end
+
+function UPDATE_GUILD_DIGNITY_BUFF_TOOLTIP(frame, handle, numarg1, numarg2)
+	-- 1. 버프 정보 가져오기
+	local buff = nil;
+	if tonumber(numarg2) > 0 then
+		buff = info.GetBuff(handle, numarg1, numarg2);
+	else
+		buff = info.GetBuff(handle, numarg1);
+	end
+
+	local buffOver = 0;
+	local buffTime = 0.0;
+	if buff ~= nil then
+		buffOver = buff.over;
+		buffTime = buff.time;
+	end
+
+	-- 2. 버프 클래스 정보
+	local cls = GetClassByType('Buff', numarg1);
+
+	-- 3. UI 컨트롤 가져오기
+	local name = frame:GetChild("name");
+	local options = frame:GetChild("options");
+	local time = frame:GetChild("time");
+
+	-- 4. 이름 설정 (중첩 표시)
+	local nametxt = cls.Name;
+	if buffOver > 1 then
+		nametxt = nametxt .. " X " .. buffOver;
+	end
+	name:SetText("{@st41}{#88ffff}" .. nametxt .. "{/}{/}");
+
+	-- 5. 길드 위엄 옵션 총합 표시
+	local pc = world.GetActor(handle)
+	local is_my_pc = pc:IsMyPC()
+	local dignity_totals = shared_guild_dress_room.get_guild_dignity_total(pc);
+	
+	local option_text = "{@st59}";
+	if dignity_totals ~= nil and #dignity_totals > 0 then
+		for i = 1, #dignity_totals do
+			local opt_name = dignity_totals[i][1];
+			local opt_value = dignity_totals[i][2];
+
+			-- 옵션명 번역 및 값 표시
+			local opt_display = ClMsg(opt_name);
+			option_text = option_text .. "{#00ccff}" .. opt_display .. "{/} {#ffffff}+" .. GET_COMMAED_STRING(opt_value) .. "{/}{nl}";
+		end
+	else
+		local acc = GetMyAccountObj()
+		if acc ~= nil then
+			local str = TryGetProp(acc, "GuildDignityBuffOption", "")
+			local str2 = TryGetProp(acc, "GuildDignityBuffOption2", "")
+			
+			if str == "" then
+				str = "None"
+			end
+
+			if str2 == "" then
+				str2 = "None"
+			end
+
+			if str ~= "None" or str2 ~= "None" then
+				if str ~= "None" then
+					local option_list = StringSplit(str, ";")
+					for i = 1, #option_list do
+						local option_info = StringSplit(option_list[i], "/")
+						local option_name = option_info[1]
+						local option_value = tonumber(option_info[2])
+
+						-- 옵션명 번역 및 값 표시
+						local opt_display = ClMsg(option_name);
+						option_text = option_text .. "{#00ccff}" .. opt_display .. "{/} {#ffffff}+" .. GET_COMMAED_STRING(option_value) .. "{/}{nl}";
+					end
+				end
+
+				if str2 ~= "None" then
+					local option_list = StringSplit(str2, ";")
+					for i = 1, #option_list do
+						local option_info = StringSplit(option_list[i], "/")
+						local option_name = option_info[1]
+						local option_value = tonumber(option_info[2])
+
+						-- 옵션명 번역 및 값 표시
+						local opt_display = ClMsg(option_name);
+						option_text = option_text .. "{#00ccff}" .. opt_display .. "{/} {#ffffff}+" .. GET_COMMAED_STRING(option_value) .. "{/}{nl}";
+					end
+				end				
+			else
+				option_text = option_text .. ClMsg("NoGuildDignityEffect")
+			end
+		else
+			option_text = option_text .. ClMsg("NoGuildDignityEffect")
+		end
+	end
+
+	if is_my_pc == 0 then
+		option_text = ""
+		option_text = option_text .. ClMsg("GuildDignityEffect")
+	end
+
+	options:SetText(option_text);
+
+	-- 7. 프레임 크기 조정
+	frame:Resize(options:GetWidth() + 30, name:GetHeight() + options:GetHeight() + 30);
 end

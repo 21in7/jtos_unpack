@@ -17,7 +17,29 @@ function GET_MAP_POS(frame, mapprop, x, y, width, height)
 	end
 end
 
+function IS_ARCHEOLOGY_MON_MINIMAP_INFO(info)
+	if info == nil or info.type == nil or info.type == 0 then
+		return false;
+	end
+
+	local monCls = GetClassByType("Monster", info.type);
+	if monCls == nil or monCls.ClassName == nil then
+		return false;
+	end
+
+	return string.find(monCls.ClassName, "Archeology", 1, true) ~= nil;
+end
+
 function MAP_MON_MINIMAP(frame, msg, argStr, argNum, info)
+	if ARCHEOLOGY_MON_MINIMAP_RECV_DEBUG_COUNT == nil then
+		ARCHEOLOGY_MON_MINIMAP_RECV_DEBUG_COUNT = 0;
+	end
+
+	if ARCHEOLOGY_MON_MINIMAP_RECV_DEBUG_COUNT < 20 then
+		print(string.format("[ARCH_DBG][MON_MINIMAP_CLIENT] recv handle=%s type=%s useIcon=%s isDot=%s x=%s z=%s", tostring(info.handle), tostring(info.type), tostring(info.useIcon), tostring(info.isDot), tostring(info.x), tostring(info.z)));
+		ARCHEOLOGY_MON_MINIMAP_RECV_DEBUG_COUNT = ARCHEOLOGY_MON_MINIMAP_RECV_DEBUG_COUNT + 1;
+	end
+
 	local isMinimap = false;
 	if frame:GetTopParentFrame():GetName() == "minimap" then
 		frame = GET_CHILD(frame, 'npclist', 'ui::CGroupBox');
@@ -34,6 +56,8 @@ function MAP_MON_MINIMAP(frame, msg, argStr, argNum, info)
 	local SIZE = 40;
 	if info.isDot == true then
 		SIZE = 14;
+	elseif IS_ARCHEOLOGY_MON_MINIMAP_INFO(info) == true then
+		SIZE = 24;
 	end
 
 	local ctrlName = "_MONPOS_" .. info.handle;
@@ -78,6 +102,9 @@ function GET_MAP_MON_MINIMAP_IMAGENAME(info)
 				return info.changeIconName
 			end
 			local monCls = GetClassByType("Monster", info.type);
+			if monCls == nil or monCls.MinimapIcon == nil or monCls.MinimapIcon == "" or monCls.MinimapIcon == "None" then
+				return "monster_notice_dot"
+			end
 			return monCls.MinimapIcon
 		end
 	end
@@ -144,6 +171,63 @@ function ON_MON_MINIMAP_END(frame, msg, argStr, handle)
 	frame:RemoveChild(string.format("_MONPOS_T_%d", handle));
 	frame:Invalidate();
 
+end
+
+function ARCHEOLOGY_CLEAR_MONSTER_MINIMAP_MARKS(handleList)
+	local mapFrame = ui.GetFrame("map");
+	local miniFrame = ui.GetFrame("minimap");
+
+	local function removeAll(parent)
+		if parent == nil then
+			return;
+		end
+
+		local removeNames = {};
+		for i = 0, parent:GetChildCount() - 1 do
+			local child = parent:GetChildByIndex(i);
+			if child ~= nil then
+				local childName = child:GetName();
+				if string.find(childName, "_MONPOS_", 1, true) == 1 then
+					removeNames[#removeNames + 1] = childName;
+				end
+			end
+		end
+
+		for i = 1, #removeNames do
+			parent:RemoveChild(removeNames[i]);
+		end
+		parent:Invalidate();
+	end
+
+	if handleList == "ALL" then
+		removeAll(mapFrame);
+		if miniFrame ~= nil then
+			removeAll(GET_CHILD(miniFrame, 'npclist', 'ui::CGroupBox'));
+			miniFrame:Invalidate();
+		end
+		return;
+	end
+
+	for handleText in string.gmatch(handleList or "", "[^;]+") do
+		local handle = tonumber(handleText);
+		if handle ~= nil then
+			if mapFrame ~= nil then
+				mapFrame:RemoveChild(string.format("_MONPOS_%d", handle));
+				mapFrame:RemoveChild(string.format("_MONPOS_T_%d", handle));
+				mapFrame:Invalidate();
+			end
+
+			if miniFrame ~= nil then
+				local npcList = GET_CHILD(miniFrame, 'npclist', 'ui::CGroupBox');
+				if npcList ~= nil then
+					npcList:RemoveChild(string.format("_MONPOS_%d", handle));
+					npcList:RemoveChild(string.format("_MONPOS_T_%d", handle));
+					npcList:Invalidate();
+				end
+				miniFrame:Invalidate();
+			end
+		end
+	end
 end
 
 function _MONPIC_AUTOUPDATE(ctrl)

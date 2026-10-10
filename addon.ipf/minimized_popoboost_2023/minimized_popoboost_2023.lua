@@ -1,6 +1,7 @@
 local POPOBOOST_DEALY_TIME = 0;
 function MINIMIZED_POPOBOOST_2023_ON_INIT(addon, frame)
 	addon:RegisterMsg('GAME_START', 'MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK');
+	addon:RegisterMsg('ZONE_ENTER_COMPLETE', 'MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK');
 	addon:RegisterMsg('GAME_START', 'POPOBOOST_ALRET');
 	addon:RegisterMsg('POPOBOOST_ALREST_RESET', 'POPOBOOST_ALRET');
 end
@@ -11,6 +12,7 @@ function MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK(frame, msg, argStr, argNum)
         frame:ShowWindow(0);
         return;
     end
+
     local pc = GetMyPCObject();
     if pc == nil then
         frame:ShowWindow(0);
@@ -30,6 +32,7 @@ function MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK(frame, msg, argStr, argNum)
     end
 
     local AccProp = GET_POPOBOOST_SEASONPROP();
+    print(AccProp)
     if AccProp == "None" then
         frame:ShowWindow(0);
         return;
@@ -37,8 +40,10 @@ function MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK(frame, msg, argStr, argNum)
 
     local popoProp = TryGetProp(acc,AccProp, -1);
     local state = RETURN_POPOBOOST_ACCOUNTPROP_TO_CHAR_BY_INT(popoProp)
+    print(popoProp, state)
     if state == "None" or state == "OnlyPremium" then
         local lv = TryGetProp(pc,"Lv",0);
+        print(lv)
         if POPOBOOST_CHECK_ELIGIBILITY(lv, nil) == false then
             frame:ShowWindow(0);
         else
@@ -48,6 +53,7 @@ function MINIMIZED_POPOBOOST_BUTTON_OPEN_CHECK(frame, msg, argStr, argNum)
     end
     
     local etcProp = GET_POPOBOOST_ETCPROP();
+
     local isParticipate = TryGetProp(etc, etcProp, -1);
     if isParticipate <= 0 then
         frame:ShowWindow(0);

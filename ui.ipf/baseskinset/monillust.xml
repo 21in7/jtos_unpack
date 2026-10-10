@@ -393,7 +393,9 @@
 		<image name="boss_redania" file="\icon\monster\boss\boss_Redania.png" imgrect="0 0 80 80"/>
 		<image name="boss_veliora" file="\icon\monster\boss\boss_Veliora.png" imgrect="0 0 80 80"/>
 		<image name="boss_laimara" file="\icon\monster\boss\boss_Laimara.png" imgrect="0 0 80 80"/>
-
+		<image name="boss_zmei" file="\icon\monster\boss\boss_Zmei.png" imgrect="0 0 80 80"/>
+		<image name="boss_resonance_berserker_zawra" file="\icon\monster\boss\boss_resonance_berserker_zawra.png" imgrect="0 0 80 80"/>
+		<image name="boss_uriel" file="\icon\monster\boss\boss_Uriel.png" imgrect="0 0 80 80"/>
 	</imagelist>
 	<imagelist category="Monster_icon_nor_01">
 		<image name="mon_onion" file="\icon\monster\mon\mon_onion.png" imgrect="0 0 80 80"/>
@@ -1720,5 +1722,13 @@
 		<image name="UR_cupole_lada_m" file="\icon\monster\cupole\UR_cupole_lada_m.png" imgrect="0 0 128 128 "/>
 		<image name="UR_cupole_naktis_m" file="\icon\monster\cupole\UR_cupole_naktis_m.png" imgrect="0 0 128 128 "/>
 		<image name="UR_cupole_zesty_m" file="\icon\monster\cupole\UR_cupole_zesty_m.png" imgrect="0 0 128 128 "/>
+		<image name="UR_cupole_sugargabia_m" file="\icon\monster\cupole\UR_cupole_sugargabia_m.png" imgrect="0 0 128 128 "/>
+	</imagelist>
+	<imagelist category="guild_quest">
+		<image name="guild_boss_raid_Guild_boss_Boruta_Renewal" file="\icon\monster\guild\guild_boss_raid_boss_boruta.png" imgrect="0 0 261 262"/>
+		<image name="guild_boss_raid_Guild_Boss_Giltine_Renewal" file="\icon\monster\guild\guild_boss_raid_boss_giltine.png" imgrect="0 0 261 262"/>
+		<image name="guild_blockade_boss_dragoon_ex" file="\icon\monster\guild\blockade_dragoon_ex.png" imgrect="0 0 261 262"/>
+		<image name="guild_blockade_boss_Veliora_GBlock" file="\icon\monster\guild\blockade_veliora.png" imgrect="0 0 261 262"/>
+		<image name="guild_blockade_Guild_npc_baubas2" file="\icon\monster\guild\blockade_baubas.png" imgrect="0 0 261 262"/>
 	</imagelist>
 </skinset>

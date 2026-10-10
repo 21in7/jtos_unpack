@@ -227,7 +227,7 @@ function FULLSCREEN_NAVIGATION_MENU_DETAIL_OPEN(ctrl_set, gbox)
             local guid = tonumber(ctrl_set:GetUserValue("guid"));
             local yes_scp = string.format("FULLSCREEN_NAVIGATION_MENU_DETAIL_MOVE_NPC(%d)", guid);
             local name = TryGetProp(cls, "Name", "None");
-            if name ~= "None" then
+            if name ~= "None" and yes_scp then
                 local msg = ScpArgMsg("AskFullScreenMenuMoveNpc", "Menu", name);
                 ui.MsgBox(msg, yes_scp, "None");
             end

@@ -10,4 +10,6 @@
 	<SkinInfo SkinID="3" SkinName="weekboss_unique_hud" SkinType="UniqueGrade" ApplyFrames="headsupdisplay;charbaseinfo1_my;charbaseinfo1;PartyInfo"/>
 	<SkinInfo SkinID="4" SkinName="weekboss_legend_hud" SkinType="LegendGrade" ApplyFrames="headsupdisplay;charbaseinfo1_my;charbaseinfo1;PartyInfo"/>
 	<SkinInfo SkinID="5" SkinName="weekboss_goddess_hud" SkinType="GoddessGrade" ApplyFrames="headsupdisplay;charbaseinfo1_my;charbaseinfo1;PartyInfo"/>
+	<SkinInfo SkinID="6" SkinName="archeology" SkinType="Archeology" ApplyFrames="headsupdisplay;charbaseinfo1_my;charbaseinfo1;PartyInfo"/>
+	<SkinInfo SkinID="7" SkinName="Resonance_Zawra" SkinType="ResonanceZawra" ApplyFrames="headsupdisplay;charbaseinfo1_my;charbaseinfo1;PartyInfo"/>
 </SkinList>

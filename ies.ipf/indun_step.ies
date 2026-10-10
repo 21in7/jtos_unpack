@@ -1,0 +1,11 @@
+ClassID,IndunType,Step,GearScore,AbilityScore,RewardBonus,BossATKRate,BossDEFRate,BossMHPRate,ClassName,DefaultUnlocked,UnlockedStepPropName
+1,732,1,45600,100,0,0,0,0,"SanctuartyResonance_Zawra_1","YES","SanctuartyResonance_Zawra_UnlockedStep"
+2,732,2,46300,100,10,5.800000,3.300000,5.400000,"SanctuartyResonance_Zawra_2","NO","SanctuartyResonance_Zawra_UnlockedStep"
+3,732,3,46900,100,15,12,6.900000,11.110000,"SanctuartyResonance_Zawra_3","NO","SanctuartyResonance_Zawra_UnlockedStep"
+4,732,4,47600,100,20,18.500000,10.700000,17.129999,"SanctuartyResonance_Zawra_4","NO","SanctuartyResonance_Zawra_UnlockedStep"
+5,732,5,48200,100,25,25.400000,14.800000,23.469999,"SanctuartyResonance_Zawra_5","NO","SanctuartyResonance_Zawra_UnlockedStep"
+6,732,6,48900,100,30,32.700001,19.100000,30.150000,"SanctuartyResonance_Zawra_6","NO","SanctuartyResonance_Zawra_UnlockedStep"
+7,732,7,49500,100,35,40.400002,23.799999,37.200001,"SanctuartyResonance_Zawra_7","NO","SanctuartyResonance_Zawra_UnlockedStep"
+8,732,8,50200,100,40,48.599998,28.799999,44.630001,"SanctuartyResonance_Zawra_8","NO","SanctuartyResonance_Zawra_UnlockedStep"
+9,732,9,50800,100,45,57.200001,34.200001,52.459999,"SanctuartyResonance_Zawra_9","NO","SanctuartyResonance_Zawra_UnlockedStep"
+10,732,10,51500,100,55,66.400002,40,60.709999,"SanctuartyResonance_Zawra_10","NO","SanctuartyResonance_Zawra_UnlockedStep"

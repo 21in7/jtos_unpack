@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="minimap_region_info_detail" x="0" y="0" width="360" height="328">
+	<frame title="지역 정보" layout_gravity="right top" margin="0 70 387 0" scale_align="right top"/>
+	<option visible="false" closebutton="false" hideable="true" alwaysVisible="false"/>
+	<input moveable="false" hittestframe="true" hittesttitlebar="false"/>
+	<draw blend="100" drawtitlebar="false" drawframe="false"/>
+	<layer layerlevel="26"/>
+	<script OpenScp="MINIMAP_REGION_INFO_DETAIL_ON_OPEN" CloseScp="MINIMAP_REGION_INFO_DETAIL_ON_CLOSE"/>
+	<controls>
+		<groupbox name="panel_bg" rect="0 0 360 328" margin="0 0 0 0" layout_gravity="left top" skin="chat_window" hittestbox="false" scrollbar="false"/>
+		<richtext name="title_monster" parent="panel_bg" rect="0 0 110 24" margin="10 5 0 0" layout_gravity="left top" caption="{@st42b}{s16}몬스터{/}" hittest="false"/>
+		<richtext name="title_collection" parent="panel_bg" rect="0 0 110 24" margin="10 5 0 0" layout_gravity="left top" caption="{@st42b}{s16}컬렉션{/}" hittest="false" visible="false"/>
+		<richtext name="title_npc" parent="panel_bg" rect="0 0 110 24" margin="10 5 0 0" layout_gravity="left top" caption="{@st42b}{s16}NPC{/}" hittest="false" visible="false"/>
+		<richtext name="title_quest" parent="panel_bg" rect="0 0 110 24" margin="10 5 0 0" layout_gravity="left top" caption="{@st42b}{s16}퀘스트{/}" hittest="false" visible="false"/>
+		<richtext name="map_name" parent="panel_bg" rect="0 0 190 22" margin="116 6 0 0" layout_gravity="left top" format="{@st42}{#B7AEA4}{s12}%s{/}" param1="value" param1_def="-" fixwidth="true" omitbywidth="true" hittest="false"/>
+		<button name="close_btn" parent="panel_bg" rect="0 0 22 22" margin="0 4 5 0" layout_gravity="right top" image="testclose_button" LBtnUpScp="MINIMAP_REGION_INFO_DETAIL_CLOSE" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}닫기{/}"/>
+		<richtext name="summary_monster" parent="panel_bg" rect="0 0 330 22" margin="10 30 0 0" layout_gravity="left top" format="{@st42}{#C8BFB5}{s12}등장 %s종 · 미등록 %s종{/}" param1="total" param1_def="0" param2="unknown" param2_def="0" hittest="false"/>
+		<richtext name="summary_collection" parent="panel_bg" rect="0 0 330 22" margin="10 30 0 0" layout_gravity="left top" format="{@st42}{#C8BFB5}{s12}지역 연관 컬렉션 %s개{/}" param1="total" param1_def="0" hittest="false" visible="false"/>
+		<richtext name="summary_npc" parent="panel_bg" rect="0 0 330 22" margin="10 30 0 0" layout_gravity="left top" format="{@st42}{#C8BFB5}{s12}확인 가능한 NPC %s명{/}" param1="total" param1_def="0" hittest="false" visible="false"/>
+		<richtext name="summary_quest" parent="panel_bg" rect="0 0 330 22" margin="10 30 0 0" layout_gravity="left top" format="{@st42}{#C8BFB5}{s12}현재 지역 퀘스트 %s개{/}" param1="total" param1_def="0" hittest="false" visible="false"/>
+
+		<groupbox name="row_list" parent="panel_bg" rect="0 0 348 236" margin="6 56 0 0" layout_gravity="left top" skin="None" hittestbox="false" scrollbar="false"/>
+
+		<richtext name="empty_text" parent="panel_bg" rect="0 0 320 80" margin="20 126 0 0" layout_gravity="left top" caption="{@st42}{#A9A097}{s13}표시할 지역 정보가 없습니다.{/}" textalign="center center" hittest="false" visible="false"/>
+		<button name="prev_btn" parent="panel_bg" rect="0 0 28 24" margin="8 0 0 5" layout_gravity="left bottom" skin="textbutton" caption="{@st42}{s13}＜{/}" LBtnUpScp="MINIMAP_REGION_INFO_DETAIL_CHANGE_PAGE" LBtnUpArgNum="-1" clicksound="button_click" oversound="button_over" texttooltip="{@st59}이전 페이지{/}"/>
+		<richtext name="page_text" parent="panel_bg" rect="0 0 100 22" margin="0 0 0 5" layout_gravity="center bottom" format="{@st42}{#A9A097}{s11}%s / %s{/}" param1="page" param1_def="1" param2="total" param2_def="1" textalign="center center" hittest="false"/>
+		<button name="next_btn" parent="panel_bg" rect="0 0 28 24" margin="0 0 8 5" layout_gravity="right bottom" skin="textbutton" caption="{@st42}{s13}＞{/}" LBtnUpScp="MINIMAP_REGION_INFO_DETAIL_CHANGE_PAGE" LBtnUpArgNum="1" clicksound="button_click" oversound="button_over" texttooltip="{@st59}다음 페이지{/}"/>
+	</controls>
+</uiframe>

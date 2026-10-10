@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="minimap_region_info" x="0" y="0" width="169" height="34" create="open">
+	<frame title="지역 정보 바로가기" layout_gravity="right top" margin="0 35 350 0"/>
+	<option visible="true" closebutton="false" useimageitem="true" piptype="right" alwaysVisible="true" hideable="false"/>
+	<input moveable="false" hittestframe="false" hittesttitlebar="false"/>
+	<draw blend="100" drawtitlebar="false" drawframe="false"/>
+	<layer layerlevel="32"/>
+	<controls>
+		<groupbox name="rail_bg" rect="0 0 169 34" margin="0 0 0 0" layout_gravity="left top" skin="chat_window" hittestbox="false" scrollbar="false"/>
+		<button name="monster_btn" rect="0 0 30 30" margin="2 2 0 0" layout_gravity="left top" skin="textbutton" image="hero_btn_monster" stretch="true" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_CATEGORY" LBtnUpArgStr="MONSTER" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}몬스터 정보{/}"/>
+		<button name="collection_btn" rect="0 0 30 30" margin="35 2 0 0" layout_gravity="left top" skin="textbutton" image="hero_btn_map" stretch="true" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_CATEGORY" LBtnUpArgStr="COLLECTION" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}지역 컬렉션{/}"/>
+		<button name="npc_btn" rect="0 0 30 30" margin="68 2 0 0" layout_gravity="left top" skin="textbutton" image="hero_btn_npc" stretch="true" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_CATEGORY" LBtnUpArgStr="NPC" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}NPC 정보{/}"/>
+		<button name="quest_btn" rect="0 0 30 30" margin="101 2 0 0" layout_gravity="left top" skin="textbutton" image="hero_btn_trophy" stretch="true" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_CATEGORY" LBtnUpArgStr="QUEST" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}퀘스트 정보{/}"/>
+		<button name="minimize_btn" rect="0 0 24 24" margin="0 5 5 0" layout_gravity="right top" image="chat_fold_btn" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_MINIMIZED" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}지역 정보 메뉴 최소화{/}"/>
+		<button name="maximize_btn" rect="0 0 24 24" margin="0 5 5 0" layout_gravity="right top" image="chat_expand_btn" LBtnUpScp="MINIMAP_REGION_INFO_TOGGLE_MINIMIZED" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click" oversound="button_over" texttooltip="{@st59}지역 정보 메뉴 최대화{/}" visible="false"/>
+		<timer name="addontimer" rect="0 0 10 10" margin="0 0 0 0"/>
+	</controls>
+</uiframe>

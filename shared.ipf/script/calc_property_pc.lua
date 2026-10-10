@@ -1,5 +1,18 @@
 local PC_MAX_MSPD = 60
 
+-- 가디스 방어구 강화의 공격력 환산(EQUIP_PATK_ARMOR / EQUIP_MATK_ARMOR)을 적용할 수 있는가.
+-- 무기 4슬롯 중 하나라도 Lv.560 이상이면 구세대 방어구의 환산은 적용하지 않는다.
+-- done, 해당 함수 내용은 cpp에도 동일하게 존재합니다. 변경 시 반드시 양쪽을 함께 수정해야 합니다.
+GODDESS_ARMOR_ATK_BLOCK_LV = 560
+function CAN_APPLY_GODDESS_ARMOR_ATK(self)
+    local equip_list = { 'RH', 'LH', 'RH_SUB', 'LH_SUB' }
+    for i = 1, #equip_list do
+        if TryGetProp(GetEquipItemForPropCalc(self, equip_list[i]), 'UseLv', 0) >= GODDESS_ARMOR_ATK_BLOCK_LV then
+            return false
+        end
+    end
+    return true
+end
 
 function GET_PVP_TARGET_COUNT(self, count)
     if IsPVPField(self) == 1 and count > 2 then
@@ -687,7 +700,11 @@ function SCR_Get_RefreshHP(self)
 end
 
 
-function SCR_Get_MHP(self)
+function SCR_Get_MHP(self, add_con)    
+    if add_con == nil then
+        add_con = 0;
+    end
+
     local jobRate = SCR_GET_JOB_RATIO_STAT(self, "MHP");
     local jobMHP = 400 * jobRate;
     
@@ -701,6 +718,8 @@ function SCR_Get_MHP(self)
         stat = 1;
     end
     
+    stat = stat + add_con;
+
     local byLevel = math.floor(jobMHP + ((lv - 1) * 80 * jobRate));
     local byStat = math.floor(((stat * 0.003) + (math.floor(stat / 10) * 0.01)) * byLevel);
 
@@ -882,6 +901,9 @@ function SCR_Get_DEFAULT_MINPATK(self)
     byItem = byItem - (ori_rhAtk + ori_lhAtk + ori_trinketAtk + ori_rh_subAtk + ori_lh_subAtk)
 
     byItem = byItem + TryGetProp(self, "EQUIP_PATK", 0) + TryGetProp(self, "EQUIP_PATK_MAIN", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_PATK_ARMOR", 0);
+    end
 
     local value = defaultValue + byLevel + byStat + byItem;
 
@@ -1023,6 +1045,9 @@ function SCR_Get_DEFAULT_MAXPATK(self)
     byItem = byItem - (ori_rhAtk + ori_lhAtk + ori_trinketAtk + ori_rh_subAtk + ori_lh_subAtk)
 
     byItem = byItem + TryGetProp(self, "EQUIP_PATK", 0) + TryGetProp(self, "EQUIP_PATK_MAIN", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_PATK_ARMOR", 0);
+    end
 
     local value = defaultValue + byLevel + byStat + byItem;
     
@@ -1110,6 +1135,9 @@ function SCR_Get_DEFAULT_MINPATK_SUB(self)
     end
  
     byItem = byItem + TryGetProp(self, "EQUIP_PATK", 0) + TryGetProp(self, "EQUIP_PATK_SUB", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_PATK_ARMOR", 0);
+    end
    
     -- 20%
     byItem = math.floor(byItem * 0.3)
@@ -1195,6 +1223,9 @@ function SCR_Get_DEFAULT_MAXPATK_SUB(self)
     end
 
     byItem = byItem + TryGetProp(self, "EQUIP_PATK", 0) + TryGetProp(self, "EQUIP_PATK_SUB", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_PATK_ARMOR", 0);
+    end
 
     -- 20%
     byItem = math.floor(byItem * 0.3)
@@ -1331,6 +1362,9 @@ function SCR_Get_DEFAULT_MINMATK(self)
     byItem = byItem - (ori_rhAtk + ori_lhAtk + ori_trinketAtk + ori_rh_subAtk + ori_lh_subAtk)
 
     byItem = byItem + TryGetProp(self, "EQUIP_MATK", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_MATK_ARMOR", 0);
+    end
 
     local value = defaultValue + byLevel + byStat + byItem;
 
@@ -1477,6 +1511,9 @@ function SCR_Get_DEFAULT_MAXMATK(self)
     byItem = byItem - (ori_rhAtk + ori_lhAtk + ori_trinketAtk + ori_rh_subAtk + ori_lh_subAtk)
 
     byItem = byItem + TryGetProp(self, "EQUIP_MATK", 0);
+    if CAN_APPLY_GODDESS_ARMOR_ATK(self) == true then
+        byItem = byItem + TryGetProp(self, "EQUIP_MATK_ARMOR", 0);
+    end
 
     local value = defaultValue + byLevel + byStat + byItem;
     
@@ -1934,7 +1971,7 @@ function SCR_Get_DR(self)
     
     local jobRate = SCR_GET_JOB_RATIO_STAT(self, "DR");
     local byLevel = lv * 1.0 * jobRate;
-        
+
     local byItem = 0;
     local byItemList = { "DR", "ADD_DR" };
     for i = 1, #byItemList do
@@ -1946,8 +1983,9 @@ function SCR_Get_DR(self)
         byItem = byItem + byItemTemp;
     end
     
-    local value = byLevel + byItem;
-    
+    local drConst = TryGetProp(self, "DR_CONST", 0);
+    local value = byLevel + byItem + drConst;
+
     local byItemRareOption = TryGetProp(self, 'EnchantDodgeRate');
     if byItemRareOption == nil then
         byItemRareOption = 0;
@@ -1956,16 +1994,16 @@ function SCR_Get_DR(self)
     byItemRareOption = math.floor(value * (byItemRareOption / 1000));
     
     local byBuff = TryGetProp(self, "DR_BM", 0);
-    
     local byRateBuff = TryGetProp(self, "DR_RATE_BM", 0);
+
     byRateBuff = math.floor(value * byRateBuff);
-    
+
     value = value + byItemRareOption + byBuff + byRateBuff;
-    
+
     if value < 0 then
     	value = 0;
     end
-    
+
     return math.floor(value);
 end
 
@@ -5521,7 +5559,13 @@ end
 
 
 function GET_ITEM_ATK(item)
-    local min, max = GET_BASIC_ATK(item)
+    local max, min = GET_BASIC_ATK(item)    
+    if min == nil then
+        min = 0;
+    end
+    if max == nil then
+        max = 0;
+    end
     local add = GET_REINFORCE_ADD_VALUE_ATK(item, 0, 0, 'ATK')
     min = min + add
     max = max + add
@@ -5529,7 +5573,13 @@ function GET_ITEM_ATK(item)
 end
 
 function GET_ITEM_MATK(item)
-    local min, max = GET_BASIC_MATK(item)
+    local max, min = GET_BASIC_MATK(item)    
+    if min == nil then
+        min = 0;
+    end
+    if max == nil then
+        max = 0;
+    end
     local add = GET_REINFORCE_ADD_VALUE_ATK(item, 0, 0, 'ATK')
     min = min + add
     max = max + add

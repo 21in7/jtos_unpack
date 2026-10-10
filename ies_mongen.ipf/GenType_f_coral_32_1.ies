@@ -54,3 +54,4 @@ ClassID,GenType,Lv,Range,GenRange,RespawnTime,MaxPop,Minimap,Hide,UseAIOufOfPC,P
 56,1006,1,40,1,60000,1,1,0,0,0,0,0,"ep16_npc_jurate","여신 유라테","","","","","","","EP16_1_CORAL_32_1_MQ5_NPC","","","NO","YES","NO","Neutral","Anim/std","","",""
 57,1007,1,40,1,60000,1,0,0,0,0,0,0,"ep16_npc_jurate","여신 유라테","","","","","","","EP16_1_CORAL_32_1_MQ6_NPC","","","NO","YES","NO","Neutral","Anim/std","","",""
 58,1008,1,40,1,60000,1,0,0,0,0,0,0,"ep16_npc_jurate","여신 유라테","","","","","","","EP16_1_CORAL_32_1_MQ7_NPC","","","NO","YES","NO","Neutral","Anim/std","","",""
+59,1009,1,40,1,60000,1,1,0,0,0,0,0,"npc_commodore","[코모도어 마스터]{nl} 캐스피언","","","","","","","NPC_COMMODORE","","","NO","YES","NO","Neutral","","","",""

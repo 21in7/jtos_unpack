@@ -41,7 +41,7 @@ local function load_setting(frame)
 		buff_raid.SettingsFileLocation = string.format(path_format, session.loginInfo.GetUserID())
 		local t, err = load_json(buff_raid.SettingsFileLocation, buff_raid.Settings);			
 		if err then
-			os.execute('mkdir ' .. PATH.dirname(buff_raid.SettingsFileLocation) .. ' >nul 2>nul')
+			MakeDirectory(PATH.dirname(buff_raid.SettingsFileLocation))
 			save_setting(frame)
 		else
 			buff_raid.Settings = t;

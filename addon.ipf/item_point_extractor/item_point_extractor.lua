@@ -4,6 +4,11 @@ function ITEM_POINT_EXTRACTOR_ON_INIT(addon, frame)
 end
 
 function REQ_ITEM_POINT_EXTRACTOR_OPEN(pointName)
+	if pointName == "ARCHEOLOGY_COIN" and REQ_ARCHEOLOGY_DECOMPOSE_OPEN ~= nil then
+		REQ_ARCHEOLOGY_DECOMPOSE_OPEN()
+		return
+	end
+
 	local frame = ui.GetFrame('item_point_extractor')
 	frame:SetUserValue("POINT_NAME",pointName)
 	frame:ShowWindow(1)
@@ -12,15 +17,33 @@ end
 function ITEM_POINT_EXTRACTOR_OPEN(frame)
 	local pointName = frame:GetUserValue("POINT_NAME")
 	local title = GET_CHILD(frame,"title")
+	
 	title:SetTextByKey("title",ClMsg(pointName..'_extract'))
 	local question = GET_CHILD(frame,"question")
 	question:SetTextTooltip(ClMsg(pointName.."_extract_tooltip"));
+	local slotSet = GET_CHILD_RECURSIVELY(frame,"slotlist","ui::CSlotSet")
+	local cautionText = GET_CHILD_RECURSIVELY(frame, "cautionText")
+	local ingredientGbox = GET_CHILD_RECURSIVELY(frame, "ingredientGbox")
+
 	
-	if pointName == "ARCHEOLOGY_COIN" then
+	if pointName == "ARCHEOLOGY_COIN" or pointName == "event_2512_ice_piece" then
 		question:ShowWindow(0);
 	else
 		question:ShowWindow(1);
 	end
+
+	--특정 상점은 사이즈 줄인다.
+	if pointName == "event_2512_ice_piece" then
+		slotSet:SetColRow(slotSet:GetCol(), 3)
+		ingredientGbox:Resize(ingredientGbox:GetWidth(), 178);
+		cautionText:ShowWindow(1)
+	else
+		slotSet:SetColRow(slotSet:GetCol(), 5)
+		cautionText:ShowWindow(0)
+		ingredientGbox:Resize(ingredientGbox:GetWidth(), 310);
+	end
+    slotSet:RemoveAllChild()
+    slotSet:CreateSlots()
 
 	UPDATE_ITEM_POINT_EXTRACTOR_UI(frame)
 	ITEM_POINT_EXTRACTOR_SET_POINT(frame)
@@ -35,19 +58,30 @@ function ITEM_POINT_EXTRACTOR_SET_POINT(frame)
 	
 	local totalValue = 0;
 	local addValue = GET_TOTAL_ADD_POINT(frame)
-	
-	totalValue = TryGetProp(aObj,pointName);
-
+	local name = ScpArgMsg("POINT");
 	--고고학 주화는 현재 아이템 개수로 출력한다.
 	if pointName == "ARCHEOLOGY_COIN" then
-		local player = GetMyPCObject();
-		totalValue = session.GetInvItemCountByType(11200475);
+		totalValue = TryGetProp(aObj, pointName);
+		totalValue = session.GetInvItemCountByType(11039559);
+	elseif pointName == "event_2512_ice_piece" then
+		totalValue = session.GetInvItemCountByType(10000666);
+		name = ScpArgMsg("icepiece25");
+	else
+		totalValue = TryGetProp(aObj, pointName);
 	end
-	totalPoint:SetTextByKey("value",totalValue)
-	
-	addPoint:SetTextByKey("value",addValue)
 
+	if totalValue == nil then
+		totalValue = 0;
+	end
+
+	totalPoint:SetTextByKey("name", name)
+	addPoint:SetTextByKey("name", name)
+	afterPoint:SetTextByKey("name", name)
+
+	totalPoint:SetTextByKey("value",totalValue)
+	addPoint:SetTextByKey("value",addValue)
 	afterPoint:SetTextByKey("value",totalValue+addValue)
+
 	SET_MATERIAL_POINT_INFO_LIST(frame)
 end
 
@@ -71,7 +105,11 @@ function SET_MATERIAL_POINT_INFO_LIST(frame)
 	local slotSet = GET_CHILD_RECURSIVELY(frame,"slotlist","ui::CSlotSet")
 	local gbox = GET_CHILD_RECURSIVELY(frame,"materialInfoGbox")
 	gbox:RemoveAllChild()
-	for i = 0,slotSet:GetSlotCount()-1 do
+	local pointName = frame:GetUserValue("POINT_NAME")
+
+
+
+	for i = 0, slotSet:GetSlotCount()-1 do
 		local slot = slotSet:GetSlotByIndex(i);
 		local point = tonumber(slot:GetUserValue("ITEM_POINT"))
 		if point == nil then
@@ -103,17 +141,24 @@ function UPDATE_ITEM_POINT_EXTRACTOR_UI(frame)
 	local slotSet = GET_CHILD_RECURSIVELY(frame,"slotlist","ui::CSlotSet")
 	slotSet:ClearIconAll();
 
+	local pointName = frame:GetUserValue("POINT_NAME")
 	local invItemList = session.GetInvItemList();
 	local materialItemList = GET_ITEM_POINT_EXTRACT_ITEM_LIST(frame)
-	FOR_EACH_INVENTORY(invItemList, function(invItemList, invItem, slotSet,materialItemList)
+	FOR_EACH_INVENTORY(invItemList, function(invItemList, invItem, slotSet, materialItemList, pointName)
 		local obj = GetIES(invItem:GetObject());
 		local itemName = TryGetProp(obj,"ClassName","None");
-		if materialItemList[itemName] ~= nil then
+
+
+		if materialItemList[itemName] ~= nil and 
+		((pointName == "event_2512_ice_piece" and TryGetProp(obj, "TeamBelonging", 0) == 0 and TryGetProp(obj, "CharacterBelonging", 0) == 0) 
+		or (pointName ~= "event_2512_ice_piece")) then
 			local slotindex = imcSlot:GetEmptySlotIndex(slotSet);
 			if slotindex == 0 and imcSlot:GetFilledSlotCount(slotSet) == slotSet:GetSlotCount() then
 				slotSet:ExpandRow()
 				slotindex = imcSlot:GetEmptySlotIndex(slotSet);
 			end
+
+
 			local slot = slotSet:GetSlotByIndex(slotindex);
 			slot:SetMaxSelectCount(invItem.count);
 			slot:SetUserValue("ITEM_POINT",materialItemList[itemName])
@@ -123,7 +168,7 @@ function UPDATE_ITEM_POINT_EXTRACTOR_UI(frame)
 			SET_SLOT_ITEM_TEXT_USE_INVCOUNT(slot, invItem, obj, invItem.count);
 			ICON_SET_INVENTORY_TOOLTIP(icon, invItem, "poisonpot", class);
 		end
-	end, false, slotSet,materialItemList);
+	end, false, slotSet, materialItemList, pointName);
 
 	local cnt = slotSet:GetRow()-tonumber(frame:GetUserConfig("DEFAULT_ROW"))
 	for i = 1,cnt do

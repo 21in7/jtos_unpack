@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by asdasd (IMCGames Co., Ltd) -->
+<uiframe name="resonance_point" x="0" y="0" width="260" height="84">
+	<draw drawtitlebar="false"/>
+	<frame layout_gravity="right top" margin="0 400 80 0"/>
+	<input moveable="true"/>
+	<layer layerlevel="50"/>
+	<skin frameskin="black_box_op20"/>
+	<option visible="false" closebutton="false" piptype="right" autoopen="true" hideable="false"/>
+	<userconfig FRAME_ORIGIN_HEIGHT="55" FRAME_GIVE_UP_BTN_ADD_HEIGHT="90"/>
+	<controls>
+		<groupbox name="gbox" rect="0 0 240 74" margin="0 5 0 0" layout_gravity="center top" skin="white_box_op10" hittestbox="false"/>
+		<picture name="icon" rect="0 0 20 20" margin="10 6 0 0" layout_gravity="left top" parent="gbox" image="icon_resonance_emblem" hittest="false" stretch="true"/>
+		<richtext name="text" rect="0 0 150 25" margin="35 8 0 0" layout_gravity="left top" parent="gbox" format="%s" param1="text" param1_def="0" autofontsizebywidth="150"/>
+		<gauge name="gauge" parent="gbox" rect="0 0 232 8" margin="0 35 0 0" hittest="false" layout_gravity="center top" inverse="false" skin="jour_info_gauge"/>
+		<richtext name="reward_step" rect="0 0 210 22" margin="18 48 0 0" layout_gravity="left top" parent="gbox" format="{@st42b}{s14}%s{/}" param1="step" param1_def="" autofontsizebywidth="210" visible="false"/>
+	</controls>
+</uiframe>

@@ -156,6 +156,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 2536
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 3296
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     
     
@@ -170,6 +173,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 2982
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 3876
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     
 
@@ -182,6 +188,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.8, 1.2)    
     elseif level == 540 then
         max = 3722
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 4838
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     
@@ -199,6 +208,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 442
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 574
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     -- end of STAT
 
@@ -212,6 +224,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.8, 1.2)    
     elseif level == 540 then
         max = 1487
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 1933
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     -- end of UTIL_ARMOR
@@ -237,7 +252,7 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
             -- print(ClMsg(v), item_goddess_icor_range[level]['Armor'][v]['HIGH'][1], item_goddess_icor_range[level]['Armor'][v]['HIGH'][2])
         end
     end    
-    elseif level == 540 then        
+    elseif level == 540 or level == 560 then
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
 
@@ -260,8 +275,11 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
             -- print(ClMsg(v), item_goddess_icor_range[level]['Armor'][v]['HIGH'][1], item_goddess_icor_range[level]['Armor'][v]['HIGH'][2])
         end
     end    
-    elseif level == 540 then        
+    elseif level == 540 then
         max = 77805
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 103480
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Armor', max, 0.55, 0.9)
     end
     -- end of DEF
@@ -280,6 +298,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 3164
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 4113
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     
     max = 2757
@@ -291,6 +312,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.8, max_ratio)
     elseif level == 540 then
         max = 5590
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 7267
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     
@@ -304,6 +328,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 9360
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 14040
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     
     max = 30000
@@ -315,6 +342,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.8, 1.2)
     elseif level == 540 then
         max = 60000
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 90000
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
 
@@ -328,6 +358,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.8, 1.2)    
     elseif level == 540 then
         max = 3722
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 4838
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     -- end of ATK
@@ -343,6 +376,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
     elseif level == 540 then
         max = 556
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 722
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     -- end of STAT
 
@@ -356,6 +392,9 @@ function set_item_goddess_icor_range_by_level(i, level, item_goddess_icor_range)
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.8, 1.2)    
     elseif level == 540 then
         max = 1862
+        make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
+    elseif level == 560 then
+        max = 2420
         make_icor_option_range(item_goddess_icor_range, set_list, level, 'Weapon', max, 0.55, 0.9)
     end
     -- end of UTIL_ARMOR
@@ -446,7 +485,7 @@ function make_item_goddess_icor_range()
     'Cloth_Def', 'Leather_Def', 'Iron_Def', 'MiddleSize_Def'
     }
 
-    local level_list = {500, 520, 540}
+    local level_list = {500, 520, 540, 560}
 
     for i = 1, #level_list do
         local level = level_list[i]
@@ -503,7 +542,10 @@ shared_item_goddess_icor.get_option_list_by_group = function(level, spot, option
 end
 
 -- 아이커에 옵션을 부여할 때, 상급/하급 구분해서 옵션다시 재 설정
-shared_item_goddess_icor.get_option_value_range_icor = function(item, option_name)               
+shared_item_goddess_icor.get_option_value_range_icor = function(item, option_name, is_client)
+    if is_client == nil then
+        is_client = false
+    end
     if shared_item_goddess_icor.get_goddess_icor_grade(item) == 0 then
         return 0, 0
     end
@@ -525,7 +567,20 @@ shared_item_goddess_icor.get_option_value_range_icor = function(item, option_nam
 
         local icor_name = TryGetProp(item, 'GoddessIcorName', 'None')
         if icor_name ~= 'None' then
-            item = GetClass('Item', icor_name)
+            if is_client == true then                
+                local icor_name_cls = GetClass('Item', icor_name)
+                local str3 = TryGetProp(icor_name_cls, 'StringArg3', 'None')
+                if str3 ~= 'None' then        
+                    local token = StringSplit(str3, '/')
+                    if token[1] ~= 'Inheritance' then
+                        item = GetClass('Item', icor_name)    
+                    end
+                else
+                    item = GetClass('Item', icor_name)    
+                end
+            else
+                item = GetClass('Item', icor_name)
+            end
         end
     end
 
@@ -605,7 +660,7 @@ shared_item_goddess_icor.is_able_to_reroll = function(item, index)
         return false, 'NotExistRandomOption'
     end
 
-    local reroll_index = TryGetProp(iten, 'RerollIndex', 0)
+    local reroll_index = TryGetProp(item, 'RerollIndex', 0)
     if reroll_index ~= 0 and reroll_index ~= index then
         return false, 'DifferentRerollIndex'
     end
@@ -722,7 +777,33 @@ shared_item_goddess_icor.get_cost = function(lv, count, grade, cost_list)
 
             cost_count = 100 * math.pow(1.05, count)
             cost_count = cost_count * 1.5
-            cost_list['misc_ore29'] = math.floor(cost_count) -- 
+            cost_list['misc_ore29'] = math.floor(cost_count) --
+            return true
+        end
+    elseif lv == 560 then
+        if grade == 'LOW' then
+            local cost_count = 1 + math.floor(count / 4)
+            cost_list['misc_BlessedStone_2'] = math.floor(cost_count)
+
+            cost_count = 300 * math.pow(1.04, count)
+            cost_list['SauleCertificate'] = math.floor(cost_count)
+
+            cost_count = 100 * math.pow(1.05, count)
+            cost_list['misc_ore30'] = math.floor(cost_count)
+
+            return true
+        else
+            local cost_count = 1 + math.floor(count / 2.5)
+            cost_count = cost_count * 1.5
+            cost_list['misc_BlessedStone_2'] = math.floor(cost_count)
+
+            cost_count = 300 * math.pow(1.04, count)
+            cost_count = cost_count * 1.3
+            cost_list['SauleCertificate'] = math.floor(cost_count)
+
+            cost_count = 100 * math.pow(1.05, count)
+            cost_count = cost_count * 1.5
+            cost_list['misc_ore30'] = math.floor(cost_count) --
             return true
         end
     end

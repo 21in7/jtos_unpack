@@ -297,6 +297,10 @@ function IS_VALID_BRIQUETTING_HAIR_ACC_TARGET_ITEM(targetItem)
 		return false;
 	end
 
+	if TryGetProp(targetItem, 'LifeTime', -1) == - 1 then
+		return false;
+	end
+
 	if tonumber(targetItem.LifeTime) > 0 then
 		return false;
 	end

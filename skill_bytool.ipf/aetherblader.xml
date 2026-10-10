@@ -34,24 +34,24 @@
 				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
 					<Str Str="skl_eff_aetherblader_aquareave_shot"/>
 				</Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
-                    <Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="270"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="YES" Time="500">
-                    <Str Str="SCR_AETHERBLADER_AQUAREAVE_RUN_PAD_RAMDOM"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="500">
-                    <Pos Angle="0" Dist="10"/>
-                    <Num Num="85"/>
-                    <Num Num="80"/>
-                    <Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
+					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
+					<Num Num="1"/>
+					<Num Num="-180"/>
+					<Num Num="0"/>
+					<Num Num="-90"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="YES" Time="500">
+					<Str Str="SCR_AETHERBLADER_AQUAREAVE_RUN_PAD_RAMDOM"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="10"/>
+					<Num Num="85"/>
+					<Num Num="80"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
     return count"/>
                     <Num Num="2"/>
                     <Num Num="0"/>
@@ -110,9 +110,9 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="400">
 					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
 					<Num Num="1"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
-					<Num Num="0"/>
-					<Num Num="150"/>
+					<Num Num="30"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
@@ -378,7 +378,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="0"/>
 					<Num Num="160"/>
 					<Str Str="Dummy_emitter"/>
@@ -425,81 +425,81 @@
 				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
 					<Str Str="skl_eff_aetherblader_frimveil_shot"/>
 				</Scp>
-                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="20">
-                    <Str Str="SKL_AETHERBLADER_FRIMVEIL_SHOT"/>
-                    <Num Num="1.5"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING_NOCANCEL" Client="NO" UseSleep="NO" Time="0">
-                    <Num Num="1"/>
-                    <Num Num="120"/>
-                </Scp>
-                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
-                    <Num Num="1"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="2002"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
-                    <Str_Arg Str="Stab_Normal_Blue_02" Arg="2.2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="180"/>
-                    <Num Num="180"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="100">
-                    <Str Str="AerialExplosion_Ice_Blue_01"/>
-                    <Num Num="1.5"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Str Str="MID"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_JUMP_TO_TARGET_FRIMVEIL" Client="NO" UseSleep="YES" Time="300">
-                    <Num Num="0"/>
-                    <Num Num="120"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                    <Num Num="0.1"/>
-                    <Num Num="1"/>
-                    <Num Num="0.1"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="550">
-                    <Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="90"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="650">
-                    <Str Str="AerialExplosion_Ice_Blue_01"/>
-                    <Num Num="1.5"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Str Str="MID"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="700">
-                    <Pos Angle="0" Dist="0" PosType="5"/>
-                    <Num Num="85"/>
-                    <Num Num="80"/>
-                    <Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="20">
+					<Str Str="SKL_AETHERBLADER_FRIMVEIL_SHOT"/>
+					<Num Num="1.5"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING_NOCANCEL" Client="NO" UseSleep="NO" Time="0">
+					<Num Num="1"/>
+					<Num Num="120"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
+					<Str_Arg Str="Stab_Normal_Blue_02" Arg="2.2"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="180"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="100">
+					<Str Str="AerialExplosion_Ice_Blue_01"/>
+					<Num Num="1.5"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_JUMP_TO_TARGET_FRIMVEIL" Client="NO" UseSleep="YES" Time="300">
+					<Num Num="0"/>
+					<Num Num="120"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0.1"/>
+					<Num Num="1"/>
+					<Num Num="0.1"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="550">
+					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
+					<Num Num="1"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Num Num="90"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="650">
+					<Str Str="AerialExplosion_Ice_Blue_01"/>
+					<Num Num="1.5"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="700">
+					<Pos Angle="0" Dist="0" PosType="5"/>
+					<Num Num="85"/>
+					<Num Num="80"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
     return count"/>
                     <Num Num="2"/>
                     <Num Num="0"/>
@@ -661,24 +661,24 @@
 				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
 					<Str Str="skl_eff_aetherblader_aquareave_shot"/>
 				</Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
-                    <Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="270"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="YES" Time="500">
-                    <Str Str="SCR_AETHERBLADER_AQUAREAVE_RUN_PAD_RAMDOM"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="500">
-                    <Pos Angle="0" Dist="10"/>
-                    <Num Num="85"/>
-                    <Num Num="80"/>
-                    <Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
+					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
+					<Num Num="1"/>
+					<Num Num="-180"/>
+					<Num Num="0"/>
+					<Num Num="-90"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="YES" Time="500">
+					<Str Str="SCR_AETHERBLADER_AQUAREAVE_RUN_PAD_RAMDOM"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="10"/>
+					<Num Num="85"/>
+					<Num Num="80"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
     return count"/>
                     <Num Num="2"/>
                     <Num Num="0"/>
@@ -737,9 +737,9 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="400">
 					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
 					<Num Num="1"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
-					<Num Num="0"/>
-					<Num Num="150"/>
+					<Num Num="30"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
@@ -989,153 +989,153 @@
                     <Num Num="80"/>
                     <Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
     return count"/>
-                    <Num Num="2"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
-                    <Str Str="GroundImpact_Frost_Blue_01"/>
-                    <Num Num="2.5"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Str Str="BOT"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
-                    <Num Num="1"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="2002"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
-                    <Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="160"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="MONSKL_PAD_FRONT_MSL_AETHERBLADER" Client="NO" UseSleep="NO" Time="300">
-                    <Pos Angle="0" Dist="0"/>
-                    <Str Str="AetherBlader_FrostShatter_pad"/>
-                    <Num Num="190"/>
-                    <Num Num="1"/>
-                    <Num Num="200"/>
-                    <Num Num="100"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="450">
-                    <Str Str="SCR_AETHERBLADER_PUDDLE_PAD_REPLACE"/>
-                </Scp>
-            </EtcList>
-        </MainSkl>
-    </Skill>
-    <Skill Name="AetherBlader_Frimveil_Wizard">
-        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
-            <EndScripts>
-                <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
-                <ToolScp Scp="SKL_BUFF_REMOVE" Client="NO" UseSleep="NO">
-                    <Str Str="AetherBlader_IceBlade_Buff"/>
-                </ToolScp>
-            </EndScripts>
-            <HitList>
-                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
-            </HitList>
-            <EtcList>
-                <Scp Scp="SKL_BUFF" Client="NO" UseSleep="NO" Time="0">
-                    <Str Str="AetherBlader_IceBlade_Buff"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                    <Num Num="100"/>
-                    <Num Num="0"/>
-                </Scp>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="GroundImpact_Frost_Blue_01"/>
+					<Num Num="2.5"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="BOT"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
+					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
+					<Num Num="1"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Num Num="160"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="MONSKL_PAD_FRONT_MSL_AETHERBLADER" Client="NO" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="0"/>
+					<Str Str="AetherBlader_FrostShatter_pad"/>
+					<Num Num="190"/>
+					<Num Num="1"/>
+					<Num Num="200"/>
+					<Num Num="100"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="450">
+					<Str Str="SCR_AETHERBLADER_PUDDLE_PAD_REPLACE"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="AetherBlader_Frimveil_Wizard">
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<EndScripts>
+				<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+				<ToolScp Scp="SKL_BUFF_REMOVE" Client="NO" UseSleep="NO">
+					<Str Str="AetherBlader_IceBlade_Buff"/>
+				</ToolScp>
+			</EndScripts>
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="SKL_BUFF" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="AetherBlader_IceBlade_Buff"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="100"/>
+					<Num Num="0"/>
+				</Scp>
 				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
 					<Str Str="skl_eff_aetherblader_frimveil_shot"/>
 				</Scp>
-                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="20">
-                    <Str Str="SKL_AETHERBLADER_FRIMVEIL_SHOT"/>
-                    <Num Num="1.5"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING_NOCANCEL" Client="NO" UseSleep="NO" Time="0">
-                    <Num Num="1"/>
-                    <Num Num="120"/>
-                </Scp>
-                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
-                    <Num Num="1"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="2002"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
-                    <Str_Arg Str="Stab_Normal_Blue_02" Arg="2.2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="180"/>
-                    <Num Num="180"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="100">
-                    <Str Str="AerialExplosion_Ice_Blue_01"/>
-                    <Num Num="1.5"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Str Str="MID"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_JUMP_TO_TARGET_FRIMVEIL" Client="NO" UseSleep="YES" Time="300">
-                    <Num Num="0"/>
-                    <Num Num="120"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                    <Num Num="0.1"/>
-                    <Num Num="1"/>
-                    <Num Num="0.1"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="550">
-                    <Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
-                    <Num Num="1"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="90"/>
-                    <Str Str="Dummy_emitter"/>
-                    <Str Str="None"/>
-                    <Str Str="MID"/>
-                </Scp>
-                <Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="650">
-                    <Str Str="AerialExplosion_Ice_Blue_01"/>
-                    <Num Num="1.5"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Str Str="MID"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="0"/>
-                    <Num Num="1"/>
-                </Scp>
-                <Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="700">
-                    <Pos Angle="0" Dist="0" PosType="5"/>
-                    <Num Num="85"/>
-                    <Num Num="80"/>
-                    <Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="20">
+					<Str Str="SKL_AETHERBLADER_FRIMVEIL_SHOT"/>
+					<Num Num="1.5"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING_NOCANCEL" Client="NO" UseSleep="NO" Time="0">
+					<Num Num="1"/>
+					<Num Num="120"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="100">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
+					<Str_Arg Str="Stab_Normal_Blue_02" Arg="2.2"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="180"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="100">
+					<Str Str="AerialExplosion_Ice_Blue_01"/>
+					<Num Num="1.5"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_JUMP_TO_TARGET_FRIMVEIL" Client="NO" UseSleep="YES" Time="300">
+					<Num Num="0"/>
+					<Num Num="120"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0.1"/>
+					<Num Num="1"/>
+					<Num Num="0.1"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="550">
+					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
+					<Num Num="1"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Num Num="90"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="650">
+					<Str Str="AerialExplosion_Ice_Blue_01"/>
+					<Num Num="1.5"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="700">
+					<Pos Angle="0" Dist="0" PosType="5"/>
+					<Num Num="85"/>
+					<Num Num="80"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
     return count"/>
                     <Num Num="2"/>
                     <Num Num="0"/>
@@ -1312,9 +1312,9 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
 					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
 					<Num Num="1"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
-					<Num Num="0"/>
-					<Num Num="270"/>
+					<Num Num="-90"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
@@ -1385,9 +1385,9 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="400">
 					<Str_Arg Str="Slash_Water_Blue_02" Arg="2"/>
 					<Num Num="1"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
-					<Num Num="0"/>
-					<Num Num="150"/>
+					<Num Num="30"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
@@ -1653,7 +1653,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="0"/>
 					<Num Num="160"/>
 					<Str Str="Dummy_emitter"/>
@@ -1751,7 +1751,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="550">
 					<Str_Arg Str="Slash_Frost_Blue_02" Arg="2"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="0"/>
 					<Num Num="90"/>
 					<Str Str="Dummy_emitter"/>

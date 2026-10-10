@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EquipBossCard V2 client renderer를 시작 시 선로드하는 UI 없는 AddOn이다. -->
+<uiframe name="equipbosscard_v2" x="0" y="0" width="1" height="1" create="open">
+	<option visible="false" closebutton="false"/>
+</uiframe>

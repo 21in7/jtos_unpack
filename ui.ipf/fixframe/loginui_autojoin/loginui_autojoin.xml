@@ -3,6 +3,7 @@
 <!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
 <uiframe name="loginui_autojoin" x="0" y="0" width="1920" height="1080">
 	<frame title="로그인" margin="0 0 0 0" fullheight="true" layout_gravity="center bottom" scale_align="center bottom"/>
+	<input moveable="false" hittestframe="false"/>
 	<layer layerlevel="11"/>
 	<draw drawtitlebar="false" drawframe="false"/>
 	<script fadeinScp="None" fadeoutScp="None"/>

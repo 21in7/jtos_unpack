@@ -60,6 +60,10 @@ function GET_ICON_BY_STATE_MODE(state, questIES)
 end
 
 function GET_MARK_TAIL(questies)
+	if questies == nil then
+		return "_sub", 0;
+	end
+	
     if questies.QuestMode == "MAIN" then
 		return "", 1;
 	elseif questies.PeriodInitialization ~= "None" then

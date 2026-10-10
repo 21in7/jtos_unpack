@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="quickactionboard" x="0" y="0" width="720" height="540">
+    <frame title="퀵 액션 보드" layout_gravity="center center" margin="0 0 0 0" scale_align="center center"/>
+    <skin frameskin="test_frame_low"/>
+    <layer layerlevel="95"/>
+    <draw drawtitlebar="false" drawframe="true"/>
+    <input moveable="true" hittest="true" hittestframe="true"/>
+    <option visible="false" closebutton="false" hideable="true" alwaysVisible="false"/>
+    <sound opensound="sys_popup_open_1" closesound="character_item_window_close"/>
+    <script OpenScp="QUICKACTIONBOARD_MANAGER_OPEN"/>
+    <userconfig DEFAULT_BOARD_NAME_FORMAT="보드 %d"/>
+    <userconfig SCOPE_CHARACTER="캐릭터 전용" SCOPE_ACCOUNT="계정 공용"/>
+    <userconfig MSG_MAX_BOARD="생성 가능한 보드 수를 초과했습니다." MSG_MAX_SLOT="사용 가능한 전체 슬롯 수를 초과했습니다."/>
+    <userconfig MSG_INVALID_VALUE="설정값의 범위를 확인해 주세요." MSG_TOO_MANY_ACTIONS="배치된 동작 수가 새 슬롯 수보다 많습니다. 동작을 먼저 비워 주세요." MSG_UNAVAILABLE_ACTION="현재 캐릭터는 이 동작을 사용할 수 없습니다."/>
+    <userconfig MSG_UNSUPPORTED_ACTION="등록할 수 없는 동작입니다." MSG_SAVE_FAILED="퀵 액션 보드 설정을 저장하지 못했습니다."/>
+    <userconfig MSG_DELETE_CONFIRM="선택한 보드를 삭제하시겠습니까?" MSG_EMPTY_BOARD="새 보드를 만들어 주세요."/>
+    <userconfig MSG_ALT_REMOVE="잠금 해제 상태에서 Alt+우클릭하면 슬롯을 비울 수 있습니다."/>
+    <userconfig MSG_DISCARD_CHANGES="적용하지 않은 변경 내용을 버리시겠습니까?"/>
+    <userconfig ADVANCED_OPEN="상세 설정 펼치기" ADVANCED_CLOSE="상세 설정 접기"/>
+    <controls>
+        <groupbox name="titleBanner" rect="0 0 420 46" margin="0 6 0 0" layout_gravity="center top" skin="None" scrollbar="false" hittest="false" resizebyparent="true"/>
+        <richtext name="title" rect="0 0 400 32" margin="0 15 0 0" layout_gravity="center top" caption="{@st43}{s24}퀵 액션 보드{/}" textalign="center center" hittest="false"/>
+        <button name="close" rect="0 0 35 35" margin="0 5 8 0" layout_gravity="right top" LBtnUpScp="QUICKACTIONBOARD_MANAGER_CLOSE" image="testclose_button" stretch="false" useclickimg="true" clicksound="button_click_big" oversound="button_over"/>
+        <!-- 기본 프레임과 분리된 선택형 장식 레이어 -->
+        <groupbox name="boardListBox" rect="0 0 170 455" margin="18 58 0 0" layout_gravity="left top" skin="test_skin_01" scrollbar="false"/>
+        <groupbox name="boardListBanner" parent="boardListBox" rect="0 0 150 34" margin="10 8 0 0" layout_gravity="left top" skin="None" scrollbar="false" hittest="false"/>
+        <richtext name="boardListTitle" parent="boardListBox" rect="0 0 140 28" margin="15 10 0 0" layout_gravity="left top" caption="{@st45tb2}{s18}보드 목록{/}" textalign="center center" hittest="false"/>
+        <button name="boardButton1" parent="boardListBox" rect="0 0 140 38" margin="15 46 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" format="{@st42}%s" param1="board" param1_def="-" LBtnUpScp="QUICKACTIONBOARD_MANAGER_SELECT" LBtnUpArgNum="1"/>
+        <button name="boardButton2" parent="boardListBox" rect="0 0 140 38" margin="15 87 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" format="{@st42}%s" param1="board" param1_def="-" LBtnUpScp="QUICKACTIONBOARD_MANAGER_SELECT" LBtnUpArgNum="2"/>
+        <button name="boardButton3" parent="boardListBox" rect="0 0 140 38" margin="15 128 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" format="{@st42}%s" param1="board" param1_def="-" LBtnUpScp="QUICKACTIONBOARD_MANAGER_SELECT" LBtnUpArgNum="3"/>
+        <button name="boardButton4" parent="boardListBox" rect="0 0 140 38" margin="15 169 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" format="{@st42}%s" param1="board" param1_def="-" LBtnUpScp="QUICKACTIONBOARD_MANAGER_SELECT" LBtnUpArgNum="4"/>
+        <button name="boardButton5" parent="boardListBox" rect="0 0 140 38" margin="15 210 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" format="{@st42}%s" param1="board" param1_def="-" LBtnUpScp="QUICKACTIONBOARD_MANAGER_SELECT" LBtnUpArgNum="5"/>
+        <richtext name="emptyBoardText" parent="boardListBox" rect="0 0 140 60" margin="0 0 0 0" layout_gravity="center center" caption="{@st45tw4}새 보드를{nl}만들어 주세요.{/}" textalign="center center" fixwidth="true" hittest="false"/>
+        <button name="addBoard" parent="boardListBox" rect="0 0 38 38" margin="0 0 55 16" layout_gravity="right bottom" skin="test_pvp_btn" caption="{img btn_plus 18 18}" textalign="center center" LBtnUpScp="QUICKACTIONBOARD_MANAGER_ADD" clicksound="button_click_big" texttooltip="{@st59}보드 추가{/}"/>
+        <button name="deleteBoard" parent="boardListBox" rect="0 0 38 38" margin="0 0 15 16" layout_gravity="right bottom" skin="test_pvp_btn" caption="{img context_chat_delete 18 18}" textalign="center center" LBtnUpScp="QUICKACTIONBOARD_MANAGER_DELETE" clicksound="button_click_big" texttooltip="{@st59}선택한 보드 삭제{/}"/>
+        <groupbox name="workspaceBox" rect="0 0 500 455" margin="202 58 0 0" layout_gravity="left top" skin="test_skin_01" scrollbar="false"/>
+        <groupbox name="selectedBoardBanner" parent="workspaceBox" rect="0 0 210 34" margin="15 8 0 0" layout_gravity="left top" skin="None" scrollbar="false" hittest="false"/>
+        <richtext name="selectedBoardTitle" parent="workspaceBox" rect="0 0 200 28" margin="20 10 0 0" layout_gravity="left top" format="{@st45tb2}{s18}%s{/}" param1="board" param1_def="-" textalign="center center" hittest="false"/>
+        <checkbox name="visibleCheck" parent="workspaceBox" rect="0 0 90 26" margin="300 12 0 0" layout_gravity="left top" skin="checkbox" imagesize="24 24" format="{@st45tw2}%s{/}" param1="text" param1_def="표시" LBtnUpScp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <checkbox name="lockedCheck" parent="workspaceBox" rect="0 0 90 26" margin="395 12 0 0" layout_gravity="left top" skin="checkbox" imagesize="24 24" format="{@st45tw2}%s{/}" param1="text" param1_def="잠금" LBtnUpScp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <button name="settingsTab" parent="workspaceBox" rect="0 0 145 34" margin="15 48 0 0" layout_gravity="left top" skin="test_pvp_btn" fontname="black_16_b" format="%s" param1="text" param1_def="보드 설정" LBtnUpScp="QUICKACTIONBOARD_MANAGER_TAB" LBtnUpArgStr="Settings"/>
+        <button name="actionsTab" parent="workspaceBox" rect="0 0 145 34" margin="165 48 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_16_b" format="%s" param1="text" param1_def="동작 추가" LBtnUpScp="QUICKACTIONBOARD_MANAGER_TAB" LBtnUpArgStr="Actions"/>
+        <groupbox name="settingBox" parent="workspaceBox" rect="0 0 470 355" margin="15 88 0 0" layout_gravity="left top" skin="None" scrollbar="false" visible="true"/>
+        <richtext name="nameLabel" parent="settingBox" rect="0 0 55 28" margin="5 8 0 0" layout_gravity="left top" caption="{@st45tw2}이름{/}" textalign="left center" hittest="false"/>
+        <edit name="nameEdit" parent="settingBox" rect="0 0 385 30" margin="65 6 0 0" layout_gravity="left top" skin="test_weight_skin" textalign="left center" numbermode="false" maxlength="24" fontname="white_18_ol" format="%s" param1="value" param1_def="" typingscp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <richtext name="layoutLabel" parent="settingBox" rect="0 0 55 30" margin="5 58 0 0" layout_gravity="left top" caption="{@st45tw2}배치{/}" textalign="left center" hittest="false"/>
+        <button name="rowMinus" parent="settingBox" rect="0 0 30 30" margin="65 58 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="−" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="rowEdit" LBtnUpArgNum="-1"/>
+        <edit name="rowEdit" parent="settingBox" rect="0 0 42 30" margin="98 58 0 0" layout_gravity="left top" skin="test_weight_skin" textalign="center center" numbermode="true" minnumber="1" maxnumber="8" fontname="white_18_ol" format="%s" param1="value" param1_def="" typingscp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <button name="rowPlus" parent="settingBox" rect="0 0 30 30" margin="143 58 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="＋" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="rowEdit" LBtnUpArgNum="1"/>
+        <richtext name="multiplyLabel" parent="settingBox" rect="0 0 28 30" margin="178 58 0 0" layout_gravity="left top" caption="{@st45tw2}×{/}" textalign="center center" hittest="false"/>
+        <button name="colMinus" parent="settingBox" rect="0 0 30 30" margin="211 58 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="−" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="colEdit" LBtnUpArgNum="-1"/>
+        <edit name="colEdit" parent="settingBox" rect="0 0 42 30" margin="244 58 0 0" layout_gravity="left top" skin="test_weight_skin" textalign="center center" numbermode="true" minnumber="1" maxnumber="8" fontname="white_18_ol" format="%s" param1="value" param1_def="" typingscp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <button name="colPlus" parent="settingBox" rect="0 0 30 30" margin="289 58 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="＋" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="colEdit" LBtnUpArgNum="1"/>
+        <groupbox name="layoutPreview" parent="settingBox" rect="0 0 130 92" margin="330 50 0 0" layout_gravity="left top" skin="test_skin_01" scrollbar="false" hittest="false"/>
+        <richtext name="previewLabel" parent="layoutPreview" rect="0 0 120 20" margin="5 2 0 0" layout_gravity="left top" caption="{@st45tw5}미리보기{/}" textalign="center center" hittest="false"/>
+        <slotset name="previewSlots" parent="layoutPreview" rect="0 0 104 56" margin="13 25 0 0" layout_gravity="left top" col="4" row="1" size="24 24" spc="0 0" skin="quickslot" enablepop="false" enabledrag="false" enabledrop="false" hittest="false"/>
+        <button name="advancedToggle" parent="settingBox" rect="0 0 220 32" margin="240 142 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_16_b" format="%s" param1="text" param1_def="상세 설정 펼치기" LBtnUpScp="QUICKACTIONBOARD_MANAGER_TOGGLE_ADVANCED"/>
+        <groupbox name="advancedBox" parent="settingBox" rect="0 0 455 105" margin="5 175 0 0" layout_gravity="left top" skin="test_skin_01" scrollbar="false" visible="false"/>
+        <richtext name="scopeLabel" parent="settingBox" rect="0 0 80 28" margin="5 124 0 0" layout_gravity="left top" caption="{@st45tw2}저장 범위{/}" textalign="left center" hittest="false"/>
+        <droplist name="scopeDrop" parent="settingBox" rect="0 0 125 28" margin="100 123 0 0" layout_gravity="left top" skin="droplist_normal" SelectScp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <richtext name="scaleLabel" parent="advancedBox" rect="0 0 80 28" margin="15 57 0 0" layout_gravity="left top" caption="{@st45tw2}배율(%%){/}" textalign="left center" hittest="false"/>
+        <button name="scaleMinus" parent="advancedBox" rect="0 0 30 28" margin="95 56 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="−" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="scaleEdit" LBtnUpArgNum="-5"/>
+        <edit name="scaleEdit" parent="advancedBox" rect="0 0 50 28" margin="128 56 0 0" layout_gravity="left top" skin="test_weight_skin" textalign="center center" numbermode="true" minnumber="50" maxnumber="150" fontname="white_18_ol" format="%s" param1="value" param1_def="" typingscp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <button name="scalePlus" parent="advancedBox" rect="0 0 30 28" margin="181 56 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="＋" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="scaleEdit" LBtnUpArgNum="5"/>
+        <richtext name="alphaLabel" parent="advancedBox" rect="0 0 90 28" margin="225 57 0 0" layout_gravity="left top" caption="{@st45tw2}투명도(%%){/}" textalign="left center" hittest="false"/>
+        <button name="alphaMinus" parent="advancedBox" rect="0 0 30 28" margin="315 56 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="−" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="alphaEdit" LBtnUpArgNum="-5"/>
+        <edit name="alphaEdit" parent="advancedBox" rect="0 0 50 28" margin="348 56 0 0" layout_gravity="left top" skin="test_weight_skin" textalign="center center" numbermode="true" minnumber="10" maxnumber="100" fontname="white_18_ol" format="%s" param1="value" param1_def="" typingscp="QUICKACTIONBOARD_MANAGER_FIELD_CHANGED"/>
+        <button name="alphaPlus" parent="advancedBox" rect="0 0 30 28" margin="401 56 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_18_b" caption="＋" LBtnUpScp="QUICKACTIONBOARD_MANAGER_STEP" LBtnUpArgStr="alphaEdit" LBtnUpArgNum="5"/>
+        <richtext name="settingHint" parent="settingBox" rect="0 0 330 42" margin="5 295 0 0" layout_gravity="left top" caption="{@st45tw5}행·열 1~8 · 배율 50~150 · 투명도 10~100{nl}해제 후 슬롯 밖 드롭/Alt+우클릭으로 비우기{/}" fixwidth="true" hittest="false"/>
+        <button name="applyBoard" parent="settingBox" rect="0 0 110 38" margin="0 0 5 23" layout_gravity="right bottom" skin="test_pvp_btn" fontname="black_16_b" format="%s" param1="text" param1_def="적용" LBtnUpScp="QUICKACTIONBOARD_MANAGER_APPLY" clicksound="button_click_big"/>
+        <groupbox name="paletteBox" parent="workspaceBox" rect="0 0 470 355" margin="15 88 0 0" layout_gravity="left top" skin="None" scrollbar="false" visible="false"/>
+        <richtext name="paletteHint" parent="paletteBox" rect="0 0 440 24" margin="5 5 0 0" layout_gravity="left top" caption="{@st45tw2}아이콘을 원하는 보드 슬롯으로 드래그하세요.{/}" textalign="left center" hittest="false"/>
+        <button name="poseTab" parent="paletteBox" rect="0 0 100 30" margin="5 38 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_16_b" format="%s" param1="text" param1_def="포즈" LBtnUpScp="QUICKACTIONBOARD_MANAGER_PALETTE" LBtnUpArgStr="Pose"/>
+        <button name="emoticonTab" parent="paletteBox" rect="0 0 100 30" margin="110 38 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_16_b" format="%s" param1="text" param1_def="감정표현" LBtnUpScp="QUICKACTIONBOARD_MANAGER_PALETTE" LBtnUpArgStr="Emoticon"/>
+        <button name="warpTab" parent="paletteBox" rect="0 0 120 30" margin="215 38 0 0" layout_gravity="left top" skin="test_normal_button" fontname="black_16_b" format="%s" param1="text" param1_def="퀘스트 워프" LBtnUpScp="QUICKACTIONBOARD_MANAGER_PALETTE" LBtnUpArgStr="Warp"/>
+        <groupbox name="paletteScroll" parent="paletteBox" rect="0 0 450 270" margin="5 76 0 0" layout_gravity="left top" skin="None" scrollbar="true" scrollbarskinname="verticalscrollbar" draw="false"/>
+        <slotset name="paletteSlots" parent="paletteScroll" rect="0 0 420 264" margin="0 0 0 0" layout_gravity="left top" col="7" row="4" size="52 52" spc="6 4" skin="invenslot" enablepop="true" enabledrag="true" enabledrop="false" PopScp="QUICKACTIONBOARD_PALETTE_POP"/>
+        <timer name="addontimer" rect="0 0 10 10" margin="0 0 0 0"/>
+    </controls>
+</uiframe>

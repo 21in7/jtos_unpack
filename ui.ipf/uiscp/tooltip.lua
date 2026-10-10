@@ -61,6 +61,10 @@ function TRY_PARSE_PROPERTY(obj, nextObj, caption)
                 propValue = string.format("%.1f", propValue);            
             end
 
+            if tonumber(propValue) ~= nil then
+                propValue = GET_COMMAED_STRING(tonumber(propValue));
+            end            
+
             return (beforeStr .. propValue .. endStr), 1;
         end
 
@@ -171,7 +175,14 @@ function PARSE_TOOLTIP_CAPTION(_obj, caption, predictSkillPoint)
             addCaption = addCaption..ScpArgMsg('SKILL_CAPTION_MSG20').."{nl}"
         end
         
-        if skillHitType == "Pad" then
+        local resonanceCls = GetClassByStrProp("resonance_skill", "SkillClassName", classname)
+        local hitTypeOverrideMsg = "None"
+        if resonanceCls ~= nil then
+            hitTypeOverrideMsg = TryGetProp(resonanceCls, "TooltipHitTypeOverrideMsg", "None")
+        end
+        if hitTypeOverrideMsg ~= nil and hitTypeOverrideMsg ~= "" and hitTypeOverrideMsg ~= "None" then
+            addCaption = addCaption..ScpArgMsg(hitTypeOverrideMsg).."{nl}"
+        elseif skillHitType == "Pad" then
             if skillClassType == "Magic" then
                 addCaption = addCaption..ScpArgMsg('SKILL_CAPTION_MSG21').."{nl}"
             else
@@ -678,7 +689,52 @@ local function SET_TOOLTIP_SUBSKILL_CAPTION_BY_CLASS(skill, begin_lv, max_lv)
     return caption
 end
 
-function UPDATE_SKILL_TOOLTIP(frame, strarg, numarg1, numarg2, userData, obj)        
+-- 무적 연계 차단(글로벌 쿨다운) 안내.
+-- 방향이 둘이라 두 줄로 나눈다. 서버 판정과 같은 기준을 써야 표기와 동작이 어긋나지 않는다.
+--   거는 쪽 : 키워드만 본다(특성 무관). 그래서 첫 줄은 대상 스킬이면 항상 나온다.
+--   받는 쪽 : 특성까지 본다. 특성 때문에 빠져 있으면 둘째 줄로 알려준다.
+-- PARSE_TOOLTIP_CAPTION 안에 넣으면 Caption / Caption2 양쪽에서 두 번 출력되므로 여기서 붙인다.
+function MAKE_GLOBAL_COOLDOWN_CAPTION(skillObj)
+    -- 거는 쪽 판정 = SCR_GLOBAL_COOLDOWN 의 게이트와 동일하게 pc 를 넘기지 않는다.
+    if IS_GLOBAL_COOLDOWN_SKILL(nil, skillObj) == false then
+        return "";
+    end
+
+    local caption = "{#7A00CC}{ol}"..ScpArgMsg('SKILL_CAPTION_GLOBALCOOLDOWN').."{/}{/}{nl}"
+                 .. "{#7A00CC}"..ScpArgMsg('SKILL_CAPTION_GLOBALCOOLDOWN_DESC').."{/}{nl}";
+
+    -- 특성 때문에 받는 쪽에서 빠진 상태면 그 사실을 덧붙인다.
+    if IS_GLOBAL_COOLDOWN_SKILL(GetMyPCObject(), skillObj) == false then
+        caption = caption.."{#7A00CC}"..ScpArgMsg('SKILL_CAPTION_GLOBALCOOLDOWN_EXCEPT').."{/}{nl}";
+    end
+
+    return caption.."{nl}";
+end
+
+-- 쿨다운 감소 무시 안내 — 캡션 마지막에 붙인다. 키워드 2종(2026-09-09 분리):
+--   IgnoreSkillCoolDownReduce  = 그룹1(스킬 패스·시안 젬) 무시
+--   IgnoreCommonCoolDownReduce = 그룹2(아이템·버프·카드 등 공용) 무시
+-- 둘 다 있으면 통합 문구 한 줄, 하나만 있으면 해당 그룹 문구. clientmessage.xml SKILL_CAPTION_IGNORE_*_COOLDOWN_REDUCE.
+-- PARSE_TOOLTIP_CAPTION 안에 넣으면 Caption / Caption2 양쪽에서 두 번 출력되므로 여기서 붙인다.
+function MAKE_IGNORE_COOLDOWN_REDUCE_CAPTION(skillObj)
+    local ignoreSkill = CHECK_SKILL_KEYWORD(skillObj, 'IgnoreSkillCoolDownReduce') == 1;
+    local ignoreCommon = CHECK_SKILL_KEYWORD(skillObj, 'IgnoreCommonCoolDownReduce') == 1;
+
+    local msgKey;
+    if ignoreSkill and ignoreCommon then
+        msgKey = 'SKILL_CAPTION_IGNORE_COOLDOWN_REDUCE';
+    elseif ignoreSkill then
+        msgKey = 'SKILL_CAPTION_IGNORE_SKILL_COOLDOWN_REDUCE';
+    elseif ignoreCommon then
+        msgKey = 'SKILL_CAPTION_IGNORE_COMMON_COOLDOWN_REDUCE';
+    else
+        return "";
+    end
+
+    return "{nl}{#DD5500}{ol}"..ScpArgMsg(msgKey).."{/}{/}";
+end
+
+function UPDATE_SKILL_TOOLTIP(frame, strarg, numarg1, numarg2, userData, obj)
     -- destroy skill, ability tooltip
     DESTROY_CHILD_BYNAME(frame:GetChild('skill_desc'), 'SKILL_CAPTION_');
     DESTROY_CHILD_BYNAME(frame:GetChild('ability_desc'), 'ABILITY_CAPTION_');
@@ -756,14 +812,35 @@ function UPDATE_SKILL_TOOLTIP(frame, strarg, numarg1, numarg2, userData, obj)
 
     -- set skill description
     local skillDesc = GET_CHILD(skillFrame, "desc", "ui::CRichText");
+    local globalCoolDownCaption = MAKE_GLOBAL_COOLDOWN_CAPTION(obj);
+    local ignoreCoolDownReduceCaption = MAKE_IGNORE_COOLDOWN_REDUCE_CAPTION(obj);
+
+    local additionalCaption = ""
+    local skill_name = TryGetProp(obj, 'ClassName', 'None')
+    local func_name_additional_caption = string.format('get_raid_effect_tooltip_%s', skill_name)
+    local extra_text = ""
+    if _G[func_name_additional_caption] ~= nil then
+        extra_text = _G[func_name_additional_caption](obj)
+    elseif tooltip_resonance ~= nil then
+        local resonance_cls = GetClassByStrProp("resonance_skill", "SkillClassName", skill_name)
+        if resonance_cls ~= nil then
+            local reinforce_level = tooltip_resonance.get_parse_level(skill_name)
+            extra_text = tooltip_resonance.get_skill_raid_effect_tooltip(skill_name, reinforce_level)
+        end
+    end
+
+    if extra_text ~= nil and extra_text ~= "" then
+        additionalCaption = "{nl}"..extra_text
+    end
+
     if is_skill_conversion(obj) == true then
         if strarg == 'quickslot' then
             SET_SKILL_CONVERSION_TOOLTIP_CAPTION(skillFrame, obj);
         else
-            SET_SKILL_TOOLTIP_CAPTION(skillFrame, obj.Caption, PARSE_TOOLTIP_CAPTION(obj, obj.Caption, true));            
+            SET_SKILL_TOOLTIP_CAPTION(skillFrame, obj.Caption, globalCoolDownCaption..PARSE_TOOLTIP_CAPTION(obj, obj.Caption, true)..ignoreCoolDownReduceCaption .. additionalCaption);
         end
     else
-        SET_SKILL_TOOLTIP_CAPTION(skillFrame, obj.Caption, PARSE_TOOLTIP_CAPTION(obj, obj.Caption, true));    	
+        SET_SKILL_TOOLTIP_CAPTION(skillFrame, obj.Caption, globalCoolDownCaption..PARSE_TOOLTIP_CAPTION(obj, obj.Caption, true)..ignoreCoolDownReduceCaption .. additionalCaption);
     end
 
     local stateLevel = 0;
@@ -1772,6 +1849,18 @@ function UPDATE_DUNGEON_RESTRICT_INFO_TOOLTIP(frame, indunName)
             ypos = height;
 		end
     end
+	frame:Resize(xpos + INNER_X, ypos + INNER_Y);
+end
+
+function UPDATE_SILVER_RESTRICT_INFO_TOOLTIP(frame, indunName)
+	local titleBox = GET_CHILD_RECURSIVELY(frame, "titleBox");
+	local title = GET_CHILD(titleBox,"title")
+    local INNER_X = frame:GetUserConfig("INNER_X");
+    local INNER_Y = frame:GetUserConfig("INNER_Y");
+
+    local xpos = title:GetWidth() + title:GetX();
+    local ypos = titleBox:GetHeight();
+	
 	frame:Resize(xpos + INNER_X, ypos + INNER_Y);
 end
 

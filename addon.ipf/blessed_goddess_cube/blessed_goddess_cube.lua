@@ -6,13 +6,14 @@ function UI_TOGGLE_BLESSED_CUBE_OPEN()
     BLESSED_CUBE_OPEN();
 end
 
-function BLESSED_CUBE_OPEN(frame)
+function BLESSED_CUBE_OPEN(frame, argStr)
 	local frame = ui.GetFrame('blessed_goddess_cube');
     local gachabtn = GET_CHILD_RECURSIVELY(frame,"openBtn2");
     local openBtn = GET_CHILD_RECURSIVELY(frame,"openBtn");
+    local headerText = GET_CHILD_RECURSIVELY(frame,"headerText");
     
     local nation = GET_POPOBOOST_SERVER();
-	BLESSED_CUBE_LIST_UPDATE(frame);
+	BLESSED_CUBE_LIST_UPDATE(frame, argStr);
     BELSEED_CUBE_COUNT_UPDATE(frame);
 	frame:ShowWindow(1);
 	if config.GetServiceNation() ~= "KOR" then
@@ -30,6 +31,17 @@ function BLESSED_CUBE_OPEN(frame)
         gachabtn:SetEventScript(ui.LBUTTONUP, "EXTERN_OPEN_LETICIA_PROBABILITY");
         gachabtn:SetEventScriptArgNumber(ui.LBUTTONUP, 3)
 		openBtn:SetMargin(0, 0, 0, 60);
+    end
+    
+    if argStr == "_EVENT" then
+        gachabtn:SetEventScriptArgNumber(ui.LBUTTONUP, 4)
+    end
+
+    if headerText ~= nil then
+        headerText:SetTextByKey("name", ScpArgMsg('blessed_goddess'))
+        if argStr == "_EVENT" then
+            headerText:SetTextByKey("name", ScpArgMsg('event_blessed_goddess'))
+        end
     end
 end
 
@@ -55,18 +67,24 @@ function BELSEED_CUBE_COUNT_UPDATE(frame)
     gachaCnt:SetTextByKey("count",count);
 end
 
-function BLESSED_CUBE_LIST_UPDATE(frame)
+function BLESSED_CUBE_LIST_UPDATE(frame, argStr)
     local cubeListBox = GET_CHILD_RECURSIVELY(frame, 'cubeListBox');
     local defaultSetted = false;
     local ITEM_LIST_INTERVAL = frame:GetUserConfig('ITEM_LIST_INTERVAL');
     local gachaList, cnt = GetClassList("GachaDetail");
     local pc = GetMyPCObject()
+    local blessed_cube_str = "Gacha_Blessed_CUBE_001";
+    if argStr ~= "NONE" then
+        blessed_cube_str = blessed_cube_str..argStr;
+    end
+    
+    cubeListBox:RemoveAllChild()
 
     for i = 0, cnt-1 do
         local info = GetClassByIndexFromList(gachaList, i);
 
         if info ~= nil then
-            if TryGetProp(info, "RewardGroup", "None") == "Gacha_Blessed_CUBE_001" then
+            if TryGetProp(info, "RewardGroup", "None") == blessed_cube_str then
                 local cube = cubeListBox:CreateOrGetControlSet("leticia_cube_list", 'LIST_'..info.ClassName, 0, 0);
                 cube = AUTO_CAST(cube);
                 
@@ -147,9 +165,14 @@ function BLESSED_CUBE_OPEN_BUTTON(frame, ctrl, argStr, argNum, _gachaClassName, 
 	local aobj = GetMyAccountObj(pc)
     
 	local skip_animation = GET_CHILD_RECURSIVELY(frame, "skip_animation");
-    
+
 	if frame:GetUserIValue('OPEN_MSG_BOX') == 0 then
-		local msg = string.format("%s{nl} {nl}{#85070a}%s", ScpArgMsg('BlessedCubeGacha{CONSUME}', 'CONSUME', clMsg), ClMsg('ContainWarningItem'))
+        local msg = string.format("%s{nl} {nl}{#85070a}%s", ScpArgMsg('BlessedCubeGacha{CONSUME}', 'CONSUME', clMsg), ClMsg('ContainWarningItem'))
+        if gachaClassName == 'Gacha_Blessed_CUBE_010' then
+            msg = string.format("%s{nl} {nl}%s", ScpArgMsg('BlessedCubeGacha{CONSUME}', 'CONSUME', clMsg), ClMsg('ContainWarningItem3'))
+        else
+            msg = string.format("%s{nl} {nl}%s", ClMsg('BlessedCubeGachaEvent'), ClMsg('ContainWarningItem3'))
+        end
 		cubeName = tostring(cubeName) .. "/" .. tostring(skip_animation:GetUserValue("IsSkipAnimation"))
 		local yesScp = string.format('REQ_BLESSED_CUBE_OPEN("%s")', cubeName)
         

@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToolSkill>
+    <Skill Name="Sagitta_SerratedBarb">
+        <EndScripts>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Shoot_BloodSpear_Red_02"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+        </EndScripts>
+        <KeyCancelScp>
+            <ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_BloodMissile_Red_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_MysticSmoke_Red_01"/>
+            </ToolScp>
+        </KeyCancelScp>
+        <KeyInputStart>
+            <ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_SERRATEDBARB_CAST"/>
+                <Num Num="2.5"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_SERRATEDBARB_LOOP"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+            </ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO">
+				<Str_Arg Str="Projectile_BloodMissile_Red_01" Arg="1"/>
+				<Num Num="1"/>
+				<Num Num="100"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="Dummy_R_HAND"/>
+				<Str Str="None"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="GroundAura_MysticSmoke_Red_01"/>
+				<Num Num="0.6"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+        </KeyInputStart>
+        <KeyInputEnd>
+            <ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="SKL_C_RESUME_ANI" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_BloodMissile_Red_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_MysticSmoke_Red_01"/>
+            </ToolScp>
+        </KeyInputEnd>
+        <KeyInput>
+            <ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0.3"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+                <Str_Arg Str="None" Arg="1"/>
+                <Str Str="None"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="5"/>
+                <Num Num="1"/>
+                <Num Num="45"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Str Str=""/>
+                <Str Str=""/>
+            </ToolScp>
+        </KeyInput>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_SERRATEDBARB_SHOT"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="skl_eff_sagitta_serratedbarb"/>
+                </Scp>
+                <Scp Client="YES" Scp="C_ADD_UNITY_EFFECT" UseSleep="NO" Time="0">
+                    <Str_Arg Arg="1.8" Str="Shoot_BloodSpear_Red_02#Dummy_emitter"/>
+                    <Num Num="1"/>
+                    <Pos Angle="0" Dist="20" Height="20"/>
+                    <Num Num="1"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="0">
+                    <Str_Arg Str="Projectile_BloodMissile_Red_01#Dummy_Force" Arg="0.5"/>
+                    <Str Str="arrow_cast"/>
+                    <Str_Arg Str="None" Arg="1"/>
+                    <Str Str="arrow_blow"/>
+                    <Num Num="0"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Str Str="FAST"/>
+                    <Num Num="800"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Angle_Abs Angle="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="MONSKL_PAD_FRONT_MSL" Client="NO" UseSleep="YES" Time="300">
+                    <Pos Angle="0" Dist="0"/>
+                    <Str Str="Sagitta_SerratedBarb_Pad"/>
+                    <Num Num="120"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                    <Num Num="200"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Sagitta_BreachingPoint">
+        <EndScripts>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Shoot_BloodSpear_Red_02"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+        </EndScripts>
+        <KeyCancelScp>
+            <ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_Bullet_Blue_03"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_SuperSaiyan_Blue_01"/>
+            </ToolScp>
+        </KeyCancelScp>
+        <KeyInputStart>
+            <ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_BREACHINGPOINT_CAST"/>
+                <Num Num="2.5"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_BREACHINGPOINT_LOOP"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+            </ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO">
+				<Str_Arg Str="Projectile_Bullet_Blue_03" Arg="1"/>
+				<Num Num="0.8"/>
+				<Num Num="100"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="Dummy_R_HAND"/>
+				<Str Str="None"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="BodyAura_SuperSaiyan_Blue_01"/>
+				<Num Num="1.5"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="MID"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+        </KeyInputStart>
+        <KeyInputEnd>
+            <ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="SKL_C_RESUME_ANI" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_Bullet_Blue_03"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_SuperSaiyan_Blue_01"/>
+            </ToolScp>
+        </KeyInputEnd>
+        <KeyInput>
+            <ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0.3"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+                <Str_Arg Str="None" Arg="1"/>
+                <Str Str="None"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="5"/>
+                <Num Num="1"/>
+                <Num Num="45"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Str Str=""/>
+                <Str Str=""/>
+            </ToolScp>
+        </KeyInput>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_BREACHINGPOINT_SHOT"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="skl_eff_sagitta_breachingpoint"/>
+                </Scp>
+                <Scp Client="YES" Scp="C_ADD_UNITY_EFFECT" UseSleep="NO" Time="0">
+                    <Str_Arg Arg="1.8" Str="Shoot_PulseRifle_Blue_02#Dummy_emitter"/>
+                    <Num Num="1"/>
+                    <Pos Angle="0" Dist="10" Height="20"/>
+                    <Num Num="1"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="0">
+                    <Str_Arg Str="Projectile_Bullet_Blue_03#Dummy_Force" Arg="0.5"/>
+                    <Str Str="arrow_cast"/>
+                    <Str_Arg Str="None" Arg="1"/>
+                    <Str Str="arrow_blow"/>
+                    <Num Num="0"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Str Str="FAST"/>
+                    <Num Num="800"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Angle_Abs Angle="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="MONSKL_PAD_FRONT_MSL" Client="NO" UseSleep="YES" Time="300">
+                    <Pos Angle="0" Dist="0"/>
+                    <Str Str="Sagitta_BreachingPoint_Pad"/>
+                    <Num Num="120"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                    <Num Num="200"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Sagitta_CausticPoint">
+        <EndScripts>
+            <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+        </EndScripts>
+        <KeyCancelScp>
+            <ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_Sticky_Green_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_Dark_Green_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_MysticSmoke_Green_02"/>
+            </ToolScp>
+        </KeyCancelScp>
+        <KeyInputStart>
+            <ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_CAUSTICPOINT_CAST"/>
+                <Num Num="2.5"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_CAUSTICPOINT_LOOP"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+            </ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO">
+				<Str_Arg Str="Projectile_Sticky_Green_01" Arg="0.8"/>
+				<Num Num="1"/>
+				<Num Num="100"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="Dummy_R_HAND"/>
+				<Str Str="None"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="BodyAura_Dark_Green_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="GroundAura_MysticSmoke_Green_02"/>
+				<Num Num="0.6"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+        </KeyInputStart>
+        <KeyInputEnd>
+            <ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="SKL_C_RESUME_ANI" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_Sticky_Green_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_Dark_Green_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_MysticSmoke_Green_02"/>
+            </ToolScp>
+        </KeyInputEnd>
+        <KeyInput>
+            <ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0.3"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+                <Str_Arg Str="None" Arg="1"/>
+                <Str Str="None"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="5"/>
+                <Num Num="1"/>
+                <Num Num="45"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Str Str=""/>
+                <Str Str=""/>
+            </ToolScp>
+        </KeyInput>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_CAUSTICPOINT_SHOT"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="skl_eff_sagitta_causticpoint_shot"/>
+                </Scp>
+                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING" Client="NO" UseSleep="NO" Time="0"/>
+                <Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="0">
+                    <Str_Arg Str="Projectile_Sticky_Green_01#Dummy_Force" Arg="0.5"/>
+                    <Str Str="arrow_cast"/>
+                    <Str_Arg Str="AerialExplosion_Fire_Orange_01" Arg="1"/>
+                    <Str Str="arrow_blow"/>
+                    <Num Num="0"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Str Str="SLOW"/>
+                    <Num Num="500"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Angle_Abs Angle="0"/>
+                    <Num Num="0"/>
+                    <Num Num="5"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="0">
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Num Num="2002"/>
+                </Scp>
+                <Scp Scp="SKL_TGT_BUFF" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="Corrosion_Debuff"/>
+                    <Num Num="0" UseFunc="1" FuncTxt="return obj.Level;"/>
+                    <Num Num="0"/>
+                    <Num Num="60000"/>
+                    <Num Num="1"/>
+                    <Num Num="100"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Sagitta_Flechette">
+        <EnableScripts>
+            <ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+                <Str Str="SCR_SAGITTA_CHECK_USE_FLECHETTE"/>
+            </ToolScp>
+            <ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+                <Str Str="SCR_SAGITTA_CHECK_USE_FLECHETTE_C"/>
+            </ToolScp>
+        </EnableScripts>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="500" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_FLECHETTE"/>
+                    <Num Num="3"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="skl_eff_sagitta_flechette"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_SAGITTA_FLECHETTE_ADD_DRAWWEIGHT"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="500">
+                    <Str Str="SCR_SAGITTA_FLECHETTE_MISSILE"/>
+                </Scp>
+                <Scp Scp="SKL_SET_TARGET_CIRCLE" Client="NO" UseSleep="NO" Time="750">
+                    <Pos Angle="0" Dist="0" PosType="1"/>
+                    <Num Num="55"/>
+                    <Num Num="0" UseFunc="1" FuncTxt="    local value = 10
+    value = GET_PVP_TARGET_COUNT(self, value)
+    return value"/>
+                    <Num Num="2"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="800">
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Sagitta_IgnitionPierce">
+        <EndScripts>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Shoot_BloodSpear_Red_02"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+        </EndScripts>
+        <KeyCancelScp>
+            <ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_LightAuraMissile_Purple_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_DivineEnergy_Purple_01"/>
+            </ToolScp>
+        </KeyCancelScp>
+        <KeyInputStart>
+            <ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_IGNITIONPIERCE_CAST"/>
+                <Num Num="2.5"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_IGNITIONPIERCE_LOOP"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+            </ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO">
+				<Str_Arg Str="Projectile_LightAuraMissile_Purple_01" Arg="1"/>
+				<Num Num="1"/>
+				<Num Num="90"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="Dummy_R_HAND"/>
+				<Str Str="None"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="GroundAura_DivineEnergy_Purple_01"/>
+				<Num Num="0.6"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+        </KeyInputStart>
+        <KeyInputEnd>
+            <ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="SKL_C_RESUME_ANI" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_LightAuraMissile_Purple_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_DivineEnergy_Purple_01"/>
+            </ToolScp>
+        </KeyInputEnd>
+        <KeyInput>
+            <ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0.5"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+                <Str_Arg Str="None" Arg="1"/>
+                <Str Str="None"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="5"/>
+                <Num Num="1"/>
+                <Num Num="45"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Str Str=""/>
+                <Str Str=""/>
+            </ToolScp>
+        </KeyInput>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_IGNITIONPIERCE_SHOT"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="skl_eff_sagitta_ignitionpierce_1"/>
+                </Scp>
+                <Scp Client="YES" Scp="C_ADD_UNITY_EFFECT" UseSleep="NO" Time="0">
+                    <Str_Arg Arg="1.5" Str="Shoot_PlasmaGun_Purple_02#Dummy_emitter"/>
+                    <Num Num="1"/>
+                    <Pos Angle="0" Dist="10" Height="20"/>
+                    <Num Num="1"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="0">
+                    <Str_Arg Str="Projectile_LightAuraMissile_Purple_01#Dummy_Force" Arg="0.5"/>
+                    <Str Str="arrow_cast"/>
+                    <Str_Arg Str="None" Arg="1"/>
+                    <Str Str="arrow_blow"/>
+                    <Num Num="0"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Str Str="FAST"/>
+                    <Num Num="800"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Angle_Abs Angle="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="MONSKL_PAD_FRONT_MSL" Client="NO" UseSleep="YES" Time="300">
+                    <Pos Angle="0" Dist="0"/>
+                    <Str Str="Sagitta_IgnitionPierce_Pad"/>
+                    <Num Num="120"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                    <Num Num="200"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Sagitta_OutbreakCap">
+        <EnableScripts>
+            <ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+                <Str Str="SCR_SAGITTA_CHECK_USE_OUTBREAKCAP"/>
+            </ToolScp>
+            <ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+                <Str Str="SCR_SAGITTA_CHECK_USE_OUTBREAKCAP_C"/>
+            </ToolScp>
+        </EnableScripts>
+        <EndScripts>
+            <ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+        </EndScripts>
+        <KeyCancelScp>
+            <ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_FireMissile_Orange_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_Fire_Orange_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_FireWave_Orange_01"/>
+            </ToolScp>
+        </KeyCancelScp>
+        <KeyInput>
+            <ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1.0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+                <Str_Arg Str="None" Arg="1"/>
+                <Str Str="None"/>
+                <Num Num="0"/>
+                <Num Num="0"/>
+                <Num Num="5"/>
+                <Num Num="1"/>
+                <Num Num="45"/>
+                <Num Num="0"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+                <Str Str=""/>
+                <Str Str=""/>
+            </ToolScp>
+        </KeyInput>
+        <KeyInputStart>
+            <ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_OUTBREAKCAP_CAST"/>
+                <Num Num="2.5"/>
+                <Num Num="1"/>
+                <Num Num="0"/>
+            </ToolScp>
+            <ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+                <Str Str="SKL_OUTBREAKCAP_LOOP"/>
+                <Num Num="1"/>
+                <Num Num="1"/>
+            </ToolScp>
+            <ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+                <Str Str="skl_eff_sagitta_outbreakcap_cast"/>
+            </ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO">
+				<Str_Arg Str="Projectile_FireMissile_Orange_01" Arg="0.8"/>
+				<Num Num="1"/>
+				<Num Num="100"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="Dummy_R_HAND"/>
+				<Str Str="None"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="BodyAura_Fire_Orange_01"/>
+				<Num Num="1.2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="MID"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="GroundAura_FireWave_Orange_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+        </KeyInputStart>
+        <KeyInputEnd>
+            <ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="SKL_C_RESUME_ANI" Client="YES" UseSleep="NO"/>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="Projectile_FireMissile_Orange_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="BodyAura_Fire_Orange_01"/>
+            </ToolScp>
+            <ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+                <Str Str="GroundAura_FireWave_Orange_01"/>
+            </ToolScp>
+        </KeyInputEnd>		
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="SKL_OUTBREAKCAP_SHOT"/>
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_SAGITTA_OUTBREAKCAP_CONSUME_DRAWWEIGHT"/>
+                </Scp>
+                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING" Client="NO" UseSleep="NO" Time="0"/>
+                <Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="0">
+                    <Str_Arg Str="Projectile_FireMissile_Orange_01#Dummy_Force" Arg="0.5"/>
+                    <Str Str="arrow_cast"/>
+                    <Str_Arg Str="AerialExplosion_Fire_Orange_01" Arg="1"/>
+                    <Str Str="arrow_blow"/>
+                    <Num Num="0"/>
+                    <Num Num="180"/>
+                    <Num Num="0"/>
+                    <Str Str="FAST"/>
+                    <Num Num="800"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Angle_Abs Angle="0"/>
+                    <Num Num="0"/>
+                    <Num Num="5"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="200"/>
+                </Scp>
+                <Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="0">
+                    <Num Num="1"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                    <Num Num="2002"/>
+                </Scp>
+                <Scp Scp="SKL_TGT_BUFF" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="Ignition_Debuff"/>
+                    <Num Num="0" UseFunc="1" FuncTxt="return obj.Level;"/>
+                    <Num Num="0"/>
+                    <Num Num="60000"/>
+                    <Num Num="1"/>
+                    <Num Num="100"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+</ToolSkill>

@@ -1,5 +1,7 @@
 --- lib_uiscp.lua --
 
+local s_TOKEN_BUFF_ID = nil;
+
 function OPEN_WINDOW(frame, arg)
     frame:ShowWindow(arg);
 end
@@ -489,7 +491,9 @@ end
 
 function BUFF_TIME_UPDATE(handle, buff_ui)
     local updated = 0;
-    local TOKEN_BUFF_ID = TryGetProp(GetClass("Buff", "Premium_Token"), "ClassID");
+    if s_TOKEN_BUFF_ID == nil then
+        s_TOKEN_BUFF_ID = TryGetProp(GetClass("Buff", "Premium_Token"), "ClassID") or 0;
+    end
     for j = 0, buff_ui["buff_group_cnt"] do
         local slotlist = buff_ui["slotlist"][j];
         local captlist = buff_ui["captionlist"][j];
@@ -511,7 +515,7 @@ function BUFF_TIME_UPDATE(handle, buff_ui)
                                 if slot:IsBlinking() == 0 then
                                     slot:SetBlink(600000, 1.0, "55FFFFFF", 1);
                                 end
-                            elseif buff.buffID == TOKEN_BUFF_ID and GET_REMAIN_TOKEN_SEC() < 3600 then
+                            elseif buff.buffID == s_TOKEN_BUFF_ID and GET_REMAIN_TOKEN_SEC() < 3600 then
                                 if slot:IsBlinking() == 0 then
                                     slot:SetBlink(0, 1.0, "55FFFFFF", 1);
                                 end
@@ -635,6 +639,37 @@ function GET_MON_ILLUST(monCls)
     return "unknown_monster";
 end
 
+-- SpineInfo의 캐릭터별 deform 설정을 picture에 적용한다.
+-- 설정이 없으면 이전 캐릭터의 target/영역을 함께 비워 파지가 암묵적으로 남지 않게 한다.
+function APPLY_SPINE_DEFORM_CONFIG(picture, spineInfo)
+    if picture == nil then
+        return 0;
+    end
+
+    picture:ClearDeformGrabRegions();
+    picture:SetDeformTargetSlot("");
+    if spineInfo == nil then
+        return 0;
+    end
+
+    local deformInfo = spineInfo:GetDeformInfo();
+    if deformInfo == nil then
+        return 0;
+    end
+
+    picture:SetDeformTargetSlot(deformInfo:GetTargetSlot());
+    picture:SetDeformParams(deformInfo:GetRadiusRatio(), deformInfo:GetMaxDisplacementRatio(), deformInfo:GetStiffness(), deformInfo:GetDamping());
+    local regionCount = deformInfo:GetGrabRegionCount();
+    for i = 0, regionCount - 1 do
+        local region = deformInfo:GetGrabRegion(i);
+        if region ~= nil then
+            picture:AddDeformGrabRegion(region:GetBoneName(), region:GetOffsetX(), region:GetOffsetY(), region:GetRadiusRatio());
+        end
+    end
+
+    return picture:GetDeformGrabRegionCount();
+end
+
 function SET_SPINE_TOOLTIP_IMAGE(picture, itemCls)
     local isEnableSpine = config.GetXMLConfig("EnableAnimateItemIllustration");
 
@@ -686,4 +721,27 @@ end
 
 function ENABLE_FRAME(frame,argNum,argStr)
 	frame:SetEnable(1)
+end
+
+--- 잡을 수 있는 지점 디버그 표시 토글 [테스트 전용]
+--- 빨강 = 눌러서 잡히는 영역(region radius), 하늘색 = 같이 늘어나는 범위(falloffradius).
+--- CDeformPicture 의 전역 스위치라 화면 안의 아무 deformpicture 하나만 찾으면 전부 켜진다.
+--- 사용: TOGGLE_DEFORM_REGIONS(1) / TOGGLE_DEFORM_REGIONS(0)
+function TOGGLE_DEFORM_REGIONS(enable)
+	local on = (enable == 1 or enable == true);
+	local frame = ui.GetFrame("loginui_title");
+	if frame == nil then
+		return 0;
+	end
+
+	-- 이름으로 후보를 훑는다. 한 개만 찾으면 나머지도 같이 적용된다 (전역 스위치).
+	local names = {"login_popolion_deform", "login_bg_char_a", "login_bg_char_b"};
+	for i = 1, #names do
+		local picture = GET_CHILD(frame, names[i], "ui::CDeformPicture");
+		if picture ~= nil then
+			picture:ShowDeformRegions(on);
+			return 1;
+		end
+	end
+	return 0;
 end

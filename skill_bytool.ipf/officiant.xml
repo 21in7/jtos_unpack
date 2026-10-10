@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<ToolSkill>
+	<Skill Name="Officiant_Prelude_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Prelude" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC6_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_prelude_wizard"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="80"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Haze" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Officiant6') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Officiant_Haze_Arts' end return 'Officiant_Haze'"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_IncenseBreath_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC1_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC5_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_incensebreath_wizard"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="150"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="210"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_SET_TARGET_FAN" Time="0" UseSleep="NO">
+					<Pos Angle="0" Dist="0"/>
+					<Num Num="50"/>
+					<Num Num="150"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_TGT_DMG" Time="500" UseSleep="NO">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_IncenseBreath" Time="0" UseSleep="NO"/>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_EmberWave_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC2_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC6_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_emberwave_wizard"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_UNITY_EFFECT_POS" UseSleep="NO" Time="0">
+					<Str Str="Teleport_SmokeDown_Cyan_01"/>
+					<Num Num="0.6"/>
+					<Pos Angle="0" Dist="80" Height="0"/>
+					<Num Num="0"/>
+					<Str Str="None"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_SET_TARGET_CIRCLE" Time="0" UseSleep="NO">
+					<Pos Angle="0" Dist="80"/>
+					<Num Num="100"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_TGT_DMG" Time="300" UseSleep="NO">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_EmberWave" Time="300" UseSleep="NO"/>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_IncenseBeacon_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_incensebeacon_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_IncenseBeacon" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC4_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="70"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Beacon_Pad"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_Vertigo_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_vertigo_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Vertigo" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC4_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="0"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Vertigo_Pad" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Officiant8') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Officiant_Vertigo_Pad_Arts' end return 'Officiant_Vertigo_Pad'"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_Botafumeiro_Wizard">
+		<EnableScripts>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+				<Str Str="SCR_OFFICIANT_CHECK_USE_BOTAFUMEIRO"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+				<Str Str="SCR_OFFICIANT_CHECK_USE_BOTAFUMEIRO_C"/>
+			</ToolScp>
+		</EnableScripts>
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_botafumeiro_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Botafumeiro" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="60"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Botafumeiro_Pad"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_Prelude_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Prelude" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC6_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_prelude_wizard"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="80"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Haze" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Officiant6') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Officiant_Haze_Arts' end return 'Officiant_Haze'"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_IncenseBreath_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC1_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC5_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_incensebreath_wizard"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="150"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_SmokeBreathLoop_Cyan_03"/>
+					<Num Num="1.5"/>
+					<Num Num="210"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_SET_TARGET_FAN" Time="0" UseSleep="NO">
+					<Pos Angle="0" Dist="0"/>
+					<Num Num="50"/>
+					<Num Num="150"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_TGT_DMG" Time="500" UseSleep="NO">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_IncenseBreath" Time="0" UseSleep="NO"/>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_EmberWave_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC2_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC6_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_SOUND" Time="0" UseSleep="NO">
+					<Str Str="skl_eff_officiant_emberwave_wizard"/>
+				</Scp>
+				<Scp Client="YES" Scp="C_UNITY_EFFECT_POS" UseSleep="NO" Time="0">
+					<Str Str="Teleport_SmokeDown_Cyan_01"/>
+					<Num Num="0.6"/>
+					<Pos Angle="0" Dist="80" Height="0"/>
+					<Num Num="0"/>
+					<Str Str="None"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_SET_TARGET_CIRCLE" Time="0" UseSleep="NO">
+					<Pos Angle="0" Dist="80"/>
+					<Num Num="100"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 5)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SKL_TGT_DMG" Time="300" UseSleep="NO">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_EmberWave" Time="300" UseSleep="NO"/>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_IncenseBeacon_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_incensebeacon_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_IncenseBeacon" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC4_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="70"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Beacon_Pad"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_Vertigo_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BASIC3_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_vertigo_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Vertigo" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BASIC4_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="0"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Vertigo_Pad" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Officiant8') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Officiant_Vertigo_Pad_Arts' end return 'Officiant_Vertigo_Pad'"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="OFFICIANT_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Officiant_Botafumeiro_Cleric">
+		<EnableScripts>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+				<Str Str="SCR_OFFICIANT_CHECK_USE_BOTAFUMEIRO"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+				<Str Str="SCR_OFFICIANT_CHECK_USE_BOTAFUMEIRO_C"/>
+			</ToolScp>
+		</EnableScripts>
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+				<Num Num="2"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_officiant_botafumeiro_wizard_cast"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="eff_monster_naktis_skill08_cast_02"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Client="NO" Scp="SCR_USE_Officiant_Botafumeiro" Time="0" UseSleep="NO"/>
+				<Scp Client="YES" Scp="MONSKL_C_PLAY_ANIM" Time="0" UseSleep="NO">
+					<Str Str="SKL_OFFICIANT_BOTAFUMEIRO_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" UseSleep="NO" Time="500">
+					<Pos Angle="0" Dist="60"/>
+					<Angle Angle="0"/>
+					<Str Str="Officiant_Botafumeiro_Pad"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+</ToolSkill>

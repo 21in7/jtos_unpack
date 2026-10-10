@@ -10,6 +10,7 @@ item_earring_base_ctrl_list = {'Warrior', 'Wizard', 'Archer', 'Cleric', 'Scout'}
 local item_earring_max_special_option_count = nil 
 item_earring_ctrl_tree = nil
 item_earring_ctrl_tree_dup = nil
+item_earring_special_group = nil
 
 shared_item_earring.MAX_SLOT_CNT = 25;
 
@@ -20,6 +21,7 @@ local function make_item_earring_option_range()
     
     item_earring_ctrl_tree = {}
     item_earring_ctrl_tree_dup = {}
+    item_earring_special_group = {}
     for _, ctrl in pairs(item_earring_base_ctrl_list) do
         item_earring_ctrl_tree[ctrl] = {}
         item_earring_ctrl_tree_dup[ctrl] = {}
@@ -31,11 +33,17 @@ local function make_item_earring_option_range()
         if TryGetProp(cls, 'EnableJob', 'None') == 'YES' then
             local ctrl_type = TryGetProp(cls, 'CtrlType', 'None')
             if ctrl_type ~= 'None' and TryGetProp(cls, 'Rank', 0) > 1 then
-                table.insert(item_earring_ctrl_tree[ctrl_type], TryGetProp(cls, 'ClassName', 'None'))
+                local class_name = TryGetProp(cls, 'ClassName', 'None')
+                table.insert(item_earring_ctrl_tree[ctrl_type], class_name)
 
-                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {TryGetProp(cls, 'ClassName', 'None'), 1})
-                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {TryGetProp(cls, 'ClassName', 'None'), 2})
-                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {TryGetProp(cls, 'ClassName', 'None'), 3})
+                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {class_name, 1})
+                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {class_name, 2})
+                table.insert(item_earring_ctrl_tree_dup[ctrl_type], {class_name, 3})
+
+                local special_group = TryGetProp(cls, 'SpecialGroup', 'None')
+                if special_group ~= 'None' then
+                    item_earring_special_group[class_name] = special_group
+                end
             end
         end
     end
@@ -146,6 +154,10 @@ end
 shared_item_earring.is_valid_unlock_item = function(scrollObj, itemObj)
     if TryGetProp(itemObj, 'CharacterBelonging', 0) == 0 then
 		return false, 'OnlyUseBelongingItem'
+	end
+
+	if TryGetProp(itemObj, 'popoboost', 0) >= 12 then
+		return false, 'NotValidItem'
 	end
 
 	if TryGetProp(itemObj, 'ItemLv', 0) ~= TryGetProp(scrollObj, 'NumberArg1', 999) then

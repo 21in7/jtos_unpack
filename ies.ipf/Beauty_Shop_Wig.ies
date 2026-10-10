@@ -54,6 +54,7 @@ ClassID,Price,PriceRatio,StampCount,ClassName,Category,Gender,ItemClassName,Equi
 1027,198,0,0,"HAIR_F_152","Helmet","F","HAIR_F_152","wig","ep15snowknight","","","","","YES","","",""
 1028,198,0,0,"HAIR_F_153","Helmet","F","HAIR_F_153","wig","ep15elf01_f","","","","","YES","","",""
 1029,198,0,0,"HAIR_F_154","Helmet","F","HAIR_F_154","wig","ep15elf02_f","","","","","YES","","",""
+1030,198,0,0,"HAIR_F_155","Helmet","F","HAIR_F_155","wig","helmet_ep17couplelook_f","","","","","YES","","",""
 2501,49,0,0,"Premium_hairColor_01","Wig_Dye","","Premium_hairColor_01","wig_dye","","","","","","NO","","",""
 2502,49,0,0,"Premium_hairColor_02","Wig_Dye","","Premium_hairColor_02","wig_dye","","","","","","NO","","",""
 2503,49,0,0,"Premium_hairColor_03","Wig_Dye","","Premium_hairColor_03","wig_dye","","","","","","NO","","",""

@@ -1,9 +1,9 @@
 ClassID,ExtensionLevel,ExtensionNeedGuildLevel,ExtensionNeedMileage,ExtensionNeedSilver,ExtensionRewardItemCount1,ExtensionRewardItemCount2,ExtensionRewardItemCount3,MaxPointByExtensionLevel,SkillLevel,SkillFactorBySkillLevel1,SkillFactorBySkillLevel2,SkillLevelUpNeedSilver,NeedPoint,ClassName,Name,Caption1,ExtensionRewardItemName1,ExtensionRewardItemName2,ExtensionRewardItemName3,FacilityName,Caption2,SkillName,CityName
 1,1,0,0,0,0,0,0,0,0,0,0,0,0,"guild_agit_extension1","아지트 확장 1단계","-","","","","","","",""
-2,2,10,10000,100000000,1,0,0,0,0,0,0,0,0,"guild_agit_extension2","아지트 확장 2단계","확장된 길드 아지트 이용 가능{nl}    - 하우징 용품, 시설 구매 및 판매 가능{nl}    - 제작 공방소 설치 가능{nl}    - 아지트 내 하우징 용품 및 시설 배치 가능한 구역 추가","GuildHousing_Item_h_field","","","","","",""
-3,3,10,30000,200000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension3","아지트 확장 3단계","각종 연구소 설치 및 이용 가능{nl}    - 아지트 내 하우징 용품 및 시설 배치 가능한 구역 확장","","","","","","",""
-4,4,12,50000,300000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension4","아지트 확장 3단계","아지트 내 하우징 용품 및 시설 배치 가능한 구역 확장","","","","","","",""
-5,5,12,70000,400000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension5","아지트 확장 3단계","아지트 내 하우징 용품 및 시설 배치 가능한 구역 확장","","","","","","",""
+2,2,10,5000,10000000,1,0,0,0,0,0,0,0,0,"guild_agit_extension2","아지트 확장 2단계","길드 아지트 확장, 하우징 용품 거래 개방, 제작 공방소 설치 가능, 시설 배치 구역 추가","GuildHousing_Item_h_field","","","","","",""
+3,3,10,10000,30000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension3","아지트 확장 3단계","길드 연구소 설치 개방, 하우징 배치 구역 확장","","","","","","",""
+4,4,12,15000,50000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension4","아지트 확장 4단계","하우징 배치 구역 추가 확장","","","","","","",""
+5,5,12,20000,80000000,0,0,0,0,0,0,0,0,0,"guild_agit_extension5","아지트 확장 5단계","하우징 배치 구역 추가 확장","","","","","","",""
 101,1,0,0,0,0,0,0,5,0,0,0,0,0,"guild_weapon_lab_extension1","무기 연구소","무기 연구 최대 레벨 +5","","","","Weapon","","",""
 102,2,0,3000,20000000,0,0,0,10,0,0,0,0,0,"guild_weapon_lab_extension2","무기 연구소","무기 연구 최대 레벨 +5","","","","Weapon","","",""
 103,3,0,8000,50000000,0,0,0,15,0,0,0,0,0,"guild_weapon_lab_extension3","무기 연구소","무기 연구 최대 레벨 +5","","","","Weapon","","",""

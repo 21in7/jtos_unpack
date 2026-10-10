@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
 <!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by imc (imc) -->
 <SpcItemList>
   <SpcItem Name="magicAmulet_1">
@@ -20205,6 +20206,2888 @@
         <ExecList>
           <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
             <Str Str="Hermit_JudgementoftheCosmos_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_FallingStarlight_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_FallingStarlight_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_FallingStarlight_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_StellarRebound_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_StellarRebound_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_StellarRebound_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_LunarBrand_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_LunarBrand_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_LunarBrand_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_TwilightVeil_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_TwilightVeil_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_TwilightVeil_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_ConstellationResidueField_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_ConstellationResidueField_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_ConstellationResidueField_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_Eclipse_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_Eclipse_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_Eclipse_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Hermit_JudgementoftheCosmos_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_JudgementoftheCosmos_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Hermit_JudgementoftheCosmos_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_PiercingLeap_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_HamstringPin_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodspearPierce_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ChainOfThirst_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_StakeOfTerminus_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_PiercingLeap_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_HamstringPin_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodspearPierce_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ChainOfThirst_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_StakeOfTerminus_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ExploitWeakness_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ExploitWeakness_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodEruption_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodEruption_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_PiercingLeap_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_PiercingLeap_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_HamstringPin_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_HamstringPin_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodspearPierce_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodspearPierce_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ChainOfThirst_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ChainOfThirst_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_StakeOfTerminus_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_StakeOfTerminus_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_ExploitWeakness_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_ExploitWeakness_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Grimmark_BloodEruption_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Grimmark_BloodEruption_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_GraveHand_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_MourningChime_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_PassingBell_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeeperResonance_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_RestingGround_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_ResonantPulse_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeathKnell_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_GraveHand_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_MourningChime_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_PassingBell_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeeperResonance_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_RestingGround_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_ResonantPulse_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeathKnell_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_AttaqueEnchainee">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_AttaqueEnchainee" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_AttaqueEnchainee" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_SeptEclairs">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_SeptEclairs" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_SeptEclairs" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_GrandFente">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_GrandFente" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_GrandFente" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_AvantGarde">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_AvantGarde" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_AvantGarde" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_Rafale">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_Rafale" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_Rafale" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Escrimeur_PassataSotto">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_PassataSotto" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Escrimeur_PassataSotto" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_GraveHand_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_GraveHand_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_MourningChime_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_MourningChime_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_PassingBell_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_PassingBell_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeeperResonance_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeeperResonance_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_RestingGround_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_RestingGround_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_ResonantPulse_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_ResonantPulse_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Kneller_DeathKnell_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Kneller_DeathKnell_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArtillerySupport_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArmorPiercingShot_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AntiBoarding_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnchorStrike_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnnihilationBombardment_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArtillerySupport_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArmorPiercingShot_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AntiBoarding_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnchorStrike_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnnihilationBombardment_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_FlareBlast">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_FlareBlast" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_FlareBlast" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_BlazingEruption">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_BlazingEruption" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_BlazingEruption" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_Gehenna">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_Gehenna" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_Gehenna" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_VolcanicGeyser">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_VolcanicGeyser" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_VolcanicGeyser" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_Inferno">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_Inferno" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_Inferno" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Incendiar_DiesIrae">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_DiesIrae" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Incendiar_DiesIrae" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArtillerySupport_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArtillerySupport_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_ArmorPiercingShot_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_ArmorPiercingShot_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AntiBoarding_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AntiBoarding_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnchorStrike_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnchorStrike_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Commodore_AnnihilationBombardment_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Commodore_AnnihilationBombardment_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardGale_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalZone_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardRicochet_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalSpear_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ObsidianPulsar_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardGale_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalZone_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardRicochet_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalSpear_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ObsidianPulsar_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_SerratedBarb">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_SerratedBarb" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_SerratedBarb" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_BreachingPoint">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_BreachingPoint" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_BreachingPoint" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_CausticPoint">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_CausticPoint" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_CausticPoint" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_Flechette">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_Flechette" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_Flechette" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_IgnitionPierce">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_IgnitionPierce" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_IgnitionPierce" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Sagitta_OutbreakCap">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_OutbreakCap" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Sagitta_OutbreakCap" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardGale_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardGale_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalZone_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalZone_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ShardRicochet_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ShardRicochet_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_CrystalSpear_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_CrystalSpear_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Shardbringer_ObsidianPulsar_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Shardbringer_ObsidianPulsar_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_RuinCleave_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_PhantomCharge_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_GrimShackle_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_DeathSentence_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalFlurry_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalOculus_Swordman">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Swordman" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Swordman" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_RuinCleave_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_PhantomCharge_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_GrimShackle_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_DeathSentence_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalFlurry_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalOculus_Scout">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Scout" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Scout" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_FanaticBlaze">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_FanaticBlaze" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_FanaticBlaze" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_Fulminatio">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Fulminatio" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Fulminatio" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_BlindChase">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_BlindChase" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_BlindChase" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_Compassio">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Compassio" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Compassio" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_Martyrdom">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Martyrdom" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_Martyrdom" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Fanaticus_DivineFanaticism">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_DivineFanaticism" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Fanaticus_DivineFanaticism" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_RuinCleave_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_RuinCleave_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_PhantomCharge_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_PhantomCharge_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_GrimShackle_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_GrimShackle_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_DeathSentence_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_DeathSentence_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalFlurry_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalFlurry_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Executor_AbyssalOculus_Archer">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Archer" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Executor_AbyssalOculus_Archer" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_IncenseBreath_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBreath_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBreath_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_EmberWave_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_EmberWave_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_EmberWave_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_IncenseBeacon_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBeacon_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBeacon_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_Vertigo_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Vertigo_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Vertigo_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_Botafumeiro_Wizard">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Botafumeiro_Wizard" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Botafumeiro_Wizard" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_IncenseBreath_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBreath_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBreath_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_EmberWave_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_EmberWave_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_EmberWave_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_IncenseBeacon_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBeacon_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_IncenseBeacon_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_Vertigo_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Vertigo_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Vertigo_Cleric" />
+            <Num Num="1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+  </SpcItem>
+  <SpcItem Name="GEM_Officiant_Botafumeiro_Cleric">
+    <TriggerList Act="UnEquip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Botafumeiro_Cleric" />
+            <Num Num="-1" />
+          </ToolScp>
+        </ExecList>
+      </Trigger>
+    </TriggerList>
+    <TriggerList Act="Equip">
+      <Trigger>
+        <ExecList>
+          <ToolScp Scp="SPCI_GEM_SKILLUP" Client="NO" UseSleep="NO">
+            <Str Str="Officiant_Botafumeiro_Cleric" />
             <Num Num="1" />
           </ToolScp>
         </ExecList>

@@ -392,3 +392,89 @@ function ignore_skill_hit_check(target)
 
 	return 0;
 end
+-- ============================================================================
+-- 무적 연계 차단 (글로벌 쿨다운) — 서버/클라 공용 정의
+--   UseGlobalCoolTime 키워드를 가진 무적 스킬끼리, 하나를 쓰면 나머지의
+--   재사용 대기시간이 5초 미만일 때 5초로 조정된다.
+--
+--   이 시스템의 데이터(대기시간, 특성 예외)는 전부 여기에만 둔다.
+--     서버 : skill_buff_pc.lua  SCR_GLOBAL_COOLDOWN / SCR_GLOBAL_ABIL_COOLDOWN
+--     클라 : tooltip.lua        MAKE_GLOBAL_COOLDOWN_CAPTION
+--   양쪽이 같은 함수를 쓰므로 툴팁 표기와 실제 동작이 어긋날 수 없다.
+--
+--   상세는 _docs/무적스킬_글로벌쿨다운.md
+-- ============================================================================
+GLOBAL_COOLDOWN_TIME = 5000
+
+-- 활성이면 그 스킬의 무적이 사라져 대상에서 빠지는 특성
+GLOBAL_COOLDOWN_ABIL_OFF = {
+	Bulletmarker_BloodyOverdrive = 'Bulletmarker25',
+	Assassin_Annihilation        = 'Assassin23',
+	Arditi_Ritirarsi             = 'Arditi18',
+}
+
+-- 활성이어야 무적이 붙는 특성. 비활성이면 애초에 무적이 아니므로 대상에서 빠진다
+GLOBAL_COOLDOWN_ABIL_ON = {
+	Bulletmarker_BloodyOverdrive = 'Bulletmarker12',
+	Fencer_EsquiveToucher        = 'Fencer23',
+	Hunter_Praise                = 'Hunter26',
+}
+
+-- pc 를 넘기면 특성 상태까지 반영한다. nil 이면 키워드만 본다(스킬 자체의 성질).
+function IS_GLOBAL_COOLDOWN_SKILL(pc, skill)
+	if skill == nil then
+		return false;
+	end
+
+	if CHECK_SKILL_KEYWORD(skill, 'UseGlobalCoolTime') ~= 1 then
+		return false;
+	end
+
+	if pc == nil then
+		return true;
+	end
+
+	local className = TryGetProp(skill, 'ClassName', 'None');
+
+	local offAbil = GLOBAL_COOLDOWN_ABIL_OFF[className];
+	if offAbil ~= nil then
+		local abil = GetAbility(pc, offAbil);
+		if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then
+			return false;
+		end
+	end
+
+	local onAbil = GLOBAL_COOLDOWN_ABIL_ON[className];
+	if onAbil ~= nil then
+		local abil = GetAbility(pc, onAbil);
+		if abil == nil or TryGetProp(abil, 'ActiveState', 0) ~= 1 then
+			return false;
+		end
+	end
+
+	return true;
+end
+
+-- 위 두 목록에 등장하는 특성 이름 전체. 특성 토글 차단(SCR_GLOBAL_ABIL_COOLDOWN)이 쓴다.
+-- pairs 순회라 순서가 보장되지 않으므로 정렬해 돌려준다.
+function GET_GLOBAL_COOLDOWN_ABIL_LIST()
+	local seen = {};
+	local list = {};
+
+	for _, abilName in pairs(GLOBAL_COOLDOWN_ABIL_OFF) do
+		if seen[abilName] == nil then
+			seen[abilName] = true;
+			table.insert(list, abilName);
+		end
+	end
+
+	for _, abilName in pairs(GLOBAL_COOLDOWN_ABIL_ON) do
+		if seen[abilName] == nil then
+			seen[abilName] = true;
+			table.insert(list, abilName);
+		end
+	end
+
+	table.sort(list);
+	return list;
+end

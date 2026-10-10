@@ -1,8 +1,7 @@
 -- shared_popoboost
 local item_list = nil
 local ticket_item_list = nil
-local maxProgress = 3;
-local BuffExceptMapList = nil
+local maxProgress = 6;
             
 -- 캐시된 서버 타입
 local cached_server_type = nil
@@ -48,177 +47,84 @@ local item_data = {
         [1] = {
             open_ticket_cabinet_vibora_lv4 = 3,
             Premium_boostToken05_14d = 1,
-            Exchange_Weapon_Book_500_1d = 4,
-            misc_pvp_mine2_NotLimit_10000 = 4
+            Exchange_Weapon_Book_540_1d = 4,
+            misc_pvp_mine2_NotLimit_10000 = 4,
         },
         [2] = {
-            misc_upinis_wing_NoTrade = 180,
-            misc_reinforce_percentUp_510_NoTrade = 70,
-            RadaCertificateCoin_50000p = 2,
-            Ticket_DreamyForest_Auto_Enter_LimitTime = 2
+            misc_boss_202509_armor_NoTrade = 180,
+            misc_reinforce_percentUp_540_NoTrade = 70,
+            AustejaCertificateCoin_50000p = 2,
+            Ticket_Veliora_Auto_Enter_LimitTime = 2
         },
         [3] = {
-            misc_upinis_wing_NoTrade = 540,
-            misc_reinforce_percentUp_510_NoTrade = 205,
-            RadaCertificateCoin_50000p = 4,
-            Ticket_DreamyForest_Auto_Enter_LimitTime = 2
+            misc_boss_202509_armor_NoTrade = 540,
+            misc_reinforce_percentUp_540_NoTrade = 205,
+            AustejaCertificateCoin_50000p = 4,
+            Ticket_Veliora_Auto_Enter_LimitTime = 2
         },
         [4] = {
-            misc_slogutis_fragments_NoTrade = 720,
-            misc_reinforce_percentUp_510_NoTrade = 270,
-            RadaCertificateCoin_50000p = 5,
-            Ticket_AbyssalObserver_Auto_Enter_LimitTime = 2,
+            misc_boss_202509_weapon_NoTrade = 720,
+            misc_reinforce_percentUp_540_NoTrade = 270,
+            AustejaCertificateCoin_50000p = 5,
+            Ticket_Laimara_Auto_Enter_LimitTime = 2,
         },
         [5] = {
-            misc_merregina_blackpearl_NoTrade = 520,
-            misc_reinforce_percentUp_510_NoTrade = 205,
-            RadaCertificateCoin_50000p = 4,
-            Ticket_DespairIsland_Auto_Enter_LimitTime = 2,
+            misc_ep17_acc_NoTrade = 520,
+            misc_reinforce_percentUp_540_NoTrade = 205,
+            JurateCertificateCoin_50000p = 4,
+            Ticket_Redania_Auto_Enter_LimitTime = 2,
         },
         [6] = {
-            piece_fierce_shoulder_high_NoTrade_Belonging = 1,
-            piece_penetration_belt_high_Belonging = 1,
-            selectbox_specialclass_allinone = 1,
-            Event_Roulette_Coin_PoPo_2503 = 5
+            EP17_fierce_shoulder_event_box_NoTrade = 1,
+            EP17_penetration_belt_event_box_NoTrade = 1,
+            selectbox_specialclass_allinone5 = 1,
+            Event_Roulette_Coin_PoPo_2609 = 5
         }
     },
     premium = {
         [0] = {
-            emoticonItem_2503_popo = 1,
+            emoticonItem_2609_popo = 1,
             class_unlock_achievement_select = 1,
             EVENT_2403_Friend_Invite_Coin = 8,
-            misc_Ether_Gem_Socket_500_NoTrade = 4,
-            Piece_Gem_High_500 = 4,
-            lv500_aether_lvup_scroll_lv100 = 4
+            misc_Ether_Gem_Socket_540_NoTrade = 4,
+            Piece_Gem_High_540 = 4,
+            lv540_aether_lvup_scroll_lv100 = 4
         },
         [1] = {
             Gem_Select_Box_Color = 8,
             misc_gemExpStone12_NoTrade = 8,
-            Exchange_Weapon_Book_500 = 4,
+            Exchange_Weapon_Book_540 = 4,
             misc_pvp_mine2_NotLimit_10000 = 4
         },
         [2] = {
-            misc_upinis_wing_NoTrade = 75,
-            misc_reinforce_percentUp_510_NoTrade = 30,
+            misc_boss_202509_armor_NoTrade = 75,
+            misc_reinforce_percentUp_540_NoTrade = 30,
             misc_Premium_reinforce_percentUp_460 = 15,
             misc_pvp_mine2_NotLimit_10000 = 4
         },
         [3] = {
-            misc_upinis_wing_NoTrade = 225,
-            misc_reinforce_percentUp_510_NoTrade = 85,
+            misc_boss_202509_armor_NoTrade = 225,
+            misc_reinforce_percentUp_540_NoTrade = 85,
             misc_Premium_reinforce_percentUp_460 = 15,
             misc_pvp_mine2_NotLimit_10000 = 4
         },
         [4] = {
-            misc_slogutis_fragments_NoTrade = 300,
-            misc_reinforce_percentUp_510_NoTrade = 115,
+            misc_boss_202509_weapon_NoTrade = 300,
+            misc_reinforce_percentUp_540_NoTrade = 115,
             misc_Premium_reinforce_percentUp_460 = 15,
             misc_pvp_mine2_NotLimit_10000 = 4,
         },
         [5] = {
-            misc_merregina_blackpearl_NoTrade = 220,
-            misc_reinforce_percentUp_510_NoTrade = 85,
+            misc_ep17_acc_NoTrade = 220,
+            misc_reinforce_percentUp_540_NoTrade = 85,
             misc_Premium_reinforce_percentUp_460 = 15,
             misc_pvp_mine2_NotLimit_10000 = 4,
         },
         [6] = {
-            Event_Roulette_Coin_PoPo_2503 = 5,
-            plate_achieve_Jumpin_UP = 1,
+            plate_achieve_wings_of_deceit = 1,
+            Event_Roulette_Coin_PoPo_2609 = 5,
             piece_GabijaEarring_select_job_NoTrade_Belonging = 1,
-            JurateCertificateCoin_50000p = 5,
-        }
-    },
-    papaya = {
-        [0] = {
-            open_ticket_cabinet_goddess_lv3 = 4,
-            Event_JobexpCard_BOX = 1,
-            Event_Drug_RedApple20 = 20,
-            Event_Drug_BlueApple20 = 20,
-            Ability_Point_Stone_100000 = 20,
-            HiddenAbility_MasterPiece_Fragment_Event = 120
-            
-        },
-        [1] = {
-            open_ticket_cabinet_vibora_lv4 = 3,
-            Premium_boostToken05_14d = 1,
-            Exchange_Weapon_Book_500_1d = 4,
-            misc_pvp_mine2_NotLimit_10000 = 4
-        },
-        [2] = {
-            misc_upinis_wing_NoTrade = 180,
-            misc_reinforce_percentUp_510_NoTrade = 70,
-            RadaCertificateCoin_50000p = 2,
-            Ticket_DreamyForest_Auto_Enter_LimitTime = 2
-        },
-        [3] = {
-            misc_upinis_wing_NoTrade = 540,
-            misc_reinforce_percentUp_510_NoTrade = 205,
-            RadaCertificateCoin_50000p = 4,
-            Ticket_DreamyForest_Auto_Enter_LimitTime = 2
-        },
-        [4] = {
-            misc_slogutis_fragments_NoTrade = 720,
-            misc_reinforce_percentUp_510_NoTrade = 270,
-            RadaCertificateCoin_50000p = 5,
-            Ticket_AbyssalObserver_Auto_Enter_LimitTime = 2,
-        },
-        [5] = {
-            misc_merregina_blackpearl_NoTrade = 520,
-            misc_reinforce_percentUp_510_NoTrade = 205,
-            RadaCertificateCoin_50000p = 4,
-            Ticket_DespairIsland_Auto_Enter_LimitTime = 2,
-        },
-        [6] = {
-            piece_fierce_shoulder_high_NoTrade_Belonging = 1,
-            piece_penetration_belt_high_Belonging = 1,
-            selectbox_specialclass_allinone = 1,
-            Event_Roulette_Coin_PoPo_2503 = 5
-        }
-    },
-    papaya_premium = {
-        [0] = {
-            emoticonItem_2503_popo = 1,
-            class_unlock_achievement_select = 1,
-            EVENT_2403_Friend_Invite_Coin = 8,
-            misc_Ether_Gem_Socket_500_NoTrade = 4,
-            Piece_Gem_High_500 = 4,
-            lv500_aether_lvup_scroll_lv100 = 4
-        },
-        [1] = {
-            Gem_Select_Box_Color = 8,
-            misc_gemExpStone12_NoTrade = 8,
-            Exchange_Weapon_Book_500 = 4,
-            misc_pvp_mine2_NotLimit_10000 = 4
-        },
-        [2] = {
-            misc_upinis_wing_NoTrade = 75,
-            misc_reinforce_percentUp_510_NoTrade = 30,
-            misc_Premium_reinforce_percentUp_460 = 15,
-            misc_pvp_mine2_NotLimit_10000 = 43
-        },
-        [3] = {
-            misc_upinis_wing_NoTrade = 225,
-            misc_reinforce_percentUp_510_NoTrade = 85,
-            misc_Premium_reinforce_percentUp_460 = 15,
-            misc_pvp_mine2_NotLimit_10000 = 4
-        },
-        [4] = {
-            misc_slogutis_fragments_NoTrade = 300,
-            misc_reinforce_percentUp_510_NoTrade = 115,
-            misc_Premium_reinforce_percentUp_460 = 15,
-            misc_pvp_mine2_NotLimit_10000 = 4,
-        },
-        [5] = {
-            misc_merregina_blackpearl_NoTrade = 220,
-            misc_reinforce_percentUp_510_NoTrade = 85,
-            misc_Premium_reinforce_percentUp_460 = 15,
-            misc_pvp_mine2_NotLimit_10000 = 4,
-        },
-        [6] = {
-            Event_Roulette_Coin_PoPo_2503 = 5,
-            plate_achieve_Jumpin_UP = 1,
-            piece_GabijaEarring_select_job_NoTrade_Belonging = 1,
-            JurateCertificateCoin_50000p = 5,
+            SauleCertificateCoin_50000p = 5,
         }
     }
 }
@@ -265,12 +171,12 @@ local progress_checks = {
     end,
     [3] = function(pc, groupname)
         return check_equipment_upgrade_inheritance(pc, groupname, {
-            types = {"Armor"}
+            types = {"SHIRT", "PANTS", "BOOTS", "GLOVES"}
         })
     end,
     [4] = function(pc, groupname)
         return check_equipment_upgrade_inheritance(pc, groupname, {
-            types = {"Armor"}
+            types = {"SHIRT", "PANTS", "BOOTS", "GLOVES"}
         })
     end,
     [5] = function(pc, groupname)
@@ -280,64 +186,11 @@ local progress_checks = {
     end
 }
             
-local SERVER_TYPES = {
-    PAPAYA = 1,
-    TAIWAN = 2,
-    GLOBAL = 3,
-    DEFAULT = 0
-}
-            
-local function get_server_type()
-    if cache.server_type then 
-        return cache.server_type 
-    end
-
-    local nation = IsServerSection() == 1 
-        and GetServiceNation() 
-        or config.GetServiceNation()
-        
-    cache.server_type = SERVER_TYPES[nation] or SERVER_TYPES.DEFAULT
-    return cache.server_type
-end
-        
-local function check_period(start_time, end_time)
-    local current_time = get_cached("current_time", function()
-        if IsServerSection() == 1 then
-            return date_time.get_lua_now_datetime_str()
-    else
-            local serverTime = geTime.GetServerSystemTime()
-            return string.format("%04d-%02d-%02d %02d:%02d:%02d", 
-                serverTime.wYear, serverTime.wMonth, serverTime.wDay, 
-                serverTime.wHour, serverTime.wMinute, serverTime.wSecond)
-        end
-    end, 60) -- 1분 캐싱
-
-    return date_time.is_between_time(start_time, end_time, current_time)
-end
-            
-function create_item_list(server_type)
-    return get_cached("item_list_" .. server_type, function()
-        local list = {}
-        local normal_template = server_type == 1 and item_data.papaya or item_data.normal
-        local premium_template = server_type == 1 and item_data.papaya_premium or item_data.premium
-            
-        for level = 0, 6 do
-            list["Normal"..level] = normal_template[level]
-            list["Premium"..level] = premium_template[level]
-        end
-            
-        return list
-    end, 3600) -- 1시간 캐싱
-end
-            
 function popoboost_table()
     return get_cached("item_list", function()
         local result = {}
-        local server_type = GET_POPOBOOST_SERVER()
-
-        -- 서버 타입에 따라 다른 아이템 리스트 사용
-        local normal_template = server_type == 1 and item_data.papaya or item_data.normal
-        local premium_template = server_type == 1 and item_data.papaya_premium or item_data.premium
+        local normal_template = item_data.normal
+        local premium_template = item_data.premium
 
         for level = 0, 6 do
             result['Normal'..level] = normal_template[level]
@@ -348,14 +201,18 @@ function popoboost_table()
     end, 3600) -- 1시간 캐싱
 end
 
-function GET_BUFF_EXCEPTION_LIST()
-    return get_cached("buff_except_list", function()
+function GET_POPOBOOST_RAID_LIST()
+    return get_cached("popoboost_raid_list", function()
         return {
-            "raid_Rosethemisterable",
-            "Raid_DreamyForest",
-            "Raid_AbyssalObserver"
+            "Raid_Veliora",
+            "Raid_Laimara",
+            "Raid_Redania"
         }
     end, 3600) -- 1시간 캐싱
+end
+
+function GET_BUFF_EXCEPTION_LIST()
+    return GET_POPOBOOST_RAID_LIST()
 end
 
 function GET_TICKET_ITEM_LIST(AccProp)
@@ -409,8 +266,65 @@ function GET_TICKET_ITEM_LIST(AccProp)
             misc_Ether_Gem_Socket_480_NoTrade = 2,
             selectbox_Gem_High_480 = 2,
             lv480_aether_lvup_scroll_lv100 = 2,
-            Evnet2403_FriendInvite_Buff = 8
+            EVENT_2403_Friend_Invite_Coin = 8
         },
+        ["EVENT_POPOBOOST_SUMMER"] = {
+            emoticonItem_2506_popo = 1,
+            class_unlock_achievement_select = 1,
+            open_ticket_cabinet_vibora_lv4 = 2,
+            misc_Ether_Gem_Socket_480_NoTrade = 2,
+            selectbox_Gem_High_480 = 2,
+            lv480_aether_lvup_scroll_lv100 = 2,
+            EVENT_2403_Friend_Invite_Coin = 8
+        },
+        ["EVENT_POPOBOOST_SUMMER"] = {
+            emoticonItem_2506_popo = 1,
+            class_unlock_achievement_select = 1,
+            misc_Ether_Gem_Socket_520_NoTrade = 4,
+            selectbox_Gem_High_480 = 4,
+            lv520_aether_lvup_scroll_lv100 = 4,
+            EVENT_2403_Friend_Invite_Coin = 8
+        },
+        ["EVENT_POPOBOOST_AUTUMN"] = {
+            emoticonItem_2510_popo = 1,
+            class_unlock_achievement_select = 1,
+            misc_Ether_Gem_Socket_520_NoTrade = 4,
+            Piece_Gem_High_520 = 4,
+            lv520_aether_lvup_scroll_lv100 = 4,
+            EVENT_2403_Friend_Invite_Coin = 8
+        },
+        ["EVENT_POPOBOOST_WINTER"] = {
+            emoticonItem_2512_popo = 1,
+            class_unlock_achievement_select = 1,
+            EVENT_2403_Friend_Invite_Coin = 8,
+            misc_Ether_Gem_Socket_520_NoTrade = 4,
+            Piece_Gem_High_520 = 4,
+            lv520_aether_lvup_scroll_lv100 = 4,
+        },
+        ["EVENT_POPOBOOST_2603"] = {
+            emoticonItem_2603_popo = 1,
+            class_unlock_achievement_select = 1,
+            EVENT_2403_Friend_Invite_Coin = 8,
+            misc_Ether_Gem_Socket_520_NoTrade = 4,
+            Piece_Gem_High_520 = 4,
+            lv520_aether_lvup_scroll_lv100 = 4,
+        },
+        ["EVENT_POPOBOOST_2606"] = {
+            emoticonItem_2606_popo = 1,
+            class_unlock_achievement_select = 1,
+            EVENT_2403_Friend_Invite_Coin = 8,
+            misc_Ether_Gem_Socket_520_NoTrade = 4,
+            Piece_Gem_High_520 = 4,
+            lv520_aether_lvup_scroll_lv100 = 4,
+        },
+        ["EVENT_POPOBOOST_2609"] = {
+            emoticonItem_2609_popo = 1,
+            class_unlock_achievement_select = 1,
+            EVENT_2403_Friend_Invite_Coin = 8,
+            misc_Ether_Gem_Socket_540_NoTrade = 4,
+            Piece_Gem_High_540 = 4,
+            lv540_aether_lvup_scroll_lv100 = 4,
+        }
 
     }
     
@@ -423,14 +337,6 @@ end
 
 
 function POPOBOOST_CHECK_ELIGIBILITY(lv, gearscore)
-    -- if GET_POPOBOOST_SERVER() == 1 then
-    -- if true then
-    --     if lv >= 460 and lv <= 500 then
-    --         return true;
-    --     end
-    --     return false;
-    -- end
-    
     if lv >= 10 then
         return false;
     end
@@ -529,6 +435,19 @@ function POPOBOOST_POPOBUFF_REMINE_TIME(pc)
     return false;
 end
 
+local function replace(text, to_be_replaced, replace_with)
+	local retText = text
+	local strFindStart, strFindEnd = string.find(text, to_be_replaced)	
+    if strFindStart ~= nil then
+		local nStringCnt = string.len(text)		
+		retText = string.sub(text, 1, strFindStart-1) .. replace_with ..  string.sub(text, strFindEnd+1, nStringCnt)		
+    else
+        retText = text
+	end
+	
+    return retText
+end
+
 function GET_POPOBOOST_END_TIME()
     local end_time ="0000-00-00 00:00:00";
 
@@ -549,7 +468,8 @@ function GET_POPOBOOST_END_TIME()
             local accprop = TryGetProp(popobannercls,"AccountProp","None");
             local PopoboostAccountProp = GET_POPOBOOST_SEASONPROP();
             if accprop == PopoboostAccountProp then
-                end_time = TryGetProp(popobannercls,"EndDateTime", "0000-00-00 00:00:00");
+                end_time = TryGetProp(popobannercls, "EndDateTime", "0000-00-00 00:00:00");
+                end_time = replace(end_time, 'd', '');
             end
         end
     end
@@ -582,6 +502,7 @@ local function POPOPBOOST_PREIODE_CHECK(start_time, end_time)
             return true;
         end
     end        
+    return false;
 end
 
 function GET_CURRENT_SEASCON_POPOBOST_INFO()
@@ -592,12 +513,10 @@ function GET_CURRENT_SEASCON_POPOBOST_INFO()
     end
 
         local server_type = GET_POPOBOOST_SERVER()
-        local startprop = server_type == 1 and "PAPAYAStartTime" or
-                         server_type == 2 and "TAIWANStartTime" or
+        local startprop = server_type == 2 and "TAIWANStartTime" or
                          server_type == 3 and "GlobalStartTime" or
                          "StartTime"
-        local endprop = server_type == 1 and "PAPAYAEndTime" or
-                       server_type == 2 and "TAIWANTEndTime" or
+        local endprop = server_type == 2 and "TAIWANTEndTime" or
                        server_type == 3 and "GlobalEndTime" or
                        "EndTime"
             
@@ -621,9 +540,8 @@ function GET_POPOBOOST_SEASONITEM()
     if cls == nil then
         return "None"
     end
-    local ItemBox = TryGetProp(cls, "ItemBox", "None");
-    return ItemBox;
-end
+    return TryGetProp(cls, "ItemBox", "None");
+        end
 
 
 function GET_POPOBOOST_SEASONPROP()
@@ -725,7 +643,6 @@ function IS_POPOBOOST_PARTICIPATE_ACCOUNT(pc)
 end
 
 -- return server : 0  w
--- return server : 1 papaya
 -- return server : 2 taiwan 
 function GET_POPOBOOST_SERVER()
     return get_cached("server_type", function()
@@ -737,7 +654,6 @@ function GET_POPOBOOST_SERVER()
         end
         
         local server_types = {
-            PAPAYA = 1,
             TAIWAN = 2,
             GLOBAL = 3
         }
@@ -811,6 +727,18 @@ function IS_POPOBOOST_PROGRESS_ALL_CLEAR(pc)
     return true;
 end
 
+function IS_POPOBOOST_BENEFIT_ACTIVE(pc)
+    if pc == nil then
+        return false
+    end
+
+    if IS_POPOBOOST_PARTICIPATE_ACCOUNT(pc) == false or IS_POPOBOOST_PARTICIPATE_CHARACTER(pc) == false then
+        return false
+    end
+
+    return IS_POPOBOOST_PROGRESS_ALL_CLEAR(pc) == false
+end
+
 --여기서 완료 상태인지 체크하고 완료 상태 아니면 tx로 넘어가는 형식으로 만들자.
 function SCR_POPOBOOST_PROGRESS_SET(pc, progress, tx)
     local CheckProp, CheckCnt = GET_POPOBOOST_PROGRESS_CHECK_PROP(progress)
@@ -879,4 +807,3 @@ function RETURN_POPOBOOST_ACCOUNTPROP_TO_CHAR_BY_INT(value)
     end
     return "None"
 end
-

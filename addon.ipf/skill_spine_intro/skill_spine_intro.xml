@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="skill_spine_intro" x="0" y="0" width="400" height="480">
+	<frame fasthide="true" layout_gravity="right bottom" open="pip" margin="0 0 -256 0"/>
+	<skin frameskin="none"/>
+	<draw drawtitlebar="false"/>
+	<input moveable="false" hittestframe="false"/>
+	<layer layerlevel="100"/>
+	<option closebutton="false"/>
+	<effect open="skill_spine_introOpen" close="skill_spine_introClose"/>
+	<script OpenScp="SKILL_SPINE_INTRO_OPEN" CloseScp="SKILL_SPINE_INTRO_CLOSE"/>
+	<controls>
+		<picture name="background" rect="0 0 432 294" margin="0 0 0 0" layout_gravity="center center" image="skill_spine_intro_zawra_bg" stretch="true" hittest="false"/>
+		<spinepic name="spinepic" rect="0 0 400 480" margin="0 0 0 0" layout_gravity="center top" updateparent="true" animation="animation" scale="1.0" stretch="false" offsetX="0" offsetY="0" hittest="false"/>
+		<picture name="dissolve" rect="0 0 400 480" margin="0 0 0 0" layout_gravity="center top" image="skill_spine_intro_zawra_frame" stretch="true" hittest="false" alpha="0"/>
+		<picture name="frame" rect="0 0 400 480" margin="0 0 0 0" layout_gravity="center top" image="skill_spine_intro_zawra_frame" stretch="true" hittest="false"/>
+		<richtext name="skillName" rect="0 0 224 29" margin="0 0 0 4" layout_gravity="center bottom" caption="" fontname="white_18_ol" textalign="center center" hittest="false" resizebytext="false" fixwidth="true"/>
+	</controls>
+</uiframe>

@@ -1,0 +1,9 @@
+ClassID,ClassName,ActionType,CheckIntegrateServer,CheckPVPField,CheckPVPServer,CheckLayerZero,CheckRaidField,CheckWeeklyBossMap,CheckDungeonType,CheckSubType,BlockMapType,BlockMapKeyword,CloseIndunInfo
+1,"COMMON_ENTER","ENTER","YES","YES","YES","YES","YES","YES","","","","","YES"
+2,"RAID_AUTO_ENTER","ENTER","YES","YES","YES","YES","YES","YES","Raid;MythicDungeon;MythicDungeon_Auto;MythicDungeon_Auto_Hard","","","","YES"
+3,"RAID_SOLO_ENTER","ENTER","YES","YES","YES","YES","YES","YES","Raid;MythicDungeon_Auto;MythicDungeon_Auto_Hard","Casual","","","YES"
+4,"RAID_EARRING_ENTER","ENTER","YES","YES","YES","YES","YES","YES","EarringRaid;SeasonEarringRaid","","","","YES"
+5,"LEVEL_DUNGEON_ENTER","ENTER","YES","YES","YES","YES","YES","YES","Indun;MissionIndun","Level","","","YES"
+6,"BRIDGE_WAILING_ENTER","ENTER","YES","YES","YES","YES","YES","YES","BridgeWailing","","","","YES"
+7,"DEMON_LAIR_ENTER","ENTER","YES","YES","YES","YES","YES","YES","DemonLair","","","","YES"
+8,"RESONANCE_ENTER","ENTER","YES","YES","YES","YES","YES","YES","SanctuartyResonance","","","","YES"

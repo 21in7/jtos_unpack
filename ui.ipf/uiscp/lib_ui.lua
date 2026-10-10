@@ -287,9 +287,13 @@ function GET_CHILD_RECURSIVELY_AT_TOP(frame, name)
 
 	if frame == nil then
 		DumpCallStack();
-	end	
+		return nil;
+	end
 
 	local ctrl = frame:GetChildRecursively(name);
+	if ctrl == nil then
+		return nil;
+	end
 	tolua.cast(ctrl, ctrl:GetClassString());
 	return ctrl;
 
@@ -298,7 +302,8 @@ end
 function GET_CHILD_RECURSIVELY(frame, name)
 	if frame == nil then
 		DumpCallStack();
-	end	
+		return nil;
+	end
 
 	local ctrl = frame:GetChildRecursively(name);
 

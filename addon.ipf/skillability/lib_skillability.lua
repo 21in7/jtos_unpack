@@ -207,7 +207,6 @@ function GET_COMMON_SKILL_INFO_BY_CLSNAME(sklClsName)
             info['enchant_skill'] = 1
         end
     end
-
     return info;
 end
 
@@ -598,6 +597,10 @@ function GET_SKILLABILITY_COMMON_SKILL_LIST()
 
         if is_spearmaster_atk_skill(skill_class_name) == true then
             isinsert = false;
+        end
+
+        if shared_resonance.is_resonance_skill(skill_class_name) == true then
+            isinsert = false
         end
 
         if isinsert == true then

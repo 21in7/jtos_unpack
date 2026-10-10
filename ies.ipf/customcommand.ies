@@ -89,3 +89,5 @@ ClassID,ClassName,Script,UseTx
 94,"REQ_RadaCertificate_COIN_SHOP_OPEN","SCR_REQ_RadaCertificate_COIN_SHOP_OPEN","YES"
 95,"REQ_JurateCertificate_COIN_SHOP_OPEN","SCR_REQ_JurateCertificate_COIN_SHOP_OPEN","YES"
 96,"REQ_AustejaCertificate_COIN_SHOP_OPEN","SCR_REQ_AustejaCertificate_COIN_SHOP_OPEN","YES"
+97,"REQ_RESONANCE_SKILL_REINFORCE","SCR_REQ_RESONANCE_SKILL_REINFORCE","YES"
+98,"REQ_SauleCertificate_COIN_SHOP_OPEN","SCR_REQ_SauleCertificate_COIN_SHOP_OPEN","YES"

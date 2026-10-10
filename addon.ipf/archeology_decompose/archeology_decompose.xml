@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uiframe name="archeology_decompose" x="0" y="0" width="520" height="980">
+  <draw drawtitlebar="false" />
+  <frame fullheight="false" fasthide="true" layout_gravity="left top" margin="575 5 0 0" />
+  <input maxwidth="1280" moveable="true" hittestframe="true" />
+  <layer layerlevel="102" />
+  <option closebutton="false" />
+  <sound opensound="skill_window_open" closesound="skill_window_close" />
+  <script OpenScp="ARCHEOLOGY_DECOMPOSE_OPEN" CloseScp="ARCHEOLOGY_DECOMPOSE_CLOSE" />
+  <userconfig DEFAULT_ROW="6" />
+  <userconfig REWARD_LINE_FORMAT="%s %s개"/>
+  <userconfig REWARD_LINE_SEPARATOR="{nl}"/>
+  <userconfig CONFIRM_REWARDS="선택한 유물을 분해하여 다음 아이템을 획득하시겠습니까?{nl}%s"/>
+  <controls>
+    <groupbox name="bg" rect="0 0 520 980" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="true" skin="test_frame_low" />
+    <groupbox name="pip" rect="0 0 520 130" margin="0 -5 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="false" skin="test_frame_top" />
+    <richtext name="title" rect="0 0 260 30" margin="0 11 0 0" layout_gravity="center top" caption="{@st43}유물 분해{/}" hittest="false" />
+    <button name="close" rect="-10 0 44 44" margin="0 15 17 0" layout_gravity="right top" LBtnUpScp="ui.CloseFrame('archeology_decompose')" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="testclose_button" oversound="button_over" texttooltip="{@st59}창을 닫습니다{/}" />
+    <picture name="question" rect="0 0 44 44" margin="27 20 0 0" layout_gravity="left top" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" hittest="true" image="testquesten_button" oversound="button_over" texttooltip="{@st59}자동 등록은 현재 필터에 보이는 잠금 해제 아이템을 최대 60칸 선택합니다.{nl}같은 칸에 쌓인 아이템은 수량 전체가 선택됩니다.{nl}필터로 숨긴 선택도 분해 대상과 예정 수량에 포함됩니다.{nl}회색 아이템은 잠금 상태로 선택할 수 없습니다. 전체 해제는 숨긴 선택도 해제합니다.{/}" />
+    <groupbox name="filterGbox" rect="0 0 480 70" margin="20 65 0 0" layout_gravity="left top" draw="true" hittestbox="false" scrollbar="false" skin="test_frame_midle" />
+    <checkbox name="check_junk" parent="filterGbox" rect="0 0 90 24" margin="18 12 0 0" layout_gravity="left top" caption="{@st66b}잡동사니{/}" fontname="black_16_b" checked="true" LBtnUpScp="ARCH_DECOMP_FILTER_CHANGED" />
+    <checkbox name="check_normal" parent="filterGbox" rect="0 0 80 24" margin="128 12 0 0" layout_gravity="left top" caption="{@st66b}일반{/}" fontname="black_16_b" checked="true" LBtnUpScp="ARCH_DECOMP_FILTER_CHANGED" />
+    <checkbox name="check_magic" parent="filterGbox" rect="0 0 80 24" margin="218 12 0 0" layout_gravity="left top" caption="{@st66b}매직{/}" fontname="black_16_b" checked="true" LBtnUpScp="ARCH_DECOMP_FILTER_CHANGED" />
+    <checkbox name="check_rare" parent="filterGbox" rect="0 0 80 24" margin="308 12 0 0" layout_gravity="left top" caption="{@st66b}레어{/}" fontname="black_16_b" checked="false" LBtnUpScp="ARCH_DECOMP_FILTER_CHANGED" />
+    <richtext name="statusText" parent="filterGbox" rect="0 0 460 24" margin="18 42 0 0" layout_gravity="left top" format="{@st66d}{s14}잠금 %s개 / 숨김 %s개 / 숨긴 선택 %s개 포함{/}" param1="protected" param1_def="0" param2="hidden" param2_def="0" param3="selected_hidden" param3_def="0" />
+    <groupbox name="ingredientGbox" rect="0 0 500 360" margin="10 145 0 0" layout_gravity="left top" draw="true" hittestbox="true" scrollbar="true" skin="test_frame_midle" />
+    <slotset name="slotlist" parent="ingredientGbox" rect="0 0 420 0" margin="38 12 0 0" layout_gravity="left top" LBtnDownScp="ARCH_DECOMP_SLOT_CLICK" LBtnDblClickScp="ARCH_DECOMP_SLOT_CLICK" RBtnDownScp="ARCH_DECOMP_SLOT_CLICK" col="7" cursoronresize="false" dropsound="icon_get_down" enabledrag="false" enableselect="true" hideindrag="true" image="slot" maxselect="60" movepop="false" oversound="button_over" picksound="icon_pick_up" row="6" selectmode="count" size="56 56" skin="invenslot2" spc="2 2" />
+    <button name="autoBtn" rect="0 0 145 45" margin="45 518 0 0" layout_gravity="left top" LBtnUpScp="ARCH_DECOMP_AUTO_REGISTER" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" caption="{@st41b}자동 등록{/}" clicksound="button_click_big" oversound="button_over" skin="test_normal_button" />
+    <button name="clearBtn" rect="0 0 145 45" margin="200 518 0 0" layout_gravity="left top" LBtnUpScp="ARCH_DECOMP_DESELECT_ALL" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" caption="{@st41b}전체 해제{/}" clicksound="button_click_big" oversound="button_over" skin="test_normal_button" />
+    <richtext name="decomposecnt" rect="0 0 120 24" margin="370 528 0 0" layout_gravity="left top" format="{@st47}{s16}%s/%s{/}" param1="cnt" param1_def="0" param2="max" param2_def="60" />
+    <groupbox name="materialInfoGbox" rect="0 0 480 145" margin="0 575 0 0" layout_gravity="center top" skin="test_frame_midle" scrollbar="true" />
+    <groupbox name="point_gb" rect="0 0 480 160" margin="0 735 0 0" layout_gravity="center top" draw="true" hittestbox="false" scrollbar="false" skin="test_frame_midle" />
+    <richtext name="totalPoint" rect="0 0 452 46" margin="14 8 0 0" layout_gravity="left top" parent="point_gb" format="{@st41b}{s14}보유: %s{/}" param1="value" param1_def="0" />
+    <richtext name="addPoint" rect="0 0 452 46" margin="14 56 0 0" layout_gravity="left top" parent="point_gb" format="{@st41b}{s14}획득 예정: %s{/}" param1="value" param1_def="0" />
+    <richtext name="afterPoint" rect="0 0 452 46" margin="14 104 0 0" layout_gravity="left top" parent="point_gb" format="{@st41b}{s14}분해 후: %s{/}" param1="value" param1_def="0" />
+    <button name="repairBtn" rect="0 0 180 55" margin="0 0 0 18" layout_gravity="center bottom" LBtnUpScp="ARCH_DECOMP_EXEC" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" caption="{@st41b}분해하기{/}" clicksound="button_click_stats_OK" oversound="button_over" skin="test_red_button" />
+  </controls>
+</uiframe>

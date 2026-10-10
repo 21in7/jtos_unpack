@@ -821,6 +821,17 @@ local function _GET_ITEM_SOCKET_ADD_VALUE(targetPropName, item)
     return value;
 end
 
+-- 툴팁 공격력에 더할 진화석 공격력.
+-- UseLv < 480 은 item_calculate.lua 에서 아이템 MINATK/MAXATK/MATK 에 이미 포함되므로 0.
+-- UseLv >= 480 은 캐릭터 공격력(calc_property_pc.lua SCR_Get_MIN/MAXPATK, MIN/MAXMATK)에서만 더해지므로 여기서 합산한다.
+-- 계승본(구세대 진화석) 50% 감쇄는 GET_EVOLVED_ATK 안에서 적용된다.
+function GET_EVOLVED_ATK_FOR_TOOLTIP(invitem)
+	if TryGetProp(invitem, 'UseLv', 0) < 480 then
+		return 0
+	end
+	return math.floor(GET_EVOLVED_ATK(invitem))
+end
+
 --공격력 및 방어력
 function DRAW_EQUIP_ATK_N_DEF(tooltipframe, invitem, yPos, mainframename, strarg, basicProp)
 	
@@ -882,15 +893,17 @@ function DRAW_EQUIP_ATK_N_DEF(tooltipframe, invitem, yPos, mainframename, strarg
 		end
 		reinforceaddvalue = math.floor( GET_REINFORCE_ADD_VALUE_ATK(invitem, ignoreReinf, bonusReinf + overReinf, basicProp) )		
 		socketaddvalue =  _GET_ITEM_SOCKET_ADD_VALUE(basicProp, invitem);		
-		arg1 = invitem.MINATK - reinforceaddvalue + socketaddvalue;
-		arg2 = invitem.MAXATK - reinforceaddvalue + socketaddvalue;
+		local evolvedAtk = GET_EVOLVED_ATK_FOR_TOOLTIP(invitem)
+		arg1 = invitem.MINATK - reinforceaddvalue + socketaddvalue + evolvedAtk;
+		arg2 = invitem.MAXATK - reinforceaddvalue + socketaddvalue + evolvedAtk;
 	elseif basicProp == 'MATK' then
 	    typeiconname = 'test_sword_icon'
 		typestring = ScpArgMsg("Magic_Atk")
 		reinforceaddvalue = math.floor( GET_REINFORCE_ADD_VALUE_ATK(invitem, ignoreReinf, bonusReinf + overReinf, basicProp) )
 		socketaddvalue =  _GET_ITEM_SOCKET_ADD_VALUE("ADD_MATK", invitem)
-		arg1 = invitem.MATK - reinforceaddvalue + socketaddvalue;
-		arg2 = invitem.MATK - reinforceaddvalue + socketaddvalue;
+		local evolvedAtk = GET_EVOLVED_ATK_FOR_TOOLTIP(invitem)
+		arg1 = invitem.MATK - reinforceaddvalue + socketaddvalue + evolvedAtk;
+		arg2 = invitem.MATK - reinforceaddvalue + socketaddvalue + evolvedAtk;
 	else
 		typeiconname = 'test_shield_icon'
 		typestring = ScpArgMsg(basicProp);
@@ -1214,7 +1227,7 @@ function DRAW_EQUIP_RANDOM_ICHOR(invitem, property_gbox, inner_yPos)
 			
 			local equipGroup = TryGetProp(invitem, 'EquipGroup', 'None')
 			if TryGetProp(invitem, 'UseLv', 0) >= 470 and IS_GODDESS_ICOR_SPOT(equipGroup) == true then
-				min, max = shared_item_goddess_icor.get_option_value_range_icor (invitem, propItem[propName])
+				min, max = shared_item_goddess_icor.get_option_value_range_icor (invitem, propItem[propName], true)
 			else
 				min, max = GET_RANDOM_OPTION_VALUE_VER2(invitem, propItem[propName])	
 			end			
@@ -1239,7 +1252,7 @@ function DRAW_EQUIP_RANDOM_ICHOR(invitem, property_gbox, inner_yPos)
 					strInfo = ABILITY_DESC_NO_PLUS(opName, propItem[propValue], 0);
 				end
 				
-				if max > 0 and max > current_value and (keyboard.IsKeyPressed('LALT') == 1 or keyboard.IsKeyDown('LALT') == 1) then
+				if max > 0 and max > current_value and (keyboard.IsKeyPressed('LALT') == 1 or keyboard.IsKeyDown('LALT') == 1) then			
 					strInfo = strInfo .. ' {@st66b}{#e28500}{ol}(' .. GET_COMMAED_STRING(max) .. ')'				
 				end
 			else
@@ -1489,9 +1502,15 @@ function DRAW_EQUIP_DESC(tooltipframe, invitem, yPos, mainframename)
 	
 	local tooltip_equip_property_CSet = gBox:CreateOrGetControlSet('tooltip_equip_desc', 'tooltip_equip_desc', 0, yPos - 2);
 	local property_gbox = GET_CHILD(tooltip_equip_property_CSet,'property_gbox','ui::CGroupBox')
-		
-	local inner_yPos = 0;	
+
+	local inner_yPos = 0;
 	inner_yPos = ADD_ITEM_PROPERTY_TEXT(property_gbox, desc, 0, inner_yPos);
+
+	-- 추가 커스텀 정보 표시
+	local custom_info = GET_CUSTOM_EQUIP_INFO(invitem);	
+	if custom_info ~= "" then
+		inner_yPos = ADD_ITEM_PROPERTY_TEXT(property_gbox, custom_info, 0, inner_yPos);
+	end
 
 	local BOTTOM_MARGIN = tooltipframe:GetUserConfig("BOTTOM_MARGIN"); -- 맨 아랫쪽 여백
 	tooltip_equip_property_CSet:Resize(tooltip_equip_property_CSet:GetWidth(),tooltip_equip_property_CSet:GetHeight() + property_gbox:GetHeight() + property_gbox:GetY() + BOTTOM_MARGIN);
@@ -1507,14 +1526,13 @@ function DRAW_popoboost_INFO(invitem, desc)
 		return desc
 	end
 
-	local PopoItemProp = GET_POPOBOOST_ITEMPROP();
-	if PopoItemProp > 0 and popo_count == PopoItemProp then
+	if popo_count then
 		local text = '{@st41b}{#00ee00}'	
 		text = text .. ScpArgMsg('desc_popoboost_item', 'count', popo_count)
 	
 		desc = desc .. '{nl} {nl}' .. text
 	end
-
+	
 	return desc
 end
 
@@ -2363,7 +2381,7 @@ function DRAW_EQUIP_TRADABILITY(tooltipframe, invitem, yPos, mainframename)
 	TOGGLE_TRADE_OPTION(CSet, invitem, 'option_market', 'option_market_text', 'MarketTrade')
 	TOGGLE_TRADE_OPTION(CSet, invitem, 'option_teamware', 'option_teamware_text', 'TeamTrade')
 	TOGGLE_TRADE_OPTION(CSet, invitem, 'option_trade', 'option_trade_text', 'UserTrade')
-
+	
     local bottomMargin = CSet:GetUserConfig("BOTTOM_MARGIN");
 	CSet:Resize(CSet:GetWidth(), CSet:GetHeight() + bottomMargin)
 	gBox:Resize(gBox:GetWidth(), gBox:GetHeight() + CSet:GetHeight())
@@ -2513,7 +2531,7 @@ function DRAW_CANNOT_REINFORCE(tooltipframe, invitem, yPos, mainframename)
 		text = text:sub(0, text:len() - 2);
 	end
 
-	socket_text:SetText(text);
+	socket_text:SetTextByKey('value', text);
 
 	local bottomMargin = CSet:GetUserConfig("BOTTOM_MARGIN");
 
@@ -2630,6 +2648,7 @@ function DRAW_ENABLE_TREATMENT(tooltipframe, invitem, yPos, mainframename)
 	enable_set_option = ENABLE_EQUIP_SETOPTION(invitem)
 
 	local character_belonging = TryGetProp(invitem, 'CharacterBelonging', 0)
+	local cannot_unlock_popoboost_belonging = TryGetProp(invitem, 'popoboost', 0) >= 12
 
 	if character_belonging == 1 and (TryGetProp(invitem, 'StringArg', 'None') == 'Legenda') then
 		decomposeAble_flag = 1
@@ -2672,6 +2691,7 @@ function DRAW_ENABLE_TREATMENT(tooltipframe, invitem, yPos, mainframename)
 		text = _APPEND_LIMITATION_TEXT(enable_frag, text, ClMsg('enable_fragmentation'));
 		text = _APPEND_LIMITATION_TEXT(decomposeAble_flag, text, ClMsg('enable_decomposition'));
 		text = _APPEND_LIMITATION_TEXT(reinforce_flag, text, ClMsg('enable_reinforce'));
+		text = _APPEND_LIMITATION_TEXT(cannot_unlock_popoboost_belonging, text, ClMsg('PopoboostBelongingUnlockImpossible'));
 		text = _APPEND_LIMITATION_TEXT(transcend_flag, text, ClMsg('enable_transcend'));
 		text = _APPEND_LIMITATION_TEXT(extract_flag, text, ClMsg('enable_extract'));
 		text = _APPEND_LIMITATION_TEXT(socket_flag, text, ClMsg('enable_socket'));	
@@ -2697,6 +2717,7 @@ function DRAW_ENABLE_TREATMENT(tooltipframe, invitem, yPos, mainframename)
 		else
 			text = _APPEND_LIMITATION_TEXT(true, text, ClMsg('enable_reinforce'));
 		end
+		text = _APPEND_LIMITATION_TEXT(cannot_unlock_popoboost_belonging, text, ClMsg('PopoboostBelongingUnlockImpossible'));
 	end
 
 	if TryGetProp(invitem, 'StringArg', 'None') == 'TOSHeroEquip' or TryGetProp(invitem, 'StringArg', 'None') == 'TOSHeroEquipNeck' then
@@ -2707,7 +2728,7 @@ function DRAW_ENABLE_TREATMENT(tooltipframe, invitem, yPos, mainframename)
 		text = text:sub(0, text:len() - 2);
 	end
 
-	socket_text:SetText(text);
+	socket_text:SetTextByKey('value', text);
 
 	local bottomMargin = CSet:GetUserConfig("BOTTOM_MARGIN");
 
@@ -3737,7 +3758,7 @@ function ITEM_TOOLTIP_EARRING(tooltipframe, invitem, strarg, usesubframe)
 end
 
 -- 가디스 아이커
-function DRAW_EQUIP_GODDESS_ICOR(invitem, property_gbox, inner_yPos)
+function DRAW_EQUIP_GODDESS_ICOR(invitem, property_gbox, inner_yPos)	
 	local init_yPos = inner_yPos;
 	
 	local reroll_index = TryGetProp(invitem, 'RerollIndex', 0)
@@ -3772,7 +3793,7 @@ function DRAW_EQUIP_GODDESS_ICOR(invitem, property_gbox, inner_yPos)
 				cls_msg = '{@st47}{s15}{#00EEEE}' .. cls_msg .. '{/}{/}{/}'
 			end
 			local opName = string.format("%s %s", ClMsg(clientMessage), cls_msg);	
-			local _, max = shared_item_goddess_icor.get_option_value_range_icor(invitem, propItem[propName])	
+			local _, max = shared_item_goddess_icor.get_option_value_range_icor(invitem, propItem[propName], true)	
 			
 			local strInfo = nil
 			if max ~= nil and max > 0 then
@@ -4264,4 +4285,60 @@ function DRAW_EQUIP_CORE_ITEM(invitem, property_gbox, inner_yPos)
     end
 
     return inner_yPos
+end
+
+-- 커스텀 장비 정보 가져오기
+function GET_CUSTOM_EQUIP_INFO(invitem)
+	if invitem == nil then
+		return ""
+	end
+
+	if shared_guild_dress_room.is_valid_item(invitem) == false then
+		return ""
+	end
+
+	local name = TryGetProp(invitem, 'ClassName', 'None')
+	local cls = GetClass('guild_dress_room', name)
+	
+	if cls == nil then
+		return ""
+	end
+	
+	local custom_text = ""
+	custom_text = custom_text .. "{nl} {nl}" .. ClMsg("GuildDressRoomItem")
+
+	-- 등급 정보
+	local grade = TryGetProp(cls, 'Grade', 'None')	
+	if grade ~= 'None' then
+		local grade_color = "#ffffff"
+		if grade == 'S' then
+			grade_color = "#ff6600"
+		elseif grade == 'A' then
+			grade_color = "#9966ff"
+		elseif grade == 'B' then
+			grade_color = "#66ccff"
+		end
+		custom_text = custom_text .. "{nl}" .. ClMsg("GuildDressRoomItemGrade") .. ": {" .. grade_color .. "}" .. grade .. "{/}"
+	end
+
+	-- 획득 가능 옵션(1레벨 기준) 텍스트 추가
+	custom_text = custom_text .. "{nl}" .. ClMsg("GuildDressRoomItemOption")
+
+	-- 최대 레벨 정보
+	local max_level = TryGetProp(cls, 'MaxLevel', 0)
+	local option_list = shared_guild_dress_room.get_item_option_list(invitem)
+	local level_value = option_list[1]		
+	if level_value ~= 'None' and level_value ~= '' then		
+		local options = SCR_STRING_CUT(level_value, ';')
+		for i = 1, #options do
+			local option_data = SCR_STRING_CUT(options[i], '/')
+			if #option_data == 2 then
+				local option_name = option_data[1]
+				local option_value = option_data[2]
+				custom_text = custom_text .. "{nl}{@st42}- {#00ccff}" .. ClMsg(option_name) .. " {#ffffff}+" .. option_value .. "{/}"
+			end
+		end
+	end	
+
+	return custom_text
 end

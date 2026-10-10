@@ -41,6 +41,10 @@ function MAP_ON_INIT(addon, frame)
 	addon:RegisterMsg("DEMONLAIR_AREA_PROGRESS_MAX", "ON_MAP_INFO");
 	addon:RegisterMsg("DEMONLAIR_AREA_PROGRESS_END", "ON_MAP_INFO");
 
+	addon:RegisterMsg("ARCHE_SEARCH_RESULT", "ON_ARCHE_SEARCH_RESULT");
+	addon:RegisterMsg("ARCHE_SEARCH_RESET", "ON_ARCHE_SEARCH_RESET");
+
+	
 	frame = ui.GetFrame("map");
 	INIT_MAPUI_INFO(frame);
 	local mapClassName = session.GetMapName();
@@ -81,6 +85,10 @@ function MAP_OPEN(frame)
 
 	local use_map_info = frame:GetUserIValue("USE_MAP_INFO")
 	MAP_INFO_VISIBLE(frame, use_map_info)
+
+	if MINIMAP_REGION_INFO_ON_MAP_OPEN ~= nil then
+		MINIMAP_REGION_INFO_ON_MAP_OPEN()
+	end
 end
 
 -- 해상도 변경되면 실행시켜줘야됨.
@@ -117,6 +125,9 @@ function INIT_MAPUI_PTR(frame)
 end
 
 function MAP_CLOSE(frame)
+	if MINIMAP_REGION_INFO_ON_MAP_CLOSE ~= nil then
+		ReserveScript('MINIMAP_REGION_INFO_ON_MAP_CLOSE()', 0.01)
+	end
 end
 
 function MAKE_MAP_AREA_INFO(frame, mapClassName, font, mapWidth, mapHeight, offsetX, offsetY)
@@ -369,6 +380,7 @@ function UPDATE_MAP(frame)
 	local curmapname = session.GetMapName()
 	UPDATE_MAP_BY_NAME(frame, curmapname, GET_CHILD_RECURSIVELY(frame, "map"));
 	RUN_REVEAL_CHECKER(frame, curmapname);
+	DRAW_ARCHEOLOGY_SURVEY_CIRCLES(frame);
 end
 
 function MAKE_MAP_NPC_ICONS(frame, mapname, mapWidth, mapHeight, offsetX, offsetY)
@@ -1590,5 +1602,169 @@ function UPDATE_DEMONLAIR_PROGRESS_INFO(frame, arg_str, is_max)
 			end
 		end
 		gbox:Invalidate()
+	end
+end
+
+local ARCH_SURVEY_MAX = 3
+local ARCH_SURVEY_IMAGE = "archeology_survey_ring_hd"
+local ARCH_SURVEY_ALPHA = 65        -- SetAlpha 는 0(투명)~100(불투명) 기준(값/100). 약 65% 불투명
+local ARCH_SURVEY_COLOR = "FFFFD24A" -- AARRGGBB: 밝은 금색
+
+local function GET_ARCHEOLOGY_SURVEY_IMAGE_BY_SIZE(width, height)
+	local drawSize = math.max(tonumber(width) or 0, tonumber(height) or 0)
+	if drawSize <= 0 then
+		return ARCH_SURVEY_IMAGE
+	elseif drawSize <= 128 then
+		return "archeology_survey_ring_128"
+	elseif drawSize <= 256 then
+		return "archeology_survey_ring_256"
+	elseif drawSize <= 512 then
+		return "archeology_survey_ring_512"
+	end
+
+	return "archeology_survey_ring_1024"
+end
+
+local survey_results = {}
+function ON_ARCHE_SEARCH_RESULT(frame, msg, argStr, argNum)
+	local info = StringSplit(argStr, ',')
+	local info_table = {}
+	info_table["x"]    = tonumber(info[1])
+	info_table["y"]    = tonumber(info[2])
+	info_table["z"]    = tonumber(info[3])
+	info_table["dist"] = tonumber(info[4])
+	table.insert(survey_results, info_table)
+	if #survey_results > ARCH_SURVEY_MAX then
+		table.remove(survey_results, 1)
+	end
+
+	DRAW_ARCHEOLOGY_SURVEY_CIRCLES(frame)
+end
+
+function DRAW_ARCHEOLOGY_SURVEY_CIRCLES(frame)
+	local mapClassName = session.GetMapName()
+	local mapprop = geMapTable.GetMapProp(mapClassName)
+	local minimapw = m_mapWidth
+	local minimaph = m_mapHeight
+
+	for i, result in ipairs(survey_results) do
+		local MapPos = mapprop:WorldPosToMinimapPos(result.x, result.z, minimapw, minimaph)
+
+		local RangeX = result.dist * MINIMAP_LOC_MULTI * minimapw / WORLD_SIZE
+		local RangeY = result.dist * MINIMAP_LOC_MULTI * minimaph / WORLD_SIZE
+		local XC = m_offsetX + MapPos.x - RangeX / 2
+		local YC = m_offsetY + MapPos.y - RangeY / 2
+		local ctrlname = "_ARCH_SURVEY_" .. i
+		local pic = frame:CreateOrGetControl('picture', ctrlname, XC, YC, RangeX, RangeY)
+		tolua.cast(pic, "ui::CPicture")
+		pic:SetEnable(1)
+		pic:EnableHitTest(0)
+		pic:SetEnableStretch(1)
+		pic:SetImage(GET_ARCHEOLOGY_SURVEY_IMAGE_BY_SIZE(RangeX, RangeY))
+		pic:SetAlpha(ARCH_SURVEY_ALPHA)
+		pic:SetColorTone(ARCH_SURVEY_COLOR)
+		pic:ShowWindow(1)
+	end
+end
+
+local ARCH_SURVEY_PREFIX_V2 = "_ARCH_SURVEY_"
+local ARCH_SURVEY_ALPHA_V2 = 65
+local ARCH_SURVEY_COLOR_V2 = "FFFFD24A"
+
+local arch_survey_results = {}
+local arch_survey_map_name = "None"
+local arch_survey_target_key = "None"
+
+local function CLEAR_ARCHEOLOGY_SURVEY_CIRCLES_V2(frame)
+	if frame == nil then
+		frame = ui.GetFrame("map")
+	end
+	if frame ~= nil then
+		DESTROY_CHILD_BYNAME(frame, ARCH_SURVEY_PREFIX_V2)
+	end
+end
+
+local function RESET_ARCHEOLOGY_SURVEY_STATE_V2(frame)
+	arch_survey_results = {}
+	arch_survey_map_name = "None"
+	arch_survey_target_key = "None"
+	CLEAR_ARCHEOLOGY_SURVEY_CIRCLES_V2(frame)
+end
+
+function ON_ARCHE_SEARCH_RESET(frame, msg, argStr, argNum)
+	RESET_ARCHEOLOGY_SURVEY_STATE_V2(frame)
+end
+
+function ON_ARCHE_SEARCH_RESULT(frame, msg, argStr, argNum)
+	local info = StringSplit(argStr, ',')
+	local cur_map_name = session.GetMapName()
+	local target_key = info[7] or "None"
+
+	if arch_survey_map_name ~= "None" and arch_survey_map_name ~= cur_map_name then
+		RESET_ARCHEOLOGY_SURVEY_STATE_V2(frame)
+	end
+	if arch_survey_target_key ~= "None" and target_key ~= "None" and arch_survey_target_key ~= target_key then
+		RESET_ARCHEOLOGY_SURVEY_STATE_V2(frame)
+	end
+
+	local info_table = {}
+	info_table["x"] = tonumber(info[1])
+	info_table["y"] = tonumber(info[2])
+	info_table["z"] = tonumber(info[3])
+	info_table["dist"] = tonumber(info[4])
+	info_table["draw_dist"] = tonumber(info[6]) or info_table["dist"]
+	info_table["target_key"] = target_key
+	info_table["map_name"] = cur_map_name
+
+	if info_table["x"] == nil or info_table["z"] == nil or info_table["draw_dist"] == nil then
+		return
+	end
+
+	table.insert(arch_survey_results, info_table)
+	if #arch_survey_results > ARCH_SURVEY_MAX then
+		table.remove(arch_survey_results, 1)
+	end
+
+	arch_survey_map_name = cur_map_name
+	arch_survey_target_key = target_key
+	DRAW_ARCHEOLOGY_SURVEY_CIRCLES(frame)
+end
+
+function DRAW_ARCHEOLOGY_SURVEY_CIRCLES(frame)
+	CLEAR_ARCHEOLOGY_SURVEY_CIRCLES_V2(frame)
+	if frame == nil then
+		return
+	end
+
+	local mapClassName = session.GetMapName()
+	if arch_survey_map_name ~= "None" and arch_survey_map_name ~= mapClassName then
+		RESET_ARCHEOLOGY_SURVEY_STATE_V2(frame)
+		return
+	end
+
+	local mapprop = geMapTable.GetMapProp(mapClassName)
+	local minimapw = m_mapWidth
+	local minimaph = m_mapHeight
+
+	for i, result in ipairs(arch_survey_results) do
+		if result.map_name ~= nil and result.map_name ~= mapClassName then
+			return
+		end
+
+		local MapPos = mapprop:WorldPosToMinimapPos(result.x, result.z, minimapw, minimaph)
+		local RangeX = result.draw_dist * MINIMAP_LOC_MULTI * minimapw / WORLD_SIZE
+		local RangeY = result.draw_dist * MINIMAP_LOC_MULTI * minimaph / WORLD_SIZE
+		local XC = m_offsetX + MapPos.x - RangeX / 2
+		local YC = m_offsetY + MapPos.y - RangeY / 2
+		local ctrlname = ARCH_SURVEY_PREFIX_V2 .. i
+		local pic = frame:CreateOrGetControl('picture', ctrlname, XC, YC, RangeX, RangeY)
+		tolua.cast(pic, "ui::CPicture")
+		pic:SetEnable(1)
+		pic:EnableHitTest(0)
+		pic:SetEnableStretch(1)
+		pic:SetImage(GET_ARCHEOLOGY_SURVEY_IMAGE_BY_SIZE(RangeX, RangeY))
+		pic:SetAlpha(ARCH_SURVEY_ALPHA_V2)
+		pic:SetColorTone(ARCH_SURVEY_COLOR_V2)
+		pic:ShowWindow(1)
 	end
 end
