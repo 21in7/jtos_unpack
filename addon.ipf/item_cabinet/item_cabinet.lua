@@ -864,14 +864,16 @@ function ITEM_CABINET_ITEM_TAB_INIT(listCls, itemTabCtrl)
 	
 	local add_str = ''	
 	local add_job = ''
-	if TryGetProp(itemCls, 'AdditionalOption_1', 'None') ~= 'None' then		
+	if TryGetProp(itemCls, 'AdditionalOption_1', 'None') ~= 'None' then
 		add_str = '(' ..  ClMsg('Unique1') .. ')'
-		
+
 		add_job = GET_ENABLE_EQUIP_JOB(listCls)
 
 		if add_job ~= '' then
 			add_job = ' - ' .. add_job
 		end
+	elseif TryGetProp(itemCls, 'StringArg', 'None') == 'Vibora' then
+		add_job = ' - ' .. ClMsg('ViboraAllClass')
 	end
 
 	SET_SLOT_BG_BY_ITEMGRADE(itemSlot, itemCls);
@@ -2084,10 +2086,8 @@ function ITEM_CABINET_ICOR_SECTION(frame, self, entry_cls)
 	if IS_SEASON_SERVER() == 'YES' then
 		cost = cost * 0.01
 	end
-	if IS_POPOBOOST_PARTICIPATE_CHARACTER(pc) == true then
-		if category == "Weapon" or category =="Armor" then
-			cost = 1
-		end
+	if IS_POPOBOOST_BENEFIT_ACTIVE(pc) == true and (category == "Weapon" or category == "Armor") then
+		cost = 1
 	end
 	
 	local price = cost

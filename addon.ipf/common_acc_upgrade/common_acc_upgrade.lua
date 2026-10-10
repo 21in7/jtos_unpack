@@ -106,8 +106,7 @@ function COMMON_ACC_UPGRADE_MAT_NUM_SET(frame, item_obj)
 
 end
 
-function COMMON_ACC_UPGRADE_MAT_SET(frame,item_obj)
-
+function COMMON_ACC_UPGRADE_MAT_SET(frame,item_obj)    
     local frame     = frame:GetTopParentFrame()
     local bottom_bg = GET_CHILD_RECURSIVELY(frame,"bottom_Bg")
     bottom_bg:RemoveAllChild();
@@ -116,7 +115,7 @@ function COMMON_ACC_UPGRADE_MAT_SET(frame,item_obj)
     local index = 1
     local aObj = GetMyAccountObj()
     
-    local mat_list = shared_upgrade_acc.get_cost(item_obj)
+    local mat_list = shared_upgrade_acc.get_cost(item_obj)    
     for k,v in pairs(mat_list) do
         local ctrlSet = bottom_bg:CreateOrGetControlSet("mat_required_set", "ENCHANT_MAT_"..index, ui.CENTER_HORZ, ui.TOP,0,height*(index-1) + 25,0,0);
         local mat_cls = nil	
@@ -330,7 +329,10 @@ local function _GET_EFFECT_UI_MARGIN()
 end
 
 
-function _COMMON_ACC_UPGRADE_RESULT(frame, msg, argStr, argNum)    
+function _COMMON_ACC_UPGRADE_RESULT(frame, msg, argStr, argNum)
+    -- 가디스 장비 관리창(통합 UI) 경유 업그레이드 시에도 이 메시지가 수신됨 — 이 창이 열려 있을 때만 처리
+    if frame == nil or frame:IsVisible() == 0 then return end
+
     local left, top = _GET_EFFECT_UI_MARGIN()
     local res_scp = ""
 

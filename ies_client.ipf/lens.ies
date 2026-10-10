@@ -1,0 +1,3 @@
+ClassID,ClassName,RenderMode,MaskSet,TextureSet,Fallback
+1,"eye01_angel","MASK_BLEND","default","eye01_angel","LEGACY_XAC"
+2,"eye_uriel","MASK_BLEND","default","eye_uriel","LEGACY_XAC"

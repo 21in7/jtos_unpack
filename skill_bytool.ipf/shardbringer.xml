@@ -1,0 +1,1816 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<ToolSkill>
+	<Skill Name="Shardbringer_CrystalSowing_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSOWING"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalsowing_scout"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="100">
+					<Str Str="SHARDBRINGER_APPLY_CR_DEBUFF"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardGale_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_MultipleIceSpike_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="ShardGale_Instant_Buff"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardgale_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_SHARDGALE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardgale_scout_shot"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_RESET"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_CONSUME_INSTANT_BUFF"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="250">
+					<Pos Angle="0" Dist="-10"/>
+					<Num Num="30"/>
+					<Num Num="200"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 8)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="-16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDGALE_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalZone_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalzone_scout"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="80"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_CrystalZone" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Shardbringer7') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Shardbringer_CrystalZone_abil' end return 'Shardbringer_CrystalZone'"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardRicochet_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardricochet_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardricochet_scout_shot"/>
+				</Scp>
+                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="100">
+					<Str_Arg Str="Projectile_Crystal_Blue_01#Dummy_Force" Arg="0.8"/>
+					<Str Str="arrow_cast"/>
+					<Str_Arg Str="None" Arg="0.5"/>
+					<Str Str="arrow_blow"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="FAST"/>
+					<Num Num="800"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Angle_Abs Angle="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="300">
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDRICOCHET_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalSpear_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_CrystalSpear_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalspear_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalspear_scout_shot"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_CrystalSpear_Blue_03"/>
+					<Num Num="1.7"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_SQUARE" Client="NO" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="0"/>
+					<Num Num="0"/>
+					<Num Num="210"/>
+					<Num Num="40"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 10)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_CRYSTALLIZATION_CHECK" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ObsidianPulsar_Scout">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<EnableScripts>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR_C"/>
+			</ToolScp>
+		</EnableScripts>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1.0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_cast"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_loop"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="SCR_USE_Shardbringer_ObsidianPulsar" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_Shardbringer_ObsidianPulsar_shot"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_shot"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="90"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_ObsidianPulsar"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+
+	<Skill Name="Shardbringer_CrystalSowing_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSOWING"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalsowing_scout"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="100">
+					<Str Str="SHARDBRINGER_APPLY_CR_DEBUFF"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardGale_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_MultipleIceSpike_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="ShardGale_Instant_Buff"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardgale_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_SHARDGALE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardgale_scout_shot"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_RESET"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_CONSUME_INSTANT_BUFF"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="250">
+					<Pos Angle="0" Dist="-10"/>
+					<Num Num="30"/>
+					<Num Num="200"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 8)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="-16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDGALE_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalZone_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalzone_scout"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="80"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_CrystalZone" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Shardbringer7') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Shardbringer_CrystalZone_abil' end return 'Shardbringer_CrystalZone'"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardRicochet_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardricochet_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardricochet_scout_shot"/>
+				</Scp>
+                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="100">
+					<Str_Arg Str="Projectile_Crystal_Blue_01#Dummy_Force" Arg="0.8"/>
+					<Str Str="arrow_cast"/>
+					<Str_Arg Str="None" Arg="0.5"/>
+					<Str Str="arrow_blow"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="FAST"/>
+					<Num Num="800"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Angle_Abs Angle="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="300">
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDRICOCHET_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalSpear_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_CrystalSpear_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalspear_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalspear_scout_shot"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_CrystalSpear_Blue_03"/>
+					<Num Num="1.7"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_SQUARE" Client="NO" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="0"/>
+					<Num Num="0"/>
+					<Num Num="210"/>
+					<Num Num="40"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 10)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_CRYSTALLIZATION_CHECK" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ObsidianPulsar_Cleric">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<EnableScripts>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR_C"/>
+			</ToolScp>
+		</EnableScripts>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1.0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_cast"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_loop"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="SCR_USE_Shardbringer_ObsidianPulsar" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_Shardbringer_ObsidianPulsar_shot"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_shot"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="90"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_ObsidianPulsar"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalSowing_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSOWING"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalsowing_scout"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="100">
+					<Str Str="SHARDBRINGER_APPLY_CR_DEBUFF"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardGale_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_MultipleIceSpike_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="ShardGale_Instant_Buff"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDGALE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardgale_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_SHARDGALE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardgale_scout_shot"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_RESET"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_SHARDGALE_CONSUME_INSTANT_BUFF"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="250">
+					<Pos Angle="0" Dist="-10"/>
+					<Num Num="30"/>
+					<Num Num="200"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 8)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="250">
+					<Str_Arg Str="Shoot_MultipleIceSpike_Blue_03" Arg="1.5"/>
+					<Num Num="1"/>
+					<Num Num="-16"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Dummy_emitter"/>
+					<Str Str="None"/>
+					<Str Str="MID"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDGALE_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalZone_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.5"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalzone_scout"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALZONE_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="80"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_CrystalZone" UseFunc="1" FuncTxt="local abil = GetAbility(self, 'Shardbringer7') if abil ~= nil and TryGetProp(abil, 'ActiveState', 0) == 1 then return 'Shardbringer_CrystalZone_abil' end return 'Shardbringer_CrystalZone'"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ShardRicochet_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_CAST"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_SHARDRICOCHET_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_shardricochet_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="99799" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="99999" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_shardricochet_scout_shot"/>
+				</Scp>
+                <Scp Scp="SKL_SET_TARGET_CLIENT_TARGETTING" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="C_FORCE_UNITY_EFT" Client="YES_Time" UseSleep="NO" Time="100">
+					<Str_Arg Str="Projectile_Crystal_Blue_01#Dummy_Force" Arg="0.8"/>
+					<Str Str="arrow_cast"/>
+					<Str_Arg Str="None" Arg="0.5"/>
+					<Str Str="arrow_blow"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="FAST"/>
+					<Num Num="800"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Angle_Abs Angle="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="300">
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_SHARDRICOCHET_HIT" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_CrystalSpear_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="Shoot_CrystalSpear_Blue_03"/>
+			</ToolScp>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0.8"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_LOOP"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_crystalspear_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="SKL_SHARDBRINGER_CRYSTALSPEAR_SHOT"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_crystalspear_scout_shot"/>
+				</Scp>
+				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="Shoot_CrystalSpear_Blue_03"/>
+					<Num Num="1.7"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="MID"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+				</Scp>
+				<Scp Scp="SKL_SET_TARGET_SQUARE" Client="NO" UseSleep="NO" Time="300">
+					<Pos Angle="0" Dist="0"/>
+					<Num Num="0"/>
+					<Num Num="210"/>
+					<Num Num="40"/>
+					<Num Num="0" UseFunc="1" FuncTxt="    local count = GET_PVP_TARGET_COUNT(self, 10)
+    return count"/>
+					<Num Num="2"/>
+					<Num Num="0"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_TGT_DMG" Client="NO" UseSleep="NO" Time="400">
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="2002"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+			<ResultList>
+				<ToolScp Scp="SHARDBRINGER_CRYSTALLIZATION_CHECK" Client="NO" UseSleep="NO"/>
+			</ResultList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Shardbringer_ObsidianPulsar_Wizard">
+		<EndScripts>
+			<ToolScp Scp="MONSKL_C_STOP_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</EndScripts>
+		<KeyCancelScp>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CANCEL_CANCEL" Client="NO" UseSleep="NO"/>
+		</KeyCancelScp>
+		<EnableScripts>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT" Client="NO" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR"/>
+			</ToolScp>
+			<ToolScp Scp="SKL_CHECK_BY_SCRIPT_C" Client="YES" UseSleep="NO">
+				<Str Str="SCR_SHARDBRINGER_CHECK_USE_OBSIDIANPULSAR_C"/>
+			</ToolScp>
+		</EnableScripts>
+		<KeyInput>
+			<ToolScp Scp="SKL_KEY_DYNAMIC_CASTING" Client="YES" UseSleep="NO">
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1.0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Str_Arg Str="None" Arg="1"/>
+				<Str Str="None"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="5"/>
+				<Num Num="1"/>
+				<Num Num="45"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+				<Str Str="None"/>
+				<Str Str="None"/>
+			</ToolScp>
+		</KeyInput>
+		<KeyInputStart>
+			<ToolScp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_cast"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+				<Num Num="0"/>
+			</ToolScp>
+			<ToolScp Scp="MONSKL_C_RESERVE_ANIM" Client="YES" UseSleep="NO">
+				<Str Str="skl_Shardbringer_ObsidianPulsar_loop"/>
+				<Num Num="1"/>
+				<Num Num="1"/>
+			</ToolScp>
+			<ToolScp Scp="C_SOUND" Client="YES" UseSleep="NO">
+				<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_cast"/>
+			</ToolScp>
+			<ToolScp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+				<Num Num="0.8"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Str Str="BOT"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="0"/>
+				<Num Num="1"/>
+			</ToolScp>
+		</KeyInputStart>
+		<KeyInputEnd>
+			<ToolScp Scp="MONSKL_C_CLEAR_RESERVE_ANIM" Client="YES" UseSleep="NO"/>
+			<ToolScp Scp="C_UNITY_EFFECT_DETACH" Client="YES" UseSleep="NO">
+				<Str Str="MagicCircle_Emerald_Blue_01"/>
+			</ToolScp>
+		</KeyInputEnd>
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<HitList>
+				<Frame Type="FAN" Time="0" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.17453292" AniTime="0" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+			</HitList>
+			<EtcList>
+				<Scp Scp="SCR_USE_Shardbringer_ObsidianPulsar" Client="NO" UseSleep="NO" Time="0"/>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_Shardbringer_ObsidianPulsar_shot"/>
+					<Num Num="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="skl_eff_shardbringer_obsidianpulsar_scout_shot"/>
+				</Scp>
+				<Scp Client="NO" Scp="MONSKL_CRE_PAD" Time="500" UseSleep="NO">
+					<Pos Angle="0" Dist="90"/>
+					<Angle Angle="0"/>
+					<Str Str="Shardbringer_ObsidianPulsar"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+					<Str Str="SHARDBRINGER_APPLY_SHARDGALE_INSTANT_BUFF"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+</ToolSkill>

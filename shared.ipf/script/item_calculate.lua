@@ -675,19 +675,33 @@ function GET_BASIC_ATK(item)
     return maxAtk, minAtk;
 end
 
+-- 계승본(구세대 진화석)에 적용할 감쇄율. 재진화 동기를 남기기 위해 값어치를 절반으로 깎는다.
+-- ※ CalcProperty_Item.cpp 의 GODDESS_EVOLVE_INHERIT_ATK_RATE 와 반드시 같은 값을 유지할 것.
+GODDESS_EVOLVE_INHERIT_ATK_RATE = 0.5
+
 -- done, 해당 함수 내용은 cpp로 이전되었습니다. 변경 사항이 있다면 반드시 프로그램팀에 알려주시기 바랍니다.
 function GET_EVOLVED_ATK(item)
-    if TryGetProp(item, 'EvolvedItemLv', 0) <= TryGetProp(item, 'UseLv', 0) then
+    -- EvolvedItemLv = 진화석이 부여된 세대 + 10. UseLv 와 같으면 미진화.
+    -- 계승본은 구세대 값이 남아 있으므로 그 세대의 EvolveAtk 를 적용한다.
+    local use_lv = TryGetProp(item, 'UseLv', 0)
+    local evolved_lv = TryGetProp(item, 'EvolvedItemLv', 0)
+    if evolved_lv <= 0 or evolved_lv == use_lv then
         return 0
     end
 
+    -- 계승본(evolved_lv < use_lv)만 감쇄. 현세대 진화(use_lv + 10)는 온전히 적용된다.
+    local inherit_rate = 1.0
+    if evolved_lv < use_lv then
+        inherit_rate = GODDESS_EVOLVE_INHERIT_ATK_RATE
+    end
+
     local evolvedAtkUp = 0
-    local lv = TryGetProp(item, "UseLv", 0)
+    local lv = evolved_lv - 10
     local cls = GetClassByType('item_goddess_reinforce_' .. lv, 1)
     if cls ~= nil then
         local EvolveAtk = TryGetProp(cls, 'EvolveAtk', 0)
         if EvolveAtk > 0 then
-            return EvolveAtk
+            return EvolveAtk * inherit_rate
         else
         local basicAtk = TryGetProp(cls, 'BasicAtk', 0)
         if TryGetProp(item, 'ClassType', 'None') == 'Trinket' then
@@ -699,7 +713,7 @@ function GET_EVOLVED_ATK(item)
         evolvedAtkUp = basicAtk * 0.05
         end
     end
-    return evolvedAtkUp
+    return evolvedAtkUp * inherit_rate
 end
 
 -- done, 해당 함수 내용은 cpp로 이전되었습니다. 변경 사항이 있다면 반드시 프로그램팀에 알려주시기 바랍니다.
@@ -1065,7 +1079,7 @@ function SCR_REFRESH_ARMOR(item, enchantUpdate, ignoreReinfAndTranscend, reinfBo
                     basicDef = TryGetProp(cls, 'BasicAtk', 0)
                 else                  
                         if classType == 'BELT' or classType == 'SHOULDER' then-- 벨트
-                        basicDef = TryGetProp(cls, 'BasicDef', 0) * 0.5
+                                basicDef = GET_BELT_SHOULDER_DEF_BASE(lv)
                         basicDef = basicDef + TryGetProp(item, 'Additional_def', 0)                        
                     else-- 상,하,장,신
                         basicDef = TryGetProp(cls, 'BasicDef', 0) * 0.25

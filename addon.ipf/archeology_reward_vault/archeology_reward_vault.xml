@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="archeology_reward_vault" x="0" y="0" width="350" height="360">
+	<frame title="" layout_gravity="left top" margin="360 260 0 0" scale_align="left top"/>
+	<draw drawframe="false" drawtitlebar="false"/>
+	<skin frameskin="none"/>
+	<input moveable="true" hittestframe="true" catchmovepos="true"/>
+	<layer layerlevel="96"/>
+	<option visible="false" closebutton="false" hideable="false" alwaysVisible="false"/>
+	<animation frameOpenAnim="chat_balloon_start" frameCloseAnim="chat_balloon_end"/>
+	<controls>
+		<groupbox name="minimized" rect="0 0 62 62" margin="0 0 0 0"
+			layout_gravity="left top" draw="true" hittestbox="true" resizebyparent="false"
+			scrollbar="false" skin="quest_bg_black_op_50"/>
+		<picture name="minimized_icon" parent="minimized" rect="0 0 46 46" margin="8 8 0 0"
+			layout_gravity="left top" image="icon_item_event_archeology_coin"
+			stretch="true" hittest="false"/>
+		<button name="minimized_button" parent="minimized" rect="0 0 54 54" margin="4 4 0 0"
+			layout_gravity="left top" skin="None" caption=""
+			clicksound="button_click_3" oversound="button_cursor_over_2"
+			LBtnUpScp="ARCHEOLOGY_REWARD_VAULT_TOGGLE"
+			texttooltip="{@st59}고고학 탐사 보관함 · 클릭하여 펼치기{/}"/>
+		<richtext name="minimized_count" parent="minimized" rect="0 0 30 20" margin="31 39 0 0"
+			layout_gravity="left top" fontname="white_14_b_ol" fixwidth="true"
+			textalign="center center" hittest="false" format="%s" param1="count" param1_def="0"/>
+
+		<groupbox name="expanded" rect="0 0 350 360" margin="0 0 0 0"
+			layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false"
+			scrollbar="false" skin="quest_bg_black_op_50" visible="false"/>
+		<richtext name="title" parent="expanded" rect="0 0 270 28" margin="18 12 0 0"
+			layout_gravity="left top" fontname="white_16_b_ol" fixwidth="true"
+			textalign="left center" format="{#FFE082}고고학 탐사 보관함{/}"/>
+		<button name="minimize_button" parent="expanded" rect="0 0 34 28" margin="0 10 12 0"
+			layout_gravity="right top" caption="－" fontname="white_16_b_ol"
+			skin="test_pvp_btn" clicksound="button_click_3" oversound="button_cursor_over_2"
+			LBtnUpScp="ARCHEOLOGY_REWARD_VAULT_TOGGLE"
+			texttooltip="{@st59}보관함 최소화{/}"/>
+		<richtext name="status_text" parent="expanded" rect="0 0 314 42" margin="18 45 0 0"
+			layout_gravity="left top" fontname="white_14_ol" fixwidth="true"
+			textalign="left top" format="%s" param1="status" param1_def="포탈 입장 시 보상이 이곳에 쌓입니다."/>
+		<groupbox name="reward_list" parent="expanded" rect="0 0 314 222" margin="18 92 0 0"
+			layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false"
+			scrollbar="true" skin="None"/>
+		<richtext name="empty_text" parent="expanded" rect="0 0 314 44" margin="18 177 0 0"
+			layout_gravity="left top" fontname="white_14_ol" fixwidth="true"
+			textalign="center center" format="{#AFAFAF}아직 발견한 보상이 없습니다.{/}"/>
+		<richtext name="footer_text" parent="expanded" rect="0 0 314 30" margin="18 321 0 0"
+			layout_gravity="left top" fontname="white_12_ol" fixwidth="true"
+			textalign="left center"
+			format="{#AFAFAF}서버에 보관된 보상 · 탐사 종료 시 한 번에 정산{/}"/>
+	</controls>
+</uiframe>

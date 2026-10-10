@@ -410,13 +410,13 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="90"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
-				</Scp>
+				</Scp>		
 				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="200">
 					<Pos Angle="0" Dist="-10"/>
 					<Num Num="90"/>
@@ -430,7 +430,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="-90"/>
 					<Str Str="Dummy_emitter"/>
@@ -1255,13 +1255,13 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="90"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
-				</Scp>
+				</Scp>		
 				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="200">
 					<Pos Angle="0" Dist="-10"/>
 					<Num Num="90"/>
@@ -1275,7 +1275,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="-90"/>
 					<Str Str="Dummy_emitter"/>
@@ -2100,13 +2100,13 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="90"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
-				</Scp>
+				</Scp>		
 				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="200">
 					<Pos Angle="0" Dist="-10"/>
 					<Num Num="90"/>
@@ -2120,7 +2120,7 @@
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="-90"/>
 					<Str Str="Dummy_emitter"/>
@@ -2965,13 +2965,13 @@ value = GET_PVP_TARGET_COUNT(self, value)
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="100">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="90"/>
 					<Str Str="Dummy_emitter"/>
 					<Str Str="None"/>
 					<Str Str="MID"/>
-				</Scp>
+				</Scp>		
 				<Scp Scp="SKL_SET_TARGET_FAN" Client="NO" UseSleep="NO" Time="200">
 					<Pos Angle="0" Dist="-10"/>
 					<Num Num="90"/>
@@ -2985,7 +2985,7 @@ value = GET_PVP_TARGET_COUNT(self, value)
 				<Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="300">
 					<Str_Arg Str="Slash_DarkMatter_White_02" Arg="2.5"/>
 					<Num Num="1"/>
-					<Num Num="0"/>
+					<Num Num="-180"/>
 					<Num Num="0"/>
 					<Num Num="-90"/>
 					<Str Str="Dummy_emitter"/>

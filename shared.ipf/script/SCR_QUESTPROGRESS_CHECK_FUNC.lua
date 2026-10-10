@@ -128,11 +128,14 @@ function DROPITEM_REQUEST1_PROGRESS_CHECK_FUNC_SUB(pc)
     for i = 0, class_count -1 do
         local mapIES = GetClassByIndex('Map', i)
         if mapIES ~= nil then
-            local keywordTable = StringSplit(mapIES.Keyword, ";");
-            local NoRequestCheck = table.find(keywordTable, 'NoRequest')
-            if (mapIES.MapType == 'Field' or mapIES.MapType == 'Dungeon') and mapIES.WorldMapPreOpen == 'YES' and IS_FREE_DUNGEON(mapIES.ClassName) == 'NO' and NoRequestCheck == 0 then
+            local keyword = TryGetProp(mapIES, "Keyword", "None");
+            local keywordTable = StringSplit(keyword, ";");
+            local flag1 = table.find(keywordTable, 'NoRequest')
+            local flag2 = table.find(keywordTable, "IsRaidField")
+            local flag = flag1 == 0 and flag2 == 0            
+            if (flag == true) and (mapIES.MapType == 'Field' or mapIES.MapType == 'Dungeon') and mapIES.WorldMapPreOpen == 'YES' and IS_FREE_DUNGEON(mapIES.ClassName) == 'NO' then
                 if mapIES.QuestLevel >= pcLv - minRange and mapIES.QuestLevel <= pcLv + maxRange then
-                    zoneClassNameList[#zoneClassNameList + 1] = mapIES.ClassName
+                    zoneClassNameList[#zoneClassNameList + 1] = mapIES.ClassName                    
                 end
             end
         end

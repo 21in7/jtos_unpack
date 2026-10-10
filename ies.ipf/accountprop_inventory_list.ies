@@ -10,4 +10,5 @@ ClassID,ClassName,Category,Type,Icon,StringCoin,IsNowSeason,InvIcon
 10,"RadaCertificate","old_coin","essential","icon_item_season_coin_Rada","YES","NO","inventory_coin_rada_pic"
 11,"JurateCertificate","old_coin","essential","icon_item_season_coin_Jurate","YES","NO","inventory_coin_jurate_pic"
 12,"ARCHEOLOGY_COIN","POINT","","icon_item_demon_point","NO","NO",""
-13,"AustejaCertificate","coin","essential","icon_item_season_coin_Austeja","YES","YES","inventory_coin_austeja_pic"
+13,"AustejaCertificate","old_coin","essential","icon_item_season_coin_Austeja","YES","NO","inventory_coin_austeja_pic"
+14,"SauleCertificate","coin","essential","icon_item_season_coin_Saule","YES","YES","inventory_coin_saule_pic"

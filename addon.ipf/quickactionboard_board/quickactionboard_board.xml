@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="quickactionboard_board" x="0" y="0" width="220" height="78">
+	<frame title="퀵 액션 보드" margin="0 0 0 0" tooltipoverlap="true" keyboardselectframe="false"/>
+	<skin frameskin="quickactionboard_panel"/>
+	<layer layerlevel="92"/>
+	<draw drawtitlebar="false" drawframe="true"/>
+	<input moveable="true" hittest="true" hittestframe="true"/>
+	<option visible="false" closebutton="false" hideable="false" alwaysVisible="false"/>
+	<controls>
+		<picture name="boardHeader" rect="0 0 200 24" margin="8 1 0 0" layout_gravity="left top" image="quickactionboard_board_header" hittest="false"/>
+		<richtext name="boardTitle" rect="0 0 92 22" margin="8 2 0 0" layout_gravity="left top" format="{@st42b}{s14}%s{/}" param1="board" param1_def="보드" fixwidth="true" hittest="false"/>
+		<button name="manageButton" rect="0 0 22 22" margin="0 1 52 0" layout_gravity="right top" LBtnUpScp="QUICKACTIONBOARD_BOARD_MANAGE_BUTTON" image="chat_option_btn" clicksound="button_click_big" oversound="button_over" texttooltip="{@st59}퀵 액션 보드 관리{/}"/>
+		<button name="minimizeButton" rect="0 0 22 22" margin="0 1 28 0" layout_gravity="right top" LBtnUpScp="QUICKACTIONBOARD_BOARD_TOGGLE_MINIMIZED" image="chat_fold_btn" clicksound="button_click_big" oversound="button_over" texttooltip="{@st59}보드 최소화{/}"/>
+		<button name="restoreButton" rect="0 0 22 22" margin="0 1 28 0" layout_gravity="right top" LBtnUpScp="QUICKACTIONBOARD_BOARD_TOGGLE_MINIMIZED" image="chat_expand_btn" clicksound="button_click_big" oversound="button_over" texttooltip="{@st59}보드 펼치기{/}" visible="false"/>
+		<button name="closeButton" rect="0 0 22 22" margin="0 1 4 0" layout_gravity="right top" LBtnUpScp="QUICKACTIONBOARD_BOARD_CLOSE" image="bgm_cancel_c" clicksound="button_click_big" oversound="button_over" texttooltip="{@st59}보드 닫기{/}"/>
+		<slotset name="boardSlots" rect="0 0 200 48" margin="8 25 0 0" layout_gravity="left top" col="4" row="1" size="48 48" spc="0 0" skin="quickslot" enablepop="true" enabledrag="true" enabledrop="true" DropScp="QUICKACTIONBOARD_BOARD_DROP" PopScp="QUICKACTIONBOARD_BOARD_POP"/>
+		<timer name="boardTimer" rect="0 0 10 10" margin="0 0 0 0"/>
+	</controls>
+</uiframe>

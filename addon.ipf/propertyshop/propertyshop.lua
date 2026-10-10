@@ -149,9 +149,35 @@ function OPEN_PROPERTY_SHOP(shopName)
 	itemlist:AddBarInfo("BuyCount", "{@st42b}" .. ClMsg("BuyCount"), 120);
 	itemlist:RemoveAllChild();
 
+	-- [구매 가능 아이템만 보기] 필터는 콘텐츠 통합 상점 2종에서만 노출.
+	-- 노출 시에만 구매 버튼을 우측으로 이동(체크박스 자리 확보), 그 외 상점은 기본(중앙) 유지
+	local isContentsTotalShop = (shopName == "CONTENTS_TOTAL_SHOP" or shopName == "SEASONOFF_CONTENTS_TOTAL_SHOP");
+	local showBuyableOnly = GET_CHILD_RECURSIVELY(frame, "showBuyableOnly");
+	local buyBtn = GET_CHILD_RECURSIVELY(frame, "buy");
+	local onlyBuyable = false;
+	if showBuyableOnly ~= nil then
+		AUTO_CAST(showBuyableOnly);
+		if isContentsTotalShop == true then
+			showBuyableOnly:ShowWindow(1);
+			onlyBuyable = (showBuyableOnly:IsChecked() == 1);
+		else
+			showBuyableOnly:ShowWindow(0);
+		end
+	end
+	if buyBtn ~= nil then
+		if isContentsTotalShop == true then
+			buyBtn:SetGravity(ui.RIGHT, ui.BOTTOM);
+			buyBtn:SetMargin(0, 0, 25, 100);
+		else
+			buyBtn:SetGravity(ui.CENTER_HORZ, ui.BOTTOM);
+			buyBtn:SetMargin(0, 0, 22, 100);
+		end
+	end
+
 	local itemBoxFont = frame:GetUserConfig("ItemBoxFont");
 	if shopInfo ~= nil then
 		local cnt = shopInfo:GetItemCount();
+		local rowIdx = 0;
 		for i = 0 , cnt - 1 do
 			local itemInfo = shopInfo:GetItemByIndex(i);
 			local itemName, itemCount, addText;
@@ -164,11 +190,33 @@ function OPEN_PROPERTY_SHOP(shopName)
 				itemName, itemCount, addText = func();
 			end
 
+			-- 계정 구매 제한 잔여 횟수 (필터/표시 공용)
+			local sCount = ""
+			local accountNeedProperty = itemInfo:GetAccountNeedProperty();
+			if accountNeedProperty ~= "" then
+				local accObj = GetMyAccountObj();
+				sCount = TryGetProp(accObj, accountNeedProperty, "None");
+			end
+
+			-- 구매 제한이 없는 아이템은 항상 노출, 제한이 있으면 잔여 1 이상만
+			local isBuyable = true;
+			if accountNeedProperty ~= "" then
+				local remain = tonumber(sCount);
+				if remain ~= nil and remain < 1 then
+					isBuyable = false;
+				end
+			end
+
+			if onlyBuyable == false or isBuyable == true then
 			local itemCls = GetClass("Item", itemName);
-			local ctrlSet = INSERT_CONTROLSET_DETAIL_LIST(itemlist, i, 0, "propertyshop_item");
+			local ctrlSet = INSERT_CONTROLSET_DETAIL_LIST(itemlist, rowIdx, 0, "propertyshop_item");
 			ctrlSet = tolua.cast(ctrlSet, "ui::CControlSet");
 			ctrlSet:SetUserValue('REAL_INDEX',i)
 			ctrlSet:EnableHitTestSet(0);
+
+			if itemCls == nil then
+				IMC_LOG("INFO_NORMAL", "Baseclass does not exist" .. itemName);
+			end
 
 			-- 코스튬은 남녀공용, 남자PC는 남자 코스튬 툴팁이미지, 여자PC는 여자 코스튬 툴팁이미지가 보임
 			local pic = GET_CHILD_RECURSIVELY(ctrlSet, "pic");
@@ -216,15 +264,10 @@ function OPEN_PROPERTY_SHOP(shopName)
 				addText = "";
 			end
 
-			local sCount = ""
-			local accountNeedProperty = itemInfo:GetAccountNeedProperty();
 			if accountNeedProperty ~= "" then
 				if addText ~= "" then
 					addText = addText .. ", ";
 				end
-
-				local accObj = GetMyAccountObj();
-				sCount = TryGetProp(accObj, accountNeedProperty, "None");
 
 				addText = addText .. ScpArgMsg("BuyableCountPerAccount_{Count}", "Count", sCount);
 			end
@@ -249,15 +292,17 @@ function OPEN_PROPERTY_SHOP(shopName)
 			name:SetTextTooltip("{s18}" .. nameText);
 			
 			local priceTxt = GetCommaedText(itemInfo.price);
-			INSERT_TEXT_DETAIL_LIST(itemlist, i, 1, itemBoxFont .. priceTxt, nil, nil, priceTxt);
+			INSERT_TEXT_DETAIL_LIST(itemlist, rowIdx, 1, itemBoxFont .. priceTxt, nil, nil, priceTxt);
 
-			local numUpDown = INSERT_NUMUPDOWN_DETAIL_LIST(itemlist, i, 2, itemBoxFont .. "0");
+			local numUpDown = INSERT_NUMUPDOWN_DETAIL_LIST(itemlist, rowIdx, 2, itemBoxFont .. "0");
 			if itemInfo.dailyBuyLimit > 0 then
 				numUpDown:SetMaxValue(itemInfo.dailyBuyLimit);
 			end
 
 			numUpDown:SetNumChangeScp("PROPERTYSHOP_CHANGE_COUNT");
+			rowIdx = rowIdx + 1;
 		end
+	end
 	end
 
 	itemlist:RealignItems();
@@ -313,6 +358,16 @@ function OPEN_PVP_PROPERTY_SHOP(shopName)
 	t_totalprice:SetTextByKey("text", ScpArgMsg("TotalBuyPoint"));
 	t_mymoney:SetTextByKey("text", ScpArgMsg("TotalHavePoint"));
 	t_remainprice:ShowWindow(0);
+
+	local showBuyableOnly = GET_CHILD_RECURSIVELY(frame, "showBuyableOnly");
+	if showBuyableOnly ~= nil then
+		showBuyableOnly:ShowWindow(0);
+	end
+	local buyBtn = GET_CHILD_RECURSIVELY(frame, "buy");
+	if buyBtn ~= nil then
+		buyBtn:SetGravity(ui.CENTER_HORZ, ui.BOTTOM);
+		buyBtn:SetMargin(0, 0, 22, 100);
+	end
 
 	local title = frame:GetChild("title");
 	title:SetTextByKey("value", ClMsg(shopName));
@@ -419,15 +474,16 @@ function PROPERTY_SHOP_BUY(parent, ctrl)
 	for i = 0 , count do
 		local ctrlSet = GET_CHILD_RECURSIVELY(itemlist,'DETAIL_ITEM_'..i..'_'..0)
 		local numUpDown = itemlist:GetObjectByRowCol(i, 2);
+		if ctrlSet ~= nil and numUpDown ~= nil then
 		AUTO_CAST(numUpDown);
 		local num = numUpDown:GetNumber();
 		if num > 0 then
-			local itemInfo = shopInfo:GetItemByIndex(i);
+				local idx = ctrlSet:GetUserValue("REAL_INDEX")
+				local itemInfo = shopInfo:GetItemByIndex(tonumber(idx));
 			totalPrice = totalPrice + itemInfo.price * num;
-			
-			local idx = ctrlSet:GetUserValue("REAL_INDEX")
 			propertyShop.AddPropertyShopItem(idx, num);
 		end
+	end
 	end
 
 	if totalPrice > myMoney then
@@ -489,7 +545,12 @@ function PROPERTYSHOP_CHANGE_COUNT(parent)
 			AUTO_CAST(numUpDown);
 			local num = numUpDown:GetNumber();
 			if num > 0 then
-				local itemInfo = shopInfo:GetItemByIndex(i);
+				local realIndex = i;
+				local ctrlSet = GET_CHILD_RECURSIVELY(itemlist,'DETAIL_ITEM_'..i..'_'..0)
+				if ctrlSet ~= nil then
+					realIndex = tonumber(ctrlSet:GetUserValue("REAL_INDEX"));
+				end
+				local itemInfo = shopInfo:GetItemByIndex(realIndex);
 				totalPrice = totalPrice + itemInfo.price * num;
 			end
 		end
@@ -573,4 +634,15 @@ end
 function ON_UPDATE_PROPERTY_SHOP_POINT(frame,msg,argStr,argNum)
 	local t_mymoney = GET_CHILD_RECURSIVELY(frame, "t_mymoney");
 	t_mymoney:SetTextByKey("value", GET_COMMAED_STRING(GET_PROPERTY_SHOP_MY_POINT(frame)));
+end
+-- [구매 가능 아이템 보기] 체크박스 토글: 목록 재구성
+function PROPERTYSHOP_BUYABLE_FILTER_TOGGLE(parent, ctrl)
+	local frame = parent:GetTopParentFrame();
+	local shopName = frame:GetUserValue("SHOPNAME");
+	if shopName == 'None' or shopName == nil then
+		return;
+	end
+
+	propertyShop.ClearPropertyShopInfo();
+	OPEN_PROPERTY_SHOP(shopName);
 end

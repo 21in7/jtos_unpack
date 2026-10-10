@@ -17,3 +17,6 @@ ClassID,Level,ClassName,Order
 17,530,"Goddess_Raid_Redania_Party","asc"
 19,540,"Goddess_Raid_Laimara_Party","asc"
 20,540,"Goddess_Raid_Veliora_Party","asc"
+21,550,"Goddess_Raid_Zmei_Party","asc"
+22,560,"Goddess_Raid_LightUriel_Party","asc"
+23,560,"Goddess_Raid_DarkUriel_Party","asc"

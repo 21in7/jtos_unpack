@@ -2,306 +2,302 @@
 
 local blessed_goddess_cube_list = nil
 
+----------------------------------------------------------------
+-- 보상 리스트 초기화
+----------------------------------------------------------------
 local function make_blessed_goddess_cube_list()
 	if blessed_goddess_cube_list == nil then
-		blessed_goddess_cube_list = {};
+		blessed_goddess_cube_list = {}
 	end
 
-	local rewardID = 'reward_tp';
-	local clslist, cnt = GetClassList(rewardID);
+	local clslist, cnt = GetClassList('reward_tp')
 	for i = 0, cnt - 1 do
-		local rewardCls = GetClassByIndexFromList(clslist, i);
-		
-		local group = TryGetProp(rewardCls, 'Group', 'None');		
-		local reward = {};
-		reward['Group'] = group;
-		reward['ItemName'] = TryGetProp(rewardCls, 'ItemName');
-		reward['Count'] = TryGetProp(rewardCls, 'Count');
-		reward['Ratio'] = TryGetProp(rewardCls, 'Ratio', 0);
-		reward['Rank'] = TryGetProp(rewardCls, 'Rank');
-		reward['ClassID'] = TryGetProp(rewardCls, 'ClassID');
-		reward['TeamBelonging'] = TryGetProp(rewardCls, 'TeamBelonging', 0);
-		reward['CharacterBelonging'] = TryGetProp(rewardCls, 'CharacterBelonging', 0);
+		local rewardCls = GetClassByIndexFromList(clslist, i)
+		local group = TryGetProp(rewardCls, 'Group', 'None')
 
-		if TryGetProp(rewardCls, 'NeedProperty') ~= nil then
-			reward['NeedProperty'] = TryGetProp(rewardCls, 'NeedProperty');
-		end
-		if TryGetProp(rewardCls, 'NeedPropertyValue') ~= nil then
-			reward['NeedPropertyValue'] = TryGetProp(rewardCls, 'NeedPropertyValue');
-		end
-		
+		local reward = {
+			Group = group,
+			ItemName = TryGetProp(rewardCls, 'ItemName'),
+			Count = TryGetProp(rewardCls, 'Count'),
+			Ratio = TryGetProp(rewardCls, 'Ratio', 0),
+			Rank = TryGetProp(rewardCls, 'Rank'),
+			ClassID = TryGetProp(rewardCls, 'ClassID'),
+			TeamBelonging = TryGetProp(rewardCls, 'TeamBelonging', 0),
+			CharacterBelonging = TryGetProp(rewardCls, 'CharacterBelonging', 0),
+			NeedProperty = TryGetProp(rewardCls, 'NeedProperty'),
+			NeedPropertyValue = TryGetProp(rewardCls, 'NeedPropertyValue'),
+		}
+
 		if blessed_goddess_cube_list[group] == nil then
-			blessed_goddess_cube_list[group] = {};
+			blessed_goddess_cube_list[group] = {}
 		end
-
-		local rewardList = blessed_goddess_cube_list[group];
-		rewardList[#rewardList + 1] = reward;
+		table.insert(blessed_goddess_cube_list[group], reward)
 	end
 end
 
-
+----------------------------------------------------------------
+-- 레티시아 확률 조회
+----------------------------------------------------------------
 function GET_LETICIA_PROBABILITY()
-    local total = 0
-    local ret = {}
-    local start = 7001
-    local group_name = 'Gacha_TP2_001'
-    if config.GetServiceNation() == 'PAPAYA' then
-        start = 7501
-        group_name = 'Gacha_TP2_001_PAPAYA'
-    end
-    for i = start, start + 100 do
-        local cls = GetClassByType('reward_tp', i)
-        if TryGetProp(cls, 'Group', 'None') == group_name then
-            total = total + TryGetProp(cls, 'Ratio', 0)
-        end
-    end
+	local nation = config.GetServiceNation()
+	local is_papaya = (nation == 'PAPAYA')
 
-    -- ItemName, Count, Prop
-    for i = start, start + 100 do
-        local cls = GetClassByType('reward_tp', i)
-        if TryGetProp(cls, 'Group', 'None') == group_name then
-            local name = TryGetProp(cls, 'ItemName', 'None')
-            local count = TryGetProp(cls, 'Count', 0)
-            local ratio = TryGetProp(cls, 'Ratio', 0)
-            local rank = TryGetProp(cls, 'Rank', 'None')
+	local start = is_papaya and 7501 or 7001
+	local group_name = is_papaya and 'Gacha_TP2_001_PAPAYA' or 'Gacha_TP2_001'
 
-            local str = string.format('%.5f', ratio / total * 100)
-            table.insert(ret, {name, count, str, rank})
-        end
-    end
+	-- 전체 확률 합계 계산
+	local total = 0
+	for i = start, start + 100 do
+		local cls = GetClassByType('reward_tp', i)
+		if TryGetProp(cls, 'Group', 'None') == group_name then
+			total = total + TryGetProp(cls, 'Ratio', 0)
+		end
+	end
 
-    return ret
+	-- 확률 데이터 생성
+	local ret = {}
+	for i = start, start + 100 do
+		local cls = GetClassByType('reward_tp', i)
+		if TryGetProp(cls, 'Group', 'None') == group_name then
+			local ratio = TryGetProp(cls, 'Ratio', 0)
+			table.insert(ret, {
+				TryGetProp(cls, 'ItemName', 'None'),
+				TryGetProp(cls, 'Count', 0),
+				string.format('%.5f', ratio / total * 100),
+				TryGetProp(cls, 'Rank', 'None')
+			})
+		end
+	end
+
+	return ret
 end
 
+function GET_REWARD_GROUP_PROBABILITY(reward_group)
+	if blessed_goddess_cube_list == nil then
+		make_blessed_goddess_cube_list()
+	end
 
+	local reward_list = blessed_goddess_cube_list[reward_group]
+	if reward_list == nil then
+		return {}
+	end
+
+	local total_ratio = 0
+	for _, reward in ipairs(reward_list) do
+		if reward.Group == reward_group then
+			total_ratio = total_ratio + reward.Ratio
+		end
+	end
+	if total_ratio == 0 then
+		return {}
+	end
+
+	local ret = {}
+	for _, reward in ipairs(reward_list) do
+		if reward.Group == reward_group then
+			table.insert(ret, {
+				reward.ItemName,
+				reward.Count,
+				string.format('%.5f', reward.Ratio / total_ratio * 100),
+				reward.Rank
+			})
+		end
+	end
+
+	return ret
+end
+
+----------------------------------------------------------------
+-- 헬퍼 함수들
+----------------------------------------------------------------
 local function GET_GODDESS_CUBE_GROUP_TABLE(ratioGroupName)
-    return GET_GODDESS_CUBE_PROBABILITY()
+	return GET_GODDESS_CUBE_PROBABILITY()
 end
 
+----------------------------------------------------------------
+-- 축복받은 여신 큐브 공용 함수 (item_gacha.lua에서도 사용)
+----------------------------------------------------------------
 
-function GET_GODDESS_CUBE_PROBABILITY()
-    if blessed_goddess_cube_list == nil then
-        make_blessed_goddess_cube_list()
-    end
-    
-    local reward_group = 'Gacha_Blessed_CUBE_001'
-    local nation = config.GetServiceNation()
-    if nation == 'PAPAYA' then
-        reward_group = 'Gacha_Blessed_CUBE_001_PAPAYA'
-    end
-    local clslist = blessed_goddess_cube_list[reward_group];
-    
-    local ratioList = {}; -- 등급별 확률
-	local rewardGradeList = {}; -- 등급 {S, A, B, C}
-    local listIndex = 0;
-    local totalRatio = 0;
-    
-    local table_list = {} -- 확률 데이터 반환
+-- 그룹명에 접미사 추가
+function BLESSED_CUBE_APPEND_SUFFIX(base_name, is_papaya, is_event)
+	local result = base_name
+	if is_papaya then
+		result = result .. '_PAPAYA'
+	end
+	if is_event then
+		result = result .. '_EVENT'
+	end
+	return result
+end
 
-	for i, rewardcls in ipairs(clslist) do
-		local itemName = rewardcls['ItemName'];		
-        if rewardcls["Group"] == reward_group then
-            ratioList[listIndex] = rewardcls["Ratio"];
-			rewardGradeList[listIndex] = rewardcls["Rank"];			
-            listIndex = listIndex + 1;
-            totalRatio = totalRatio + rewardcls["Ratio"];
-        end
-    end
+-- 등급별 New/Old 풀 설정 반환
+-- @return pool_prefixes, pool_ratios (C등급은 nil, nil)
+function BLESSED_CUBE_GET_POOL_CONFIG(rank, is_papaya, is_event)
+	-- C등급: New/Old 구분 없음
+	if rank == 'C' then
+		return nil, nil
+	-- S등급: EVENT는 100% New, 그 외 50%/50%
+	elseif rank == 'S' then
+		if is_event then
+			return {'Blessed_New_'}, {1.0}
+		else
+			return {'Blessed_New_', 'Blessed_Old_'}, {0.5, 0.5}
+		end
+	-- A/B등급: PAPAYA/EVENT는 100% New, 그 외 35%/65%
+	else
+		if is_papaya or is_event then
+			return {'Blessed_New_'}, {1.0}
+		else
+			return {'Blessed_New_', 'Blessed_Old_'}, {0.35, 0.65}
+		end
+	end
+end
 
-    for i = 0, listIndex - 1 do
-        local rewardRank = rewardGradeList[i]
-        if rewardRank == 'S' then
-            local rewardList_S = {};
-            local rewardCnt_S = {};
-            local ratioList_S = {};
-            local rewardGradeList_S = {};
-            local rewardClsIDList_S = {};
-            local listIndex_S = 0;
-            local totalRatio_S = 0;
-    
-            local parent_ratio = ratioList[i] / totalRatio            
+-- New/Old 풀 선택 (확률 기반)
+function BLESSED_CUBE_SELECT_POOL(rank, is_papaya, is_event)
+	local pool_prefixes, pool_ratios = BLESSED_CUBE_GET_POOL_CONFIG(rank, is_papaya, is_event)
+	-- 풀이 없거나 하나만 있으면 첫 번째 반환
+	if pool_prefixes == nil then
+		return nil
+	end
+	if #pool_prefixes == 1 then
+		return pool_prefixes[1]
+	end
 
-            local s_rank_name = 'Blessed_New_S'
-            if nation == 'PAPAYA' then
-                s_rank_name = 'Blessed_New_S_PAPAYA'
-            end
-            local clslist_S = blessed_goddess_cube_list[s_rank_name]
-    
-            for j, rewardcls_S in ipairs(clslist_S) do
-                local itemName_S = rewardcls_S['ItemName'];
-                if rewardcls_S["Group"] == s_rank_name then                    
-                    totalRatio_S = totalRatio_S + rewardcls_S["Ratio"];
-                end
-            end
-            
-            for j, rewardcls_S in ipairs(clslist_S) do
-                local itemName_S = rewardcls_S['ItemName'];
-                if rewardcls_S["Group"] == s_rank_name then
-                    rewardList_S[listIndex_S] = itemName_S;
-                    rewardCnt_S[listIndex_S] = rewardcls_S["Count"];
-                    ratioList_S[listIndex_S] = rewardcls_S["Ratio"];
-                    rewardGradeList_S[listIndex_S] = rewardcls_S["Rank"];
-                    rewardClsIDList_S[listIndex_S] = rewardcls_S["ClassID"];
-                    listIndex_S = listIndex_S + 1;
+	-- 확률 기반 선택 (첫 번째 풀 확률 기준)
+	local rand = IMCRandom(1, 10000)
+	local threshold = pool_ratios[1] * 10000
 
-                    local ratio = rewardcls_S["Ratio"] / totalRatio_S * parent_ratio
-                    local count = rewardcls_S["Count"]
-                    local str = string.format('%.5f', ratio * 100)
-                    table.insert(table_list, {itemName_S, count, str, rewardRank})                    
-                end
-            end
-            
-        elseif rewardRank == 'C' then
-            local rewardList_C = {};
-            local rewardCnt_C = {};
-            local ratioList_C = {};
-            local rewardGradeList_C = {};
-            local rewardClsIDList_C = {};
-            local listIndex_C = 0;
-            local totalRatio_C = 0;
-    
-            local parent_ratio = ratioList[i] / totalRatio
+	if rand <= threshold then
+		return pool_prefixes[1]
+	else
+		return pool_prefixes[2]
+	end
+end
 
-            local c_rank_hair_name = 'Blessed_HairAcc_C'
-            if nation == 'PAPAYA' then
-                c_rank_hair_name = 'Blessed_HairAcc_C_PAPAYA'	
-            end
-            local clslist_C = blessed_goddess_cube_list[c_rank_hair_name];	
-    
-            for j, rewardcls_C in ipairs(clslist_C) do
-                local itemName_C = rewardcls_C['ItemName'];
-                if rewardcls_C["Group"] == c_rank_hair_name then
-                    totalRatio_C = totalRatio_C + rewardcls_C["Ratio"];
-                end
-            end
+-- C등급 그룹명 생성
+function BLESSED_CUBE_GET_C_RANK_GROUP_NAME(is_papaya, is_event, reward_list)
+	local base_name = is_papaya and 'Blessed_HairAcc_C_PAPAYA' or 'Blessed_HairAcc_C'
 
-            for j, rewardcls_C in ipairs(clslist_C) do
-                local itemName_C = rewardcls_C['ItemName'];
-                if rewardcls_C["Group"] == c_rank_hair_name then
-                    rewardList_C[listIndex_C] = itemName_C;
-                    rewardCnt_C[listIndex_C] = rewardcls_C["Count"];
-                    ratioList_C[listIndex_C] = rewardcls_C["Ratio"];
-                    rewardGradeList_C[listIndex_C] = rewardcls_C["Rank"];
-                    rewardClsIDList_C[listIndex_C] = rewardcls_C["ClassID"];
-                    listIndex_C = listIndex_C + 1;
-                    
-                    local ratio = rewardcls_C["Ratio"] / totalRatio_C * parent_ratio
-                    local count = rewardcls_C["Count"]
-                    local str = string.format('%.5f', ratio * 100)
-                    table.insert(table_list, {itemName_C, count, str, rewardRank})
-                end
-            end
-        elseif rewardRank == 'B' then
-            local rewardList_AB = {};
-            local rewardCnt_AB = {};
-            local ratioList_AB = {};
-            local rewardGradeList_AB = {};
-            local rewardClsIDList_AB = {};
-            local listIndex_AB = 0;
-            
-    
-            local rewGroup_AB_list = {'Blessed_New_', 'Blessed_Old_'}
-            local add_ratio = {0.35, 0.65} -- 35% / 65%
-            local parent_ratio = ratioList[i] / totalRatio            
-            if nation == 'PAPAYA' then
-                rewGroup_AB_list = {'Blessed_New_'}
-                add_ratio = {1}
-            end
+	if is_event then
+		local event_name = base_name .. '_EVENT'
+		-- reward_list가 제공된 경우 이벤트 그룹 존재 여부 확인
+		if reward_list ~= nil then
+			if reward_list[event_name] then
+				return event_name
+			else
+				return base_name
+			end
+		end
+		return event_name
+	end
 
-            for i = 1, #rewGroup_AB_list do
-                local totalRatio_AB = 0;
+	return base_name
+end
 
-                rewGroup_AB = rewGroup_AB_list[i]..rewardRank                
-                if nation == 'PAPAYA' then
-                    rewGroup_AB = rewGroup_AB .. '_PAPAYA'
-                end
-                local clslist_AB = blessed_goddess_cube_list[rewGroup_AB];
-                
-                if clslist_AB ~= nil then
-                    for j, rewardcls_AB in ipairs(clslist_AB) do                        
-                        if rewardcls_AB["Group"] == rewGroup_AB then
-                            totalRatio_AB = totalRatio_AB + rewardcls_AB["Ratio"];	-- 전체 확률        
-                        end
-                    end
+-- 보상 리스트의 전체 확률 합계 계산
+local function calc_total_ratio(clslist, group_name)
+	local total = 0
+	if clslist then
+		for _, reward in ipairs(clslist) do
+			if reward.Group == group_name then
+				total = total + reward.Ratio
+			end
+		end
+	end
+	return total
+end
 
-                    for j, rewardcls_AB in ipairs(clslist_AB) do
-                        local itemName_AB = rewardcls_AB['ItemName'];			
-                        if rewardcls_AB["Group"] == rewGroup_AB then
-                            rewardList_AB[listIndex_AB] = itemName_AB;
-                            rewardCnt_AB[listIndex_AB] = rewardcls_AB["Count"];
-                            ratioList_AB[listIndex_AB] = rewardcls_AB["Ratio"];
-                            rewardGradeList_AB[listIndex_AB] = rewardcls_AB["Rank"];
-                            rewardClsIDList_AB[listIndex_AB] = rewardcls_AB["ClassID"];
-                            listIndex_AB = listIndex_AB + 1;
-                            
-        
-                            local ratio = rewardcls_AB["Ratio"] / totalRatio_AB * parent_ratio * add_ratio[i]
+-- 풀별 확률 데이터 수집
+local function collect_pool_probability(clslist, group_name, parent_ratio, pool_ratio, rank, table_list)
+	local total_ratio = calc_total_ratio(clslist, group_name)
+	if total_ratio == 0 then
+		return
+	end
 
-                            local count = rewardcls_AB["Count"]
-                            local str = string.format('%.5f', ratio * 100)
-                            table.insert(table_list, {itemName_AB, count, str, rewardRank})
-                        end
-                    end
-                end
-            end
-        elseif  rewardRank == 'A' then
-            local rewardList_AB = {};
-            local rewardCnt_AB = {};
-            local ratioList_AB = {};
-            local rewardGradeList_AB = {};
-            local rewardClsIDList_AB = {};
-            local listIndex_AB = 0;
-            
-    
-            local rewGroup_AB_list = {'Blessed_New_', 'Blessed_Old_'}
-            local add_ratio = {0.35, 0.65} -- 35% / 65%
-            local parent_ratio = ratioList[i] / totalRatio
-    
-            local rand = IMCRandom(1, 10000)
-    
-            if nation == 'PAPAYA' then
-                rand = 1
-            end
-            
-            for i = 1, #rewGroup_AB_list do
-                local totalRatio_AB = 0;
-                rewGroup_AB = rewGroup_AB_list[i]..rewardRank
-         
-                if nation == 'PAPAYA' then
-                    rewGroup_AB = rewGroup_AB .. '_PAPAYA'
-                end
+	for _, reward in ipairs(clslist) do
+		if reward.Group == group_name then
+			local ratio = reward.Ratio / total_ratio * parent_ratio * pool_ratio
+			table.insert(table_list, {
+				reward.ItemName,
+				reward.Count,
+				string.format('%.5f', ratio * 100),
+				rank
+			})
+		end
+	end
+end
 
-                local clslist_AB = blessed_goddess_cube_list[rewGroup_AB];	-- 보상 리스트 얻어온다.
-                
-                if clslist_AB ~= nil then 
-                    for j, rewardcls_AB in ipairs(clslist_AB) do	-- 보상리스트에서 확률로 보상 계산			
-                        local itemName_AB = rewardcls_AB['ItemName'];			
-                        if rewardcls_AB["Group"] == rewGroup_AB then
-                            totalRatio_AB = totalRatio_AB + rewardcls_AB["Ratio"];	-- 전체 확률        
-                        end
-                    end
-    
-                    for j, rewardcls_AB in ipairs(clslist_AB) do	-- 보상리스트에서 확률로 보상 계산			
-                        local itemName_AB = rewardcls_AB['ItemName'];			
-                        if rewardcls_AB["Group"] == rewGroup_AB then
-                            rewardList_AB[listIndex_AB] = itemName_AB;
-                            rewardCnt_AB[listIndex_AB] = rewardcls_AB["Count"];
-                            ratioList_AB[listIndex_AB] = rewardcls_AB["Ratio"];
-                            rewardGradeList_AB[listIndex_AB] = rewardcls_AB["Rank"];
-                            rewardClsIDList_AB[listIndex_AB] = rewardcls_AB["ClassID"];
-                            listIndex_AB = listIndex_AB + 1;
-                            
-        
-                            local ratio = rewardcls_AB["Ratio"] / totalRatio_AB * parent_ratio * add_ratio[i]
-                            local count = rewardcls_AB["Count"]
-                            local str = string.format('%.5f', ratio * 100)
-                            table.insert(table_list, {itemName_AB, count, str, rewardRank})                            
-                        end
-                    end
-                end
-            end
-        end
-    end
+----------------------------------------------------------------
+-- 축복받은 여신 큐브 확률 조회 (메인 함수)
+----------------------------------------------------------------
+function GET_GODDESS_CUBE_PROBABILITY(reward_group)
+	if blessed_goddess_cube_list == nil then
+		make_blessed_goddess_cube_list()
+	end
 
-    return table_list
+	local nation = config.GetServiceNation()
+	local is_papaya = (nation == 'PAPAYA')
+	local is_event = (reward_group == 'Gacha_Blessed_CUBE_001_EVENT')
+
+	-- PAPAYA 접미사 추가
+	if is_papaya then
+		reward_group = reward_group .. '_PAPAYA'
+	end
+
+	local clslist = blessed_goddess_cube_list[reward_group]
+	if clslist == nil then
+		return {}
+	end
+
+	-- 등급별 확률 수집
+	local grade_ratios = {}
+	local total_ratio = 0
+
+	for _, reward in ipairs(clslist) do
+		if reward.Group == reward_group then
+			local rank = reward.Rank
+			if grade_ratios[rank] == nil then
+				grade_ratios[rank] = 0
+			end
+			grade_ratios[rank] = grade_ratios[rank] + reward.Ratio
+			total_ratio = total_ratio + reward.Ratio
+		end
+	end
+
+	-- 확률 데이터 생성 (S, A, B, C 순서 보장)
+	local table_list = {}
+	local grade_order = {'S', 'A', 'B', 'C'}
+
+	for _, rank in ipairs(grade_order) do
+		local rank_ratio = grade_ratios[rank]
+		if rank_ratio == nil then
+			goto continue
+		end
+
+		local parent_ratio = rank_ratio / total_ratio
+
+		if rank == 'C' then
+			-- C등급: 단일 풀
+			local group_name = BLESSED_CUBE_GET_C_RANK_GROUP_NAME(is_papaya, is_event)
+			local pool_list = blessed_goddess_cube_list[group_name]
+			if pool_list then
+				collect_pool_probability(pool_list, group_name, parent_ratio, 1, rank, table_list)
+			end
+		else
+			-- S/A/B등급: New/Old 풀
+			local pool_prefixes, pool_ratios = BLESSED_CUBE_GET_POOL_CONFIG(rank, is_papaya, is_event)
+			for i, prefix in ipairs(pool_prefixes) do
+				local group_name = BLESSED_CUBE_APPEND_SUFFIX(prefix .. rank, is_papaya, is_event)
+				local pool_list = blessed_goddess_cube_list[group_name]
+				if pool_list then
+					collect_pool_probability(pool_list, group_name, parent_ratio, pool_ratios[i], rank, table_list)
+				end
+			end
+		end
+
+		::continue::
+	end
+
+	return table_list
 end

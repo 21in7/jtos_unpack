@@ -1,0 +1,10 @@
+ClassID,ParamOrder,NumberValue,ClassName,EffectClassName,ParamKey,ParamType,StringValue
+110000,10,0,"ebcv2_uriel_boss_damage_param_10","ebcv2_uriel_boss_damage","ExPropName","String","card_MerreginaDespair_Legendcard_IncraseDmg"
+110001,20,4.500000,"ebcv2_uriel_boss_damage_param_20","ebcv2_uriel_boss_damage","ValuePerAggregate","Number",""
+110002,10,0,"ebcv2_uriel_boss_damage_reduction_param_10","ebcv2_uriel_boss_damage_reduction","ExPropName","String","card_MerreginaDespair_Legendcard_ReduceDmg"
+110003,20,3,"ebcv2_uriel_boss_damage_reduction_param_20","ebcv2_uriel_boss_damage_reduction","ValuePerAggregate","Number",""
+110004,10,0,"ebcv2_uriel_mspd_param_10","ebcv2_uriel_mspd","LegacyActionHandler","String","SCR_CARDEFFECT_STATUS_PLUS"
+110005,20,0,"ebcv2_uriel_mspd_param_20","ebcv2_uriel_mspd","LegacyActionArg1","String","MSPD_BM"
+110006,30,0,"ebcv2_uriel_mspd_param_30","ebcv2_uriel_mspd","LegacyActionArg2","String","MSPD"
+110007,40,0,"ebcv2_uriel_mspd_param_40","ebcv2_uriel_mspd","LegacyActionArg3","String","1"
+110008,50,1,"ebcv2_uriel_mspd_param_50","ebcv2_uriel_mspd","ValuePerAggregate","Number",""

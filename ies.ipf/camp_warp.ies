@@ -113,3 +113,5 @@ ClassID,ClassName,Name,Zone,City,Group,WarpOpenQuest
 11067,"WARP_EP17_D_LIMESTONE_52_1","테브린 종유동 1구역","ep17_1_d_limestonecave_52_1","c_Klaipe","키렌 지방","EP17_1_LIMESTONECAVE_MQ16"
 11068,"WARP_EP17_D_LIMESTONE_52_5","테브린 종유동 5구역","ep17_1_d_limestonecave_52_5","c_Klaipe","키렌 지방","EP17_1_LIMESTONECAVE_MQ16"
 11069,"WARP_EP17_2_F_KATYN_12","레타스 개울가","ep17_2_f_katyn_12","c_Klaipe","키렌 지방","EP17_2_KATYN_10_MQ2"
+11070,"WARP_EP18_1_F_TABLELAND_72","EP18 스벤티마스 유형지","ep18_1_f_tableland_72","c_Klaipe","칼리스 지방","EP17_2_KATYN_10_MQ2"
+11071,"WARP_EP18_2_F_ROKAS_40","EP18 재의 벌판","ep18_2_f_rokas_40","c_Klaipe","은둔자들의 땅","EP18_2_ROKAS_40_MQ1"

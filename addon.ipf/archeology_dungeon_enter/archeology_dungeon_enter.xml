@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- archeology_dungeon_enter.xml
+     고고학 탐사 포탈 진입 UI: 난이도 선택 + 가변형 입장/강화 아이템 목록
+     좌 = 결정(난이도 / 아이템), 우 = 맥락과 결과(맵 특성 + 4카드),
+     하단 = 양 패널 공용 요약 스트립(추가 보상 / 소모 / 보정).
+       스트립·버튼 행·배경·프레임 높이는 보이는 줄 수에 맞춰 lua(LAYOUT_SUMMARY_AND_FRAME)가 정한다.
+       아래 기본 좌표는 가장 흔한 '스트립 없음' 크기다(첫 표시에 긴 창이 떴다 줄어드는 튐 방지).
+     계산 상세와 탐사 유형 정보는 화면에 두지 않고 richtext 툴팁으로 내린다.
+     보스 모드는 패널을 갈아끼우지 않고 같은 4카드의 텍스트만 교체한다.
+
+     간격은 4 / 8 / 12 / 20 네 값만 쓴다.
+       패널 안쪽 패딩 12 · 같은 그룹 안 8 · 그룹 사이 20 · 미세 조정 4
+     (난이도 버튼 사이 6 은 세그먼트 컨트롤이라 예외)
+
+     폰트: 카드 제목 s17 · 큰 값 s24 · 행 레이블 s16 · 행 값 s20 · 델타 s15
+           슬롯 라벨/이름 s15 · 난이도 s16 · 스트립 s14~15 · 제목 s26
+     정보량은 유지하되 카드와 섹션의 빈 여백을 줄여 1000x680 안에 배치한다. -->
+<uiframe name="archeology_dungeon_enter" x="0" y="0" width="1000" height="588">
+    <frame fullheight="false" fasthide="false" layout_gravity="center center" margin="0 0 0 0" scale_align="center center"/>
+    <draw drawtitlebar="false"/>
+    <skin frameskin="none"/>
+    <input maxwidth="1400" height="800" moveable="true"/>
+    <effect open="character_item_window_open" close="character_item_window_close"/>
+    <layer layerlevel="100"/>
+    <option closebutton="false"/>
+    <sound opensound="window_open" closesound="window_close"/>
+    <script OpenScp="" CloseScp="ARCH_DENTER_ON_CLOSE"/>
+    <controls>
+        <groupbox name="bg" rect="0 0 960 528" margin="0 30 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" resizebyresolution="true" scrollbar="false" skin="archeology_ui_main_frame"/>
+        <groupbox name="title_bg" rect="0 0 960 76" margin="0 8 0 0" layout_gravity="center top" draw="false" hittestbox="false" skin="None"/>
+        <button name="btn_close" rect="0 0 48 48" margin="0 40 30 0" layout_gravity="right top" LBtnUpScp="ARCH_DENTER_CANCEL" image="archeology_ui_close_btn" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <richtext name="title_text" parent="title_bg" rect="0 0 500 40" margin="0 36 0 0" layout_gravity="center top" drawbackground="false" fixwidth="true" fontname="white_16_ol" textalign="center center" slideshow="false" spacey="0" format="{@st42}{s26}고고학 탐사 포탈 입장{/}" updateparent="false" hittest="false"/>
+        <!-- ══════════ 좌 : 결정 (490×384) ══════════ -->
+        <groupbox name="condition_panel" rect="0 0 490 384" margin="25 84 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_card_panel"/>
+        <richtext name="difficulty_label" parent="condition_panel" rect="0 0 466 24" margin="12 12 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s16}난이도{/}" updateparent="false" hittest="false"/>
+        <groupbox name="difficulty_group" parent="condition_panel" rect="0 0 466 46" margin="12 44 0 0" layout_gravity="left top" draw="false" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+        <button name="btn_diff_easy" rect="0 0 112 46" margin="0 0 0 0" parent="difficulty_group" layout_gravity="left top" LBtnUpScp="ARCH_DENTER_SELECT_EASY" skin="test_normal_button" format="{@st41b}{s16}쉬움{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <button name="btn_diff_normal" rect="0 0 112 46" margin="118 0 0 0" parent="difficulty_group" layout_gravity="left top" LBtnUpScp="ARCH_DENTER_SELECT_NORMAL" skin="test_normal_button" format="{@st41b}{s16}보통{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <button name="btn_diff_hard" rect="0 0 112 46" margin="236 0 0 0" parent="difficulty_group" layout_gravity="left top" LBtnUpScp="ARCH_DENTER_SELECT_HARD" skin="test_normal_button" format="{@st41b}{s16}어려움{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <button name="btn_diff_very_hard" rect="0 0 112 46" margin="354 0 0 0" parent="difficulty_group" layout_gravity="left top" LBtnUpScp="ARCH_DENTER_SELECT_VERY_HARD" skin="test_normal_button" format="{@st41b}{s15}매우 어려움{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <picture name="lock_diff_hard" parent="difficulty_group" rect="0 0 16 20" margin="328 5 0 0" layout_gravity="left top" hittest="false" image="ancient_skill_lock" stretch="true" visible="false"/>
+        <picture name="lock_diff_very_hard" parent="difficulty_group" rect="0 0 16 20" margin="446 5 0 0" layout_gravity="left top" hittest="false" image="ancient_skill_lock" stretch="true" visible="false"/>
+        <groupbox name="boss_diff_box" parent="condition_panel" rect="0 0 466 46" margin="12 44 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot" visible="false"/>
+        <richtext name="boss_diff_label" parent="boss_diff_box" rect="0 0 446 38" margin="10 4 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="center center" slideshow="false" spacey="0" format="{#FFB29B}{s17}보스 전용 난이도 고정{/}   {@st66d}{s14}난이도 선택 불가{/}" updateparent="false" hittest="false"/>
+        <richtext name="difficulty_delta" parent="condition_panel" rect="0 0 466 26" margin="12 98 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="right center" slideshow="false" spacey="0" format="{@st66d}{s15}%s{/}" param1="difficulty_delta_val" param1_def="" updateparent="false" hittest="false"/>
+        <groupbox name="portal_item_list" parent="condition_panel" rect="0 0 442 220" margin="24 132 0 0" layout_gravity="left top" draw="false" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+        <!-- ══════════ 우 : 맥락 + 결과 (454×384) ══════════ -->
+        <groupbox name="effect_panel" rect="0 0 454 384" margin="0 84 25 0" layout_gravity="right top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_panel_light"/>
+        <!-- 맵 특성 : 좌측에서 이동. 심층/보스 배지도 이 줄이 흡수한다. -->
+        <groupbox name="map_trait_box" parent="effect_panel" rect="0 0 430 44" margin="12 12 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="map_trait_desc" parent="map_trait_box" rect="0 0 330 36" margin="12 0 0 0" layout_gravity="left center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st42b}{s18}%s%s{/}   {@st66d}{s15}%s{/}" param1="map_trait_style" param1_def="{#FFFFFF}" param2="map_trait_name" param2_def="" param3="map_trait_reward" param3_def="" updateparent="false"/>
+        <richtext name="effect_state_badge" parent="map_trait_box" rect="0 0 76 36" margin="0 0 10 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="{@st42b}%s{/}" param1="state_badge_val" param1_def="" updateparent="false" hittest="false"/>
+        <groupbox name="card_a" parent="effect_panel" rect="0 0 430 48" margin="12 64 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="card_a_title" parent="card_a" rect="0 0 200 42" margin="12 0 0 0" layout_gravity="left center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st42b}{s17}%s{/}  {@st66d}{s14}%s{/}" param1="card_a_title_val" param1_def="적 강도" param2="card_a_sub_val" param2_def="" updateparent="false"/>
+        <richtext name="card_a_value" parent="card_a" rect="0 0 140 42" margin="0 0 96 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_a_value_val" param1_def="" updateparent="false"/>
+        <richtext name="card_a_delta" parent="card_a" rect="0 0 84 42" margin="0 0 12 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_a_delta_val" param1_def="" updateparent="false" hittest="false"/>
+        <groupbox name="card_b" parent="effect_panel" rect="0 0 430 48" margin="12 120 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="card_b_title" parent="card_b" rect="0 0 200 42" margin="12 0 0 0" layout_gravity="left center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st42b}{s17}%s{/}  {@st66d}{s14}%s{/}" param1="card_b_title_val" param1_def="희귀 보상" param2="card_b_sub_val" param2_def="" updateparent="false"/>
+        <richtext name="card_b_value" parent="card_b" rect="0 0 140 42" margin="0 0 96 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_b_value_val" param1_def="" updateparent="false"/>
+        <richtext name="card_b_delta" parent="card_b" rect="0 0 84 42" margin="0 0 12 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_b_delta_val" param1_def="" updateparent="false" hittest="false"/>
+        <!-- 제단 등급별 희귀 보상 확률 가이드. 위치는 제목 글자 폭에 맞춰 lua 가 옮긴다. -->
+        <button name="card_b_guide" parent="card_b" rect="0 0 24 24" margin="100 0 0 0" layout_gravity="left center" skin="test_normal_button" format="{@st41b}{s14}?{/}" oversound="button_over"/>
+        <!-- card_c 는 행마다 컨트롤을 따로 둔다. 한 컨트롤에 {nl} 로 3줄을 넣으면
+             레이블과 값의 폰트 크기가 달라 행이 아래로 갈수록 어긋난다.
+             아이콘 · 확정 수량 열이 있어서 3종 파편 구분과 오해 방지를 같이 한다. -->
+        <groupbox name="card_c" parent="effect_panel" rect="0 0 430 140" margin="12 176 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="card_c_title" parent="card_c" rect="0 0 406 24" margin="12 5 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st42b}{s17}%s{/}  {@st66d}{s14}%s{/}" param1="card_c_title_val" param1_def="기록 파편" param2="card_c_sub_val" param2_def="" updateparent="false"/>
+        <picture name="card_c_i1" parent="card_c" rect="0 0 24 24" margin="12 36 0 0" layout_gravity="left top" hittest="false" stretch="true" visible="false"/>
+        <richtext name="card_c_l1" parent="card_c" rect="0 0 174 28" margin="42 34 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s16}%s{/}" param1="card_c_l1_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_g1" parent="card_c" rect="0 0 60 28" margin="222 34 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_13_ol" textalign="left center" slideshow="false" spacey="0" format="%s" param1="card_c_g1_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_v1" parent="card_c" rect="0 0 60 28" margin="0 34 96 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_v1_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_d1" parent="card_c" rect="0 0 84 28" margin="0 34 12 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_d1_val" param1_def="" updateparent="false" hittest="false"/>
+        <picture name="card_c_i2" parent="card_c" rect="0 0 24 24" margin="12 70 0 0" layout_gravity="left top" hittest="false" stretch="true" visible="false"/>
+        <richtext name="card_c_l2" parent="card_c" rect="0 0 174 28" margin="42 68 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s16}%s{/}" param1="card_c_l2_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_g2" parent="card_c" rect="0 0 60 28" margin="222 68 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_13_ol" textalign="left center" slideshow="false" spacey="0" format="%s" param1="card_c_g2_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_v2" parent="card_c" rect="0 0 60 28" margin="0 68 96 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_v2_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_d2" parent="card_c" rect="0 0 84 28" margin="0 68 12 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_d2_val" param1_def="" updateparent="false" hittest="false"/>
+        <picture name="card_c_i3" parent="card_c" rect="0 0 24 24" margin="12 104 0 0" layout_gravity="left top" hittest="false" stretch="true" visible="false"/>
+        <richtext name="card_c_l3" parent="card_c" rect="0 0 174 28" margin="42 102 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s16}%s{/}" param1="card_c_l3_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_g3" parent="card_c" rect="0 0 60 28" margin="222 102 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_13_ol" textalign="left center" slideshow="false" spacey="0" format="%s" param1="card_c_g3_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_v3" parent="card_c" rect="0 0 60 28" margin="0 102 96 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_v3_val" param1_def="" updateparent="false"/>
+        <richtext name="card_c_d3" parent="card_c" rect="0 0 84 28" margin="0 102 12 0" layout_gravity="right top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_c_d3_val" param1_def="" updateparent="false" hittest="false"/>
+        <groupbox name="card_d" parent="effect_panel" rect="0 0 430 48" margin="12 324 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="card_d_title" parent="card_d" rect="0 0 200 42" margin="12 0 0 0" layout_gravity="left center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st42b}{s17}%s{/}  {@st66d}{s14}%s{/}" param1="card_d_title_val" param1_def="유물 추가" param2="card_d_sub_val" param2_def="" updateparent="false"/>
+        <richtext name="card_d_value" parent="card_d" rect="0 0 140 42" margin="0 0 96 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_d_value_val" param1_def="" updateparent="false"/>
+        <richtext name="card_d_delta" parent="card_d" rect="0 0 84 42" margin="0 0 12 0" layout_gravity="right center" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="right center" slideshow="false" spacey="0" format="%s" param1="card_d_delta_val" param1_def="" updateparent="false" hittest="false"/>
+        <!-- ══════════ 하단 : 양 패널 공용 요약 스트립 (950×60) ══════════ -->
+        <groupbox name="summary_strip" rect="0 0 950 88" margin="25 480 0 0" layout_gravity="left top" visible="false" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="archeology_ui_slot"/>
+        <richtext name="extra_line" parent="summary_strip" rect="0 0 450 24" margin="12 5 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s14}%s{/}  %s" param1="extra_label_val" param1_def="" param2="extra_value_val" param2_def="" updateparent="false" hittest="false"/>
+        <richtext name="consume_line" parent="summary_strip" rect="0 0 900 24" margin="12 31 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="left center" slideshow="false" spacey="0" format="{@st66d}{s14}%s{/}  %s" param1="consume_label_val" param1_def="" param2="consume_value_val" param2_def="" updateparent="false" hittest="false"/>
+        <richtext name="pity_notice" parent="summary_strip" rect="0 0 880 24" margin="12 59 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="white_14_ol" textalign="center center" slideshow="false" spacey="0" visible="false" format="{#E8CF8B}{s15}군집 섬멸 2회 미등장 보정 · 이번 입장 확정{/}" updateparent="false" hittest="false"/>
+        <!-- 탐사 유형 확률·목표 '?' : 요약 스트립이 비면 숨기므로 제목 행(닫기 버튼 왼쪽)에 둔다. -->
+        <button name="btn_mission_info" rect="0 0 28 28" margin="0 50 86 0" layout_gravity="right top" skin="test_normal_button" format="{@st41b}{s15}?{/}" oversound="button_over"/>
+        <!-- ══════════ 하단 버튼 행 ══════════ -->
+        <button name="btn_reset" rect="0 0 130 58" margin="35 480 0 0" layout_gravity="left top" visible="true" hittest="true" skin="test_normal_button" LBtnUpScp="ARCH_DENTER_RESET_SLOTS" caption="{@st41b}{s18}초기화{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <button name="btn_last_setting" rect="0 0 130 58" margin="170 480 0 0" layout_gravity="left top" visible="true" hittest="true" skin="test_normal_button" LBtnUpScp="ARCH_DENTER_APPLY_LAST" caption="{@st41b}{s18}최근 설정{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_over" clicksound="button_click_big"/>
+        <button name="btn_enter" rect="0 0 200 58" margin="0 480 35 0" layout_gravity="right top" visible="true" hittest="true" skin="test_red_button" LBtnUpScp="ARCH_DENTER_CONFIRM" caption="{@st41b}{s20}입장{/}" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" oversound="button_cursor_over_3" clicksound="button_click_big"/>
+    </controls>
+</uiframe>

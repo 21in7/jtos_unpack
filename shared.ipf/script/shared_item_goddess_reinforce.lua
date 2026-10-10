@@ -1,8 +1,8 @@
 -- shared_item_goddess_reinforce.lua, 가디스 장비 강화 관련 
 -- item_goddess_reinforce.xml
 
-local equip_end_lv = 540
-local popoboost_item_lv = 510;
+local equip_end_lv = 560
+local popoboost_item_lv = 540;
 
 item_goddess_reinforce = {}  -- namespace
 
@@ -254,7 +254,7 @@ item_goddess_reinforce.get_final_reinforce_prop = function(target_item, add_perc
 	local base = item_goddess_reinforce.get_basic_prop(use_lv, goal_lv)
 	local fail_prop = item_goddess_reinforce.get_current_fail_revision_prop(target_item) -- 실패한 보정확률	
 
-	-- 	포포부스트	포포부스트 아이템이고, 포포부스트 시즌이 맞으며, 500 레벨 이하의 장비(마신, 우피니스, 네빌티스)에만 적용, 목표 미달성 시에만 적용
+	-- 포포부스트 아이템이고, 현재 시즌 아이템이며, Lv.540 이하이고, 최종 목표 미달성 상태일 때 적용
 	if 	IS_POPOBOOST_REINFORCE_ITEM(TryGetProp(target_item, 'popoboost', 0), use_lv, popoboost_item_lv, IsPopoboostClear)	then
 		base = base * 2			
 	end
@@ -533,6 +533,10 @@ function setting_lv_material_armor(mat_list_by_lv, lv)
 			seasonCoin = "AustejaCertificate" 
 			misc_reinforce_1 = "misc_boss_202509_armor_NoTrade" 
 			misc_BlessedStone = 'misc_BlessedStone_2'
+		elseif lv == 560 then
+			seasonCoin = "SauleCertificate"
+			misc_reinforce_1 = "misc_boss_EP18_armor_NoTrade"
+			misc_BlessedStone = 'misc_BlessedStone_2'
 		end
 
 		mat_list_by_lv[lv]['armor'][6][seasonCoin] = 450
@@ -764,6 +768,10 @@ function setting_lv_material_weapon(mat_list_by_lv, lv)
 			seasonCoin = "AustejaCertificate" -- 다음 세대
 			misc_reinforce_1 = "misc_boss_202509_weapon_NoTrade" -- 다음 세대 
 			misc_BlessedStone = 'misc_BlessedStone_2'
+		elseif lv == 560 then
+			seasonCoin = "SauleCertificate"
+			misc_reinforce_1 = "misc_boss_EP18_weapon_NoTrade"
+			misc_BlessedStone = 'misc_BlessedStone_2'
 		end
 
 		mat_list_by_lv[lv]['weapon'][6][seasonCoin] = 450
@@ -908,6 +916,10 @@ function setting_lv_material_acc(mat_list_by_lv, lv)
 		seasonCoin = "JurateCertificate" -- 주화
 		medusaReinforceMisc = "misc_ep17_acc_NoTrade" -- 레이드 재료
 		misc_BlessedStone = 'misc_BlessedStone_1'
+	elseif lv == 550 then
+		seasonCoin = "AustejaCertificate" -- 주화
+		medusaReinforceMisc = "misc_ep18_acc_NoTrade" -- 레이드 재료
+		misc_BlessedStone = 'misc_BlessedStone_2'
 	end
 
 	-- 여기서 레벨별 재료를 세팅한다.	
@@ -1149,6 +1161,10 @@ function setting_lv_misc_material(mat_list_by_lv, lv, group)
 			misc1 = "misc_ore28" 
 		elseif lv == 540 then
 			misc1 = "misc_ore29" 
+		elseif lv == 550 then
+			misc1 = "misc_ore29" 
+		elseif lv == 560 then
+			misc1 = "misc_ore30" 
 		end
 
 		mat_list_by_lv[lv][group][1][misc1] = 26
@@ -1323,7 +1339,7 @@ item_goddess_reinforce.get_material_list = function(use_lv, class_type, goal_lv,
 	if item_goddess_reinforce_material_list[use_lv][class_type] == nil then
 		return nil
 	end
-	local except_list = {'misc_BlessedStone', 'misc_BlessedStone_1', 'misc_ore22', 'misc_ore23', 'misc_ore28' }
+	local except_list = {'misc_BlessedStone', 'misc_BlessedStone_1', 'misc_BlessedStone_2', 'misc_ore22', 'misc_ore23', 'misc_ore28' , 'misc_ore29', 'misc_ore30'}
 	-- 포포 부스트 이벤트 아이템일 경우 (이벤트 기간중인 아이템) 축조, 뉴클/시에라 없이 강화 가능하게 한다.
 	if IS_POPOBOOST_REINFORCE_ITEM(IsEventItem, use_lv, popoboost_item_lv, IsPopoboostClear) then
 		local TempPopoboost_Material_List = {}
@@ -1577,10 +1593,20 @@ end
 
 item_goddess_transcend.is_able_to_evolve = function(target_item)
 	local use_lv = TryGetProp(target_item, 'UseLv', 0)
-	local evolved_lv = TryGetProp(target_item, 'EvolvedItemLv', 0)	
+	local group = TryGetProp(target_item, 'GroupName', 'None')
 
-	local group = TryGetProp(target_item, 'GroupName', 'None')	
-	return use_lv >= 460 and use_lv <= evolved_lv and (string.find(group, 'Weapon') ~= nil)
+	if use_lv < 460 or string.find(group, 'Weapon') == nil then
+		return false
+	end
+
+	-- 해당 세대의 진화 테이블이 있어야 진화 대상
+	if GetClass('goddess_evolve', 'Evolve_' .. use_lv) == nil then
+		return false
+	end
+
+	-- 현 세대 진화석이 이미 적용된 무기만 진화 불가.
+	-- 구 조건(use_lv <= EvolvedItemLv)은 미진화(0)와 560 계승본(구세대+10 = UseLv-10)을 걸러내는 버그가 있었음.
+	return IS_EVOLVED_CURRENT_LV(target_item) == false
 end
 
 -- 진화
@@ -1606,14 +1632,31 @@ function GET_EVOLVE_MAT_LIST(lv)
 	return list
 end
 
-function IS_EVOLVED_ITEM(item)		
+-- EvolvedItemLv 인코딩 : (진화석이 부여된 세대 레벨) + 10
+--   미진화        : EvolvedItemLv == UseLv (또는 0)
+--   현 세대 진화  : UseLv + 10
+--   계승된 구세대 : 구세대 UseLv + 10  (= UseLv - 10)
+-- 진화석 계승은 Lv.560 세대부터 적용된다.
+GODDESS_EVOLVE_INHERIT_LV = 560
+
+-- 진화석이 부여된 세대. 0 이면 미진화.
+function GET_EVOLVED_SRC_LV(item)
 	local use_lv = TryGetProp(item, 'UseLv', 0)
-	local evolved_lv = TryGetProp(item, 'EvolvedItemLv', 0)	
-	if evolved_lv > use_lv then
-		return true
-	else
-		return false
+	local evolved_lv = TryGetProp(item, 'EvolvedItemLv', 0)
+	if evolved_lv <= 0 or evolved_lv == use_lv then
+		return 0
 	end
+	return evolved_lv - 10
+end
+
+function IS_EVOLVED_ITEM(item)
+	return GET_EVOLVED_SRC_LV(item) > 0
+end
+
+-- 현 세대 진화석이 적용된 상태인가. (계승본은 false 이므로 재진화 가능)
+function IS_EVOLVED_CURRENT_LV(item)
+	local use_lv = TryGetProp(item, 'UseLv', 0)
+	return use_lv > 0 and GET_EVOLVED_SRC_LV(item) == use_lv
 end
 
 -- 진화 끝
@@ -1637,4 +1680,32 @@ function IS_ABLE_TO_USE_REINFORCE_SCROLL(item, scroll)
 	end
 
 	return false, 'DontUseItem'
+end
+
+function GET_BELT_SHOULDER_DEF_BASE(lv)
+	local cls = GetClassByType('item_goddess_reinforce_' .. lv, 1)
+	if cls == nil then
+		return 0
+	end
+
+	local basicDef = TryGetProp(cls, 'BasicDef', 0)
+	if lv < 560 then
+		return basicDef * 0.5
+	end
+
+	if lv == 560 then
+		local prev = GetClassByType('item_goddess_reinforce_540', 1)
+		return TryGetProp(prev, 'BasicDef', 0) * 0.5 * 1.1
+	end
+
+	local addDefSum = 0
+	for i = 1, 30 do
+		local row = GetClassByType('item_goddess_reinforce_' .. lv, i)
+		if row ~= nil then
+			addDefSum = addDefSum + TryGetProp(row, 'AddDef', 0)
+		end
+	end
+
+	local armor_30_def = basicDef * 0.25 * 1.5 + addDefSum
+	return armor_30_def / 2.25
 end

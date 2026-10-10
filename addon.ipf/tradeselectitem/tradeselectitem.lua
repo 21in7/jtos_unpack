@@ -93,8 +93,27 @@ function OPEN_TRADE_SELECT_ITEM(invItem)
 
 	local NeedItemSlot = frame:GetChild('NeedItemSlot')
 	local NeedItemName = frame:GetChild('NeedItemName')
-	NeedItemName:SetVisible(0)
-	NeedItemSlot:SetVisible(0)
+	-- 여러 개를 모아야 열리는 상자(예: 탐구자의 표식 조각 10개)는 보유/필요 수량을 보여 준다.
+	-- 버튼 위 줄을 쓰므로 그만큼 창을 늘려 목록 마지막 줄과 겹치지 않게 한다.
+	local needCount = tonumber(TryGetProp(cls, 'NeedItemCount', 1)) or 1
+	if needCount > 1 then
+		local haveCount = session.GetInvItemCountByType(itemobj.ClassID)
+		tolua.cast(NeedItemSlot, "ui::CSlot");
+		SET_SLOT_IMG(NeedItemSlot, GET_ITEM_ICON_IMAGE(itemobj, GETMYPCGENDER()))
+		NeedItemSlot:SetTextTooltip(itemobj.Name)
+		if haveCount < needCount then
+			NeedItemName:SetTextByKey('select', '{#FF6060}' .. haveCount .. '{/}')
+		else
+			NeedItemName:SetTextByKey('select', haveCount)
+		end
+		NeedItemName:SetTextByKey('total', needCount)
+		NeedItemName:SetVisible(1)
+		NeedItemSlot:SetVisible(1)
+		frame:Resize(frame:GetWidth(), frame:GetHeight() + 50)
+	else
+		NeedItemName:SetVisible(0)
+		NeedItemSlot:SetVisible(0)
+	end
 	frame:ShowWindow(1);
 end
 
@@ -1035,7 +1054,7 @@ function OPEN_TRADE_SELECT_ITEM_STIRNG_SPLIT(invItem)
 	for i = 1, index do
 		local itemName = TryGetProp(cls, "SelectItemClsMsg_"..i)
 		local conditionfunction = nil;
-		if itemobj.StringArg2 == "popo_special_box" then
+		if TryGetProp(itemobj, 'StringArg2', 'None') == "popo_special_box" then
 			conditionfunction = SET_SELECT_CONDITION_POPOBOOST
 		end
 

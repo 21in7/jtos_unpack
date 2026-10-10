@@ -1182,7 +1182,7 @@ function ON_SKILLABILITY_UPDATE_ABILITY_POINT(frame, msg, argStr, argNum)
     abilitypoint_text:SetTextByKey("value", GetCommaedText(pointAmount));
 end
 
-function SKILLABILITY_TOGGLE_ABILITY(parent, ctrl)
+function SKILLABILITY_TOGGLE_ABILITY(parent, ctrl)    
     local abilName = parent:GetUserValue("ClsName");
     local abilClass = GetClass("Ability", abilName);
     if abilClass == nil then
@@ -1199,7 +1199,7 @@ function SKILLABILITY_TOGGLE_ABILITY(parent, ctrl)
     TOGGLE_ABILITY(abilName)
 end
 
-function TOGGLE_ABILITY(abilName)
+function TOGGLE_ABILITY(abilName)    
     local topFrame = ui.GetFrame("skillability")
 
     local curTime = imcTime.GetAppTime();    
@@ -1210,8 +1210,7 @@ function TOGGLE_ABILITY(abilName)
     elseif prevClickTime + 0.5 > curTime then        
         return
     end
-    
-    -- ?�특?�에 ?�당 ?�킬???�전중이�?on/off�??��? 못하�??�다.    
+        
     if abilName == "Corsair7" and 1 == geClientSkill.MyActorHasCmd('HOOKEFFECT') then
         return;
     end
@@ -1226,9 +1225,9 @@ function TOGGLE_ABILITY(abilName)
 end
 
 function SKILLABILITY_INIT_TOGGLE_ABILITY(parent, ctrl, abilClass, isActive)
-    -- ??�� ?�성?????�성?� ?�성 ?�성??버튼???�보?��???
+    -- 스킬 활성화/비활성화 버튼 초기화
 	if abilClass.AlwaysActive == 'NO' then
-		-- ?�성 ?�성??버튼
+		-- 스킬 비활성화 버튼
 
 	    ctrl:EnableHitTest(0);
 
@@ -1239,10 +1238,22 @@ function SKILLABILITY_INIT_TOGGLE_ABILITY(parent, ctrl, abilClass, isActive)
             end
         end
         
+        local pc = GetMyPCObject();
+        local keyword = TryGetProp(abilClass, "Keyword", "None")
+        local token = StringSplit(keyword, ";")
+        for i = 1, #token do    
+            if token[i] == "NoPvP"  then                
+                if IsPVPField(pc) == 1 or IsPVPServer(pc) == 1 then
+                    ret = false;    
+                end
+                break;
+            end
+        end
+        
         if ret == true then
             ctrl:EnableHitTest(1);
             ctrl:SetCheck(isActive);
-        else  -- ?�정 배�? 조건??만족?�키지 못한?�면 off �??�동 ?�정?�줘???�다.
+        else  -- 특정 조건을 만족하지 못한 경우 off 상태로 변경해준다.
             ctrl:SetCheck(0);
         end    	
         ctrl:ShowWindow(1)

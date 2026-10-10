@@ -1,5 +1,26 @@
 -- inuninfo_category.lua
 -- category
+
+-- Cached lookup: "group_id|raid_type" -> IndunInfoCategory class
+local _indunInfoCategoryCache = nil
+local function _GetIndunInfoCategoryByKey(group_id, raid_type)
+    if _indunInfoCategoryCache == nil then
+        _indunInfoCategoryCache = {}
+        local list, cnt = GetClassList("IndunInfoCategory")
+        if list ~= nil and cnt > 0 then
+            for i = 0, cnt - 1 do
+                local cls = GetClassByIndexFromList(list, i)
+                if cls ~= nil then
+                    local gid = TryGetProp(cls, "GroupID", "None")
+                    local rt = TryGetProp(cls, "RaidType", "None")
+                    _indunInfoCategoryCache[gid.."|"..rt] = cls
+                end
+            end
+        end
+    end
+    return _indunInfoCategoryCache[group_id.."|"..raid_type]
+end
+
 function IS_CHANGEABLE_INDUNINFO_CATEGORY(indun_cls)
     if indun_cls == nil then return false; end
     local group_id = TryGetProp(indun_cls, "GroupID", "None");
@@ -239,21 +260,8 @@ end
 
 -- category : make boss select
 function GET_INDUNINFO_CATEOGRY_CLASS_BY_RAID_TYPE(group_id, raid_type)
-    if group_id == nil or raid_type == nil then return; end
-    local list, cnt = GetClassList("IndunInfoCategory");
-    if list ~= nil and cnt > 0 then
-        for i = 0, cnt - 1 do
-            local class = GetClassByIndexFromList(list, i);
-            if class ~= nil then
-                local cls_group_id = TryGetProp(class, "GroupID", "None");
-                local cls_raid_type = TryGetProp(class, "RaidType", "None");
-                if cls_group_id == group_id and cls_raid_type == raid_type then
-                    return class;  
-                end
-            end
-        end
-    end
-    return nil;
+    if group_id == nil or raid_type == nil then return nil end
+    return _GetIndunInfoCategoryByKey(group_id, raid_type)
 end
 
 function INDUNINFO_MAKE_DETAIL_BOSS_SELECT_BY_RAID_TYPE(frame, indun_list_box, group_id, raid_type)

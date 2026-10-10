@@ -1,0 +1,12 @@
+ClassID,GenType,Lv,Range,GenRange,RespawnTime,MaxPop,Minimap,Hide,UseAIOufOfPC,AnchorCount,UP_ReturnRange,P_MaxDialog,ClassType,Name,UniqueName,QuestName,Tag,Tactics,BTree,SimpleAI,Dialog,Enter,Leave,Save,OnlyPCCheck,SmartGen,Faction,ArgStr1,ArgStr2,ArgStr3,Tendency
+10,10,1,40,-1,60000,1,0,0,0,0,0,0,"Hiddennpc_Q2","","","","","MON_DUMMY","","PORTAL_GREEN","EP18_2_SHADOW_RAID_MAIN_01_QUEST_EXIT","EP18_2_SHADOW_RAID_MAIN_01_QUEST_EXIT","","NO","YES","NO","Neutral","","","",""
+11,11,1,40,-1,60000,1,2,0,0,0,0,0,"Warp_arrow","EP18 망각의 협곡","","","","MON_DUMMY","","","","EP18_2_SHADOW_RAID_MAIN_01_ROKAS_41","","NO","YES","NO","Neutral","","","",""
+12,12,1,40,-1,60000,1,0,0,0,0,0,0,"Hiddennpc_Q2","","","","","MON_DUMMY","","PORTAL_GREEN","EP18_2_SHADOW_RAID_MAIN_01_QUEST","EP18_2_SHADOW_RAID_MAIN_01_QUEST","","NO","YES","NO","Neutral","","","",""
+100,100,1,40,1,60000,1,0,0,0,0,0,0,"ep18_2_npc2","레이나스","","","","","","","EP18_2_D_SHADOW_RAID_MAIN_MQ16_NPC1","","","NO","YES","NO","Neutral","","","",""
+101,101,1,40,1,60000,1,0,0,0,0,0,0,"ep18_2_npc2","레이나스","","","","","","","EP18_2_D_SHADOW_RAID_MAIN_MQ16_NPC2","","","NO","YES","NO","Neutral","","","",""
+102,102,1,40,1,60000,1,0,0,0,0,0,0,"ep18_2_npc3","칼드라","","","","","","","EP18_2_D_SHADOW_RAID_MAIN_MQ17_NPC1","","","NO","YES","NO","Neutral","","","",""
+103,103,1,40,1,60000,1,0,0,0,0,0,0,"ep18_2_npc3","칼드라","","","","","","","EP18_2_D_SHADOW_RAID_MAIN_MQ20_NPC1","","","NO","YES","NO","Neutral","","","",""
+500,500,1,40,1,60000,1,1,0,0,0,0,0,"Hiddennpc_Q2","거짓된 광휘의 날개","","","","","","PORTAL_LIGHT","GODDESS_RAID_LIGHT_URIEL_PORTAL","","","NO","YES","NO","Neutral","","","",""
+501,501,1,40,1,60000,1,1,0,0,0,0,0,"Hiddennpc_Q2","타락한 심판의 날개","","","","","","PORTAL_DARK","GODDESS_RAID_DARK_URIEL_PORTAL","","","NO","YES","NO","Neutral","","","",""
+1000,1000,14,40,1,60000,7,0,0,1,1,0,1,"ep18_2_DragonEgg","용족의 알","","","","MON_DUMMY","","","EP18_2_D_SHADOW_RAID_MAIN_MQ20_BEFORE","","","NO","YES","NO","Neutral","C/77/77/77/255","","",""
+1001,1001,14,40,1,60000,7,0,0,1,1,0,1,"ep18_2_DragonEgg","용족의 알","","","","MON_DUMMY","","","EP18_2_D_SHADOW_RAID_MAIN_MQ20_AFTER","","","NO","YES","NO","Neutral","C/255/255/255/255","AttachEffect/GroundAura_HolyPlace_Yellow_01/0.5/MID","",""

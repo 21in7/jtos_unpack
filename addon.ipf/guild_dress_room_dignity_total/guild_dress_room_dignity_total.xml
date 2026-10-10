@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<uiframe name="guild_dress_room_dignity_total" x="0" y="" width="420" height="715">
+	<frame fullheight="false" fasthide="true" layout_gravity="center center" margin="0 0 0 0" draw="true"/>
+	<skin frameskin="test_skin_01"/>
+	<draw drawtitlebar="false"/>
+	<input moveable="true" hittestframe="true" moveintitlebar="true"/>
+	<option visible="false" hideable="true" closebutton="false" moveable="false" alwaysVisible="false"/>
+	<sound opensound="inven_win_open" closesound="inven_win_close"/>
+	<layer layerlevel="110"/>
+	<script OpenScp="GUILD_DRESS_ROOM_DIGNITY_TOTAL_OPEN" CloseScp="GUILD_DRESS_ROOM_DIGNITY_TOTAL_CLOSE"/>
+  	<userconfig TITLE_MARGIN_Y="50" BODY_MARGIN_Y="10"/>
+	<controls>
+		<groupbox name="title_bg" rect="0 0 413 40" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" image="guild_dress_room_popup_title_bg"/>
+		<richtext name="title" parent="title_bg" margin="0 5 0 0" rect="0 0 200 30" layout_gravity="center top" caption="{@st43}길드의 위엄 효과{/}" fontname="white_16_ol"/>
+		<picture name="question" rect="0 0 28 28" margin="10 7 0 0" layout_gravity="left top" image="guild_dress_room_popup_question" texttooltip="{@st59b}길드 위엄 효과{nl}{@st59s}길드 위엄 효과의 총합을 볼 수 있습니다."/>
+		<picture name="close" rect="0 0 28 28" margin="0 7 10 0" layout_gravity="right top" LBtnUpArgNum="" LBtnUpScp="ui.CloseFrame(&apos;guild_dress_room_dignity_total&apos;)" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="guild_dress_room_popup_close" oversound="button_over" texttooltip="{@st59}길드의 위엄 효과 창을 닫습니다{/}"/>
+		<groupbox name="bg" rect="0 0 420 675" margin="0 40 0 0" layout_gravity="left top"  draw="true" hittestbox="false" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin="market_listbase"/>
+		<richtext name="all_stauts_list_text" rect="0 0 340 30" margin="20 110 0 0" layout_gravity="left top" textalign="left top" fixwidth="true" resizebytext="true" updateparent="false" fontname="black_18" format="%s" param1="value" param1_def=""/>
+		<richtext name="complete_count_text" rect="0 0 420 30" margin="0 0 0 30" layout_gravity="center bottom" textalign="center center" fixwidth="true" resizebytext="true" updateparent="false" fontname="white_18_ol" format="{@st55_hero_count}{s21}완성 : %s{/}" param1="value" param1_def="0"/>
+	</controls>
+</uiframe>

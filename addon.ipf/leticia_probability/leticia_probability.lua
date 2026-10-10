@@ -30,7 +30,7 @@ function GET_LIST_BY_FRAME_TYPE(frame)
     local TypeNum = frame:GetUserIValue("Type")
     local RoundStr = frame:GetUserIValue("Round")
     local Round = tonumber(RoundStr);
-
+    
     local table = {}
     if TypeNum == 1 then
         table = LETICIA_CUBE_ITEM_LIST_BUTTON();
@@ -43,6 +43,13 @@ function GET_LIST_BY_FRAME_TYPE(frame)
     elseif TypeNum == 3 then
         table = GET_GODDESS_CUBE_PROBABILITY("Gacha_Blessed_CUBE_001")
         TopTab:ShowWindow(1); 
+    elseif TypeNum == 4 then
+        table = GET_GODDESS_CUBE_PROBABILITY("Gacha_Blessed_CUBE_001_EVENT")
+        TopTab:ShowWindow(1); 
+    elseif TypeNum == 5 then
+        table = GET_REWARD_GROUP_PROBABILITY("Gacha_Memory_of_Uriel_CUBE_001")
+        RounTab:ShowWindow(0)
+        TopTab:ShowWindow(1)
     else
         table = GET_STEP_GACHA_PROBABILITY_TABLE(Round);
         RounTab:ShowWindow(0)
@@ -118,7 +125,7 @@ end
 function CREATE_LETICIA_PROBABILITY_SLOTS(parent, table)
     local topframe = parent:GetTopParentFrame();
     local TypeNum = topframe:GetUserIValue("Type")
-
+    
     local cnt = parent:GetChildCount() - 1
     local isDiffTable = false;
     if cnt ~= #table then
@@ -150,27 +157,29 @@ function CREATE_LETICIA_PROBABILITY_SLOTS(parent, table)
 
         local ItemCls = GetClassByStrProp("Item", "ClassName", tab[1])
         local ItemName = TryGetProp(ItemCls, "Name", 'None');
+        local grade_text = tab[4]
         
-        if TypeNum == 1 or TypeNum == 3 then
+        if TypeNum ~= 1 and TypeNum ~= 3 and TypeNum ~= 4 and TypeNum ~= 5 then
+            grade_text = grade_text..'F';
+        end
+        
+        if TypeNum == 1 or TypeNum == 3 or TypeNum == 4 then
             inSlotCnt:ShowWindow(0)
             cnt:ShowWindow(1);
         else
             inSlotCnt:ShowWindow(1)
             cnt:ShowWindow(0);
-            tab[4] = tab[4]..'F';
         end
 
 
         name:SetTextByKey("value", ItemName);
         cnt:SetTextByKey("value", tab[2]);
-        grade:SetTextByKey("value", tab[4]);
+        grade:SetTextByKey("value", grade_text);
         percente:SetTextByKey("value", tab[3]);
         inSlotCnt:SetTextByKey("value", tab[2]);
 
-
-        local fullImage = GET_LEGENDEXPPOTION_ICON_IMAGE_FULL(ItemCls);
-
-
+        local fullImage = GET_ITEM_ICON_IMAGE(ItemCls);
+        
         local icon = pic:GetIcon()
         if icon ~= nil then
             icon:SetImage(fullImage)
@@ -178,9 +187,12 @@ function CREATE_LETICIA_PROBABILITY_SLOTS(parent, table)
             icon = CreateIcon(pic);
             icon:SetImage(fullImage)
         end       
-        SET_BALCK_MARKET_TOOLTIP(icon,ItemCls)
-    
-        SET_BALCK_MARKET_ITEM_NAME(maintab,ItemCls)
+        SET_BALCK_MARKET_TOOLTIP(icon,ItemCls)    
+        SET_BALCK_MARKET_ITEM_NAME(maintab,ItemCls)        
+
+        if TypeNum == 4 then            
+            icon:SetTooltipStrArg('copy_prop:TeamBelonging/1;GuildDressRoomItem/1')
+        end
     end
 end
 

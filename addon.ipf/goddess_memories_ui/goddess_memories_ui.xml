@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by IMC (IMCGames Co., Ltd) -->
+<uiframe name="goddess_memories_ui" x="0" y="0" width="1210" height="925">
+	<frame fullheight="false" fasthide="true" layout_gravity="left top" margin="10 40 0 0" draw="true"/>
+	<skin frameskin="None"/>
+	<draw drawtitlebar="false" drawnotitlebar="false"/>
+	<input moveable="true" hittestframe="true" moveintitlebar="false"/>
+	<option visible="false" hideable="true" closebutton="false" moveable="true" alwaysVisible="false"/>
+	<sound opensound="inven_win_open" closesound="inven_win_close"/>
+	<animation frameOpenAnim="chat_balloon_start" frameCloseAnim="chat_balloon_end" margin="-100 -100 0 0"/>
+	<layer layerlevel="95" topmostlayerbyclick="true"/>
+	<script OpenScp="ON_GODDESS_MEMORIES_UI_OPEN" CloseScp="ON_GODDESS_MEMORIES_UI_CLOSE"/>
+	<userconfig DRAW_LIMIT_COUNT="2" DRAW_MARGIN_X="0" DRAW_MARGIN_Y="20" DRAW_SPACE="5" ENABLE_COLOR="FFFFFFFF" DISABLE_COLOR="FF444444" EXEC_BTN_STYLE_START="{@st66e}{s22}" EXEC_BTN_STYLE_END="{/}{/}" LAYER_LEVEL_DRAG_ON="90" LAYER_LEVEL_DRAG_OFF="94" VIDEO_BTN_PLAY_IMAGE="button_play_start" VIDEO_BTN_PAUSE_IMAGE="button_play_halt" REG_SLOT_GAP="45" REG_SLOT_START_Y="70" RESONANCE_REINFORCE_SUCCESS_EFFECT="UI_item_parts2_success" RESONANCE_REINFORCE_SUCCESS_SCALE="8" RESONANCE_REINFORCE_SUCCESS_DURATION="1" RESONANCE_UNLOCK_SUCCESS_EFFECT="UI_light013_spark_blue" RESONANCE_UNLOCK_SUCCESS_SCALE="8" RESONANCE_REINFORCE_FAIL_EFFECT="UI_item_parts2_fail" RESONANCE_REINFORCE_FAIL_SCALE="8" RESONANCE_REINFORCE_FAIL_DURATION="0.5" RESONANCE_REINFORCE_RESULT_TEXT_DURATION="1" VIDEO_BTN_LOCK_IMAGE="popoboost_premium_lock_cursoron"/>
+	<controls>
+		<!-- title -->
+		<groupbox name="bg" rect="0 0 1170 915" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="epi_guide_frame_bg"/>
+		<groupbox name="title_bg" rect="0 0 1210 75" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="epi_guide_frame_top"/>
+		<richtext name="title" parent="title_bg" margin="0 21 0 0" rect="0 0 200 30" layout_gravity="center top" caption="" fontname="white_16_ol"/>
+		<picture name="question" rect="0 0 35 35" margin="30 18 0 0" layout_gravity="left top" image="epi_guide_help_btn" stretch="true" texttooltip=""/>
+		<button name="close" rect="0 0 44 44" margin="0 13 28 0" layout_gravity="right top" LBtnUpArgNum="" LBtnUpScp="ui.CloseFrame(&apos;goddess_memories_ui&apos;)" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="epi_guide_close_btn" oversound="button_over" texttooltip=""/>
+		<!-- list -->
+		<groupbox name="list_bg" rect="0 0 460 798" margin="30 62 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="market_listbase"/>
+		<groupbox name="list_main_bg" parent="list_bg" rect="0 0 460 738" margin="0 0 0 0" layout_gravity="left top" draw="false" skin="None" hittestbox="false" resizebyparent="false" scrollbar="true"/>
+		<groupbox name="list_filter_bg" parent="list_bg" rect="0 0 460 60" margin="0 0 0 0" layout_gravity="left bottom" draw="false" skin="None" hittestbox="false" resizebyparent="false" scrollbar="false"/>
+		<button name="filter_name_btn" parent="list_filter_bg" rect="0 0 140 35" margin="10 0 0 0" layout_gravity="left center" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" caption="" image="resonance_list_filter_btn" oversound="button_over" stretch="true" omitbywidth="true" texttooltip="" LBtnUpScp="LBTN_SORT_GODDESS_MEMORIES_UI" LBtnUpArgNum="2"/>
+		<button name="filter_level_btn" parent="list_filter_bg" rect="0 0 140 35" margin="160 0 0 0" layout_gravity="left center" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" caption="" image="resonance_list_filter_btn" oversound="button_over" stretch="true" omitbywidth="true" texttooltip="" LBtnUpScp="LBTN_SORT_GODDESS_MEMORIES_UI" LBtnUpArgNum="3"/>
+		<button name="filter_resonance_btn" parent="list_filter_bg" rect="0 0 140 35" margin="310 0 0 0" layout_gravity="left center" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" caption="" image="resonance_list_filter_btn" oversound="button_over" stretch="true" omitbywidth="true" texttooltip="" LBtnUpScp="LBTN_SORT_GODDESS_MEMORIES_UI" LBtnUpArgNum="4"/>
+		<!-- detail -->
+		<groupbox name="detail_bg" rect="0 0 693 730" margin="490 130 0 0" layout_gravity="left top" draw="false" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+		<groupbox name="detail_tab_bg" rect="0 0 693 60" margin="490 70 0 0" layout_gravity="left top" draw="false" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+		<tab name="detail_tab" parent="detail_tab_bg" rect="0 0 693 40" margin="0 25 0 0" layout_gravity="left top" LBtnDownScp="LBTN_TAB_DETAIL_GODDESS_MEMORIES_UI" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="inven_arrange" fixwidth="true" itemspc="5" oversound="button_cursor_over_2" skin="tab3"/>
+		<tabitem name="detail_tab_1" parent="detail_tab" caption="" width="160" layout_gravity="left bottom" texttooltip=""/>
+		<tabitem name="detail_tab_2" parent="detail_tab" caption="" width="160" layout_gravity="left bottom" texttooltip=""/>
+		<!-- detail - info -->
+		<groupbox name="detail_skill_info_bg" parent="detail_bg" rect="0 0 693 730" margin="0 0 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="market_listbase"/>
+		<groupbox name="detail_skill_info_title_bg" parent="detail_skill_info_bg" rect="0 0 693 68" margin="0 0 0 0" layout_gravity="center top" draw="false" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+		<labelline name="detail_skill_info_title_line" parent="detail_skill_info_bg" rect="0 0 660 3" margin="0 72 0 0" skin="labelline_def_3" layout_gravity="center top"/>
+		<slot name="skill_info_slot" parent="detail_skill_info_bg" rect="0 0 180 180" margin="50 85 0 0" layout_gravity="left top" movepop="false" picksound="icon_pick_up" skin="quickslot_navy_skin"/>
+		<picture name="skill_info_pic" parent="skill_info_slot" rect="0 0 170 170" margin="0 0 0 0" layout_gravity="center center" movepop="false" picksound="icon_pick_up" stretch="true"/>
+		<picture name="skill_info_pic_lock" parent="skill_info_slot" rect="0 0 40 40" margin="0 0 0 0" layout_gravity="center center" movepop="false" hittest="true" stretch="true" image="popoboost_premium_lock_cursoron"/>
+		<richtext name="skill_desc_top_text" parent="detail_skill_info_bg" margin="25 275 0 0" rect="0 0 230 35" layout_gravity="left top" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="%s" param1="desc" param1_def="" fontname="black_18_b" textalign="left center"/>
+		<richtext name="skill_cooldown_text" parent="detail_skill_info_bg" margin="25 310 0 0" rect="0 0 230 25" layout_gravity="left top" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="%s" param1="text" param1_def="" fontname="black_18_b" textalign="center center"/>
+		<groupbox name="skill_video_bg" parent="detail_skill_info_bg" rect="0 0 380 250" margin="275 80 0 0" layout_gravity="left top" draw="true" skin="epi_guide_frame_bg" hittestbox="false" scrollbar="false"/>
+		<video name="skill_video" parent="skill_video_bg" rect="0 0 360 230" margin="0 0 0 0" layout_gravity="center center" video="None" playrepeat="true" stretch="true"/>
+		<picture name="skill_video_overlay" parent="skill_video_bg" rect="0 0 360 230" margin="0 0 0 0" layout_gravity="center center" image="Map_Resonance_Zawra" hittest="false" stretch="false"/>
+		<groupbox name="skill_video_hit_area" parent="skill_video_bg" rect="0 0 380 250" margin="0 0 0 0" layout_gravity="left top" draw="false" skin="None" hittestbox="true" LBtnUpScp="TOGGLE_SKILL_VIDEO_GODDESS_MEMORIES_UI" MouseOnScp="SHOW_SKILL_VIDEO_CTRL_GODDESS_MEMORIES_UI" MouseOutScp="HIDE_SKILL_VIDEO_CTRL_GODDESS_MEMORIES_UI" scrollbar="false"/>
+		<picture name="skill_video_play_btn" parent="skill_video_hit_area" rect="0 0 60 60" margin="0 0 0 0" layout_gravity="center center" image="button_play_start" hittest="false" stretch="true"/>
+		<!-- detail - mgr -->
+		<groupbox name="detail_skill_mgr_bg" parent="detail_skill_info_bg" rect="0 0 660 380" margin="0 345 0 0" layout_gravity="center top" resizebyparent="false" skin="epi_guide_frame_bg" scrollbar="false"/>
+		<groupbox name="skill_reinforce_bg" parent="detail_skill_mgr_bg" rect="0 0 410 375" margin="0 5 0 0" layout_gravity="left top" resizebyparent="false" skin="None" scrollbar="false"/>
+		<picture name="skill_mgr_pic" parent="skill_reinforce_bg" rect="0 0 130 130" margin="60 10 0 0" layout_gravity="left top" image="resonance_skill_reinforce_slot_0" hittest="false" stretch="true"/>
+		<richtext name="skill_cur_level_text" parent="skill_mgr_pic" margin="0 5 0 0" rect="0 0 130 35" layout_gravity="center center" format="{@st66e}{s18}Lv.%s" param1="level" param1_def="0" textalign="center center"/>
+		<picture name="skill_reinforce_arrow_pic" parent="skill_reinforce_bg" rect="0 0 40 40" margin="190 60 0 0" layout_gravity="left top" image="gold_arrow_right" hittest="false" stretch="true"/>
+		<picture name="skill_mgr_next_pic" parent="skill_reinforce_bg" rect="0 0 130 130" margin="230 10 0 0" layout_gravity="left top" image="resonance_skill_reinforce_slot_1" hittest="false" stretch="true"/>
+		<richtext name="skill_next_level_text" parent="skill_mgr_next_pic" margin="0 5 0 0" rect="0 0 130 35" layout_gravity="center center" format="{@st71orbd16}{s18}Lv.%s" param1="level" param1_def="1" textalign="center center"/>
+		<richtext name="skill_max_level_text" parent="skill_mgr_next_pic" margin="0 5 0 0" rect="0 0 130 35" layout_gravity="center center" format="{@st71orbd16}{s18}Lv.%s" param1="text" param1_def="Max" textalign="center center"/>
+		<button name="skill_reinforce_rate_btn" parent="skill_reinforce_bg" rect="0 0 160 35" margin="85 145 0 0" layout_gravity="left top" resizebyparent="false" image="epi_guide_title_btn"/>
+		<richtext name="skill_reinforce_rate_text" parent="skill_reinforce_rate_btn" margin="0 0 0 0" rect="0 0 160 25" layout_gravity="center center" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="{@st71orbd16}{s18}%s{/}{/}" param1="text" param1_def="" textalign="center center"/>
+		<richtext name="skill_reinforce_max_rate_text" parent="skill_reinforce_rate_btn" margin="0 0 0 0" rect="0 0 160 25" layout_gravity="center center" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="{@st71orbd16}{s18}%s{/}{/}" param1="text" param1_def="" textalign="center center"/>
+		<groupbox name="skill_reinforce_desc_bg" parent="skill_reinforce_bg" rect="0 0 190 175" margin="10 185 0 0" layout_gravity="left top" resizebyparent="false" skin="epi_guide_frame_1" scrollbar="false"/>
+		<picture name="skill_reinforce_desc_title_pic" parent="skill_reinforce_desc_bg" rect="0 0 190 35" margin="0 0 0 0" layout_gravity="left top" resizebyparent="false" image="epi_guide_title_btn" scrollbar="false"/>
+		<richtext name="skill_reinforce_desc_title_text" parent="skill_reinforce_desc_title_pic" margin="0 0 0 0" rect="0 0 160 25" layout_gravity="center center" format="{@st66e}{s18}%s{/}{/}" param1="title" param1_def="" textalign="center center"/>
+		<groupbox name="skill_reinforce_desc_list_bg" parent="skill_reinforce_desc_bg" rect="0 0 190 145" margin="0 35 0 0" layout_gravity="left top" resizebyparent="false" skin="None" scrollbar="true"/>
+		<groupbox name="skill_reinforce_next_desc_bg" parent="skill_reinforce_bg" rect="0 0 190 175" margin="215 185 0 0" layout_gravity="left top" resizebyparent="false" skin="epi_guide_frame_1" scrollbar="false"/>
+		<picture name="skill_reinforce_next_desc_title_pic" parent="skill_reinforce_next_desc_bg" rect="0 0 190 35" margin="0 0 0 0" layout_gravity="left top" resizebyparent="false" image="epi_guide_title_btn"/>
+		<richtext name="skill_reinforce_next_desc_title_text" parent="skill_reinforce_next_desc_title_pic" margin="0 0 0 0" rect="0 0 160 25" layout_gravity="center center" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="{@st71orbd16}{s18}%s{/}{/}" param1="title" param1_def="" textalign="center center"/>
+		<groupbox name="skill_reinforce_next_desc_list_bg" parent="skill_reinforce_next_desc_bg" rect="0 0 190 145" margin="0 35 0 0" layout_gravity="left top" resizebyparent="false" skin="None" scrollbar="true"/>
+		<groupbox name="skill_reinforce_info_bg" parent="detail_skill_mgr_bg" rect="0 0 250 375" margin="410 0 0 0" layout_gravity="left top" resizebyparent="false" skin="None" scrollbar="false"/>
+		<groupbox name="skill_reinforce_mtrl_bg" parent="skill_reinforce_info_bg" rect="0 0 250 290" margin="0 0 0 0" layout_gravity="left top" resizebyparent="false" skin="None" scrollbar="false"/>
+		<slot name="skill_mtrl_slot" parent="skill_reinforce_mtrl_bg" rect="0 0 130 130" margin="0 45 0 0" layout_gravity="center top" hittestbox="true" skin="quickslot_navy_skin" DropScp="DROP_REINFORCE_RESONANCE_SKILL_MTRL_REG_GODDESS_MEMORIES_UI" RBtnUpScp="CANCEL_REINFORCE_RESONANCE_SKILL_MTRL_REG_GODDESS_MEMORIES_UI"/>
+		<button name="skill_mtrl_slot_btn" parent="skill_mtrl_slot" margin="0 0 0 0" rect="0 0 130 130" layout_gravity="center center" LBtnUpScp="LBTN_REINFORCE_RESONANCE_SKILL_MTRL_REG_GODDESS_MEMORIES_UI" DropScp="DROP_REINFORCE_RESONANCE_SKILL_MTRL_REG_GODDESS_MEMORIES_UI" texttooltip="" image="itemcraft_btn" clicksound="button_click_big_2" oversound="button_cursor_over_3" stretch="true"/>
+		<richtext name="skill_mtrl_slot_need_count_text" parent="skill_mtrl_slot" rect="0 0 64 20" margin="0 0 5 5" format="{@st41b}x%s{/}" layout_gravity="right bottom" textalign="right center" resizebytext="false" fixwidth="true" hittest="false" param1="count" param1_def="1" autofontsizebywidth="63"/>
+		<richtext name="skill_mtrl_text" parent="skill_reinforce_mtrl_bg" margin="0 195 0 0" rect="0 0 250 35" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" layout_gravity="center top" format="%s" fontname="black_20_b" param1="name" param1_def="" textalign="center center"/>
+		<richtext name="skill_mtrl_cur_count_text" parent="skill_reinforce_mtrl_bg" margin="0 250 0 0" rect="0 0 330 35" layout_gravity="center top" fixwidth="true" omitbywidth="true" ellipsistexttooltip="true" hittest="true" format="{@st71orbd16}{s20}%s{/}" fontname="black_20_b" param1="text" param1_def="" textalign="center center"/>
+		<button name="skill_reinforce_btn" parent="skill_reinforce_info_bg" rect="0 0 180 50" margin="0 0 0 30" layout_gravity="center bottom" image="epi_guide_reward_btn" LBtnUpScp="LBTN_REINFORCE_RESONANCE_SKILL_BTN_GODDESS_MEMORIES_UI" caption="" omitbywidth="true" texttooltip=""/>
+		<picture name="skill_reinforce_success_skin" parent="detail_skill_info_bg" rect="0 0 380 180" margin="30 340 0 0" layout_gravity="left top" resizebyparent="false" image="BnYellow_skin" stretch="true" visible="false"/>
+		<picture name="skill_reinforce_success_text" parent="skill_reinforce_success_skin" rect="0 0 330 133" hittest="false" image="card_reinforce_SUCCESS" margin="0 15 0 0" stretch="false" layout_gravity="center top" visible="false"/>
+		<groupbox name="skill_reinforce_fail_skin" parent="detail_skill_info_bg" rect="0 0 380 160" margin="30 350 0 0" layout_gravity="left top" resizebyparent="false" draw="true" skin="mission_fail_name" scrollbar="false" visible="false"/>
+		<picture name="skill_reinforce_faile_text" parent="skill_reinforce_fail_skin" rect="0 0 330 133" hittest="false" image="card_reinforce_FAIL" margin="0 10 0 0" stretch="false" layout_gravity="center top" visible="false"/>
+		<!-- detail - reg -->
+		<groupbox name="detail_skill_reg_bg" parent="detail_bg" rect="0 0 693 730" margin="0 0 0 0" layout_gravity="left top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="market_listbase"/>
+		<groupbox name="detail_skill_select_bg" parent="detail_skill_reg_bg" rect="0 0 660 450" margin="0 10 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="true" skin="epi_guide_frame_bg"/>
+		<groupbox name="detail_skill_reg_slot_bg" parent="detail_skill_reg_bg" rect="0 0 660 265" margin="0 460 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="true" skin="epi_guide_frame_1"/>
+		<picture name="detail_skill_reg_slot_bg_title_pic" parent="detail_skill_reg_slot_bg" rect="0 0 660 45" margin="0 0 0 0" layout_gravity="center top" resizebyparent="false" image="epi_guide_title_btn" stretch="true"/>
+		<richtext name="detail_skill_reg_slot_bg_title_text" parent="detail_skill_reg_slot_bg_title_pic" margin="0 0 0 0" rect="0 0 660 45" layout_gravity="center center" format="{@st71orbd16}{s22}%s{/}{/}" param1="title" param1_def="" textalign="center center"/>
+		<!-- guide -->
+		<groupbox name="footer_guide_bg" parent="bg" rect="0 0 1150 40" margin="0 0 0 8" layout_gravity="center bottom" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" skin="None"/>
+		<richtext name="footer_guide_text" parent="footer_guide_bg" rect="0 0 1100 40" margin="10 0 0 0" layout_gravity="left center" format="%s" param1="desc" param1_def="" fontname="white_16_b" textalign="center center" fixwidth="true" multiline="false" hittest="true" slideshow="true"/>
+	</controls>
+</uiframe>

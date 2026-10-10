@@ -1,0 +1,11 @@
+ClassID,GenType,Lv,Range,GenRange,RespawnTime,MaxPop,Minimap,Hide,UseAIOufOfPC,AnchorCount,UP_ReturnRange,P_MaxDialog,ClassType,Name,UniqueName,QuestName,Tag,Tactics,BTree,SimpleAI,Dialog,Enter,Leave,Save,OnlyPCCheck,SmartGen,Faction,ArgStr1,ArgStr2,ArgStr3,Tendency
+1,1,0,40,25,0,35,0,0,0,0,0,0,"ep18_1_Tiny_mage_brown","","","","","","","","","","","NO","YES","NO","Monster","SmartGen","","",""
+2,2,0,40,25,0,15,0,0,0,0,0,0,"ep18_1_Spion_mage_white","","","","","","","","","","","NO","YES","NO","Monster","SmartGen","","",""
+3,3,0,40,25,0,5,0,0,0,0,0,0,"ep18_1_Harugal_blue","","","","","","","","","","","NO","YES","NO","Monster","","","",""
+4,4,0,40,30,0,55,0,0,0,0,0,0,"ep18_1_Kepari_purple","","","","","","","","","","","NO","YES","NO","Monster","SmartGen","","",""
+5,5,1,40,-1,60000,1,2,0,0,0,0,0,"Warp_arrow","EP18 카듀멜 절벽","","","","MON_DUMMY","","","","EP18_1_TABLELAND74_TABLELAND73","","NO","YES","NO","Neutral","","","",""
+7,7,1,40,-1,60000,1,2,0,0,0,0,0,"Warp_arrow","칼레이마스 접견소","","","","MON_DUMMY","","","","EP18_1_TABLELAND74_PRISON78","","NO","YES","NO","Neutral","","","",""
+48,1001,1,40,1,60000,1,2,0,0,0,0,0,"Warp_arrow","내성벽 제 8구역","","","","","","","","TABLELAND74_CASTLE_20_3","","NO","YES","NO","Neutral","","","",""
+100,100,1,40,1,60000,1,0,0,0,0,0,0,"npc_uriel_cat","엘","","","","MON_DUMMY","","","EP18_1_F_TABLELAND_74_MQ16_NPC","","","NO","YES","NO","Neutral","Anim/astd","","",""
+101,101,1,40,1,60000,1,1,0,0,0,0,0,"Hiddennpc_Q2","봉인된 용의 고원 - 즈메이","","","","","","PORTAL_GREEN","GODDESS_RAID_ZMEI_PORTAL","","","NO","YES","NO","Neutral","","","",""
+102,102,1,60,-1,60000,1,0,0,0,0,0,0,"HiddenTrigger","UnvisibleName","","","","MON_DUMMY","","","EP18_1_F_TABLELAND_74_MQ17_TRIGGER","EP18_1_F_TABLELAND_74_MQ17_TRIGGER","","NO","YES","NO","Neutral","","","",""

@@ -13,7 +13,7 @@
 	<userconfig TP_IMG="icon_item_tpBox_30" ITEM_LIST_INTERVAL="-3"/>
 	<controls>
 		<groupbox name="headerBox" rect="0 0 862 72" margin="0 0 0 0" layout_gravity="left top" skin="TPshop_title"/>
-		<richtext name="headerText" rect="0 0 300 30" parent="headerBox" margin="0 0 0 0" layout_gravity="center center" caption="{@st43}{s22}여신의 축복{/}"/>
+		<richtext name="headerText" rect="0 0 300 30" parent="headerBox" margin="0 0 0 0" layout_gravity="center center" format="{@st43}{s22}%s{/}" param1="name" param1_def="여신의 축복"/>
 		<button name="closeBtn" rect="0 0 60 60" margin="0 15 5 0" layout_gravity="right top" image="testclose_button" LBtnUpScp="ui.CloseFrame('blessed_goddess_cube')"/>
 		<picture name="cubeBox" rect="0 0 450 345" margin="13 70 0 0" layout_gravity="left top" image="cube_item_bg" stretch="true" skin="None"/>
 		<picture name="cubePic" rect="0 0 200 200" parent="cubeBox" margin="0 0 0 0" layout_gravity="center center" image="testclose_button" stretch="true"/>

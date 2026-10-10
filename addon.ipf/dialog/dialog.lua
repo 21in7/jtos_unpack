@@ -62,8 +62,8 @@ function DIALOG_SHOW_DIALOG_TEXT(frame, text, titleName, voiceName)
 
 	local spaceObj = GET_CHILD(dialogFrame, "space", "ui::CAnimPicture");
 	spaceObj:PlayAnimation();
-
-	local ViewText = string.format('{s20}{b}{#1f100b}' .. text);
+	
+	local ViewText = string.format('{s20}{b}{#1f100b}%s', text);
 	textObj:ClearText();
 	textObj:SetText(ViewText);
 	textObj:SetVoiceName(voiceName);
@@ -85,7 +85,7 @@ function DIALOG_TEXTVIEW(frame, msg, argStr)
 		local dd = string.find(argStr, "\\");
 		if dd ~= nil then
 			local npcName = string.sub(argStr, 1, dd - 1);
-			npcDialog = GetClass( 'DialogText', npcName);
+			npcDialog = GetClass('DialogText', npcName);
 
 			local dd = string.find(argStr, "\\");
 			argStr = string.sub(argStr, dd + 1);
@@ -105,7 +105,7 @@ function DIALOG_TEXTVIEW(frame, msg, argStr)
 		text = argStr;
 	end
     text = ui.HighlightText(text, "{#003399}", argStr)
-
+	
 	if DialogTable ~= nil then
 		if DialogTable.Caption ~= 'None' then
 			titleName = DialogTable.Caption;
@@ -127,7 +127,7 @@ function DIALOG_TEXTVIEW(frame, msg, argStr)
 end
 
 function DIALOG_ON_MSG(frame, msg, argStr, argNum)
-	CLOSE_EVENT_SANTA_GAMBLE();
+	-- CLOSE_EVENT_SANTA_GAMBLE();
 	
 	frame:Invalidate();
 

@@ -19,7 +19,7 @@ local function make_skill_list()
             local name = TryGetProp(cls, 'ClassName', 'None')
             local ratio = TryGetProp(cls, 'Ratio', 100)
 
-            for start_lv = 480, 540, term do
+            for start_lv = 480, 580, term do
                 local min = 1
                 local max = TryGetProp(cls, 'MaxLevel', 0)
                 if min > 0 and max > 0 then
@@ -126,6 +126,11 @@ shared_common_skill_enchant.get_cost = function(armor)
         local cost = {}
         cost['AustejaCertificate'] = 20000
         cost['common_skill_enchant_jewal_480'] = 1        
+        return cost;
+    elseif lv == 560 then
+        local cost = {}
+        cost['SauleCertificate'] = 20000
+        cost['common_skill_enchant_jewal_480'] = 1
         return cost;
     end
 

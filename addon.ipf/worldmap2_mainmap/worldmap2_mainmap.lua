@@ -341,6 +341,11 @@ function WORLDMAP2_MAINMAP_DRAW_HARD_EPISODE(frame, mapData)
 	local imageName = mapData.ImageName
 	local imageSize = ui.GetSkinImageSize(imageName)
 
+    if imageName == "None" then 
+        WORLDMAP2_MAINMAP_DRAW_SUB_EPISODE(frame, mapData) 
+        return
+    end
+
 	local episodeSet = frame:CreateOrGetControlSet("episode_set", episode, ui.CENTER_HORZ, ui.CENTER_VERT, x, y, 0, 0)
 	local episodeImg = AUTO_CAST(episodeSet:GetChild("episode_img"))
 	local episodeBtn = AUTO_CAST(episodeSet:GetChild("episode_btn"))

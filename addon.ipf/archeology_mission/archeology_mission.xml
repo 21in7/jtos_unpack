@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="archeology_mission" x="0" y="0" width="650" height="650">
+    <frame fullheight="false" fasthide="true" layout_gravity="center center" margin="0 0 505 0"/>
+    <draw drawtitlebar="false"/>
+    <skin frameskin="none"/>
+    <input maxwidth="1280" moveable="false"/>
+    <effect open="character_item_window_open" close="character_item_window_close"/>
+    <layer layerlevel="100"/>
+    <option closebutton="false"/>
+    <sound opensound="window_open" closesound="window_close"/>
+    <script OpenScp="OPEN_ARCHEOLOGY_MISSION" CloseScp="CLOSE_ARCHEOLOGY_MISSION"/>
+    <controls>
+        <groupbox name="bg" rect="0 0 650 630" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" resizebyresolution="true" scrollbar="false" skin="archeology_ui_main_frame"/>
+        <groupbox name="title_bg" parent="bg" rect="0 0 620 65" margin="0 0 0 0" layout_gravity="center top" draw="false" hittestbox="false" skin=""/>
+        <picture name="title_art" parent="title_bg" rect="0 0 512 65" margin="0 0 0 0" layout_gravity="center top" image="" hittest="false"/>
+        <richtext name="richtext_1" parent="title_bg" rect="0 0 530 36" margin="0 14 0 0" layout_gravity="center top" drawbackground="false" fixwidth="true" fontname="brown_20_b" resizebytext="false" textalign="center center" format="{#3A281B}{s22}%s{/}" param1="title" param1_def="[Lv.530] 유물 탐사 의뢰" autofontsizebywidth="520"/>
+        <button name="close" parent="bg" rect="0 0 42 42" margin="0 20 20 0" layout_gravity="right top" LBtnUpScp="ui.CloseFrame('archeology_mission')" oversound="button_over" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="archeology_ui_close_btn"/>
+        <groupbox name="gbox" parent="bg" rect="0 0 620 570" margin="0 64 0 0" layout_gravity="center top" draw="false" hittestbox="false" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin="None"/>
+        <richtext name="selection_guide" parent="gbox" rect="0 0 600 28" margin="10 0 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_18_b" textalign="center center" format="{#3A281B}{s18}%s{/}" param1="guide" param1_def="탐사 지역을 선택하세요"/>
+        <richtext name="selection_note" parent="gbox" rect="0 0 600 22" margin="10 29 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="st101lightbrown_16_f" textalign="center center" format="지역 특성에 따라 탐사 포탈의 전투와 추가 보상이 달라집니다."/>
+        <groupbox name="candidate_gbox" parent="gbox" rect="0 0 620 330" margin="0 55 0 0" layout_gravity="center top" draw="true" hittestbox="true" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin=""/>
+        <picture name="pic" parent="gbox" rect="0 0 312 312" margin="0 55 0 0" layout_gravity="center top" changecursor="false" hittest="false" image="archeology_ui_symbol_card" stretch="true"/>
+        <groupbox name="permit_panel" parent="gbox" rect="0 0 600 96" margin="0 392 0 0" layout_gravity="center top" draw="true" hittestbox="true" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin="archeology_ui_description_panel"/>
+        <richtext name="permit_title" parent="permit_panel" rect="0 0 110 22" margin="12 7 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_16_b" textalign="left center" format="의뢰 준비"/>
+        <slot name="slot" parent="permit_panel" rect="0 0 58 58" margin="18 33 0 0" layout_gravity="left top" movepop="false" dropsound="icon_get_down" picksound="icon_pick_up" DropScp="ARCHEOLOGY_MISSION_DROP_ITEM" skin="invenslot2" LBtnUpScp="ARCHEOLOGY_MISSION_SLOT_LBTN_CLICK" RBtnUpScp="ARCHEOLOGY_MISSION_INIT"/>
+        <picture name="slot_bg_image" parent="slot" rect="0 0 32 32" margin="0 0 0 0" layout_gravity="center center" hittest="false" image="plus_button_plusimag" stretch="true" oversound="button_over"/>
+        <richtext name="text_itemname" parent="permit_panel" rect="0 0 470 26" margin="92 38 0 0" layout_gravity="left top" hittestbox="false" textalign="left center" fontname="brown_18_b" fixwidth="true" drawbackground="false" format="%s" param1="name" param1_def=""/>
+        <richtext name="text_putonitem" parent="permit_panel" rect="0 0 470 26" margin="92 38 0 0" layout_gravity="left top" hittestbox="false" textalign="left center" fontname="st101lightbrown_16_f" fixwidth="true" drawbackground="false" format="필요한 재료를 등록해 주세요"/>
+        <richtext name="richtext_2" parent="permit_panel" rect="0 0 470 26" margin="92 63 0 0" layout_gravity="left top" drawbackground="false" fixwidth="true" fontname="brown_14" textalign="left center" format="필요 아이템  %s  × %s" param1="value1" param1_def="" param2="value2" param2_def="0" autofontsizebywidth="460"/>
+        <button name="send_ok" parent="gbox" rect="0 0 220 50" margin="0 0 0 18" layout_gravity="center bottom" LBtnUpScp="ARCHEOLOGY_MISSION_EXECUTE" image="archeology_ui_action_btn" stretch="false" format="{@st41b}{s18}%s" param1="value" param1_def="선택한 지역 탐사" oversound="button_cursor_over_3" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big"/>
+    </controls>
+</uiframe>

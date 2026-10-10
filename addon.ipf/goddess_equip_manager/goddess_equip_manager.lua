@@ -28,6 +28,12 @@ function GODDESS_EQUIP_MANAGER_ON_INIT(addon, frame)
 	addon:RegisterMsg('MSG_SUCCESS_GODDESS_CONVERT_EXEC', 'ON_SUCCESS_GODDESS_CONVERT_EXEC')
 
 	addon:RegisterMsg('ON_UI_TUTORIAL_NEXT_STEP', 'GODDESS_EQUIP_UI_TUTORIAL_CHECK')
+
+	-- 업그레이드/스킬 연성 통합 탭 결과 수신
+	addon:RegisterMsg('COMMON_ACC_UPGRADE_RESULT', 'GODDESS_MGR_ON_UPGRADE_RESULT')
+	addon:RegisterMsg('COMMON_EQUIP_UPGRADE_RESULT', 'GODDESS_MGR_ON_UPGRADE_RESULT')
+	addon:RegisterMsg('MSG_SUCCESS_ENCHANT_SKILL', 'GODDESS_MGR_ON_SKENCH_RESULT')
+	addon:RegisterMsg('MSG_FAIL_ENCHANT_SKILL', 'GODDESS_MGR_ON_SKENCH_RESULT')
 end
 
 function TOGGLE_GODDESS_EQUIP_MANAGER()
@@ -48,12 +54,12 @@ local managed_slot_list = {
 	{
 		SlotName = 'RH',
 		SkinName = 'rh',
-		ClMsg = 'RH',
+		ClMsg = 'WeaponSet1_Main',
 	},
 	{
 		SlotName = 'LH',
 		SkinName = 'lh',
-		ClMsg = 'LH',
+		ClMsg = 'WeaponSet1_Sub',
 	},	
 	{
 		SlotName = 'SHIRT',
@@ -78,12 +84,12 @@ local managed_slot_list = {
 	{
 		SlotName = 'RH_SUB',
 		SkinName = 'rh',
-		ClMsg = 'RH_SUB',
+		ClMsg = 'WeaponSet2_Main',
 	},
 	{
 		SlotName = 'LH_SUB',
 		SkinName = 'lh',
-		ClMsg = 'LH_SUB',
+		ClMsg = 'WeaponSet2_Sub',
 	},
 }
 
@@ -114,22 +120,22 @@ local managed_weapon_slot_list = {
 	{
 		SlotName = 'RH',
 		SkinName = 'rh',
-		ClMsg = 'RH',
+		ClMsg = 'WeaponSet1_Main',
 	},
 	{
 		SlotName = 'LH',
 		SkinName = 'lh',
-		ClMsg = 'LH',
+		ClMsg = 'WeaponSet1_Sub',
 	},		
 	{
 		SlotName = 'RH_SUB',
 		SkinName = 'rh',
-		ClMsg = 'RH_SUB',
+		ClMsg = 'WeaponSet2_Main',
 	},
 	{
 		SlotName = 'LH_SUB',
 		SkinName = 'lh',
-		ClMsg = 'LH_SUB',
+		ClMsg = 'WeaponSet2_Sub',
 	},
 }
 
@@ -260,7 +266,13 @@ function GODDESS_EQUIP_UI_TUTORIAL_CHECK(frame, msg, arg_str, arg_num)
 		local reforge_index = reforge_tab:GetSelectItemIndex()
 		if reforge_index == 0 then
 			GODDESS_REINFORCE_TUTORIAL_OPEN(frame, open_flag)
-		elseif reforge_index == 1 then
+		else
+			TUTORIAL_TEXT_CLOSE(frame)
+		end
+	elseif main_index == 6 then
+		local legacy_tab = GET_CHILD_RECURSIVELY(frame, "legacy_tab")
+		local legacy_index = legacy_tab:GetSelectItemIndex()
+		if legacy_index == 0 then
 			GODDESS_ENCHANT_TUTORIAL_OPEN(frame, open_flag)
 		else
 			TUTORIAL_TEXT_CLOSE(frame)
@@ -288,6 +300,8 @@ function GODDESS_MGR_TAB_CHANGE(parent, tab)
 end
 
 function TOGGLE_GODDESS_EQUIP_MANAGER_TAB(frame, index)
+	GODDESS_MGR_SET_REFORGE_SLOT_PANEL(frame, 0)
+
 	if index == 0 then
 		GODDESS_MGR_REFORGE_OPEN(frame)
 	elseif index == 1 then
@@ -300,6 +314,8 @@ function TOGGLE_GODDESS_EQUIP_MANAGER_TAB(frame, index)
 		GODDESS_MGR_INHERIT_OPEN(frame)
 	elseif index == 5 then
 		GODDESS_MGR_CONVERT_OPEN(frame)
+	elseif index == 6 then
+		GODDESS_MGR_LEGACY_OPEN(frame)
 	end
 
 	GODDESS_EQUIP_UI_TUTORIAL_CHECK(frame)
@@ -336,9 +352,6 @@ function GODDESS_MGR_REFORGE_CLEAR(frame)
 	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
 	ref_item_reinf_text:SetTextByKey('value', 0)
 
-	local ref_item_trans_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_trans_text')
-	ref_item_trans_text:SetTextByKey('value', 0)
-
 	local tuto_icon_1 = GET_CHILD_RECURSIVELY(frame, "UITUTO_ICON_1")
 	local tuto_prop_1 = GetUITutoProg("UITUTO_GODDESSEQUIP1")
 	if tuto_prop_1 == 100 then
@@ -367,9 +380,9 @@ function GODDESS_MGR_REFORGE_INV_RBTN(item_obj, slot, guid)
 		local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
 		local index = reforge_tab:GetSelectItemIndex()				
 		
-		if index == 3 then
+		if index == 3 then	-- 진화
 			local obj = GetIES(inv_item:GetObject())
-			if IS_EVOLVED_ITEM(obj) == true then
+			if IS_EVOLVED_CURRENT_LV(obj) == true then
 				ui.SysMsg(ClMsg('EvolvedWeapon'))
 				return
 			end
@@ -379,15 +392,6 @@ function GODDESS_MGR_REFORGE_INV_RBTN(item_obj, slot, guid)
 			end
 		end
 
-		local main_slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
-		local main_guid = main_slot:GetUserValue('ITEM_GUID')
-		if index == 1 then			
-			if main_guid ~= 'None' then
-				GODDESS_MGR_REFORGE_ENCHANT_REG_MAT_ITEM(frame, inv_item, item_obj)
-				return
-			end
-		end
-		
 		GODDESS_MGR_REFORGE_REG_ITEM(frame, inv_item, item_obj)
 	end
 end
@@ -396,7 +400,7 @@ function GODDESS_MGR_REFORGE_ITEM_DROP(parent, slot, arg_str, arg_num)
 	local frame = parent:GetTopParentFrame()
 	local main_tab = GET_CHILD_RECURSIVELY(frame, 'main_tab')
 	local index = main_tab:GetSelectItemIndex()
-	if index ~= 0 then return end
+	if index ~= 0 and index ~= 6 then return end
 
 	local lift_icon = ui.GetLiftIcon()
 	local from_frame = lift_icon:GetTopParentFrame()
@@ -409,36 +413,67 @@ function GODDESS_MGR_REFORGE_ITEM_DROP(parent, slot, arg_str, arg_num)
 		local item_obj = GetIES(inv_item:GetObject())
 		if item_obj == nil then return end
         
+		if index == 6 then
+			GODDESS_MGR_LEGACY_REG_ITEM(frame, inv_item, item_obj)
+		else
 		GODDESS_MGR_REFORGE_REG_ITEM(frame, inv_item, item_obj)
 	end
+end
 end
 
 -- 제련 가능 아이템 확인
 function GODDESS_MGR_REFORGE_REG_ITEM(frame, inv_item, item_obj)
 	if inv_item == nil or item_obj == nil then return end
 
+	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
+	local index = reforge_tab:GetSelectItemIndex()
+	local upg_mode = nil
+
+	-- 강화/진화는 가디스 등급 전용 (업그레이드/연성은 각자 shared 검증에 위임)
+	if index == 0 or index == 3 then
 	if TryGetProp(item_obj, 'ItemGrade', 0) < 6 then
 		ui.SysMsg(ClMsg('GoddessGradeItemOnly'))
 		return
 	end
+	end
 
-	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
-	local index = reforge_tab:GetSelectItemIndex()
-	
 	if index == 0 then  -- 강화
 		if IS_ABLE_TO_REINFORCE_GODDESS(item_obj) == false then		
 			return
 		end
-	elseif index == 1 then  -- 인챈트
-		local msg = item_goddess_transcend.is_able_to_enchant(item_obj)		
-		if msg ~= 'YES' then
+	elseif index == 1 then  -- 업그레이드 (부위 우선 판별: 장신구=Neck/Ring, 그 외=장비)
+		local class_type = TryGetProp(item_obj, 'ClassType', 'None')
+		if class_type == 'Neck' or class_type == 'Ring' then
+			local ok, msg = shared_upgrade_acc.is_valid_item(item_obj)
+			if ok ~= true then
 			ui.SysMsg(ClMsg(msg))
 			return
 		end
-	elseif index == 2 then  -- 초월
-		local msg = item_goddess_transcend.is_able_to_transcend(item_obj)
-		if msg ~= 'YES' then
+			upg_mode = 'ACC'
+		else
+			local ok, msg = shared_upgrade_equip.is_valid_item(item_obj)
+			if ok ~= true then
 			ui.SysMsg(ClMsg(msg))
+			return
+		end
+			upg_mode = 'EQUIP'
+		end
+
+		local invframe = ui.GetFrame('inventory')
+		if true == inv_item.isLockState or true == IS_TEMP_LOCK(invframe, inv_item) then
+			ui.SysMsg(ClMsg('MaterialItemIsLock'))
+			return
+		end
+	elseif index == 2 then  -- 스킬 연성
+		local ok, msg = shared_common_skill_enchant.is_valid_item(item_obj)
+		if ok ~= true then
+			ui.SysMsg(ClMsg(msg))
+			return
+		end
+
+		local invframe = ui.GetFrame('inventory')
+		if true == inv_item.isLockState or true == IS_TEMP_LOCK(invframe, inv_item) then
+			ui.SysMsg(ClMsg('MaterialItemIsLock'))
 			return
 		end
 	elseif index == 3 then  -- 진화
@@ -453,6 +488,9 @@ function GODDESS_MGR_REFORGE_REG_ITEM(frame, inv_item, item_obj)
 	SET_SLOT_ITEM(slot, inv_item)
 	slot:SetUserValue('ITEM_GUID', inv_item:GetIESID())
 	slot:SetUserValue('ITEM_USE_LEVEL', TryGetProp(item_obj, 'UseLv', 1))
+	if upg_mode ~= nil then
+		slot:SetUserValue('UPG_MODE', upg_mode)
+	end
 
 	local slot_pic = GET_CHILD_RECURSIVELY(frame, 'ref_slot_bg_image')
 	slot_pic:ShowWindow(0)
@@ -467,16 +505,12 @@ function GODDESS_MGR_REFORGE_REG_ITEM(frame, inv_item, item_obj)
 	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
 	ref_item_reinf_text:SetTextByKey('value', TryGetProp(item_obj, 'Reinforce_2', 0))
 
-	local ref_item_trans_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_trans_text')
-	ref_item_trans_text:SetTextByKey('value', TryGetProp(item_obj, 'Transcend', 0))
-
-	
 	if index == 0 then		
 		GODDESS_MGR_REFORGE_REINFORCE_UPDATE(frame)
 	elseif index == 1 then
-		GODDESS_MGR_REFORGE_ENCHANT_UPDATE(frame)
+		GODDESS_MGR_UPG_UPDATE(frame)
 	elseif index == 2 then
-		GODDESS_MGR_REFORGE_TRANSCEND_UPDATE(frame)
+		GODDESS_MGR_SKENCH_UPDATE(frame)
 	elseif index == 3 then		
 		GODDESS_MGR_REFORGE_EVOLUTION_UPDATE(frame)
 	end
@@ -509,23 +543,33 @@ function GODDESS_MGR_REFORGE_ITEM_REMOVE(parent, slot)
 	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
 	ref_item_reinf_text:SetTextByKey('value', 0)
 
-	local ref_item_trans_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_trans_text')
-	ref_item_trans_text:SetTextByKey('value', 0)
+	local main_tab = GET_CHILD_RECURSIVELY(frame, 'main_tab')
+	if main_tab:GetSelectItemIndex() == 6 then
+		local legacy_tab = GET_CHILD_RECURSIVELY(frame, 'legacy_tab')
+		local legacy_index = legacy_tab:GetSelectItemIndex()
+		if legacy_index == 0 then
+			GODDESS_MGR_REFORGE_ENCHANT_CLEAR(frame)
+		elseif legacy_index == 1 then
+			GODDESS_MGR_REFORGE_TRANSCEND_CLEAR(frame)
+		end
+		return
+	end
 
 	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
 	local index = reforge_tab:GetSelectItemIndex()
 	if index == 0 then
 		GODDESS_MGR_REFORGE_REINFORCE_CLEAR(frame)
 	elseif index == 1 then
-		GODDESS_MGR_REFORGE_ENCHANT_CLEAR(frame)
+		GODDESS_MGR_UPG_CLEAR(frame)
 	elseif index == 2 then
-		GODDESS_MGR_REFORGE_TRANSCEND_CLEAR(frame)
+		GODDESS_MGR_SKENCH_CLEAR(frame)
 	elseif index == 3 then
 		GODDESS_MGR_REFORGE_EVOLUTION_CLEAR(frame)
 	end
 end
 
 function GODDESS_MGR_REFORGE_OPEN(frame)
+	GODDESS_MGR_SET_REFORGE_SLOT_PANEL(frame, 1)
 	GODDESS_MGR_REFORGE_CLEAR(frame)
 	INVENTORY_SET_CUSTOM_RBTNDOWN('GODDESS_MGR_REFORGE_INV_RBTN')
 end
@@ -536,9 +580,9 @@ function GODDESS_MGR_REFORGE_TAB_CHANGE(parent, tab)
 	if index == 0 then
 		GODDESS_MGR_REFORGE_REINFORCE_OPEN(frame)
 	elseif index == 1 then
-		GODDESS_MGR_REFORGE_ENCHANT_OPEN(frame)
+		GODDESS_MGR_UPG_OPEN(frame)
 	elseif index == 2 then
-		GODDESS_MGR_REFORGE_TRANSCEND_OPEN(frame)
+		GODDESS_MGR_SKENCH_OPEN(frame)
 	elseif index == 3 then
 		GODDESS_MGR_REFORGE_EVOLUTION_OPEN(frame)
 	end
@@ -1506,16 +1550,25 @@ function GODDESS_MGR_REFORGE_ENCHANT_EXEC(parent, btn)
 	local mat_item = session.GetInvItemByGuid(mat_guid)
 	if mat_item == nil then return end
 
+	-- 잠금 아이템은 전송 자체가 불가하므로 확인창을 띄우기 전에 걸러낸다
+	if inv_item.isLockState == true or mat_item.isLockState == true then
+		ui.SysMsg(ClMsg('MaterialItemIsLock'))
+		return
+	end
+
 	local enchant_no_msgbox = GET_CHILD_RECURSIVELY(frame, 'enchant_no_msgbox')
 	if enchant_no_msgbox:IsChecked() == 1 then
+		-- 확인창 생략 경로에서는 여기서 홀드를 걸지 않는다.
+		-- _GODDESS_MGR_REFORGE_ENCHANT_EXEC 이 내부 검사로 조기 return 하면 해제할 주체가 없어
+		-- 홀드가 그대로 남는다(ESC/창 닫기/캐릭터 조작 차단). 전송 직전에 _EXEC 이 직접 건다
 		_GODDESS_MGR_REFORGE_ENCHANT_EXEC()
 	else
 		local yesscp = '_GODDESS_MGR_REFORGE_ENCHANT_EXEC()'
 		local msgbox = ui.MsgBox(ClMsg('CommitEnchantOption'), yesscp, 'ENABLE_CONTROL_WITH_UI_HOLD(false)')
 		SET_MODAL_MSGBOX(msgbox)
-	end
-
+		-- 확인창이 떠 있는 동안은 홀드 유지 ([아니오] 는 취소 스크립트에서 해제)
 	ENABLE_CONTROL_WITH_UI_HOLD(true)
+end
 end
 
 function _GODDESS_MGR_REFORGE_ENCHANT_EXEC()
@@ -1564,6 +1617,8 @@ function _GODDESS_MGR_REFORGE_ENCHANT_EXEC()
 	session.AddItemID(mat_guid, 1)
 	
     local result_list = session.GetItemIDList()
+	-- 전송이 확정된 시점에만 홀드 (확인창 경로는 이미 걸려 있으나 중복 호출은 무해)
+	ENABLE_CONTROL_WITH_UI_HOLD(true)
 	item.DialogTransaction('EXECUTE_GODDESS_ENCHANT', result_list)
 end
 
@@ -1679,9 +1734,6 @@ function GODDESS_MGR_REFORGE_TRANSCEND_CLEAR_AFTER_EXEC(parent, btn)
 			transcend_lv = TryGetProp(item_obj, 'Transcend', 0)
 		end
 	end
-
-	local ref_item_trans_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_trans_text')
-	ref_item_trans_text:SetTextByKey('value', transcend_lv)
 
 	GODDESS_MGR_REFORGE_TRANSCEND_CLEAR(frame)
 end
@@ -2067,9 +2119,13 @@ local function GODDESS_EVOLUTION_MAT_SLOT_UPDATE(frame, inv_item, item_obj)
 	local index = 1
 	for _name, _count in pairs(mat_list) do
 		local mat_slot = GET_CHILD_RECURSIVELY(frame, 'evolve_mat_slot_' .. index)
-		local mat_cls = GetClass('Item', _name)
-		if IS_ACCOUNT_COIN(_name) == true then
+		local isAccountCoin = IS_ACCOUNT_COIN(_name)
+		local mat_cls
+		local item_cls = GetClass('Item', _name)
+		if isAccountCoin == true then
 			mat_cls = GetClass('accountprop_inventory_list', _name)
+		else
+			mat_cls = item_cls
 		end
 		
 		if mat_cls ~= nil and _count > 0 then
@@ -2078,17 +2134,17 @@ local function GODDESS_EVOLUTION_MAT_SLOT_UPDATE(frame, inv_item, item_obj)
 			mat_slot:SetUserValue('MAT_COUNT', _count)
 			local icon = imcSlot:SetImage(mat_slot, TryGetProp(mat_cls, 'Icon', 'None'))
 			
-			if IS_EVOLVED_ITEM(item_obj) == true then
+			if IS_EVOLVED_CURRENT_LV(item_obj) == true then
 				icon:SetColorTone('FFFF0000')
 				mat_slot:SetUserValue('MAT_REG', 'NO')
 			else
 				local inv_mat_count = '0'
-				if IS_ACCOUNT_COIN(_name) == true then
+				if isAccountCoin == true then
 					inv_mat_count = TryGetProp(acc, _name, '0')		
 					local dummy_coin_name = 'dummy_'.._name
-					local mat_cls = GetClass('Item', dummy_coin_name)	
+					local dummy_cls = GetClass('Item', dummy_coin_name)
 					icon:SetTooltipType('texthelp');
-					icon:SetTooltipArg(TryGetProp(mat_cls, 'Name', 'None'));
+					icon:SetTooltipArg(TryGetProp(dummy_cls, 'Name', 'None'));
 					icon:SetTooltipOverlap(1)
 				else
 					local inv_mat_item = session.GetInvItemByName(_name)
@@ -2096,8 +2152,7 @@ local function GODDESS_EVOLUTION_MAT_SLOT_UPDATE(frame, inv_item, item_obj)
 						inv_mat_count = tostring(inv_mat_item.count)
 					end
 					icon:SetTooltipType('wholeitem');
-					local mat_cls = GetClass('Item', _name)
-					icon:SetTooltipArg("", TryGetProp(mat_cls, "ClassID", 0), 0);
+					icon:SetTooltipArg("", TryGetProp(item_cls, "ClassID", 0), 0);
 					icon:SetTooltipOverlap(1)
 				end
 				
@@ -2143,7 +2198,7 @@ function GODDESS_MGR_REFORGE_EVOLUTION_UPDATE(frame)
 		if inv_item == nil then return end
 
 		local obj = GetIES(inv_item:GetObject())
-		if IS_EVOLVED_ITEM(obj) == true or IS_WEAPON_TYPE(TryGetProp(obj, "ClassType", "None")) == false then
+		if IS_EVOLVED_CURRENT_LV(obj) == true or IS_WEAPON_TYPE(TryGetProp(obj, "ClassType", "None")) == false then
 			ui.SysMsg(ClMsg('CantEvolvedEquip'))
 			ref_evolution_do:SetEnable(0)
 			target_slot:ClearIcon()
@@ -2166,7 +2221,7 @@ function GODDESS_MGR_REFORGE_EVOLUTION_UPDATE(frame)
 
 			local icon = target_slot:GetIcon()
 			local item_obj = GetIES(inv_item:GetObject())
-			if IS_EVOLVED_ITEM(item_obj) == false then
+			if IS_EVOLVED_CURRENT_LV(item_obj) == false then
 				icon:SetColorTone('FFFFFFFF')
 				ref_evolution_do:SetEnable(1)
 				GODDESS_EVOLUTION_MAT_SLOT_UPDATE(frame, inv_item, item_obj)
@@ -2438,8 +2493,6 @@ function GODDESS_MGR_RANDOMOPTION_TAB_CHANGE(parent, tab)
 		GODDESS_MGR_RANDOMOPTION_ENGRAVE_ICOR_OPEN(frame)
 	elseif index == 1 then
 		GODDESS_MGR_RANDOMOPTION_APPLY_OPEN(frame)
-	elseif index == 2 then
-		GODDESS_MGR_RANDOMOPTION_ENGRAVE_OPEN(frame)		 -- 각인 저장(옛날)
 	end
 end
 
@@ -2646,7 +2699,40 @@ function SCR_LBTNDOWN_GODDESS_MGR_RANDOMOPTION_MAT(slotset, slot)
 	GODDESS_MGR_RANDOMOPTION_ENGRAVE_MAT_UPDATE(frame)
 end
 
+-- 각인 저장(구) 세트 선택 — rand_preset_list는 각인 탭(randomoption_bg) 소속이라 legacy 탭에서는 안 보임 → 전용 드롭리스트 사용
+function GODDESS_MGR_LEGACY_ENGRAVE_PRESET_UPDATE(frame)
+	local preset_list = GET_CHILD_RECURSIVELY(frame, 'rand_engrave_preset_list')
+	preset_list:ClearItems()
+
+	local acc_obj = GetMyAccountObj()
+	if acc_obj == nil then return end
+
+	local max_page = GET_MAX_ENGARVE_SLOT_COUNT(acc_obj)
+	for i = 1, max_page do
+		local page_name = _GODDESS_MGR_RANDOMOPTION_GET_PAGE_NAME(i)
+		preset_list:AddItem(tostring(i), page_name)
+	end
+
+	preset_list:SelectItemByKey(0)
+
+	local sel_key = preset_list:GetSelItemKey()
+	if sel_key == nil or sel_key == 'None' or sel_key == '' then
+		sel_key = '1'
+	end
+	local randomoption_bg = GET_CHILD_RECURSIVELY(frame, 'randomoption_bg')
+	randomoption_bg:SetUserValue('PRESET_INDEX', sel_key)
+end
+
+function GODDESS_MGR_LEGACY_ENGRAVE_PRESET_SELECT(parent, ctrl)
+	local frame = parent:GetTopParentFrame()
+	local randomoption_bg = GET_CHILD_RECURSIVELY(frame, 'randomoption_bg')
+	randomoption_bg:SetUserValue('PRESET_INDEX', ctrl:GetSelItemKey())
+	GODDESS_MGR_RANDOMOPTION_ENGRAVE_CLEAR(frame)
+end
+
 function GODDESS_MGR_RANDOMOPTION_ENGRAVE_OPEN(frame) -- 각인 저장(옛날)
+	GODDESS_MGR_LEGACY_ENGRAVE_PRESET_UPDATE(frame)
+
 	local rand_equip_list = GET_CHILD_RECURSIVELY(frame, 'rand_equip_list')
 	rand_equip_list:SelectItemByKey(0)
 	GODDESS_MGR_RANDOMOPTION_ENGRAVE_SET_SPOT(frame)
@@ -3115,7 +3201,7 @@ function GODDESS_MGR_RANDOMOPTION_APPLY_EXEC(parent, btn)
 			cur_coin = '0'
 		end
 
-		if math.is_larger_than(cur_coin, cost) ~= 1 then
+		if math.is_larger_than(cost, cur_coin) == 1 then
 			ui.SysMsg(ClMsg('NOT_ENOUGH_MONEY'))
 			return
 		end
@@ -3690,6 +3776,7 @@ function GODDESS_MGR_SOCKET_NORMAL_UPDATE(frame)
 		local item_obj = GetIES(inv_item:GetObject())
 		local use_lv = TryGetProp(item_obj, 'UseLv', 0)
 		local max_socket_cnt = GET_MAX_GODDESS_NORMAL_SOCKET_COUNT(use_lv)
+		local empty_socket_cls = GetClassByType('Socket', GET_COMMON_SOCKET_TYPE())
 		local not_available = false
 		for i = 0, max_socket_cnt - 1 do
 			local ctrlset = normal_inner_bg:CreateOrGetControlSet('eachsocket_in_goddessmgr', 'NORMAL_CSET_'..i , 5, i * 90)
@@ -3708,9 +3795,8 @@ function GODDESS_MGR_SOCKET_NORMAL_UPDATE(frame)
 				local gem_exp = inv_item:GetEquipGemExp(i)
 				local gem_equipped = 0
 				if gem_id == 0 then
-					local socket_cls = GetClassByType('Socket', GET_COMMON_SOCKET_TYPE())
-					socketname = socket_cls.Name .. ' '.. ScpArgMsg('JustSocket')
-					socketicon = socket_cls.SlotIcon
+					socketname = empty_socket_cls.Name .. ' '.. ScpArgMsg('JustSocket')
+					socketicon = empty_socket_cls.SlotIcon
 				else
 					local gem_cls = GetClassByType('Item', gem_id)
 					socketname = gem_cls.Name
@@ -3769,6 +3855,7 @@ function GODDESS_MGR_SOCKET_AETHER_UPDATE(frame)
 			local item_obj = GetIES(inv_item:GetObject())
 			local use_lv = TryGetProp(item_obj, 'UseLv', 0)
 			local max_aether_cnt = GET_MAX_GODDESS_AETHER_SOCKET_COUNT(use_lv)
+			local empty_socket_cls = GetClassByType('Socket', GET_COMMON_SOCKET_TYPE())
 			local not_available = false
 			for i = 0, max_aether_cnt - 1 do
 				local aether_index = i + max_normal_cnt
@@ -3788,9 +3875,8 @@ function GODDESS_MGR_SOCKET_AETHER_UPDATE(frame)
 					local gem_exp = inv_item:GetEquipGemExp(aether_index)
 					local gem_equipped = 0
 					if gem_id == 0 then
-						local socket_cls = GetClassByType('Socket', GET_COMMON_SOCKET_TYPE())
-						socketname = socket_cls.Name .. ' '.. ScpArgMsg('JustSocket')
-						socketicon = socket_cls.SlotIcon
+						socketname = empty_socket_cls.Name .. ' '.. ScpArgMsg('JustSocket')
+						socketicon = empty_socket_cls.SlotIcon
 					else
 						local gem_cls = GetClassByType('Item', gem_id)
 						socketname = gem_cls.Name
@@ -4062,7 +4148,7 @@ function GODDESS_MGR_SOCKET_REQ_NORMAL_ENABLE(parent, btn)
 						cur_count = '0'
 					end
 					
-					if math.is_larger_than(cur_count, tostring(_value)) ~= 1 then
+					if math.is_larger_than(tostring(_value), cur_count) == 1 then
 						isMaterial = 0
 					end
 
@@ -4754,6 +4840,11 @@ function GODDESS_MGR_INHERIT_REG_TARGET(frame)
 		end
 		
 		after_slot_icon:SetTooltipStrArg(key)
+
+		local popoboostProp = TryGetProp(item_obj, "popoboost", 0);
+		if popoboostProp >= 12 then
+			after_slot_icon:SetTooltipStrArg('char_belonging');
+	end
 	end
 
 	local after_name = GET_CHILD_RECURSIVELY(frame, 'inherit_after_item_name')
@@ -5021,7 +5112,7 @@ function GODDESS_MGR_INHERIT_EXEC(parent, btn)
 	option.CompareTextColor = nil
 	option.CompareTextDesc = ClMsg('ReallyGoddessInherit')
 
-	WARNINGMSGBOX_EX_FRAME_OPEN(frame, nil, clmsg .. ';Succession/' .. yesscp, 0, option)
+	WARNINGMSGBOX_EX_FRAME_OPEN(frame, nil, clmsg .. ';Succession#Succession2/' .. yesscp, 0, option)
 end
 
 function WARNINGMSGBOX_FRAME_INHERIT()
@@ -5533,6 +5624,689 @@ function CLEAR_REFORGE_MAIN_SLOT(frame)
 	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
 	ref_item_reinf_text:SetTextByKey('value', 0)	
 end
+
+-- Legacy 탭 (재련의 인챈트/초월 + 각인 저장(구) 이관)
+function GODDESS_MGR_SET_REFORGE_SLOT_PANEL(frame, visible)
+	local slot_bg = GET_CHILD_RECURSIVELY(frame, 'ref_slot_bg')
+	slot_bg:ShowWindow(visible)
+	local text_bg = GET_CHILD_RECURSIVELY(frame, 'ref_item_text_bg')
+	text_bg:ShowWindow(visible)
+end
+
+function GODDESS_MGR_LEGACY_OPEN(frame)
+	-- 각인 저장(구)이 참조하는 프리셋 인덱스가 미설정이면 1번으로 보정
+	local randomoption_bg = GET_CHILD_RECURSIVELY(frame, 'randomoption_bg')
+	if randomoption_bg:GetUserValue('PRESET_INDEX') == 'None' then
+		randomoption_bg:SetUserValue('PRESET_INDEX', '1')
+	end
+
+	local legacy_tab = GET_CHILD_RECURSIVELY(frame, 'legacy_tab')
+	legacy_tab:SelectTab(0)
+	GODDESS_MGR_LEGACY_TAB_CHANGE(frame, legacy_tab)
+end
+
+function GODDESS_MGR_LEGACY_TAB_CHANGE(parent, tab)
+	local frame = parent:GetTopParentFrame()
+	local index = tab:GetSelectItemIndex()
+
+	if index == 2 then	-- 각인 저장(구)
+		GODDESS_MGR_SET_REFORGE_SLOT_PANEL(frame, 0)
+		GODDESS_MGR_RANDOMOPTION_ENGRAVE_OPEN(frame)
+	else
+		GODDESS_MGR_SET_REFORGE_SLOT_PANEL(frame, 1)
+		CLEAR_REFORGE_MAIN_SLOT(frame)
+
+		local slot_pic = GET_CHILD_RECURSIVELY(frame, 'ref_slot_bg_image')
+		slot_pic:ShowWindow(1)
+
+		if index == 0 then	-- 인챈트
+			GODDESS_MGR_REFORGE_ENCHANT_OPEN(frame)
+		elseif index == 1 then	-- 초월
+			GODDESS_MGR_REFORGE_TRANSCEND_OPEN(frame)
+		end
+
+		INVENTORY_SET_CUSTOM_RBTNDOWN('GODDESS_MGR_LEGACY_INV_RBTN')
+	end
+
+	GODDESS_EQUIP_UI_TUTORIAL_CHECK(frame)
+end
+
+function GODDESS_MGR_LEGACY_INV_RBTN(item_obj, slot, guid)
+	local frame = ui.GetFrame('goddess_equip_manager')
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then return end
+
+	local legacy_tab = GET_CHILD_RECURSIVELY(frame, 'legacy_tab')
+	local index = legacy_tab:GetSelectItemIndex()
+	if index == 2 then return end
+
+	if index == 0 then	-- 인챈트: 대상 장비가 있으면 쥬얼 등록
+		local main_slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+		if main_slot:GetUserValue('ITEM_GUID') ~= 'None' then
+			GODDESS_MGR_REFORGE_ENCHANT_REG_MAT_ITEM(frame, inv_item, item_obj)
+			return
+		end
+	end
+
+	GODDESS_MGR_LEGACY_REG_ITEM(frame, inv_item, item_obj)
+end
+
+function GODDESS_MGR_LEGACY_REG_ITEM(frame, inv_item, item_obj)
+	if inv_item == nil or item_obj == nil then return end
+
+	if TryGetProp(item_obj, 'ItemGrade', 0) < 6 then
+		ui.SysMsg(ClMsg('GoddessGradeItemOnly'))
+		return
+	end
+
+	local legacy_tab = GET_CHILD_RECURSIVELY(frame, 'legacy_tab')
+	local index = legacy_tab:GetSelectItemIndex()
+
+	if index == 0 then	-- 인챈트
+		local msg = item_goddess_transcend.is_able_to_enchant(item_obj)
+		if msg ~= 'YES' then
+			ui.SysMsg(ClMsg(msg))
+			return
+		end
+	elseif index == 1 then	-- 초월
+		local msg = item_goddess_transcend.is_able_to_transcend(item_obj)
+		if msg ~= 'YES' then
+			ui.SysMsg(ClMsg(msg))
+			return
+		end
+	else
+		return
+	end
+
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	SET_SLOT_ITEM(slot, inv_item)
+	slot:SetUserValue('ITEM_GUID', inv_item:GetIESID())
+	slot:SetUserValue('ITEM_USE_LEVEL', TryGetProp(item_obj, 'UseLv', 1))
+
+	local slot_pic = GET_CHILD_RECURSIVELY(frame, 'ref_slot_bg_image')
+	slot_pic:ShowWindow(0)
+
+	local ref_item_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_text')
+	ref_item_text:ShowWindow(0)
+
+	local ref_item_name = GET_CHILD_RECURSIVELY(frame, 'ref_item_name')
+	ref_item_name:SetTextByKey('name', dic.getTranslatedStr(TryGetProp(item_obj, 'Name', 'NONE')))
+	ref_item_name:ShowWindow(1)
+
+	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
+	ref_item_reinf_text:SetTextByKey('value', TryGetProp(item_obj, 'Reinforce_2', 0))
+
+	if index == 0 then
+		GODDESS_MGR_REFORGE_ENCHANT_UPDATE(frame)
+	elseif index == 1 then
+		GODDESS_MGR_REFORGE_TRANSCEND_UPDATE(frame)
+	end
+end
+-- Legacy 끝
+
+-- 재련 - 업그레이드/스킬 연성 통합 (common_acc_upgrade / common_equip_upgrade / common_skill_enchant)
+-- checked=false: 원본 MAT_SET 상태(빨간톤+플러스 표시, 클릭으로 확인) / checked=true: 원본 MAT_NUM_SET 상태(확인 완료)
+function GODDESS_MGR_RENDER_MAT_LIST(frame, container_name, cost_table, checked)
+	local inner = GET_CHILD_RECURSIVELY(frame, container_name)
+	inner:RemoveAllChild()
+
+	if cost_table == nil then return false end
+
+	local aObj = GetMyAccountObj()
+	local index = 1
+	local all_enough = true
+
+	for k, v in pairs(cost_table) do		
+		local ctrlSet = inner:CreateOrGetControlSet('mat_required_set', 'GODDESS_MGR_MAT_' .. index, ui.CENTER_HORZ, ui.TOP, 0, 72 * (index - 1) + 10, 0, 0)
+		local mat_cls = nil
+		local curr_my_cnt = 0
+
+		if IS_STRING_COIN(k) == true then
+			mat_cls = GetClass('Item', 'dummy_' .. k)
+			-- 계정 String Coin 프로퍼티는 문자열로 반환됨 — 수량 비교를 위해 숫자화
+			curr_my_cnt = tonumber(TryGetProp(aObj, k, 0)) or 0
+		else
+			mat_cls = GetClass('Item', k)
+			-- 다중 반환 함수라 괄호로 첫 반환값(개수)만 취함
+			curr_my_cnt = tonumber((GET_INV_ITEM_COUNT_BY_PROPERTY({
+				{ Name = 'ClassName', Value = k }
+			}, false))) or 0
+		end
+
+		if mat_cls ~= nil then
+			local mat_slot = GET_CHILD_RECURSIVELY(ctrlSet, 'mat_slot')
+			-- 템플릿(mat_required_set)의 원 애드온 클릭 스크립트를 매니저용 확인 함수로 교체 (원본 ADD_MAT 절차 이식)
+			mat_slot:SetEventScript(ui.LBUTTONUP, 'GODDESS_MGR_MAT_CLICK')
+			mat_slot:SetEventScriptArgString(ui.LBUTTONUP, mat_cls.ClassName)
+
+			local plus = GET_CHILD_RECURSIVELY(ctrlSet, 'plus')
+			local icon = imcSlot:SetImage(mat_slot, TryGetProp(mat_cls, 'Icon', 'None'))
+
+			if checked == true then
+				icon:SetColorTone('FFFFFFFF')
+				if plus ~= nil then plus:ShowWindow(0) end
+			else
+				icon:SetColorTone('FFFF0000')
+				if plus ~= nil then plus:ShowWindow(1) end
+			end
+
+			if curr_my_cnt < v then
+				all_enough = false
+			end
+
+			local mat_name = GET_CHILD_RECURSIVELY(ctrlSet, 'mat_name')
+			mat_name:SetTextByKey('value', TryGetProp(mat_cls, 'Name', 'None'))
+			mat_name:SetTextByKey('value2', GET_COMMAED_STRING(tostring(v)))
+
+			local curr_my_cnt_text = GET_CHILD_RECURSIVELY(ctrlSet, 'cnt_in_my_bag')
+			curr_my_cnt_text:SetTextByKey('value', GET_COMMAED_STRING(curr_my_cnt))
+
+			index = index + 1
+		end
+	end
+
+	return all_enough
+end
+
+-- 원본 COMMON_SKILL_ENCHANT_ADD_MAT 이식: 재료 슬롯 클릭 → 전체 확인 → 충족 시 실행 버튼 활성
+function GODDESS_MGR_MAT_CLICK(parent, ctrl)
+	local frame = parent:GetTopParentFrame()
+	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
+	local index = reforge_tab:GetSelectItemIndex()
+
+	local container_name = nil
+	local btn_name = nil
+	if index == 1 then
+		container_name = 'upg_mat_inner'
+		btn_name = 'upg_do_btn'
+	elseif index == 2 then
+		container_name = 'skench_mat_inner'
+		btn_name = 'skench_do'
+	else
+		return
+	end
+
+	local inner = GET_CHILD_RECURSIVELY(frame, container_name)
+	local cnt = inner:GetChildCount()
+	local total = 0
+	local ready = 0
+
+	for i = 0, cnt - 1 do
+		local ctrlSet = inner:GetChildByIndex(i)
+		local mat_name = GET_CHILD_RECURSIVELY(ctrlSet, 'mat_name')
+		if mat_name ~= nil then
+			total = total + 1
+
+			local need = tonumber(GET_NOT_COMMAED_NUMBER(mat_name:GetTextByKey('value2')))
+			local cnt_in_my_bag = GET_CHILD_RECURSIVELY(ctrlSet, 'cnt_in_my_bag')
+			local have = tonumber(GET_NOT_COMMAED_NUMBER(cnt_in_my_bag:GetTextByKey('value')))
+
+			if need ~= nil and have ~= nil and need <= have then
+				local mat_slot = GET_CHILD_RECURSIVELY(ctrlSet, 'mat_slot')
+				local icon = mat_slot:GetIcon()
+				if icon ~= nil then
+					icon:SetColorTone('FFFFFFFF')
+				end
+				local plus = GET_CHILD_RECURSIVELY(ctrlSet, 'plus')
+				if plus ~= nil then
+					plus:ShowWindow(0)
+				end
+				ready = ready + 1
+			else
+				local msg = string.format('<%s> %s', mat_name:GetTextByKey('value'), ClMsg('NotEnoughMaterial'))
+				ui.SysMsg(msg)
+			end
+		end
+	end
+
+	if total > 0 and ready == total then
+		GET_CHILD_RECURSIVELY(frame, btn_name):SetEnable(1)
+	end
+end
+
+-- 업그레이드 탭 (장신구/무기/방어구 자동 판별)
+-- 공용 슬롯 초기화 (ITEM_REMOVE의 공통부와 동일)
+function GODDESS_MGR_REFORGE_RESET_SLOT(frame)
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	slot:ClearIcon()
+	slot:SetUserValue('ITEM_GUID', 'None')
+	slot:SetUserValue('ITEM_USE_LEVEL', 0)
+
+	local slot_pic = GET_CHILD_RECURSIVELY(frame, 'ref_slot_bg_image')
+	slot_pic:ShowWindow(1)
+
+	local ref_item_name = GET_CHILD_RECURSIVELY(frame, 'ref_item_name')
+	ref_item_name:ShowWindow(0)
+
+	local ref_item_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_text')
+	ref_item_text:ShowWindow(1)
+
+	local ref_item_reinf_text = GET_CHILD_RECURSIVELY(frame, 'ref_item_reinf_text')
+	ref_item_reinf_text:SetTextByKey('value', 0)
+end
+
+-- 탭 진입 시 슬롯 아이템 유효성 검사 — 해당 탭에서 등록 불가 아이템이면 슬롯에서 제거
+-- validate_func(item_obj) -> ok, msg
+function GODDESS_MGR_REFORGE_DROP_INVALID_SLOT_ITEM(frame, validate_func)
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then
+		GODDESS_MGR_REFORGE_RESET_SLOT(frame)
+		return
+	end
+
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then
+		GODDESS_MGR_REFORGE_RESET_SLOT(frame)
+		return
+	end
+
+	local ok = validate_func(item_obj)
+	if ok ~= true then
+		GODDESS_MGR_REFORGE_RESET_SLOT(frame)
+	end
+end
+
+function GODDESS_MGR_UPG_OPEN(frame)
+	GODDESS_MGR_UPG_CLEAR(frame)
+	-- 이 탭에서 등록 불가 아이템이면 슬롯 제거
+	GODDESS_MGR_REFORGE_DROP_INVALID_SLOT_ITEM(frame, function(item_obj)
+		if GODDESS_MGR_UPG_GET_MODE(item_obj) == 'ACC' then
+			return shared_upgrade_acc.is_valid_item(item_obj)
+		end
+		return shared_upgrade_equip.is_valid_item(item_obj)
+	end)
+	-- 강화/진화와 동일: 슬롯에 등록된 아이템이 있으면 정보 표시
+	GODDESS_MGR_UPG_UPDATE(frame)
+end
+
+-- 업그레이드 모드 판별 (부위 기준 — 탭 전환 시에도 안전)
+function GODDESS_MGR_UPG_GET_MODE(item_obj)
+	local class_type = TryGetProp(item_obj, 'ClassType', 'None')
+	if class_type == 'Neck' or class_type == 'Ring' then
+		return 'ACC'
+	end
+	return 'EQUIP'
+end
+
+function GODDESS_MGR_UPG_CLEAR(frame)
+	local inner = GET_CHILD_RECURSIVELY(frame, 'upg_mat_inner')
+	inner:RemoveAllChild()
+
+	local before_txt = GET_CHILD_RECURSIVELY(frame, 'upg_before_txt')
+	before_txt:SetTextByKey('value', ' ')
+	before_txt:SetTextByKey('value2', ' ')
+
+	local after_txt = GET_CHILD_RECURSIVELY(frame, 'upg_after_txt')
+	after_txt:SetTextByKey('value', ' ')
+	after_txt:SetTextByKey('value2', ' ')
+
+	local rank_text = GET_CHILD_RECURSIVELY(frame, 'upg_rank_text')
+	rank_text:SetTextByKey('value', 0)
+
+	local do_btn = GET_CHILD_RECURSIVELY(frame, 'upg_do_btn')
+	do_btn:SetEnable(0)
+end
+
+-- 옵션 표시 (원본 OPTION_SET_UP 의미: before/after 랭크를 각각 지정, after=nil이면 아이템 현재 랭크)
+function GODDESS_MGR_UPG_SET_OPTION(frame, before_rank, after_rank)
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then return end
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then return end
+
+	local mode = GODDESS_MGR_UPG_GET_MODE(item_obj)
+	if after_rank == nil then
+		after_rank = TryGetProp(item_obj, 'UpgradeRank', 0)
+	end
+
+	local before_txt = GET_CHILD_RECURSIVELY(frame, 'upg_before_txt')
+	local after_txt = GET_CHILD_RECURSIVELY(frame, 'upg_after_txt')
+
+	if mode == 'EQUIP' then
+		local before_list = shared_upgrade_equip.get_value(item_obj, before_rank)
+		local after_list = shared_upgrade_equip.get_value(item_obj, after_rank)
+		local option1 = ''
+		local option2 = ''
+		for i = 1, #before_list do
+			option1 = option1 .. string.format('%s : +%s{nl}', ClMsg(before_list[i][1]), GET_COMMAED_STRING(tostring(before_list[i][2])))
+			option2 = option2 .. string.format('%s : +%s{nl}', ClMsg(after_list[i][1]), GET_COMMAED_STRING(tostring(after_list[i][2])))
+		end
+		before_txt:SetTextByKey('value', option1)
+		before_txt:SetTextByKey('value2', ' ')
+		after_txt:SetTextByKey('value', option2)
+		after_txt:SetTextByKey('value2', ' ')
+	else -- ACC (원본 COMMON_ACC_UPGRADE_OPTION_SET_UP 이식 — 기존=before_rank 값 / 결과=after_rank 값)
+		local b1, b2 = shared_upgrade_acc.get_value(item_obj, before_rank)
+		local a1, a2 = shared_upgrade_acc.get_value(item_obj, after_rank)
+
+		-- 옵션명은 시리즈별 상이([뇌격]/[솔리드 스킨]/... — CustomOptDescFunc 2번째 반환값)
+		local opt_name = nil
+		local desc_func = _G[TryGetProp(item_obj, 'CustomOptDescFunc', 'None')]
+		if desc_func ~= nil then
+			local _, name = desc_func(item_obj)
+			opt_name = name
+		end
+		if opt_name == nil or opt_name == '' then
+			opt_name = ClMsg('ALLSTAT')
+		end
+
+		-- 원본 특례: upgrade_equip_item 등록 아이템(벨트/EP17·18 장신구 등)은 ALLSTAT + equip 값
+		if GetClass('upgrade_equip_item', TryGetProp(item_obj, 'ClassName', 'None')) ~= nil then
+			opt_name = ClMsg('ALLSTAT')
+			b1 = shared_upgrade_equip.get_value(item_obj, before_rank)[1][2]
+			a1 = shared_upgrade_equip.get_value(item_obj, after_rank)[1][2]
+			b2 = 0
+			a2 = 0
+		end
+
+		-- 숫자가 없으면(테이블 미정의/nil) 0으로 강제 — 항상 "옵션명 : +0" 형태 보장
+		b1 = tonumber(b1) or 0
+		b2 = tonumber(b2) or 0
+		a1 = tonumber(a1) or 0
+		a2 = tonumber(a2) or 0
+
+		before_txt:SetTextByKey('value', string.format('%s : +%s', opt_name, b1))
+		after_txt:SetTextByKey('value', string.format('%s : +%s', opt_name, a1))
+		
+		-- 둘째 줄(드래곤의 기운)은 시리즈 고유 옵션일 때만 — ALLSTAT(사용자 수정)·솔리드 스킨(원본 규칙) 제외
+		if opt_name ~= ClMsg('ALLSTAT') and opt_name ~= ClMsg('EP16_EFFECT_NAME02') then
+			before_txt:SetTextByKey('value2', string.format('%s : +%s', ClMsg('EP16_EFFECT_NAME05'), b2))
+			after_txt:SetTextByKey('value2', string.format('%s : +%s', ClMsg('EP16_EFFECT_NAME05'), a2))
+		else
+			before_txt:SetTextByKey('value2', ' ')
+			after_txt:SetTextByKey('value2', ' ')
+		end
+	end
+end
+
+function GODDESS_MGR_UPG_UPDATE(frame)
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then
+		GODDESS_MGR_UPG_CLEAR(frame)
+		return
+	end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then
+		GODDESS_MGR_UPG_CLEAR(frame)
+		return
+	end
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then return end
+
+	local mode = GODDESS_MGR_UPG_GET_MODE(item_obj)
+	local rank = TryGetProp(item_obj, 'UpgradeRank', 0)
+
+	-- 원본 의미: 등록 시 기존=결과=현재 랭크 값
+	frame:SetUserValue('UPG_LAST_BEFORE_RANK', rank)
+	GODDESS_MGR_UPG_SET_OPTION(frame, rank, nil)
+
+	local rank_text = GET_CHILD_RECURSIVELY(frame, 'upg_rank_text')
+	rank_text:SetTextByKey('value', rank)
+
+	local cost = nil
+	if mode == 'EQUIP' then
+		cost = shared_upgrade_equip.get_cost(item_obj)
+	else
+		cost = shared_upgrade_acc.get_cost(item_obj)
+	end
+
+	-- 원본 MAT_SET 상태(빨간톤): 재료 슬롯 클릭으로 확인 후 실행 버튼 활성
+	GODDESS_MGR_RENDER_MAT_LIST(frame, 'upg_mat_inner', cost, false)
+
+	local do_btn = GET_CHILD_RECURSIVELY(frame, 'upg_do_btn')
+	do_btn:SetEnable(0)
+end
+
+function GODDESS_MGR_UPG_EXEC(parent, btn)
+	local frame = parent:GetTopParentFrame()
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then return end
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then return end
+
+	if GODDESS_MGR_UPG_GET_MODE(item_obj) == 'EQUIP' then
+		pc.ReqExecuteTx_Item('UPGRADE_EQUIP', guid)
+	else
+		pc.ReqExecuteTx_Item('UPGRADE_ACC', guid)
+	end
+end
+
+function _END_GODDESS_UPG_EXEC()
+end
+
+function GODDESS_MGR_ON_UPGRADE_RESULT(frame, msg, arg_str, arg_num)
+	if frame == nil or frame:IsVisible() == 0 then return end
+
+	local main_tab = GET_CHILD_RECURSIVELY(frame, 'main_tab')
+	if main_tab:GetSelectItemIndex() ~= 0 then return end
+
+	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
+	if reforge_tab:GetSelectItemIndex() ~= 1 then return end
+
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	local left, top = _GET_EFFECT_UI_MARGIN()
+	local res_scp = ''
+
+	if arg_str == 'SUCCESS' then
+		local iconimg = 'None'
+		local icon = slot:GetIcon()
+		if icon ~= nil then
+			local iconInfo = icon:GetInfo()
+			iconimg = iconInfo:GetImageName()
+		end
+		res_scp = string.format('RESULT_EFFECT_UI_RUN_SUCCESS(\'%s\', \'%s\', \'%d\', \'%d\', %d)', '_END_GODDESS_UPG_EXEC', iconimg, left, top, 1)
+	elseif arg_str == 'FAIL' then
+		res_scp = string.format('RESULT_EFFECT_UI_RUN_FAILED(\'%s\', \'%d\', \'%d\')', '_END_GODDESS_UPG_EXEC', left, top)
+	end
+
+	-- 원본과 동일: 기존=이전 랭크(arg_num) 값, 결과=아이템에서 재조회한 새 랭크 값
+	frame:SetUserValue('UPG_LAST_BEFORE_RANK', arg_num)
+	GODDESS_MGR_UPG_REFRESH_AFTER_RESULT()
+	-- 아이템 프로퍼티 동기화가 msg보다 늦게 도착하는 경우 대비 지연 재갱신
+	ReserveScript('GODDESS_MGR_UPG_REFRESH_AFTER_RESULT()', 0.5)
+
+	if res_scp ~= '' then
+		ReserveScript(res_scp, 0)
+	end
+end
+
+-- 결과 수신 후 갱신: 현재 옵션 = 아이템의 (새) 현재 랭크 값
+function GODDESS_MGR_UPG_REFRESH_AFTER_RESULT()
+	local frame = ui.GetFrame('goddess_equip_manager')
+	if frame == nil or frame:IsVisible() == 0 then return end
+
+	local main_tab = GET_CHILD_RECURSIVELY(frame, 'main_tab')
+	if main_tab:GetSelectItemIndex() ~= 0 then return end
+
+	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
+	if reforge_tab:GetSelectItemIndex() ~= 1 then return end
+
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then return end
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then return end
+
+	local cur_rank = TryGetProp(item_obj, 'UpgradeRank', 0)
+
+	-- 원본: 기존=이전 랭크(결과 msg의 arg_num), 결과=현재(새) 랭크
+	local prev_rank = frame:GetUserIValue('UPG_LAST_BEFORE_RANK')
+	GODDESS_MGR_UPG_SET_OPTION(frame, prev_rank, nil)
+
+	local rank_text = GET_CHILD_RECURSIVELY(frame, 'upg_rank_text')
+	rank_text:SetTextByKey('value', cur_rank)
+
+	local mode = GODDESS_MGR_UPG_GET_MODE(item_obj)
+	local cost = nil
+	if mode == 'EQUIP' then
+		cost = shared_upgrade_equip.get_cost(item_obj)
+	else
+		cost = shared_upgrade_acc.get_cost(item_obj)
+	end
+	GODDESS_MGR_RENDER_MAT_LIST(frame, 'upg_mat_inner', cost, true)
+end
+
+-- 스킬 연성 탭
+function GODDESS_MGR_SKENCH_OPEN(frame)
+	-- 이 탭에서 등록 불가 아이템이면 슬롯 제거
+	GODDESS_MGR_REFORGE_DROP_INVALID_SLOT_ITEM(frame, function(item_obj)
+		return shared_common_skill_enchant.is_valid_item(item_obj)
+	end)
+	-- 강화/진화와 동일: 슬롯에 등록된 아이템이 있으면 정보 표시 (UPDATE가 선두에서 CLEAR 수행)
+	GODDESS_MGR_SKENCH_UPDATE(frame)
+end
+
+function GODDESS_MGR_SKENCH_CLEAR(frame)
+	local inner = GET_CHILD_RECURSIVELY(frame, 'skench_mat_inner')
+	inner:RemoveAllChild()
+
+	for i = 1, 2 do
+		local skill_slot = GET_CHILD_RECURSIVELY(frame, 'skench_slot_' .. i)
+		skill_slot:ClearIcon()
+		local name_text = GET_CHILD_RECURSIVELY(frame, 'skench_name_' .. i)
+		name_text:SetTextByKey('value', ' ')
+	end
+
+	GET_CHILD_RECURSIVELY(frame, 'skench_select_left'):ShowWindow(0)
+	GET_CHILD_RECURSIVELY(frame, 'skench_select_right'):ShowWindow(0)
+	GET_CHILD_RECURSIVELY(frame, 'skench_success_pic'):ShowWindow(0)
+
+	local do_btn = GET_CHILD_RECURSIVELY(frame, 'skench_do')
+	do_btn:SetEnable(0)
+end
+
+function GODDESS_MGR_SKENCH_SET_SLOT(frame, index, skill_name, skill_lv)
+	local skill_slot = GET_CHILD_RECURSIVELY(frame, 'skench_slot_' .. index)
+	local name_text = GET_CHILD_RECURSIVELY(frame, 'skench_name_' .. index)
+
+	local cls = GetClass('Skill', skill_name)
+	if cls == nil then return end
+
+	imcSlot:SetImage(skill_slot, 'icon_' .. TryGetProp(cls, 'Icon', 'None'))
+	name_text:SetTextByKey('value', string.format('[Lv.%s] %s', skill_lv, TryGetProp(cls, 'Name', 'None')))
+end
+
+function GODDESS_MGR_SKENCH_UPDATE(frame)
+	GODDESS_MGR_SKENCH_CLEAR(frame)
+
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local inv_item = session.GetInvItemByGuid(guid)
+	if inv_item == nil then return end
+	local item_obj = GetIES(inv_item:GetObject())
+	if item_obj == nil then return end
+
+	local skl, lv = shared_common_skill_enchant.get_enchanted_skill(item_obj, 1)
+	local state = 0
+	if skl ~= 'None' then
+		if TryGetProp(item_obj, 'CommonSkillStr', 'None') ~= 'None' then
+			state = 2
+		else
+			state = 1
+		end
+	end
+	frame:SetUserValue('SKENCH_STATE', state)
+
+	if state >= 1 then
+		GODDESS_MGR_SKENCH_SET_SLOT(frame, 1, skl, lv)
+	end
+
+	if state == 2 then
+		-- 후보 스킬 존재: 유지/교체 선택 대기
+		local candi_skl, candi_lv = shared_common_skill_enchant.get_canidate_skill(item_obj)
+		GODDESS_MGR_SKENCH_SET_SLOT(frame, 2, candi_skl, candi_lv)
+		GET_CHILD_RECURSIVELY(frame, 'skench_select_left'):ShowWindow(1)
+		GET_CHILD_RECURSIVELY(frame, 'skench_select_right'):ShowWindow(1)
+		return
+	end
+
+	-- 원본 MAT_SET 상태(빨간톤): 재료 슬롯 클릭으로 확인 후 실행 버튼 활성
+	local cost = shared_common_skill_enchant.get_cost(item_obj)
+	GODDESS_MGR_RENDER_MAT_LIST(frame, 'skench_mat_inner', cost, false)
+end
+
+function GODDESS_MGR_SKENCH_EXEC(parent, btn)
+	local frame = parent:GetTopParentFrame()
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	local state = frame:GetUserIValue('SKENCH_STATE')
+	if state == 2 then return end
+
+	ui.SetHoldUI(true)
+	pc.ReqExecuteTx_Item('ENCHANT_VAKARINE_SKILL', guid, '1 1')
+end
+
+function GODDESS_MGR_SKENCH_SELECT_LEFT(parent, btn)
+	local frame = parent:GetTopParentFrame()
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	ui.SetHoldUI(true)
+	pc.ReqExecuteTx_Item('ENCHANT_VAKARINE_SKILL', guid, '1 2')
+end
+
+function GODDESS_MGR_SKENCH_SELECT_RIGHT(parent, btn)
+	local frame = parent:GetTopParentFrame()
+	local slot = GET_CHILD_RECURSIVELY(frame, 'ref_slot')
+	local guid = slot:GetUserValue('ITEM_GUID')
+	if guid == 'None' then return end
+
+	ui.SetHoldUI(true)
+	pc.ReqExecuteTx_Item('ENCHANT_VAKARINE_SKILL', guid, '1 3')
+end
+
+function GODDESS_MGR_ON_SKENCH_RESULT(frame, msg, arg_str, arg_num)
+	ui.SetHoldUI(false)
+
+	if frame == nil or frame:IsVisible() == 0 then return end
+
+	local main_tab = GET_CHILD_RECURSIVELY(frame, 'main_tab')
+	if main_tab:GetSelectItemIndex() ~= 0 then return end
+
+	local reforge_tab = GET_CHILD_RECURSIVELY(frame, 'reforge_tab')
+	if reforge_tab:GetSelectItemIndex() ~= 2 then return end
+
+	GODDESS_MGR_SKENCH_UPDATE(frame)
+
+	-- 원본 성공 연출: 사운드 + 골드 배경 0.8초 (SUCCESS_COMMON_SKILL_ENCHANT 이식)
+	if msg == 'MSG_SUCCESS_ENCHANT_SKILL' then
+		imcSound.ReleaseSoundEvent('sys_transcend_success')
+		imcSound.PlaySoundEvent('sys_transcend_success')
+		GET_CHILD_RECURSIVELY(frame, 'skench_success_pic'):ShowWindow(1)
+		ReserveScript('GODDESS_MGR_SKENCH_SUCCESS_END()', 0.8)
+	end
+end
+
+function GODDESS_MGR_SKENCH_SUCCESS_END()
+	local frame = ui.GetFrame('goddess_equip_manager')
+	if frame == nil then return end
+	GET_CHILD_RECURSIVELY(frame, 'skench_success_pic'):ShowWindow(0)
+end
+-- 재련 - 업그레이드/스킬 연성 통합 끝
 
 function init_goddess_icor_spot_list(frame, type)
 	local goddess_icor_spot_list = GET_CHILD_RECURSIVELY(frame, 'goddess_icor_spot_list')

@@ -159,3 +159,7 @@ ClassID,BaseID,ClassName,TreeGroup,TreeGroupCaption,TreeSSetTitle,InvenTabName,M
 158,790001,"OPTMisc_GoddessIcorArmor","Material","재료","아이커","Etc","Icor"
 159,795001,"Armor_Shoulder","EquipGroup","장비","방어구","Equip","Armor"
 160,800001,"Accessory_Core","EquipGroup","장비","코어","Equip","NO"
+161,805001,"Archeology_ArcRelic","Archeology","고고학","유물","Etc","NO"
+162,810001,"Archeology_ArcManagement","Archeology","고고학","유물 관리","Etc","NO"
+163,815001,"Archeology_ArcPortal","Archeology","고고학","탐사·포탈","Etc","NO"
+164,820001,"Archeology_ArcMaterial","Archeology","고고학","발굴 재료","Etc","NO"

@@ -12,7 +12,7 @@ function LOGINUI_TITLE_ON_INIT(addon, frame)
 		frame_width = frame:GetUserConfig('FRAME_WIDTH_WIDE')
 	end
 	frame_top:Resize(frame_width, frame_top:GetHeight())
-	
+	LOGIN_TITLE_OPEN(frame);
 --	ENABLE_ANIMATE_BACKGROUND_ILLUSTRATION();
 end
 
@@ -118,3 +118,31 @@ end
 --		TITLE_SHOW_SPINE_PIC(frame, "login_img", 1);
 ----	end
 --end
+
+
+function LOGIN_TITLE_OPEN(frame)	
+    local video = GET_CHILD_RECURSIVELY(frame, 'video')
+    if video ~= nil then
+        video:Stop()
+		-- video:SetVideoName("login_video.avi")
+		-- video:SetVideoName("uriel_video.avi")
+		-- video:UseGPU(true)
+        -- video:Play()
+    end
+
+end
+
+function LOGIN_TITLE_CLOSE(frame)	
+	if frame == nil then
+		frame = ui.GetFrame("loginui_title");
+	end
+
+	if frame == nil then
+		return;
+	end
+
+    local video = GET_CHILD_RECURSIVELY(frame, 'video')
+    if video ~= nil then
+        video:Stop()
+    end
+end

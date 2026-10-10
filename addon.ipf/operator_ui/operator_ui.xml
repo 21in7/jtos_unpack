@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="operator_ui" x="0" y="0" width="495" height="65">
+    <frame fullheight="false" fasthide="true" layout_gravity="center top" margin="0 0 0 0" draw="true"/>
+    <skin frameskin="None"/>
+    <draw drawtitlebar="false"/>
+    <layer layerlevel="91" topmostlayerbyclick="true"/>
+    <option visible="false" hideable="true" closebutton="false" moveable="true" alwaysVisible="false"/>
+    <script OpenScp="ON_OPERATOR_UI_OPEN"/>
+    <controls>
+        <picture name="pic" rect="0 0 493 65" margin="0 0 0 0" layout_gravity="left top" image="operator_title_red" hittestbox="false"/>
+    </controls>
+</uiframe>

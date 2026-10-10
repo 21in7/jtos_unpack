@@ -1675,7 +1675,7 @@ function CHECK_GEAR_SCORE_FOR_GUILD_EVENT_BLOCKADE(pc, event_id)
 
 			local function _check_equip(pc, item, check)
 				-- no equip
-				if item == nil then 
+				if item == nil then
 					return false, "MustEquipWeaponArmorToEnter"; 
 				end
 				
@@ -1753,4 +1753,59 @@ function CHECK_ENTERANCE_FOR_TEAM_BATTLE_LEAGUE(pc, index)
 		return false;
 	end
 	return true;
+end
+
+-- ** indun select step ** --
+---- 단계별 기어 스코어 체크
+function CHECK_INDUN_SELECT_STEP_GEAR_SCORE(pc, step_info)
+	if pc == nil or step_info == nil then
+		return true
+	end
+
+	local restrict_gear_score = tonumber(step_info.gear_score) or 0
+	if restrict_gear_score > 0 then
+		local gear_score = GET_PLAYER_GEAR_SCORE(pc)
+		if gear_score < restrict_gear_score then
+			SendSysMsg(pc, "LowEquipedItemGearScore")
+			return false
+		end
+	end
+
+	local restrict_ability_score = tonumber(step_info.ability_score) or 0
+	if restrict_ability_score > 0 then
+		local ability_score = GET_PLAYER_ABILITY_SCORE(pc)
+		if tonumber(ability_score) < restrict_ability_score then
+			SendSysMsg(pc, "LowAblityPointScore")
+			return false
+		end
+	end
+	return true
+end
+
+---- 유효한 단계 정보 가져오기
+function GET_VALID_INDUN_SELECT_STEP_INFO(pc, indun_type, selected_step, join_method)
+	if join_method == 4 then
+		return nil
+	end
+
+	local step_list = shared_indun_step.get_list(indun_type)
+	if step_list  == nil or #step_list <= 0 then
+		return nil
+	end
+
+	if selected_step <= 0 then
+		selected_step = shared_indun_step.get_first_unlocked_step(pc, indun_type)
+	end
+
+	local step_info = shared_indun_step.get_info(indun_type, selected_step)
+	if step_info == nil then
+		SendSysMsg(pc, "CannotJoinIndunYet")
+		return false
+	end
+
+	if shared_indun_step.is_unlocked(pc, indun_type, selected_step) == false then
+		SendSysMsg(pc, "CannotJoinIndunYet")
+		return false
+	end
+	return step_info
 end

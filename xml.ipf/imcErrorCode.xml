@@ -664,6 +664,7 @@
 	<Code Code="ERROR_LUA_CORE" Team="PROGRAM" Category="ERROR" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="Lua ies object 관리 에러"/>
 	<Code Code="ERROR_DX9" Team="PROGRAM" Category="ERROR" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="DX9 에러 로그"/>
 	<Code Code="FATAL_DX9" Team="PROGRAM" Category="ERROR" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="DX9 페이탈 로그"/>
+	<Code Code="INFO_GM_SAFE_BLOCK_DEAD" Team="PROGRAM" Category="INFO" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="GM 무적(//safe on) PC의 사망 전이를 차단함 (경로/HP 기록)"/>
 	<Code Code="ERROR_CHALLENGE_AUTO_MODE" Team="PROGRAM" Category="ERROR" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="챌린지모드 자동매칭 관련 에러"/>
 	<Code Code="INFO_TRACE_QUICKSLOT" Team="tos_team" Category="INFO" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="퀵슬롯"/>
 	<Code Code="ERROR_GILTINE" Team="tos_team" Category="SYSTEM" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="길티네 랭킹 관련 에러"/>
@@ -687,4 +688,5 @@
 	<Code Code="INFO_INDUN_DESTROY" Team="PROGRAM" Category="INFO" SubCategory="" Logger="root" Enabled="NO" CallStack="NO" Desc="INDUN_DESTROY_LOG"/>
 	<Code Code="INFO_NORMAL_LUA" Team="tos_team" Category="INFO" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="Lua Debug용"/>
 	<Code Code="INFO_DLC_LOG" Team="tos_team" Category="SYSTEM" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc=""/>
+	<Code Code="INFO_EQUIP_BOSS_CARD_V2" Team="PROGRAM" Category="INFO" SubCategory="" Logger="root" Enabled="YES" CallStack="NO" Desc="EquipBossCard V2 effect cache initialization"/>
 </imcErrorCode>

@@ -509,7 +509,7 @@ function SET_ITEM_TOOLTIP_ALL_TYPE(icon, invitem, className, strType, itemType, 
 end
 
 function SET_ITEM_TOOLTIP_TYPE(prop, itemID, itemCls, tooltipType)
-	local customTooltipScp = TryGetProp(itemCls, "CustomToolTip");	
+	local customTooltipScp = TryGetProp(itemCls, "CustomToolTip");
 	if customTooltipScp ~= nil and customTooltipScp ~= "None" then
 		customTooltipScp = _G[customTooltipScp];		
 		if customTooltipScp ~= nil then
@@ -1015,6 +1015,29 @@ function DRAW_SPECIAL_RANDOM_OPTION(item, desc)
 			desc = desc .. ScpArgMsg(name, 'level', value) .. '{nl}'
 		end
 		desc = desc .. ScpArgMsg('austeja_option_end') .. '{nl}'
+		desc = desc .. suffix
+	end
+
+	RadaOption = TryGetProp(item, 'SauleOption', 'None')	
+	if RadaOption ~= 'None' then
+		local prefix = ''
+		local suffix = ''
+		if SEASON_COIN_NAME ~= 'SauleCertificate' then
+			prefix = '{#7F7F7F}'
+			suffix = '{/}'
+		end
+
+		desc = prefix .. desc
+		desc = desc .. '{nl}' .. ScpArgMsg('saule_option') .. '{nl}'
+
+		local list = StringSplit(RadaOption, ';')
+		for i = 1, #list do
+			local name = StringSplit(list[i], '/')[1]
+			local value = StringSplit(list[i], '/')[2]
+			
+			desc = desc .. ScpArgMsg(name, 'level', value) .. '{nl}'
+		end
+		desc = desc .. ScpArgMsg('saule_option_end') .. '{nl}'
 		desc = desc .. suffix
 	end
 

@@ -32,8 +32,8 @@ end
 
 function tooltip_EP16_NECK_02(item)
     local a, b, c, d, e, f, g, h = GET_EP16_NECK_02_POINT(item)
-    
-    local value1, value2 = shared_upgrade_acc.get_value(item)    
+        
+    local value1, value2 = shared_upgrade_acc.get_value(item)        
     if value1 > 0 then
         e = e .. '{ol}{#0055aa}({img green_up_arrow 16 16}' .. value1  .. '){/}{/}'
     end
@@ -196,6 +196,7 @@ function tooltip_Vasilisa(item)
     return msg, 'None'
 end
 
+-- 피크티스(공용)
 function tooltip_EP17_Kalentis_NECK_01(item)    
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -208,7 +209,6 @@ function tooltip_EP17_Kalentis_NECK_01(item)
 
     return msg, optionname
 end
-
 function tooltip_EP17_Kalentis_BRC_01(item)    
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -216,14 +216,14 @@ function tooltip_EP17_Kalentis_BRC_01(item)
     local a = '2,250'
     local b = '675'
     
-    local msg = ScpArgMsg('tooltip_EP16_NECK_01', 'aa', aa, 'a', a, 'b', b, 'c', 0.5)
+    local msg = ScpArgMsg('tooltip_EP16_NECK_01', 'aa', aa, 'a', a, 'b', b, 'c', 0.25)
     
     optionname = get_item_effect_name(item)
 
     return msg, optionname
 end
--- 칸트리베는 기존 툴팁으로 대응 가능
 
+-- 주오다(공용)
 function tooltip_EP17_Kalentis_NECK_03(item)
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -237,7 +237,6 @@ function tooltip_EP17_Kalentis_NECK_03(item)
 
     return msg, optionname
 end
-
 function tooltip_EP17_Kalentis_BRC_03(item)
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -252,6 +251,7 @@ function tooltip_EP17_Kalentis_BRC_03(item)
     return msg, optionname
 end
 
+-- 트리우카스(공용)
 function tooltip_EP17_Kalentis_NECK_04(item)
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -265,7 +265,6 @@ function tooltip_EP17_Kalentis_NECK_04(item)
 
     return msg, optionname
 end
-
 function tooltip_EP17_Kalentis_BRC_04(item)
     local aa = shared_upgrade_acc.get_add_atk_value(item)
     aa = GET_COMMAED_STRING(aa)
@@ -274,16 +273,17 @@ function tooltip_EP17_Kalentis_BRC_04(item)
     local b = '788'
 
     local msg = ScpArgMsg('tooltip_EP16_NECK_04', 'aa', aa, 'a', a, 'b', b, 'c', 0.25)
-   
+
     optionname = get_item_effect_name(item)
 
     return msg, optionname
 end
 
+-- 구 칸트리베
 function tooltip_EP17_Kalentis_NECK_02(item)
     local a, b, c, d, e, f, g, h = GET_EP16_NECK_02_POINT(item)
     
-    local value1, value2 = shared_upgrade_acc.get_value(item)    
+    local value1, value2 = shared_upgrade_acc.get_value(item)       
     if value1 > 0 then
         e = e .. '{ol}{#0055aa}({img green_up_arrow 16 16}' .. value1  .. '){/}{/}'
     end
@@ -293,7 +293,6 @@ function tooltip_EP17_Kalentis_NECK_02(item)
     optionname = get_item_effect_name(item)    
     return msg, optionname
 end
-
 function tooltip_EP17_Kalentis_BRC_02(item)
     local a, b, c, d, e, f, g, h = GET_EP16_BRC_02_POINT(item)
 
@@ -302,6 +301,26 @@ function tooltip_EP17_Kalentis_BRC_02(item)
         e = e .. '{ol}{#0055aa}({img green_up_arrow 16 16}' .. value1  .. '){/}{/}'
     end
 
+    local msg = ScpArgMsg('tooltip_EP16_NECK_02', 'a', a, 'b', b, 'c', c, 'd', d, 'e', e, 'f', f, 'g', g, 'h', h)
+    
+    optionname = get_item_effect_name(item)
+
+    return msg, optionname
+end
+
+-- 550제 이후 공용(칸트리베)
+function tooltip_EP18_NECK_02(item)
+    local a, b, c, d, e, f, g, h = GET_EP18_NECK_02_POINT(item)
+        
+    local msg = ScpArgMsg('tooltip_EP16_NECK_02', 'a', a, 'b', b, 'c', c, 'd', d, 'e', e, 'f', f, 'g', g, 'h', h)    
+    
+    optionname = get_item_effect_name(item)    
+    return msg, optionname
+end
+-- 550제 이후 공용(칸트리베)
+function tooltip_EP18_BRC_02(item)
+    local a, b, c, d, e, f, g, h = GET_EP18_BRC_02_POINT(item)
+    
     local msg = ScpArgMsg('tooltip_EP16_NECK_02', 'a', a, 'b', b, 'c', c, 'd', d, 'e', e, 'f', f, 'g', g, 'h', h)
     
     optionname = get_item_effect_name(item)

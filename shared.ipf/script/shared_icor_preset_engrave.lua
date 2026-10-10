@@ -138,6 +138,8 @@ function GET_COST_APPLY_ENGRAVE(item_obj)
         coin = 'JurateCertificate'
     elseif lv == 540 then
         coin = 'AustejaCertificate'
+    elseif lv == 560 then
+        coin = 'SauleCertificate'
     end
 
     local cost = math.floor((lv / 20) * 3)    

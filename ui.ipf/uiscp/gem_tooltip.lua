@@ -280,7 +280,14 @@ function DRAW_GEM_DESC_TOOLTIP(tooltipframe, invitem, yPos, mainframename)
 	local desc = invitem.Desc
 
 	desc = DRAW_SEALED_SKILL_GEM_INFO(invitem, desc)
-	desc = DRAW_COLLECTION_INFO(invitem, desc)
+	-- 장비 보관함에서 추출한 사본 젬은 컬렉션 등록 불가(COLLECTION 등록 거부 조건과 동일)
+	if tonumber(TryGetProp(invitem, 'CharacterBelonging', 0)) == 1 then
+		if is_collection_item(TryGetProp(invitem, 'ClassName', 'None')) == true then
+			desc = desc .. '{nl} {nl}{@st58}{#dd1122}' .. ClMsg('CopyGemCollectionUnavailable') .. '{/}{/}'
+		end
+	else
+		desc = DRAW_COLLECTION_INFO(invitem, desc)
+	end
 
 	descRichtext:SetText(desc)
 

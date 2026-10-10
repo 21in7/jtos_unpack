@@ -624,6 +624,7 @@
 			</EtcList>
 		</MainSkl>
 	</Skill>
+	<!-- Dev #147965 : 추종자 스킬 -->
 	<Skill Name="Paladin_Conviction_2">
 		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
 			<HitList>
@@ -752,6 +753,34 @@
 				<Scp Client="YES" Scp="C_VOICE_SOUND" Time="10" UseSleep="NO">
 					<Str Str="voice_cleric_m_restoration_shot"/>
 					<Str Str="voice_cleric_restoration_shot"/>
+				</Scp>
+			</EtcList>
+		</MainSkl>
+	</Skill>
+	<Skill Name="Paladin_StoneSkin_2">
+		<MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+			<EtcList>
+				<Scp Scp="MONSKL_C_PLAY_ANIM" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="PUBLIC_BUFF"/>
+					<Num Num="2"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="C_VOICE_SOUND" Client="YES" UseSleep="NO" Time="0">
+					<Str Str="voice_cleric_m_stoneskin_shot"/>
+					<Str Str="voice_cleric_stoneskin_shot"/>
+				</Scp>
+				<Scp Scp="SKL_BUFF" Client="NO" UseSleep="NO" Time="300">
+					<Str Str="StoneSkin_Buff"/>
+					<Num Num="1" UseFunc="1" FuncTxt="return obj.Level;"/>
+					<Num Num="0"/>
+					<Num Num="1800000"/>
+					<Num Num="1"/>
+					<Num Num="100"/>
+					<Num Num="0"/>
+				</Scp>
+				<Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="310">
+					<Str Str="SCR_Vibora_Mace_StoneSkin"/>
 				</Scp>
 			</EtcList>
 		</MainSkl>

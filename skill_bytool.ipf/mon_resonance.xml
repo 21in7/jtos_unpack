@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by imc (imc) -->
+<ToolSkill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_10">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl4" Speed="0.89999998"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="8"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="8"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="8"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="8"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_10"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="500">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_10_START"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="1600">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_10_LAND"/>
+                </Scp>
+                <Anim Time="2000" Anim="skl8" Speed="0.6" StartTime="0.030924529"/>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="2000">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_10_CASTING"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2000">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill05_cast_01" Arg="3"/>
+                    <Str Str="None"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="7000">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_10_SHOT"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_9">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="astd" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_9"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_8">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl1" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_monster_fireload_skill03_cast_02" Arg="1"/>
+                    <Str Str="None"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_08"/>
+                </Scp>
+                <Scp Scp="MONSKL_PAD_FRONT_MSL" Client="NO" UseSleep="YES" Time="1000">
+                    <Pos Angle="0" Dist="2.3827679e-39"/>
+                    <Str Str="Resonance_BerserkerZawra_Lamentation_Pad"/>
+                    <Num Num="500"/>
+                    <Num Num="1"/>
+                    <Num Num="180"/>
+                    <Num Num="10"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Anim Time="1500" Anim="skl2" Speed="1"/>
+                <Scp Scp="MONSKL_PAD_FRONT_MSL" Client="NO" UseSleep="YES" Time="2500">
+                    <Pos Angle="0" Dist="2.3827679e-39"/>
+                    <Str Str="Resonance_BerserkerZawra_Lamentation_Pad"/>
+                    <Num Num="500"/>
+                    <Num Num="1"/>
+                    <Num Num="180"/>
+                    <Num Num="10"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="S_R_KNOCK_TARGET" Client="NO" UseSleep="NO" TooltipScp="TOOLTIP_MONSKL_R_KNOCKDOWN">
+                    <Num Num="3"/>
+                    <Num Num="0"/>
+                    <Num Num="250"/>
+                    <Num Num="10"/>
+                    <Num Num="0"/>
+                    <Num Num="1"/>
+                    <Num Num="2"/>
+                    <Num Num="0"/>
+                    <Str Str="None"/>
+                </ToolScp>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_7">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_06"/>
+                </Scp>
+                <Anim Time="500" Anim="skl7" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="2"/>
+                    <Str Str="Dummy_Weapon"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="1000">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill01_cast_02" Arg="1.5"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="1800">
+                    <Str Str="berserkerzawra_skill_07_1"/>
+                </Scp>
+                <Scp Scp="EFT_AND_HIT_RANGE_PREVIEW" Client="NO" UseSleep="YES" TooltipScp="TOOLTIP_EFT_AND_HIT" Time="1000">
+                    <Pos Angle="0" Dist="50" Height="1"/>
+                    <Num Num="1000"/>
+                    <Num Num="101"/>
+                    <Str_Arg Str="eff_monster_fireload_skill06_launch_02" Arg="0.80000001"/>
+                    <Num Num="80"/>
+                    <Num Num="200"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="2000">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_7"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_6">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl8" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_monster_fireload_skill03_cast_02" Arg="1"/>
+                    <Str Str="None"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_06"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2700">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill03_launch_02" Arg="1"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="2900">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_6"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="3000">
+                    <Str_Arg Str="Projectile_FireBall_Orange_03" Arg="0.60000002"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="10"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="3000">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill04_launch_03" Arg="0.40000001"/>
+                    <Str Str="Bip01 Head"/>
+                    <Num Num="10"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="3000">
+                    <Str_Arg Str="GroundAura_FireWave_Orange_01" Arg="0.60000002"/>
+                    <Str Str="Bip01"/>
+                    <Num Num="10"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_5">
+        <MainSkl ScrLock="None" JumpFlee="YES" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl8" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="6"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="6"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="6"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="3.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill02_cast_01" Arg="1"/>
+                    <Str Str="None"/>
+                    <Num Num="3.5"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_5_ARROW_ATK"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_05"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2700">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill01_launch_01" Arg="1"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="3500">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_5_JUMP"/>
+                </Scp>
+                <Anim Time="3500" Anim="skl6" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="3500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="2.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="3600">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill01_cast_02" Arg="1.5"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="SCR_RESONANCE_ZAWRA_ADD_FLAME_DEBUFF" Client="NO" UseSleep="NO"/>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_4">
+        <CondList>
+            <Scp Scp="SCOND_USE_CNT" Client="NO" UseSleep="NO" Time="0">
+                <Num Num="3"/>
+            </Scp>
+        </CondList>
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl4" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="4"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="2"/>
+                    <Str Str="Dummy_Weapon"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_04"/>
+                </Scp>
+                <Scp Scp="EFT_AND_HIT_RANGE_PREVIEW" Client="NO" UseSleep="YES" TooltipScp="TOOLTIP_EFT_AND_HIT" Time="500">
+                    <Pos Angle="0" Dist="2.3827679e-39"/>
+                    <Num Num="1000"/>
+                    <Num Num="101"/>
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill03_launch_02" Arg="0.69999999"/>
+                    <Num Num="100"/>
+                    <Num Num="200"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="500">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill01_cast_02" Arg="1.5"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="1500">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_4"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="SCR_RESONANCE_ZAWRA_ADD_FLAME_DEBUFF" Client="NO" UseSleep="NO"/>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_3">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.0029670598" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl5" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill02_cast_01" Arg="2"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_03"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="800">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill02_launch_01" Arg="1.5"/>
+                    <Str Str="berserker_zawra_wing"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="800">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_3"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="SCR_RESONANCE_ZAWRA_ADD_FLAME_DEBUFF" Client="NO" UseSleep="NO"/>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_2">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl3" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_skill02_cast_01" Arg="2"/>
+                    <Str Str="None"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="0">
+                    <Str Str="berserkerzawra_skill_02"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_2"/>
+                </Scp>
+                <Anim Time="1000" Anim="skl3" Speed="1"/>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="1000">
+                    <Str Str="SCR_RESONANCE_BERSERKER_ZAWRA_SKILL_2"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="SCR_RESONANCE_ZAWRA_ADD_FLAME_DEBUFF" Client="NO" UseSleep="NO"/>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_BerserkerZawra_Skill_1">
+        <MainSkl ScrLock="None" JumpFlee="YES" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="600" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="110" SklAngle="0.52359879" AniTime="800" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+                <Frame Type="FAN" Time="600" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="110" SklAngle="0.52359879" AniTime="800" RotAngle="-1.0471976" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+                <Frame Type="FAN" Time="600" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="110" SklAngle="0.52359879" AniTime="800" RotAngle="1.0471976" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl2" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_002"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_012"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_debuff_01" Arg="1"/>
+                    <Str Str="Bone_BZawra_back_022"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_goddessboss_berserkerzawra_dead_cast_01" Arg="1"/>
+                    <Str Str="Dummy_BerserkerZawra_Root"/>
+                    <Num Num="3"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="eff_monster_fireload_skill02_cast_01" Arg="0.5"/>
+                    <Str Str="Dummy_Weapon"/>
+                    <Num Num="1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="200">
+                    <Str_Arg Str="I_skillrange_180" Arg="6.8000002"/>
+                    <Str Str="None"/>
+                    <Num Num="0.69999999"/>
+                </Scp>
+                <Scp Scp="C_UNITY_EFFECT_NODE" Client="YES" UseSleep="NO" Time="900">
+					<Str_Arg Str="eff_goddessboss_berserkerzawra_skill02_projectile_end" Arg="1"/>
+					<Num Num="1"/>
+					<Num Num="0"/>
+					<Num Num="180"/>
+					<Num Num="0"/>
+					<Str Str="Bip01"/>
+					<Str Str="None"/>
+					<Str Str="None"/>
+				</Scp>
+                <Scp Scp="C_SOUND" Client="YES" UseSleep="NO" Time="800">
+                    <Str Str="berserkerzawra_skill_01"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="SCR_RESONANCE_ZAWRA_ADD_FLAME_DEBUFF" Client="NO" UseSleep="NO"/>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_Zawra_Skill_5">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <MoveList>
+                <Frame Time="1100" Dist="3.1396441" Angle="-0.75571573" Accel="1" Height="0" MoveType="0" Gravity="600" JumpPower="300"/>
+                <Frame Time="2400" Dist="269.48196" Angle="0.0041260999" Accel="1" Height="0" MoveType="0" Gravity="600" JumpPower="300"/>
+            </MoveList>
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="30" Length="30" SklAngle="0.17453292" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl5" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="GroundAura_Wind_LightBrown_02" Arg="4"/>
+                    <Str Str="None"/>
+                    <Num Num="1.0"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="200">
+                    <Str_Arg Str="I_light004_orange2" Arg="1"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="1.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="200">
+                    <Str_Arg Str="I_light004_orange2" Arg="1"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="1.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="300">
+                    <Str_Arg Str="I_light004_orange2" Arg="2.5"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="300">
+                    <Str_Arg Str="I_light004_orange2" Arg="2.5"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="400">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_5_RUSH"/>
+                </Scp>
+                <Anim Time="2400" Anim="skl4" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2600">
+                    <Str_Arg Str="I_light004_orange2" Arg="1"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="1.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2600">
+                    <Str_Arg Str="I_light004_orange2" Arg="1"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="1.5"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2700">
+                    <Str_Arg Str="I_light004_orange2" Arg="2.5"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="2700">
+                    <Str_Arg Str="I_light004_orange2" Arg="2.5"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="3400">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_5_JUMP"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="4200">
+                    <Str_Arg Str="Stomp_Dust_LightBrown_02" Arg="4"/>
+                    <Str Str="None"/>
+                    <Num Num="0.5"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_Zawra_Skill_4">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <MoveList>
+                <Frame Time="2200" Dist="1.2996645" Angle="2.3583314" Accel="1" Height="0" MoveType="0" Gravity="600" JumpPower="300"/>
+                <Frame Time="3500" Dist="197.06723" Angle="0.0035071641" Accel="1" Height="0" MoveType="0" Gravity="600" JumpPower="300"/>
+            </MoveList>
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.0029670598" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl2" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="600">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="600">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="0.30000001"/>
+                </Scp>
+                <Scp Scp="EFT_AND_HIT_ARROW" Client="NO" UseSleep="YES" Time="1000">
+                    <Pos Angle="0" Dist="0"/>
+                    <Pos Angle="0" Dist="250"/>
+                    <Str_Arg Str="None" Arg="1"/>
+                    <Num Num="25"/>
+                    <Num Num="0.0099999998"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                    <Str_Arg Str="F_spin038_orange" Arg="2.5"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="40"/>
+                    <Num Num="0.2"/>
+                    <Num Num="0"/>
+                    <Num Num="1000"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="EFT_AND_HIT_ARROW" Client="NO" UseSleep="YES" Time="1200">
+                    <Pos Angle="0" Dist="0"/>
+                    <Pos Angle="0" Dist="250"/>
+                    <Str_Arg Str="None" Arg="1"/>
+                    <Num Num="25"/>
+                    <Num Num="0.0099999998"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                    <Str_Arg Str="I_light013_spark_orange2" Arg="3"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="0"/>
+                    <Num Num="40"/>
+                    <Num Num="0.2"/>
+                    <Num Num="0"/>
+                    <Num Num="1000"/>
+                    <Num Num="1"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="1400">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_4"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_Zawra_Skill_3">
+        <MainSkl ScrLock="None" JumpFlee="NO" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" SklAngle="0.0029670598" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl3" Speed="1"/>
+                <Scp Scp="EFT_AND_HIT_RANGE_PREVIEW" Client="NO" UseSleep="YES" TooltipScp="TOOLTIP_EFT_AND_HIT" Time="0">
+                    <Pos Angle="0" Dist="2.3827679e-39"/>
+                    <Num Num="2000"/>
+                    <Num Num="101"/>
+                    <Str_Arg Str="Groundimpact_SuperNova_Orange_03" Arg="1.2"/>
+                    <Num Num="300"/>
+                    <Num Num="200"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="2000">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_3"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="S_R_KNOCK_TARGET" Client="NO" UseSleep="NO" TooltipScp="TOOLTIP_MONSKL_R_KNOCKDOWN">
+                    <Num Num="3"/>
+                    <Num Num="0"/>
+                    <Num Num="350"/>
+                    <Num Num="10"/>
+                    <Num Num="40"/>
+                    <Num Num="1"/>
+                    <Num Num="2"/>
+                    <Num Num="1"/>
+                    <Str Str="SCR_RAID_BOSS_SUPER_KNOCK_BACK_END"/>
+                </ToolScp>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_Zawra_Skill_2">
+        <MainSkl ScrLock="None" JumpFlee="YES" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="9999" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" AniTime="10199" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="skl" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="0.69999999"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="0.69999999"/>
+                </Scp>
+                <Scp Scp="EFT_AND_HIT_RANGE_PREVIEW" Client="NO" UseSleep="YES" TooltipScp="TOOLTIP_EFT_AND_HIT" Time="1400">
+                    <Pos Angle="0" Dist="120"/>
+                    <Num Num="1000"/>
+                    <Num Num="101"/>
+                    <Str_Arg Str="GroundImpact_ElectricCrush_Orange_01##1" Arg="0.80000001"/>
+                    <Num Num="80"/>
+                    <Num Num="500"/>
+                    <Num Num="1"/>
+                    <Num Num="1000"/>
+                </Scp>
+                <Scp Scp="C_EFFECT_POS" Client="YES" UseSleep="NO" Time="2300">
+                    <Str_Arg Str="AerialExplosion_DarkDisintegration_Orange_01" Arg="1"/>
+                    <Pos Angle="0" Dist="120"/>
+                    <Num Num="1"/>
+                    <Str Str="None"/>
+                    <Angle Angle="0"/>
+                    <Num Num="0"/>
+                </Scp>
+                <Scp Scp="SKL_REPEAT" Client="NO" UseSleep="NO" Time="2600">
+                    <Num Num="2"/>
+                    <Num Num="2"/>
+                    <Num Num="150"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+            <ResultList>
+                <ToolScp Scp="S_R_COND_SCRIPT" Client="NO" UseSleep="NO">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_2_HIT"/>
+                </ToolScp>
+            </ResultList>
+        </MainSkl>
+    </Skill>
+    <Skill Name="Mon_Resonance_Zawra_Skill_1">
+        <MainSkl ScrLock="None" JumpFlee="YES" MSPDToUsePos="0">
+            <HitList>
+                <Frame Type="FAN" Time="1000" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="80" Length="130" SklAngle="0.52359879" AniTime="1200" RotAngle="1.0471976" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+                <Frame Type="FAN" Time="1000" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="80" Length="130" SklAngle="0.52359879" AniTime="1200" RotAngle="0" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+                <Frame Type="FAN" Time="1000" HitCount="1" TermMin="0" TermMax="0" PosType="0" Dist="0" RandDist="0" RandomPerHit="0" Angle="0" Width="80" Length="130" SklAngle="0.52359879" AniTime="1200" RotAngle="-1.0471976" ForceATK="0" ScriptIndex="0" ScriptName="" SkillType="0"/>
+            </HitList>
+            <EtcList>
+                <Anim Time="0" Anim="atk" Speed="1"/>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_R"/>
+                    <Num Num="0.69999999"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="0">
+                    <Str_Arg Str="I_light004_orange2" Arg="3"/>
+                    <Str Str="Dummy_effect_eye_L"/>
+                    <Num Num="0.69999999"/>
+                </Scp>
+                <Scp Scp="SKL_RUN_SCRIPT" Client="NO" UseSleep="NO" Time="0">
+                    <Str Str="SCR_RESONANCE_ZAWRA_SKILL_1"/>
+                </Scp>
+                <Scp Scp="C_EFFECT" Client="YES" UseSleep="NO" Time="1200">
+                    <Str_Arg Str="Death_DarkDisintegration_Orange_02" Arg="7"/>
+                    <Str Str="None"/>
+                    <Num Num="0"/>
+                </Scp>
+            </EtcList>
+        </MainSkl>
+    </Skill>
+</ToolSkill>

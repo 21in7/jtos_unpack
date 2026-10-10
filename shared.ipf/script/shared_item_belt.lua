@@ -64,7 +64,7 @@ local function make_item_belt_option_range()
     end
 
     local start = 470
-    local end_level = 540
+    local end_level = 560
 
     while start <= end_level do
         max_option_group_count[start] = 2    -- 최대 2개의 옵션 그룹을 가질 수 있음
@@ -98,6 +98,9 @@ local function make_item_belt_option_range()
             elseif start == 540 then
                 item_belt_option_range[start][1]['LOW'][option_name] = {150, 195} 
                 item_belt_option_range[start][1]['HIGH'][option_name] = {195, 234} -- max 표기를 위해 필요함
+            elseif start == 560 then
+                item_belt_option_range[start][1]['LOW'][option_name] = {195, 254}
+                item_belt_option_range[start][1]['HIGH'][option_name] = {254, 304}
             end
             option_group_number_by_option_name[start][option_name] = 1
         end
@@ -175,6 +178,22 @@ local function make_item_belt_option_range()
             item_belt_option_range[start][2]['HIGH']['ADD_HR'] = {4063, 4875}            
             item_belt_option_range[start][2]['HIGH']['MHP'] = {13000, 15600}
             item_belt_option_range[start][2]['HIGH']['RHP'] = {4063, 4875}
+        elseif start == 560 then
+            item_belt_option_range[start][2]['LOW']['CRTATK'] = {8125, 10563}
+            item_belt_option_range[start][2]['LOW']['CRTMATK'] = {8125, 10563}
+            item_belt_option_range[start][2]['LOW']['CRTHR'] = {4063, 5282}
+            item_belt_option_range[start][2]['LOW']['BLK_BREAK'] = {4063, 5282}
+            item_belt_option_range[start][2]['LOW']['ADD_HR'] = {4063, 5282}
+            item_belt_option_range[start][2]['LOW']['MHP'] = {13000, 16900}
+            item_belt_option_range[start][2]['LOW']['RHP'] = {4063, 5282}
+
+            item_belt_option_range[start][2]['HIGH']['CRTATK'] = {10563, 12675}
+            item_belt_option_range[start][2]['HIGH']['CRTMATK'] = {10563, 12675}
+            item_belt_option_range[start][2]['HIGH']['CRTHR'] = {5282, 6338}
+            item_belt_option_range[start][2]['HIGH']['BLK_BREAK'] = {5282, 6338}
+            item_belt_option_range[start][2]['HIGH']['ADD_HR'] = {5282, 6338}
+            item_belt_option_range[start][2]['HIGH']['MHP'] = {16900, 20280}
+            item_belt_option_range[start][2]['HIGH']['RHP'] = {5282, 6338}
         end
     
         for i = 1, #option_name_list do
@@ -468,6 +487,19 @@ shared_item_belt.get_reroll_cost_table = function(item)
         cost_count = cost_count * 1.3
         cost_list['misc_ore29'] = math.floor(cost_count)
         valid = true
+    elseif lv == 560 then
+        local cost_count = 1 + math.floor(count / 3)
+        cost_count = cost_count * 1.1
+        cost_list['misc_BlessedStone_2'] = math.floor(cost_count)
+
+        cost_count = 500 * math.pow(1.04, count)
+        cost_count = cost_count * 1.3
+        cost_list['SauleCertificate'] = math.floor(cost_count)
+
+        cost_count = 400 * math.pow(1.04, count)
+        cost_count = cost_count * 1.3
+        cost_list['misc_ore30'] = math.floor(cost_count)
+        valid = true
     end
 
     return cost_list, valid
@@ -510,6 +542,10 @@ end
 shared_item_belt.is_valid_unlock_item = function(scrollObj, itemObj)
     if TryGetProp(itemObj, 'CharacterBelonging', 0) == 0 then
 		return false, 'OnlyUseBelongingItem'
+	end
+
+	if TryGetProp(itemObj, 'popoboost', 0) >= 12 then
+		return false, 'NotValidItem'
 	end
     
 	if TryGetProp(itemObj, 'ItemLv', 0) ~= TryGetProp(scrollObj, 'NumberArg1', 999) then

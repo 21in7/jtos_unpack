@@ -8,7 +8,6 @@ function friend_invite_reward_cls_list(GroupName)
     for i = 0, cnt - 1 do
         local cls = GetClassByIndexFromList(i);
         local ClsGroup = TryGetProp(cls, "GroupName", "None")
-        print(ClsGroup,GroupName)
         -- if ClsGroup == GroupName then
         -- end
         table.insert(cls_list, cls);

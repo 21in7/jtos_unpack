@@ -1,0 +1,71 @@
+name: Game data
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  data:
+    name: Game asset validation
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          sparse-checkout: .github
+          persist-credentials: false
+      - name: Verify Git object integrity
+        run: git fsck --strict --no-dangling
+      - name: Validate changed assets
+        env:
+          TAVERN_DATA_BASE: ${{ github.event.pull_request.base.sha }}
+          TAVERN_DATA_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          python3 - <<'PY'
+          import io, json, os, subprocess
+          from pathlib import PurePosixPath
+          import xml.etree.ElementTree as ET
+
+          base, head = os.environ['TAVERN_DATA_BASE'], os.environ['TAVERN_DATA_HEAD']
+          changes = subprocess.check_output(['git', 'diff', '--raw', '--no-abbrev', '--no-renames', '-z', base, head]).split(b'\0')
+          rows = [(changes[i].decode().split(), changes[i+1].decode('utf-8')) for i in range(0, len(changes)-1, 2)]
+          shas = [meta[3] for meta, _ in rows if meta[1] != '000000']
+          if os.environ.get('GITHUB_ACTIONS') == 'true' and shas:
+              subprocess.run(['git', '-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head', '--recurse-submodules=no', '--filter=blob:none', 'origin', '--stdin'], input=('\n'.join(sorted(set(shas)))+'\n').encode(), check=True)
+          sizes = subprocess.check_output(['git', 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], input=('\n'.join(shas)+'\n').encode()).decode().splitlines()
+          objects = {sha: (typ, int(size)) for sha, typ, size in (line.split() for line in sizes)}
+          counts = {'xml': 0, 'utf8_text': 0, 'legacy_text': 0, 'other_assets': 0, 'deleted': 0, 'workflow': 0}
+          for metadata, name in rows:
+              path = PurePosixPath(name)
+              if name == '.github/workflows/data.yml':
+                  counts['workflow'] += 1
+                  continue
+              assert path.parts[0].endswith('.ipf'), 'Unexpected path outside extracted game packages: ' + name
+              if metadata[1] == '000000':
+                  counts['deleted'] += 1
+                  continue
+              sha = metadata[3]
+              kind, size = objects[sha]
+              assert metadata[1] in ('100644', '100755') and kind == 'blob', name
+              assert size <= 100000000, 'File exceeds the approved 100 MB limit: ' + name
+              if path.suffix.lower() in ('.xml', '.lua', '.ies'):
+                  data = subprocess.check_output(['git', 'cat-file', 'blob', sha])
+                  if path.suffix.lower() == '.xml':
+                      for _, element in ET.iterparse(io.BytesIO(data)):
+                          element.clear()
+                      counts['xml'] += 1
+                  else:
+                      try:
+                          data.decode('utf-8-sig')
+                          counts['utf8_text'] += 1
+                      except UnicodeDecodeError:
+                          counts['legacy_text'] += 1
+              else:
+                  counts['other_assets'] += 1
+          assert sum(counts.values()) > 0, 'No changes were validated'
+          print(json.dumps(counts, sort_keys=True))
+          PY

@@ -74,6 +74,8 @@
 		<font name="white_12" filename="ORIGINAL" size="12" color="#FFFFFF" space="0" underline="no" bold="no" dropshadow="no" italic="no" outline="no" outlinecolor="#333333"/>
 		<font name="white_12_ol" filename="ORIGINAL" size="12" color="#FFFFFF" space="0" underline="no" bold="no" dropshadow="no" italic="no" outline="yes" outlinecolor="#333333"/>
 		<font name="white_12_b" filename="ORIGINAL" size="12" color="#FFFFFF" space="0" underline="no" bold="yes" dropshadow="no" italic="no" outline="no" outlinecolor="#333333"/>
+		<font name="white_13_ol" filename="ORIGINAL" size="13" color="#FFFFFF" space="0" underline="no" bold="no" dropshadow="no" italic="no" outline="yes" outlinecolor="#333333"/>
+		<font name="white_13_b_ol" filename="ORIGINAL" size="13" color="#FFFFFF" space="0" underline="no" bold="yes" dropshadow="no" italic="no" outline="yes" outlinecolor="#333333"/>
 		<font name="white_14" filename="ORIGINAL" size="14" color="#FFFFFF" space="0" underline="no" bold="no" dropshadow="no" italic="no" outline="no" outlinecolor="#333333"/>
 		<font name="white_14_ol" filename="ORIGINAL" size="14" color="#FFFFFF" space="0" underline="no" bold="no" dropshadow="no" italic="no" outline="yes" outlinecolor="#333333"/>
 		<font name="white_14_b" filename="ORIGINAL" size="14" color="#FFFFFF" space="0" underline="no" bold="yes" dropshadow="no" italic="no" outline="no" outlinecolor="#333333"/>

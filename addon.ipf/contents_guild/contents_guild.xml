@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<uiframe name="contents_guild" x="0" y="10" width="44" height="290">
+	<frame fasthide="true" layout_gravity="right bottom" margin="0 0 482 50" scale_align="center bottom"/>
+	<draw drawframe="false" drawtitlebar="false"/>
+	<skin frameskin="systemmenu_vertical"/>
+	<input moveable="false" hittestframe="true"/>
+	<layer layerlevel="99"/>
+	<option closebutton="false"/>
+	<sound opensound="sys_popup_open_1" closesound="character_item_window_close"/>
+	<script OpenScp="CONTENTS_GUILD_OPEN" CloseScp="CONTENTS_GUILD_CLOSE"/>
+	<animation frameOpenAnim="chat_balloon_start" frameCloseAnim="chat_balloon_end"/>
+	<controls>
+		<button name="CONTENTS_GUILD_RANK" layout_gravity="center bottom" texttooltip="{@st59}길드 홍보 (Alt + R){/}" clicksound="button_click_big" oversound="button_over" image="sysmenu_guild_rank" rect="0 0 44 44" margin="0 0 0 5" MouseOnAnim="btn_mouseover" MouseOffAnim="btn_mouseoff" LBtnUpScp="GUILD_RANK_INFO_TOGGLE"/>
+		<button name="CONTENTS_GUILD_INFO" layout_gravity="center bottom" texttooltip="{@st59}길드 정보 (Alt + G){/}" clicksound="button_click_big" oversound="button_over" image="sysmenu_guild" rect="0 0 44 44" margin="0 0 0 50" MouseOnAnim="btn_mouseover" MouseOffAnim="btn_mouseoff" LBtnUpScp="ui.ToggleFrame(&apos;guildinfo&apos;)"/>
+		<button name="CONTENTS_GUILD_ACTIVITY" layout_gravity="center bottom" texttooltip="{@st59}길드 콘텐츠 (Alt + H){/}" clicksound="button_click_big" oversound="button_over" image="sysmenu_guild_activity" rect="0 0 44 44" margin="3 0 0 95" MouseOnAnim="btn_mouseover" MouseOffAnim="btn_mouseoff" LBtnUpScp="ui.ToggleFrame(&apos;guild_activity_ui&apos;)"/>
+		<button name="CONTENTS_GUILD_DRESS_ROOM" layout_gravity="center bottom" texttooltip="{@st59}길드 드레스룸 (Alt + D){/}" clicksound="button_click_big" oversound="button_over" image="sysmenu_guild_dress_room" rect="0 0 44 44" margin="3 0 0 140" MouseOnAnim="btn_mouseover" MouseOffAnim="btn_mouseoff" LBtnUpScp="ui.ToggleFrame(&apos;guild_dress_room&apos;)"/>
+	</controls>
+</uiframe>

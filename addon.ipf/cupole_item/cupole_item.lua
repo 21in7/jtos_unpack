@@ -17,6 +17,9 @@ local stat_sort_value={
     ["MiddleSize_Def_BM"] = 8
 }
 
+local CUPOLE_PRESET_MAX_COUNT = 5;
+local CUPOLE_PRESET_PROP_PREFIX = "CupolePreset";
+
 ------------------------------------get function
 function GET_CUPOLE_INDEX(ownerHandle, ui_model, isMainCharacter)
     local val = GetCupoleRTTOffsetIndex(ownerHandle, ui_model)
@@ -266,8 +269,8 @@ function SortTableByLevel(classlist, count, Owing)
                     else
                         table.insert(clsList,{favorite, CupoleExpProp, cls});
                     end
-    end
-    end
+                end
+            end
         end
     end
     --befor sort
@@ -315,9 +318,9 @@ function SET_CUPOLE_SLOTS(frame)
 
     local SlotBG = GET_CHILD(bg, "SlotBG")
     local gb_slot = GET_CHILD(SlotBG, "gb_slot")
+    
 
-
-    local cupole_slot_box = gb_slot:CreateOrGetControlSet('cupole_slot', "Main_Cupole_Slot_0", 0, 0);
+    local cupole_slot_box = gb_slot:CreateOrGetControlSet('cupole_slot', "Main_Cupole_Slot_0", 0, 16);
     cupole_slot_box:SetGravity(ui.CENTER_HORZ, ui.CENTER_VERT)
     local slot_gb = cupole_slot_box:GetChild("gb")
     slot_gb:SetEventScript(ui.LBUTTONUP,"CUPOLE_SLOT_SELECT_BTN")
@@ -331,9 +334,9 @@ function SET_CUPOLE_SLOTS(frame)
 
     local MiniCnt = 2;
     local ctrler = 1;
-    local defx = 15;
-    local X = 82;
-    local Y = 10;
+    local defx = 12;
+    local X = 94;
+    local Y = 15;
     local cnt = 1;
     for i = 1, MiniCnt do 
         local mini_cupole_slot_box = gb_slot:CreateOrGetControlSet('cupole_mini_slot', "Main_Cupole_Slot_"..i, X * ctrler * cnt + defx * ctrler, Y);
@@ -351,8 +354,8 @@ function SET_CUPOLE_SLOTS(frame)
         -- SUMMON_SELECT_LEFT_CUPOLE_SLOT(mini_cupole_slot_box, tonumber(equip_cupole_list[i + 1]))
         SET_SLOT_CUPOLE_INFO(mini_cupole_slot_box, tonumber(equip_cupole_list[i + 1]))
 
-        end
     end
+end
 
 ---선택된 큐폴의 정보를 좌측 정보 세팅에 설정하고, uimodel을 그린다.
 function SET_SELECT_CUPOLE_INFO_WITH_MODEL(frame, cupole_index)
@@ -360,21 +363,20 @@ function SET_SELECT_CUPOLE_INFO_WITH_MODEL(frame, cupole_index)
     if cupole_index == -1 then
         return;
     end
-    if frame:HaveUpdateScript("CUPOLE_UIMODEL_DELAY_CREATE_IN_MAINCHARACTER") == true then
-        return;
-    else
-        REMOVE_ALL_CUPOLE_UIMODEL()
-        frame:SetUserValue("Select_Cupole_Index",cupole_index);
-        frame:RunUpdateScript("CUPOLE_UIMODEL_DELAY_CREATE_IN_MAINCHARACTER",0.2)
-    end
+    -- The control owns replacement/loading; the latest selection must win.
+    frame:StopUpdateScript("CUPOLE_UIMODEL_DELAY_CREATE_IN_MAINCHARACTER")
+    frame:SetUserValue("Select_Cupole_Index", cupole_index)
     SET_SELECT_CUPOLE_INFORMATION(frame,cupole_index);
-    -- KUPOLE_UIMODEL_IN_MAINCHARACTER(cupole_index)
+    KUPOLE_UIMODEL_IN_MAINCHARACTER(cupole_index)
+    SET_SELECT_CUPOLE_NAME(frame, cupole_index)
     frame:SetUserValue("Global_Select_Cupole", cupole_index);
     SET_BACKGROUND_IMAGE_BY_SELECT_TAB(frame, 0)
     CHECK_ILLUSTRATION_MODE(frame)
 end
 
 function CUPOLE_UIMODEL_DELAY_CREATE_IN_MAINCHARACTER(frame, delay)
+    frame = frame:GetTopParentFrame()
+    if frame:IsVisible() == 0 then return 0 end
     local index = frame:GetUserIValue("Select_Cupole_Index");
     local parent = frame:GetTopParentFrame();
     SET_SELECT_CUPOLE_NAME(parent, index)
@@ -407,10 +409,10 @@ function SET_SELECT_CUPOLE_INFORMATION(frame, cupole_index)
         return 0;
     end
 
-    local NamelBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/NamelBG")
-    local ExplainBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/ExplainBG")
-    local SkillBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/SkillBG")
-    local PassiveBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/PassiveBG")
+    local NamelBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/InfoHeadgBox/NamelBG")
+    local ExplainBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/InfoHeadgBox/ExplainBG")
+    local SkillBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/SkillSheetgBox/SkillBG")
+    local PassiveBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/SkillSheetgBox/PassiveBG")
     local RankBG = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/RankBG")
     local favorites = GET_CHILD_RECURSIVELY_NAME(frame, "managerTab/manageBG/InfoBG/favorites")
 
@@ -438,7 +440,6 @@ end
 ------큐폴의 이름 정보 세팅
 function SET_CUPOLE_NAME_INFO(frame, cls)
     local Name = GET_CHILD(frame, "Name")
-    local rankPic = GET_CHILD(frame, "rank_pic")
 
     local Cupole_Name = TryGetProp(cls, "Dec_Name", "None");
     local Grade = TryGetProp(cls, "Grade", "None");
@@ -446,8 +447,8 @@ function SET_CUPOLE_NAME_INFO(frame, cls)
     if RankName == "cupole_grade_None" then
         RankName = "cupole_grade_R"
     end
+    Name:SetTextByKey("rank", RankName)
     Name:SetTextByKey("value", Cupole_Name)
-    rankPic:SetImage(RankName)
 end
 
 function SET_CUPOLE_STAT_AT_UI(frame, Stat, Value)
@@ -473,19 +474,12 @@ function SET_CUPOLE_BUFF_INFO(frame, cls, specifiedRank)
     local Grade = TryGetProp(cls, "Grade", "None");
 
     local Stat, UpgradeValue = GET_CUPOLE_FRIENDLY_RESULT_VALUE_BY_CLS(nil, cls, rank)
-
+    
     SET_CUPOLE_STAT_AT_UI(companyEffect, Stat, UpgradeValue)
 end
 
 --큐폴의 사용 스킬 정보 세팅
 function SET_CUPOLE_ACTIVE_SKILL_INFO(frame, cls)
-    local ctrl = frame:CreateOrGetControlSet("cupole_skil","cupole_skil0",0,0)
-    ctrl:SetGravity(ui.CENTER_HORZ, ui.CENTER_VERT)
-    local SkillIcon = GET_CHILD(ctrl, "SkillIcon")
-
-    local Cupole_Name = TryGetProp(cls, "Dec_Name", "None");
-    local Grade = TryGetProp(cls, "Grade", "None");
-
     local Cupole_Group_ID = TryGetProp(cls, "Group_ID", "None");
     local Cupole_Skill_List = GET_CUPOLE_SKILL_BY_GROUPID_LIST(Cupole_Group_ID)
     local Cupole_Skill_Cls = nil;
@@ -495,7 +489,16 @@ function SET_CUPOLE_ACTIVE_SKILL_INFO(frame, cls)
             Cupole_Skill_Cls = v;
         end
     end
+
+    local ctrl = frame:CreateOrGetControlSet("cupole_skil","cupole_skil0", 0, -6)
+    ctrl:SetGravity(ui.LEFT, ui.CENTER_VERT)
+    local SkillIcon = GET_CHILD(ctrl, "SkillIcon")
     if Cupole_Skill_Cls == nil then
+        SkillIcon:SetImage("");
+        SkillIcon:SetEventScript(ui.MOUSEON, "None");
+        SkillIcon:SetEventScriptArgNumber(ui.MOUSEON, 0);
+        SkillIcon:SetEventScript(ui.MOUSEOFF, "None");
+        SET_CUPOLE_SKILL_DESC(frame, nil);
         return;
     end
 
@@ -513,13 +516,6 @@ end
 
 ---큐폴의 패시브 스킬 정보 세팅
 function SET_CUPOLE_PASSIVE_SKILL_INFO(frame, cls)
-    local ctrl = frame:CreateOrGetControlSet("cupole_skil","cupole_skil1",0,0)
-    ctrl:SetGravity(ui.CENTER_HORZ, ui.CENTER_VERT)
-    local SkillIcon = GET_CHILD(ctrl, "SkillIcon")
-
-    local Cupole_Name = TryGetProp(cls, "Dec_Name", "None");
-    local Grade = TryGetProp(cls, "Grade", "None");
-
     local Cupole_Group_ID = TryGetProp(cls, "Group_ID", "None");
     local Cupole_Skill_List = GET_CUPOLE_SKILL_BY_GROUPID_LIST(Cupole_Group_ID)
     local Cupole_Skill_Cls = nil;
@@ -529,8 +525,16 @@ function SET_CUPOLE_PASSIVE_SKILL_INFO(frame, cls)
             Cupole_Skill_Cls = v;
         end
     end
+
+    local ctrl = frame:CreateOrGetControlSet("cupole_skil","cupole_skil1",0, -8)
+    ctrl:SetGravity(ui.LEFT, ui.CENTER_VERT)
+    local SkillIcon = GET_CHILD(ctrl, "SkillIcon")
     if Cupole_Skill_Cls == nil then
-        frame:ShowWindow(0)
+        SkillIcon:SetImage("");
+        SkillIcon:SetEventScript(ui.MOUSEON, "None");
+        SkillIcon:SetEventScriptArgNumber(ui.MOUSEON, 0);
+        SkillIcon:SetEventScript(ui.MOUSEOFF, "None");
+        SET_CUPOLE_SKILL_DESC(frame, nil);
         return;
     end
     frame:ShowWindow(1)
@@ -544,15 +548,552 @@ function SET_CUPOLE_PASSIVE_SKILL_INFO(frame, cls)
     SkillIcon:SetEventScript(ui.MOUSEON, "ON_CUPOLE_SKILL_TOOLTIP_OPEN");
     SkillIcon:SetEventScriptArgNumber(ui.MOUSEON, SkillClassID);
     SkillIcon:SetEventScript(ui.MOUSEOFF, "ON_CUPOLE_SKILL_TOOLTIP_CLOSE");
+    SET_CUPOLE_SKILL_DESC(frame, Cupole_Skill_Cls)
 end
 
 ------보유 효과 세팅
-function SET_CUPOLE_SKILL_DESC(frame, cls)
+local function GET_CUPOLE_SKILL_DISPLAY_DESC(cls)
     if cls == nil then
+        return ClMsg("None");
+    end
+
+    local desc = TryGetProp(cls, "Dec_Skill", ClMsg("None"));
+    desc = dic.getTranslatedStr(desc);
+
+    local pc = GetMyPCObject();
+    local groupID = TryGetProp(cls, "Group_ID", "None");
+    local cupoleCls = GET_CUPOLE_CLASS_BY_GROUPID(groupID);
+    if pc ~= nil and cupoleCls ~= nil then
+        local ratio = GET_KUPOLE_SKILL_RATE(pc, cupoleCls, cls);
+        if ratio ~= nil then
+            desc = string.gsub(desc, "{Ratio}", string.format("%.f", ratio));
+        end
+    end
+    return desc;
+end
+
+function SET_CUPOLE_SKILL_DESC(frame, cls)
+    local descCtrl = GET_CHILD(frame, "Desc")
+    if descCtrl == nil then
         return;
     end
-    local Desc = TryGetProp(cls, "Dec_Skill", "None")
-    
+
+    local desc = GET_CUPOLE_SKILL_DISPLAY_DESC(cls);
+    descCtrl:SetTextByKey("value", desc)
+    frame:SetScrollPos(0);
+    frame:InvalidateScrollBar();
+end
+
+local function GET_CUPOLE_PRESET_PROP_NAME(index)
+    return CUPOLE_PRESET_PROP_PREFIX..tostring(index);
+end
+
+local function NORMALIZE_CUPOLE_PRESET_VALUE(value)
+    local result = {0, 0, 0};
+    if value == nil or value == "None" or value == "" then
+        return result, false;
+    end
+
+    local tokenList = StringSplit(tostring(value), ',');
+    local registered = false;
+    for i = 1, 3 do
+        local classID = tonumber(tokenList[i]) or 0;
+        if classID > 0 then
+            result[i] = classID;
+            registered = true;
+        end
+    end
+    return result, registered;
+end
+
+local function GET_CURRENT_CUPOLE_PRESET_VALUE()
+    local equipList = GET_EQUIP_CUPOLE_LIST();
+    local classIDList = {0, 0, 0};
+    for i = 1, 3 do
+        local cupoleIndex = tonumber(equipList[i]) or -1;
+        if cupoleIndex >= 0 then
+            local cls = GET_CUPOLE_BY_INDEX_IN_CLASSLIST(cupoleIndex);
+            classIDList[i] = TryGetProp(cls, "ClassID", 0);
+        end
+    end
+    return string.format("%d,%d,%d", classIDList[1], classIDList[2], classIDList[3]);
+end
+
+local function GET_CUPOLE_PRESET_SLOT_TEXT(classID)
+    if classID == nil or tonumber(classID) == nil or tonumber(classID) <= 0 then
+        return "-";
+    end
+
+    local cls = GetClassByType("cupole_list", tonumber(classID));
+    if cls == nil then
+        return "?";
+    end
+
+    local iconName = TryGetProp(cls, "Icon", "None");
+    if iconName == "None" then
+        return "?";
+    end
+    return string.format("{img %s 32 32}", iconName);
+end
+
+local function GET_VALID_CUPOLE_PRESET_INDEX(index)
+    index = tonumber(index);
+    if index == nil or index ~= math.floor(index)
+        or index < 1 or index > CUPOLE_PRESET_MAX_COUNT then
+        return nil;
+    end
+    return index;
+end
+
+local function GET_CUPOLE_PRESET_EDIT_INDEX(frame)
+    if frame == nil then
+        return 0;
+    end
+    return tonumber(frame:GetUserIValue("CUPOLE_PRESET_EDIT_INDEX")) or 0;
+end
+
+local function GET_CUPOLE_INDEX_BY_CLASS_ID(classID)
+    classID = tonumber(classID) or 0;
+    if classID <= 0 then
+        return -1;
+    end
+
+    local classList, classCount = GetClassList("cupole_list");
+    if classList == nil then
+        return -1;
+    end
+
+    for classIndex = 0, classCount - 1 do
+        local cls = GetClassByIndexFromList(classList, classIndex);
+        if cls ~= nil and TryGetProp(cls, "ClassID", 0) == classID then
+            return classIndex;
+        end
+    end
+    return -1;
+end
+
+local function GET_CUPOLE_PRESET_EDIT_VALUE(frame)
+    local value = frame:GetUserValue("CUPOLE_PRESET_EDIT_VALUE");
+    local classIDList = NORMALIZE_CUPOLE_PRESET_VALUE(value);
+    return classIDList;
+end
+
+local function SET_CUPOLE_PRESET_EDIT_VALUE(frame, classIDList)
+    local value = string.format("%d,%d,%d",
+        tonumber(classIDList[1]) or 0,
+        tonumber(classIDList[2]) or 0,
+        tonumber(classIDList[3]) or 0
+    );
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_VALUE", value);
+end
+
+local function SET_CUPOLE_PRESET_EDIT_BUTTON_STATE(frame, isEditing)
+    local selectBtn = GET_CHILD_RECURSIVELY(frame, "SelectBtn");
+    local disableBtn = GET_CHILD_RECURSIVELY(frame, "DisableBtn");
+    local saveBtn = GET_CHILD_RECURSIVELY(frame, "PresetEditSaveBtn");
+    local cancelBtn = GET_CHILD_RECURSIVELY(frame, "PresetEditCancelBtn");
+    local visible = isEditing == true and 1 or 0;
+
+    selectBtn:ShowWindow(0);
+    disableBtn:ShowWindow(0);
+    saveBtn:ShowWindow(visible);
+    cancelBtn:ShowWindow(visible);
+end
+
+local function SET_CUPOLE_PRESET_EDIT_TITLE(frame, presetIndex)
+    local slotBG = GET_CHILD_RECURSIVELY(frame, "SlotBG");
+    if slotBG == nil then
+        return;
+    end
+    local title = GET_CHILD(slotBG, "Title");
+    if title == nil then
+        return;
+    end
+
+    if presetIndex ~= nil and presetIndex > 0 then
+        title:SetTextByKey("value", ScpArgMsg("CupolePresetEditTitle", "PRESET", presetIndex));
+    else
+        title:SetTextByKey("value", ClMsg("CupoleTeamFormation"));
+    end
+end
+
+local function REFRESH_CUPOLE_PRESET_EDIT_SLOTS(frame)
+    local slotBG = GET_CHILD_RECURSIVELY(frame, "SlotBG");
+    if slotBG == nil then
+        return;
+    end
+    local slotGroup = GET_CHILD(slotBG, "gb_slot");
+    if slotGroup == nil then
+        return;
+    end
+
+    local classIDList = GET_CUPOLE_PRESET_EDIT_VALUE(frame);
+    local selectedSlot = tonumber(frame:GetUserIValue("CUPOLE_PRESET_EDIT_SLOT")) or 1;
+    FRAME_CHILD_COLORTONE_CLEAR(slotGroup);
+
+    for slotIndex = 1, 3 do
+        local slot = GET_CHILD(slotGroup, "Main_Cupole_Slot_"..tostring(slotIndex - 1));
+        if slot ~= nil then
+            SET_SLOT_CUPOLE_INFO(slot, GET_CUPOLE_INDEX_BY_CLASS_ID(classIDList[slotIndex]));
+            local slotButton = GET_CHILD(slot, "gb");
+            if slotButton ~= nil then
+                slotButton:SetEventScript(ui.LBUTTONUP, "CUPOLE_PRESET_EDIT_SLOT_SELECT");
+                slotButton:SetEventScriptArgNumber(ui.LBUTTONUP, slotIndex);
+                slotButton:SetEventScript(ui.RBUTTONUP, "CUPOLE_PRESET_EDIT_SLOT_CLEAR");
+                slotButton:SetEventScriptArgNumber(ui.RBUTTONUP, slotIndex);
+            end
+
+            if slotIndex == selectedSlot then
+                FRAME_COLOR_CHANGE(slot, "FF5CFFDF");
+            end
+        end
+    end
+end
+
+local function END_CUPOLE_PRESET_EDIT(frame, showPresetList)
+    if frame == nil then
+        return;
+    end
+
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_INDEX", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_VALUE", "0,0,0");
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 0);
+
+    SET_CUPOLE_SLOTS(frame);
+    SET_CUPOLE_LIST(frame);
+    local slotBG = GET_CHILD_RECURSIVELY(frame, "SlotBG");
+    local slotGroup = nil;
+    if slotBG ~= nil then
+        slotGroup = GET_CHILD(slotBG, "gb_slot");
+    end
+    local rightSlotGroup = GET_CHILD_RECURSIVELY(frame, "slotsetBG");
+    FRAME_CHILD_COLORTONE_CLEAR(slotGroup);
+    FRAME_CHILD_COLORTONE_CLEAR(rightSlotGroup);
+    SET_CUPOLE_PRESET_EDIT_BUTTON_STATE(frame, false);
+    SET_CUPOLE_PRESET_EDIT_TITLE(frame, 0);
+    CUPOLE_PRESET_REFRESH(frame);
+
+    if showPresetList == true then
+        CUPOLE_RIGHT_VIEW_CHANGE(frame, nil, "", 1);
+    end
+end
+
+function CUPOLE_PRESET_EDIT_BEGIN(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    local presetIndex = GET_VALID_CUPOLE_PRESET_INDEX(argNum);
+    if frame == nil or presetIndex == nil then
+        return;
+    end
+
+    local etc = GetMyEtcObject();
+    if etc == nil then
+        return;
+    end
+
+    RESET_CUPOLE_SELECT_MODE(frame);
+    local propName = GET_CUPOLE_PRESET_PROP_NAME(presetIndex);
+    local classIDList = NORMALIZE_CUPOLE_PRESET_VALUE(TryGetProp(etc, propName, "0,0,0"));
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_INDEX", presetIndex);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", 1);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 0);
+    SET_CUPOLE_PRESET_EDIT_VALUE(frame, classIDList);
+
+    CUPOLE_RIGHT_VIEW_CHANGE(frame, nil, "", 0);
+    SET_CUPOLE_PRESET_EDIT_BUTTON_STATE(frame, true);
+    SET_CUPOLE_PRESET_EDIT_TITLE(frame, presetIndex);
+    REFRESH_CUPOLE_PRESET_EDIT_SLOTS(frame);
+    SET_CUPOLE_LIST_SET_FUNCTION(frame, "CUPOLE_PRESET_EDIT_CUPOLE_SELECT");
+end
+
+function CUPOLE_PRESET_EDIT_SLOT_SELECT(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) <= 0 then
+        return;
+    end
+
+    local slotIndex = tonumber(argNum) or 0;
+    if slotIndex < 1 or slotIndex > 3 then
+        return;
+    end
+
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", slotIndex);
+    REFRESH_CUPOLE_PRESET_EDIT_SLOTS(frame);
+end
+
+function CUPOLE_PRESET_EDIT_SLOT_CLEAR(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) <= 0 then
+        return;
+    end
+
+    local slotIndex = tonumber(argNum) or 0;
+    if slotIndex < 1 or slotIndex > 3 then
+        return;
+    end
+
+    local classIDList = GET_CUPOLE_PRESET_EDIT_VALUE(frame);
+    classIDList[slotIndex] = 0;
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", slotIndex);
+    SET_CUPOLE_PRESET_EDIT_VALUE(frame, classIDList);
+    REFRESH_CUPOLE_PRESET_EDIT_SLOTS(frame);
+end
+
+function CUPOLE_PRESET_EDIT_CUPOLE_SELECT(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) <= 0 then
+        return;
+    end
+
+    local slotIndex = tonumber(frame:GetUserIValue("CUPOLE_PRESET_EDIT_SLOT")) or 0;
+    local classID = tonumber(argNum) or 0;
+    if slotIndex < 1 or slotIndex > 3 or classID <= 0 then
+        return;
+    end
+
+    local cls = GetClassByType("cupole_list", classID);
+    local pc = GetMyPCObject();
+    if pc == nil then
+        return;
+    end
+    local account = GetMyAccountObj(pc);
+    if cls == nil or account == nil then
+        return;
+    end
+
+    local accountProperty = TryGetProp(cls, "AccountProperty", "None");
+    if accountProperty == "None" or TryGetProp(account, accountProperty, 0) <= 0 then
+        ui.SysMsg(ClMsg("CupolePresetNotOwned"));
+        return;
+    end
+
+    local classIDList = GET_CUPOLE_PRESET_EDIT_VALUE(frame);
+    for index = 1, 3 do
+        if index ~= slotIndex and classIDList[index] == classID then
+            classIDList[index] = 0;
+        end
+    end
+    classIDList[slotIndex] = classID;
+    SET_CUPOLE_PRESET_EDIT_VALUE(frame, classIDList);
+
+    if slotIndex < 3 then
+        frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", slotIndex + 1);
+    end
+    REFRESH_CUPOLE_PRESET_EDIT_SLOTS(frame);
+end
+
+function CUPOLE_PRESET_EDIT_SAVE(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    local presetIndex = GET_CUPOLE_PRESET_EDIT_INDEX(frame);
+    if presetIndex <= 0 or frame:GetUserIValue("CUPOLE_PRESET_EDIT_PENDING") == 1 then
+        return;
+    end
+
+    local classIDList = GET_CUPOLE_PRESET_EDIT_VALUE(frame);
+    if classIDList[1] <= 0 then
+        ui.SysMsg(ClMsg("CupolePresetNeedMain"));
+        return;
+    end
+
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 1);
+    CUPOLE_PRESET_SAVE_EXEC(presetIndex, string.format("%d,%d,%d", classIDList[1], classIDList[2], classIDList[3]));
+end
+
+function CUPOLE_PRESET_EDIT_CANCEL(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    END_CUPOLE_PRESET_EDIT(frame, true);
+end
+
+function CUPOLE_PRESET_SAVE(parent, ctrl, argStr, argNum)
+    local presetIndex = GET_VALID_CUPOLE_PRESET_INDEX(argNum);
+    if presetIndex == nil then
+        return;
+    end
+
+    local classIDList = NORMALIZE_CUPOLE_PRESET_VALUE(GET_CURRENT_CUPOLE_PRESET_VALUE());
+    if classIDList[1] <= 0 then
+        ui.SysMsg(ClMsg("CupolePresetNeedMain"));
+        return;
+    end
+
+    local etc = GetMyEtcObject();
+    if etc == nil then
+        return;
+    end
+    local propName = GET_CUPOLE_PRESET_PROP_NAME(presetIndex);
+    local _, registered = NORMALIZE_CUPOLE_PRESET_VALUE(TryGetProp(etc, propName, "0,0,0"));
+    if registered == true then
+        ui.MsgBox(
+            ScpArgMsg("CupolePresetOverwriteConfirm", "PRESET", presetIndex),
+            string.format("CUPOLE_PRESET_SAVE_EXEC(%d)", presetIndex),
+            "None"
+        );
+        return;
+    end
+
+    CUPOLE_PRESET_SAVE_EXEC(presetIndex);
+end
+
+function CUPOLE_PRESET_SAVE_EXEC(presetIndex, presetValue)
+    presetIndex = GET_VALID_CUPOLE_PRESET_INDEX(presetIndex);
+    if presetIndex == nil then
+        return;
+    end
+
+    local txArg = tostring(presetIndex);
+    if presetValue ~= nil and presetValue ~= "" then
+        txArg = txArg.."/"..tostring(presetValue);
+    end
+    pc.ReqExecuteTx("SCR_CUPOLE_PRESET_SAVE", txArg);
+end
+
+function CUPOLE_PRESET_APPLY(parent, ctrl, argStr, argNum)
+    local presetIndex = GET_VALID_CUPOLE_PRESET_INDEX(argNum);
+    if presetIndex == nil then
+        return;
+    end
+
+    if IS_IN_CITY() == 0 then
+        ui.SysMsg(ClMsg("AllowedInTown"));
+        return;
+    end
+
+    local etc = GetMyEtcObject();
+    if etc == nil then
+        return;
+    end
+    local propName = GET_CUPOLE_PRESET_PROP_NAME(presetIndex);
+    local _, registered = NORMALIZE_CUPOLE_PRESET_VALUE(TryGetProp(etc, propName, "0,0,0"));
+    if registered == false then
+        ui.SysMsg(ClMsg("CupolePresetNotFound"));
+        return;
+    end
+
+    pc.ReqExecuteTx("SCR_CUPOLE_PRESET_APPLY", tostring(presetIndex));
+end
+
+function ON_CUPOLE_PRESET_SAVED(frame, msg, argStr, argNum)
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) == (tonumber(argNum) or 0) then
+        END_CUPOLE_PRESET_EDIT(frame, true);
+    else
+        CUPOLE_PRESET_REFRESH(frame);
+    end
+    ui.SysMsg(ScpArgMsg("CupolePresetSaved", "PRESET", tonumber(argNum) or 0));
+end
+
+function ON_CUPOLE_PRESET_APPLIED(frame, msg, argStr, argNum)
+    local equipList = StringSplit(argStr, ";");
+    local mainCupoleIndex = tonumber(equipList[1]) or -1;
+
+    SET_CUPOLE_SLOTS(frame);
+    if mainCupoleIndex >= 0 then
+        SET_SELECT_CUPOLE_INFO_WITH_MODEL(frame, mainCupoleIndex);
+        TOGGLE_CUPOLE_SPECIAL_ADDON(frame, mainCupoleIndex);
+    end
+    CUPOLE_PRESET_REFRESH(frame);
+    ui.SysMsg(ScpArgMsg("CupolePresetApplied", "PRESET", tonumber(argNum) or 0));
+end
+
+function ON_CUPOLE_PRESET_FAILED(frame, msg, argStr, argNum)
+    local messageKeyByReason = {
+        ["INVALID_INDEX"] = "CupolePresetInvalidIndex",
+        ["EMPTY_EQUIP"] = "CupolePresetNeedMain",
+        ["NOT_FOUND"] = "CupolePresetNotFound",
+        ["INVALID_CUPOLE"] = "CupolePresetInvalidCupole",
+        ["NOT_OWNED"] = "CupolePresetNotOwned",
+        ["DUPLICATE"] = "CupolePresetDuplicate",
+        ["NOT_IN_CITY"] = "AllowedInTown"
+    };
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 0);
+    ui.SysMsg(ClMsg(messageKeyByReason[argStr] or "CupolePresetFailed"));
+    CUPOLE_PRESET_REFRESH(frame);
+end
+
+function CUPOLE_PRESET_REFRESH(frame)
+    if frame == nil then
+        frame = ui.GetFrame("cupole_item");
+    end
+    if frame == nil then
+        return;
+    end
+
+    local etc = GetMyEtcObject();
+    if etc == nil then
+        return;
+    end
+
+    local currentValue = GET_CURRENT_CUPOLE_PRESET_VALUE();
+    for i = 1, CUPOLE_PRESET_MAX_COUNT do
+        local row = GET_CHILD_RECURSIVELY(frame, "PresetRow"..i);
+        if row ~= nil then
+            local propName = GET_CUPOLE_PRESET_PROP_NAME(i);
+            local presetValue = TryGetProp(etc, propName, "0,0,0");
+            local classIDList, registered = NORMALIZE_CUPOLE_PRESET_VALUE(presetValue);
+            local normalizedValue = string.format("%d,%d,%d", classIDList[1], classIDList[2], classIDList[3]);
+            local isActive = registered == true and normalizedValue == currentValue;
+
+            for slotIndex = 1, 3 do
+                local slotText = GET_CHILD(row, "Slot"..slotIndex);
+                slotText:SetTextByKey("value", GET_CUPOLE_PRESET_SLOT_TEXT(classIDList[slotIndex]));
+                slotText:ShowWindow(registered == true and 1 or 0);
+            end
+
+            local emptyState = GET_CHILD(row, "EmptyState");
+            local activeState = GET_CHILD(row, "ActiveState");
+            local applyBtn = GET_CHILD(row, "ApplyBtn");
+            local editBtn = GET_CHILD(row, "EditBtn");
+            local overwriteBtn = GET_CHILD(row, "OverwriteBtn");
+            local emptySaveBtn = GET_CHILD(row, "EmptySaveBtn");
+            local emptySaveBtnText = GET_CHILD(row, "EmptySaveBtnText");
+            local emptyCreateBtn = GET_CHILD(row, "EmptyCreateBtn");
+
+            emptyState:ShowWindow(registered == false and 1 or 0);
+            activeState:ShowWindow(isActive == true and 1 or 0);
+            applyBtn:ShowWindow(registered == true and isActive == false and 1 or 0);
+            editBtn:ShowWindow(registered == true and 1 or 0);
+            overwriteBtn:ShowWindow(registered == true and 1 or 0);
+            emptySaveBtn:ShowWindow(registered == false and 1 or 0);
+            emptySaveBtnText:ShowWindow(registered == false and 1 or 0);
+            emptyCreateBtn:ShowWindow(registered == false and 1 or 0);
+
+            if isActive == true then
+                row:SetSkinName("cupolegreenroundsquare");
+            else
+                row:SetSkinName("cupolesquare");
+            end
+        end
+    end
+end
+
+function CUPOLE_RIGHT_VIEW_CHANGE(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    local viewIndex = tonumber(argNum) or 0;
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) > 0 and viewIndex ~= 0 then
+        return;
+    end
+    local slotsetBG = GET_CHILD_RECURSIVELY(frame, "slotsetBG");
+    local presetBG = GET_CHILD_RECURSIVELY(frame, "PresetBG");
+    local filtergbox = GET_CHILD_RECURSIVELY(frame, "filtergbox");
+    local listTabBtn = GET_CHILD_RECURSIVELY(frame, "ListTabBtn");
+    local presetTabBtn = GET_CHILD_RECURSIVELY(frame, "PresetTabBtn");
+    local listTabWidth = listTabBtn:GetWidth();
+    local listTabHeight = listTabBtn:GetHeight();
+    local presetTabWidth = presetTabBtn:GetWidth();
+    local presetTabHeight = presetTabBtn:GetHeight();
+
+    frame:SetUserValue("CUPOLE_RIGHT_VIEW", viewIndex);
+    slotsetBG:ShowWindow(viewIndex == 0 and 1 or 0);
+    presetBG:ShowWindow(viewIndex == 1 and 1 or 0);
+    filtergbox:ShowWindow(viewIndex == 0 and 1 or 0);
+
+    listTabBtn:SetImage(viewIndex == 0 and "cupole_ui_view_tab_btn_clicked" or "cupole_ui_view_tab_btn");
+    presetTabBtn:SetImage(viewIndex == 1 and "cupole_ui_view_tab_btn_clicked" or "cupole_ui_view_tab_btn");
+    listTabBtn:Resize(listTabWidth, listTabHeight);
+    presetTabBtn:Resize(presetTabWidth, presetTabHeight);
+
+    if viewIndex == 1 then
+        CUPOLE_PRESET_REFRESH(frame);
+    end
 end
 
 
@@ -584,11 +1125,11 @@ function SET_CUPOLE_FRIENDLY(frame, clsid)
     local AccProp = GET_CUPOLE_PROP_BY_INDEX(clsid, "AccountProperty");
     local CupoleExp = TryGetProp(acc, AccProp, 0);
     SET_CUPOLE_FRIENDLY_RATE(frame, CupoleExp);
-    end
+end
 
 --친밀도 숫자 변경
 function SET_CUPOLE_FRIENDLY_RATE(frame, exp)
-    local Rate = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/ExplainBG/friendly_pic/Rate")
+    local Rate = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/InfoBG/InfoHeadgBox/ExplainBG/friendly_pic/Rate")
     Rate:SetTextByKey("value", exp);
 end
 
@@ -596,7 +1137,7 @@ end
 function SET_CUPOLE_SELECT_BTN(btnframe, funcscp, btnname)
     if btnframe ~= nil then
         btnframe:SetEventScript(ui.LBUTTONUP, funcscp);
-        btnframe:SetText(ClMsg(btnname))
+        btnframe:SetTextByKey("label", ClMsg(btnname))
     end
 end
 
@@ -614,14 +1155,14 @@ end
 function SET_CUPOLE_MAINCHARACTERFRAME_BY_INDEX(index, cupole_index)
     local frame = ui.GetFrame("cupole_item")
     if frame == nil then
-        return;
+        return ;
     end
 
     local MainCharacter = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/MainCharacter")
     if MainCharacter == nil then
         return ;
     end
-    SET_RTT_OFFSET_IN_IMAGE(MainCharacter, index, cupole_index)
+    KUPOLE_UIMODEL_IN_MAINCHARACTER(cupole_index)
 end
 
 function SET_CUPOLE_GAHCAFRAME_BY_INDEX(frame, index, cupole_index)
@@ -653,7 +1194,7 @@ function SET_SLOT_SELECT_STATE(SlotFrame, SelectBtnFrame, SelectBtnScp, SelectTe
         CHANGE_DISABLE_BTN_SHOWSTATE(0, SlotFrame:GetName(), index);
     else
         CHANGE_DISABLE_BTN_SHOWSTATE(1, SlotFrame:GetName(), index);
-end
+    end
     
     SET_CUPOLE_SELECT_BTN(SelectBtnFrame, SelectBtnScp, SelectTextMsg);  
     SET_SELECT_CUPOLE_INFO_WITH_MODEL(parent, index);
@@ -764,6 +1305,9 @@ end
 function CUPOLE_ITEM_ON_INIT(addon,frame)
     addon:RegisterMsg('SET_CUPOLE_EXP_UP', 'ON_SET_CUPOLE_EXP_UP');
     addon:RegisterMsg('CUPOLE_EQUIP_COMPLELTE', 'ON_SET_EQUIP_CUPOLE_OPTIONS');
+    addon:RegisterMsg('CUPOLE_PRESET_SAVED', 'ON_CUPOLE_PRESET_SAVED');
+    addon:RegisterMsg('CUPOLE_PRESET_APPLIED', 'ON_CUPOLE_PRESET_APPLIED');
+    addon:RegisterMsg('CUPOLE_PRESET_FAILED', 'ON_CUPOLE_PRESET_FAILED');
     addon:RegisterMsg('GACHA_CUPOLE_RESULT', 'ON_GACHA_CUPOLE_RESULT');
     addon:RegisterMsg('GACHA_CUPOLE_RESULT', 'ON_GACHA_RESULT_APPLY_IN_CUPOLE_UI');
     addon:RegisterMsg('GACHA_CUPOLE_RESULT', 'ON_SET_EQUIP_CUPOLE_OPTIONS');
@@ -779,8 +1323,14 @@ function OPEN_CUPOLE_ITEM()
     if frame == nil then
         return;
     end
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_INDEX", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_VALUE", "0,0,0");
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 0);
     local managertab = frame:GetChild("managerTab")
     RESET_CUPOLE_SELECT_MODE(frame)
+    SET_CUPOLE_PRESET_EDIT_BUTTON_STATE(frame, false);
+    SET_CUPOLE_PRESET_EDIT_TITLE(frame, 0);
     
     local pc = GetMyPCObject();
     if pc == nil then
@@ -805,6 +1355,8 @@ function OPEN_CUPOLE_ITEM()
     SET_CUPOLE_SLOTS(frame);
     ---우측 큐폴리스트 생성
     SET_CUPOLE_LIST(frame);
+    ---우측 작업 영역은 큐폴 목록을 기본으로 표시
+    CUPOLE_RIGHT_VIEW_CHANGE(managertab, nil, "", 0);
     ---큐폴 정보중 GAUGE 설정
     SET_CUPOLE_FRIENDLY(frame, ChoosCupoleIndex);
     ----우상단 돈 설정
@@ -817,10 +1369,7 @@ function OPEN_CUPOLE_ITEM()
     
     frame:RunUpdateScript("UPDATE_CUPOLE")
 
-    local tabObj		    = managertab:GetChild('CupoleTab');
-	local itembox_tab		= tolua.cast(tabObj, "ui::CTabControl");
-	itembox_tab:SelectTab(0);
-    CUPOLE_TAB_CHANGE(managertab)
+    CUPOLE_TOP_TAB_CHANGE(managertab, nil, "", 0)
     
     local upgradebtn_bg = GET_CHILD_RECURSIVELY(frame,"upgradebtn_bg")
     SET_MOUSE_OVER_COLOR_CHNAGE_FUNC(upgradebtn_bg)
@@ -861,11 +1410,16 @@ end
 
 ---큐폴 UI닫음
 function CLOSE_CUPOLE_ITEM(frame)
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_INDEX", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_SLOT", 0);
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_VALUE", "0,0,0");
+    frame:SetUserValue("CUPOLE_PRESET_EDIT_PENDING", 0);
     CLOSE_RELEATIVE_FRAMES()
     RESET_CUPOLE_UIMODEL_FIX_DIR()
     -- local frame = ui.GetFrame("cupole_item");
     frame:StopUpdateScript('UPDATE_CUPOLE')
-
+    frame:StopUpdateScript("CUPOLE_UIMODEL_DELAY_CREATE_IN_MAINCHARACTER")
+    
     --현재 UI모델을 삭제한다.
     local selc_cupole = GET_GLOBAL_SELECT_CUPOLE(frame);
     REMOVE_ALL_CUPOLE_UIMODEL()
@@ -956,6 +1510,7 @@ function ON_SET_EQUIP_CUPOLE_OPTIONS(frame, msg, argStr, argNum)
         SET_CUPOLE_STAT_AT_UI(StatBox, k, v)
         y = y + 1;
     end
+    CUPOLE_PRESET_REFRESH(frame);
 end
 
 
@@ -995,11 +1550,30 @@ function OPEN_REINFORCE_TAB(frame, ctrl, argStr, argNum)
 end
 
 ---큐폴 선택, 가챠 탭 전환
+function CUPOLE_TOP_TAB_CHANGE(parent, ctrl, argStr, argNum)
+    local frame = parent:GetTopParentFrame();
+    local managerTab = GET_CHILD_RECURSIVELY(frame, "managerTab");
+    local curtabIndex = tonumber(argNum) or 0;
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) > 0 and curtabIndex ~= 0 then
+        END_CUPOLE_PRESET_EDIT(frame, false);
+    end
+    local manageTabBtn = GET_CHILD(managerTab, "ManageTabBtn");
+    local recruitTabBtn = GET_CHILD(managerTab, "RecruitTabBtn");
+    local manageTabWidth = manageTabBtn:GetWidth();
+    local manageTabHeight = manageTabBtn:GetHeight();
+    local recruitTabWidth = recruitTabBtn:GetWidth();
+    local recruitTabHeight = recruitTabBtn:GetHeight();
+
+    frame:SetUserValue("CUPOLE_TOP_TAB", curtabIndex);
+    manageTabBtn:SetImage(curtabIndex == 0 and "cupole_ui_top_tab_v2_clicked" or "cupole_ui_top_tab_v2");
+    recruitTabBtn:SetImage(curtabIndex == 1 and "cupole_ui_top_tab_v2_clicked" or "cupole_ui_top_tab_v2");
+    manageTabBtn:Resize(manageTabWidth, manageTabHeight);
+    recruitTabBtn:Resize(recruitTabWidth, recruitTabHeight);
+    CUPOLE_TAB_VIEW(managerTab, curtabIndex);
+end
+
 function CUPOLE_TAB_CHANGE(parent, ctrl, argStr, argNum)
-	local tabObj		    = parent:GetChild('CupoleTab');
-	local itembox_tab		= tolua.cast(tabObj, "ui::CTabControl");
-	local curtabIndex	    = itembox_tab:GetSelectItemIndex();
-	CUPOLE_TAB_VIEW(parent, curtabIndex);
+    CUPOLE_TOP_TAB_CHANGE(parent, ctrl, argStr, argNum);
 end
 
 --큐폴 탭 전환 처리
@@ -1010,6 +1584,7 @@ function CUPOLE_TAB_VIEW(frame, curtabIndex)
     local manageBG = frame:GetChild("manageBG")
     local gachaBG = frame:GetChild("gachaBG")
     local pickUpBG = frame:GetChild("pickUpBG")
+    local pickupSelectBG = GET_CHILD_RECURSIVELY(frame, "pickupSelectBG")
 
     local Sel_Btn = GET_CHILD_RECURSIVELY(frame,"SelectBtn")
     local Dis_Btn = GET_CHILD_RECURSIVELY(frame,"DisableBtn")
@@ -1019,6 +1594,9 @@ function CUPOLE_TAB_VIEW(frame, curtabIndex)
     local State, ChoosCupoleIndex, SlotIndex = GET_CHOOSE_INIT_CUPOLE(equip_cupole_list);
     REMOVE_ALL_CUPOLE_UIMODEL();
 
+    pickupSelectBG:SetUserValue("CURRENT_GACHA_NAME", "None");
+
+
     if curtabIndex == 0 then
         manageBG:ShowWindow(1)
         Sel_Btn:ShowWindow(1);
@@ -1026,10 +1604,15 @@ function CUPOLE_TAB_VIEW(frame, curtabIndex)
         filtergbox:ShowWindow(1);   
         gachaBG:ShowWindow(0);
         pickUpBG:ShowWindow(0);
+        parent:SetUserValue("Global_Select_Cupole", ChoosCupoleIndex);
+        SET_SELECT_CUPOLE_INFORMATION(parent, ChoosCupoleIndex);
         KUPOLE_UIMODEL_IN_MAINCHARACTER(ChoosCupoleIndex)
         SET_SELECT_CUPOLE_NAME(parent, ChoosCupoleIndex)
         TOGGLE_CUPOLE_SPECIAL_ADDON(parent, ChoosCupoleIndex)
+        CHECK_ILLUSTRATION_MODE(parent);
         CHNAGE_ALL_CUPOLE_UIMODEL_STATE(1)
+        local rightView = parent:GetUserIValue("CUPOLE_RIGHT_VIEW");
+        CUPOLE_RIGHT_VIEW_CHANGE(parent, nil, "", rightView);
     elseif curtabIndex == 1 then
         manageBG:ShowWindow(0)
         Sel_Btn:ShowWindow(0);
@@ -1050,9 +1633,11 @@ end
 function CUPOLE_FILTER_BTN(parent, ctrl, argStr, argNum)
     ui.ToggleFrame("cupole_filter")
     local frame = parent:GetTopParentFrame();
-    RESET_CUPOLE_SELECT_MODE(frame)
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) <= 0 then
+        RESET_CUPOLE_SELECT_MODE(frame)
+    end
 end
-    
+
 function CUPOLE_UIMODEL_ROTATE_BTN(parent, ctrl, argStr, argNum)
     if argNum == 0 then
         CHANGE_CUPOLE_UIMODEL_FIX_DIR(-45)
@@ -1098,34 +1683,78 @@ function SET_KUPOLE_RTT_IMAGE_SIZE(ImageFrame, index)
 end
 
 ----maincharater 큐폴 설정 
+function GET_CUPOLE_MAIN_PREVIEW(frame)
+    frame = frame or ui.GetFrame("cupole_item")
+    if frame == nil then return nil end
+    local control = GET_CHILD_RECURSIVELY_NAME(frame, "managerTab/manageBG/MainCharacter")
+    if control == nil then return nil end
+    return tolua.cast(control, "ui::CModelPreview")
+end
+
+-- Both views use the same private actor setup; their framing stays in XML.
+function SET_CUPOLE_PREVIEW_MODEL(control, index, frame, prefix)
+    local cls = GET_CUPOLE_BY_INDEX_IN_CLASSLIST(index)
+    if cls == nil then
+        control:ClearModel()
+        return
+    end
+    local modelClass = cls.ClassName .. "_Render"
+    local monster = GetClass("Monster", modelClass)
+    -- Camera values use the main RTT actor units, including RenderOffset.
+    local scale = math.max(0.01, TryGetProp(monster, "Scale", 1) * TryGetProp(cls, "Scale", 1)
+        * tonumber(frame:GetUserConfig(prefix .. "ACTOR_SCALE")))
+    local offset = StringSplit(TryGetProp(cls, "RenderOffset", "0;0;0"), ";")
+    local cameraHeight = tonumber(frame:GetUserConfig(prefix .. "HEIGHT_" .. cls.ClassName))
+        or tonumber(frame:GetUserConfig(prefix .. "HEIGHT"))
+    local cameraDistance = tonumber(frame:GetUserConfig(prefix .. "DISTANCE_" .. cls.ClassName))
+        or tonumber(frame:GetUserConfig(prefix .. "DISTANCE"))
+    local height = (cameraHeight - (tonumber(offset[2]) or 0)) / scale
+    local distance = cameraDistance / scale
+    if tonumber(index) == 33 then
+        distance = distance / tonumber(frame:GetUserConfig("RatioY"))
+    end
+    SET_KUPOLE_RTT_IMAGE_SIZE(control, index)
+    control:SetModel(modelClass)
+    control:SetOrthographic(tonumber(frame:GetUserConfig(prefix .. "ORTHOGRAPHIC")) == 1)
+    control:SetCamera(height, distance, tonumber(frame:GetUserConfig(prefix .. "LATITUDE")))
+    control:SetModelScale(1)
+    control:SetDirection(tonumber(frame:GetUserConfig(prefix .. "DIRECTION")))
+    control:PlayAnimation("STD", true, 1)
+end
+
 function KUPOLE_UIMODEL_IN_MAINCHARACTER(index)
-    -- REMOVE_ALL_CUPOLE_UIMODEL()
-    local ownerHandle, ui_model = CREATE_CUPOLE_UIMODEL(index, true)
-    local val = GET_CUPOLE_INDEX(ownerHandle, ui_model, true)
-    SET_CUPOLE_MAINCHARACTERFRAME_BY_INDEX(val, index)
+    local frame = ui.GetFrame("cupole_item")
+    local control = GET_CUPOLE_MAIN_PREVIEW(frame)
+    if control == nil then return end
+    SET_CUPOLE_PREVIEW_MODEL(control, index, frame, "MAIN_PREVIEW_")
+    RESET_CUPOLE_UIMODEL_FIX_DIR()
 end
 
 function KUPOLE_UIMODEL_IN_GACHA_RESULT(frame, index)
-    local pic = GET_CHILD_RECURSIVELY_NAME(frame,"Gacha_GroupBox/Gacha_FrontFrameBox/Character");
-    local ownerHandle, ui_model = CREATE_CUPOLE_UIMODEL(index)
-    local val = GET_CUPOLE_INDEX(ownerHandle, ui_model)
-    if val == -1 then
-        ownerHandle, ui_model = CREATE_CUPOLE_UIMODEL(index)
-        val = GET_CUPOLE_INDEX(ownerHandle, ui_model)   
-    end 
-    SET_CUPOLE_GAHCAFRAME_BY_INDEX(pic, val, index)
+    local control = GET_CHILD_RECURSIVELY_NAME(frame, "Gacha_GroupBox/Gacha_FrontFrameBox/Character")
+    if control == nil then return end
+    control = tolua.cast(control, "ui::CModelPreview")
+    SET_CUPOLE_PREVIEW_MODEL(control, index, frame:GetTopParentFrame(), "GACHA_PREVIEW_")
+end
+
+function GET_CUPOLE_PICKUP_PREVIEW(frame)
+    frame = frame or ui.GetFrame("cupole_pickup")
+    if frame == nil then return nil end
+    local control = GET_CHILD_RECURSIVELY_NAME(frame, "managerTab/manageBG/MainCharacter")
+    if control == nil then return nil end
+    return tolua.cast(control, "ui::CModelPreview")
 end
 
 function KUPOLE_UIMODEL_IN_PICKUP(frame, index)
-    index = GET_CURRENT_CUPOLE_SELECT_INDEX();
-    local pic = GET_CHILD_RECURSIVELY_NAME(frame,"managerTab/manageBG/MainCharacter");
-    local ownerHandle, ui_model = CREATE_CUPOLE_UIMODEL(index, true)
-    local val = GET_CUPOLE_INDEX(ownerHandle, ui_model, true)
-    -- if val == -1 then
-    --     ownerHandle, ui_model = CREATE_CUPOLE_UIMODEL(index)
-    --     val = GET_CUPOLE_INDEX(ownerHandle, ui_model)   
-    -- end 
-    SET_CUPOLE_GAHCAFRAME_BY_INDEX(pic, val, index)
+    frame = frame or ui.GetFrame("cupole_pickup")
+    local control = GET_CUPOLE_PICKUP_PREVIEW(frame)
+    if control == nil then return end
+    index = tonumber(index) or GET_CURRENT_CUPOLE_SELECT_INDEX()
+    if index == nil or index < 0 then
+        control:ClearModel()
+        return
+    end
+    SET_CUPOLE_PREVIEW_MODEL(control, index, frame, "PICKUP_PREVIEW_")
 end
 
 
@@ -1226,33 +1855,23 @@ function CHNAGE_ALL_CUPOLE_UIMODEL_STATE(State)
     end
 end
 
-function CHANGE_CUPOLE_UIMODEL_FIX_DIR(x,y,z)
-    local index = GET_GLOBAL_SELECT_CUPOLE();
-    local monName = GET_CUPOLE_NAME_BY_INDEX(index)
-    local ui_model = monName.."_Render";
-
-    local ownerHandle = session.GetMyHandle();
-    local ownerActor = world.GetActor(ownerHandle);
-	local monActor_uimodel = ownerActor:GetClientMonster():GetClientMonsterByName(ui_model);
-    local monHandle = monActor_uimodel:GetHandleVal();
-
-    FixUIModelChangeDir(monHandle, ownerHandle, x,y,z);
+function CHANGE_CUPOLE_UIMODEL_FIX_DIR(degrees)
+    local frame = ui.GetFrame("cupole_item")
+    local control = GET_CUPOLE_MAIN_PREVIEW(frame)
+    if control == nil then return end
+    local direction = (frame:GetUserIValue("MAIN_PREVIEW_DIRECTION") + degrees) % 360
+    frame:SetUserValue("MAIN_PREVIEW_DIRECTION", direction)
+    control:SetDirection(direction)
 end
 
 function RESET_CUPOLE_UIMODEL_FIX_DIR()
-    local index = GET_GLOBAL_SELECT_CUPOLE();
-    local monName = GET_CUPOLE_NAME_BY_INDEX(index)
-    local ui_model = monName.."_Render";
-
-    local ownerHandle = session.GetMyHandle();
-    local ownerActor = world.GetActor(ownerHandle);
-	local monActor_uimodel = ownerActor:GetClientMonster():GetClientMonsterByName(ui_model);
-    if monActor_uimodel ~= nil then
-        local monHandle = monActor_uimodel:GetHandleVal();
-        ResetUIModelDir(monHandle, ownerHandle);
-    end
+    local frame = ui.GetFrame("cupole_item")
+    local control = GET_CUPOLE_MAIN_PREVIEW(frame)
+    if control == nil then return end
+    local direction = tonumber(frame:GetUserConfig("MAIN_PREVIEW_DIRECTION"))
+    frame:SetUserValue("MAIN_PREVIEW_DIRECTION", direction)
+    control:SetDirection(direction)
 end
-
 
 ---큐폴 UI내에서 보유중인 돈 표시
 function CUPOLE_ITEM_MONEY_SET(frame)
@@ -1312,6 +1931,9 @@ end
 ---큐폴 선택 상태 해체
 function LBTNUP_RESET_CUPOLE_SELECT_MODE(parent, ctrl, argStr, argNum)
     local frame = parent:GetTopParentFrame();
+    if GET_CUPOLE_PRESET_EDIT_INDEX(frame) > 0 then
+        return;
+    end
     RESET_CUPOLE_SELECT_MODE(frame)
 end
 
@@ -1344,8 +1966,7 @@ end
 ----해체 버튼 상태 조절.
 function CHANGE_DISABLE_BTN_SHOWSTATE(ShowState, SlotName, CupoleIndex)
     local fraem = ui.GetFrame("cupole_item")
-    local managerTab = GET_CHILD(fraem,"managerTab")
-    local DisableBtn = GET_CHILD(managerTab, "DisableBtn");
+    local DisableBtn = GET_CHILD_RECURSIVELY(fraem, "DisableBtn");
     local Numberindex = tonumber(CupoleIndex)
     DisableBtn:ShowWindow(ShowState);
     if ShowState == 1 then
@@ -1418,14 +2039,24 @@ end
 ----마우스 오버 시 애니메이션 관련 함수
 
 function CHECK_ILLUSTRATION_MODE(frame, ctrl, argStr, argNum)
+    if frame == nil then
+        return;
+    end
     local TopParent = frame:GetTopParentFrame();
+    if TopParent == nil then
+        return;
+    end
     if ctrl == nil then
-        ctrl = GET_CHILD_RECURSIVELY_NAME(TopParent, "managerTab/manageBG/InfoBG/illustration") 
+        ctrl = GET_CHILD_RECURSIVELY_NAME(TopParent, "managerTab/manageBG/InfoBG/OptionBG/illustration") 
+    end
+    if ctrl == nil then
+        return;
     end
     local manageBG = GET_CHILD_RECURSIVELY_NAME(TopParent,"managerTab/manageBG")
     local spinepic = GET_CHILD_RECURSIVELY_NAME(TopParent,"managerTab/manageBG/spinepic")
     local MainCharacter = GET_CHILD_RECURSIVELY_NAME(TopParent,"managerTab/manageBG/MainCharacter")
 
+    local index = GET_GLOBAL_SELECT_CUPOLE();
     local cls = GET_CUPOLE_CLASS_BY_INDEX(index)
     if cls == nil then
         return;
@@ -1440,7 +2071,6 @@ function CHECK_ILLUSTRATION_MODE(frame, ctrl, argStr, argNum)
     end
     ctrl:ShowWindow(1);
     if ctrl:IsChecked() == 1 then
-        local index = GET_GLOBAL_SELECT_CUPOLE();
         CUPOLE_SPINE_ANIMAITON_SET(manageBG, illustrationName)
         spinepic:ShowWindow(1);
         MainCharacter:ShowWindow(0);
@@ -1451,9 +2081,10 @@ function CHECK_ILLUSTRATION_MODE(frame, ctrl, argStr, argNum)
 end
 
 function CUPOLE_SPINE_ANIMAITON_SET(frame, name)
-    local spinepic = GET_CHILD(frame,"spinepic")
+    local spinepic = GET_CHILD(frame, "spinepic")
     local spineInfo = geSpine.GetSpineInfo(name);
     if spineInfo ~= nil then
+        spinepic:SetScaleFactor(spineInfo:GetScaleFactor());
         spinepic:CreateSpineActor(spineInfo:GetRoot(), spineInfo:GetAtlas(), spineInfo:GetJson(), "", spineInfo:GetAnimation(), spineInfo:GetIsPremultiplied());
         spinepic:SetIsStopAnim(false)
     end	

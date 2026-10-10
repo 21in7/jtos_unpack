@@ -1,0 +1,13 @@
+ClassID,UnlockArgNum,MaxLevel,ClassName,UnlockScr,UnlockArgStr,UnlockDesc,ScrCalcPrice
+101,1,100,"Incendiar1","UNLOCK_ABIL_SKILL","Incendiar_FlareBlast","플레어 블래스트 1레벨 이상","ABIL_REINFORCE_PRICE"
+102,1,100,"Incendiar2","UNLOCK_ABIL_SKILL","Incendiar_BlazingEruption","블레이징 이럽션 1레벨 이상","ABIL_REINFORCE_PRICE"
+103,1,100,"Incendiar3","UNLOCK_ABIL_SKILL","Incendiar_Gehenna","게헤나 1레벨 이상","ABIL_REINFORCE_PRICE"
+104,1,100,"Incendiar4","UNLOCK_ABIL_SKILL","Incendiar_VolcanicGeyser","볼캐닉 가이저 1레벨 이상","ABIL_REINFORCE_PRICE"
+105,1,100,"Incendiar5","UNLOCK_ABIL_SKILL","Incendiar_Inferno","인페르노 1레벨 이상","ABIL_REINFORCE_PRICE"
+106,1,1,"Incendiar6","UNLOCK_ABIL_SKILL","Incendiar_Gehenna","게헤나 1레벨 이상","ABIL_REINFORCE_PRICE"
+201,1,1,"Incendiar7","UNLOCK_ABIL_SKILL","Incendiar_VolcanicGeyser","볼캐닉 가이저 1레벨 이상","HIDDENABIL_PRICE_COND_JOBLEVEL"
+1001,65,30,"Incendiar101","UNLOCK_ABIL_OTHERABILITY","Incendiar1","[플레어 블래스트: 강화] 특성 65 레벨 달성","HIDDENABIL_PRICE_COND_REINFORCE"
+1002,65,30,"Incendiar102","UNLOCK_ABIL_OTHERABILITY","Incendiar2","[블레이징 이럽션: 강화] 특성 65 레벨 달성","HIDDENABIL_PRICE_COND_REINFORCE"
+1003,65,30,"Incendiar103","UNLOCK_ABIL_OTHERABILITY","Incendiar3","[게헤나: 강화] 특성 65 레벨 달성","HIDDENABIL_PRICE_COND_REINFORCE"
+1004,65,30,"Incendiar104","UNLOCK_ABIL_OTHERABILITY","Incendiar4","[볼캐닉 가이저: 강화] 특성 65 레벨 달성","HIDDENABIL_PRICE_COND_REINFORCE"
+1005,65,30,"Incendiar105","UNLOCK_ABIL_OTHERABILITY","Incendiar5","[인페르노: 강화] 특성 65 레벨 달성","HIDDENABIL_PRICE_COND_REINFORCE"

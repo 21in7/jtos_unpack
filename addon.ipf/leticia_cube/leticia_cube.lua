@@ -46,10 +46,13 @@ function LETICIA_CUBE_LIST_UPDATE(frame)
         local info = GetClassByIndexFromList(gachaList, i);
 
         if info ~= nil then
-            local is_create = true;
-    
-            if TryGetProp(info, "RewardGroup", "None") == "Gacha_TP2_Season_001" or TryGetProp(info, "RewardGroup", "None") =="Gacha_Blessed_CUBE_001" then
-                    is_create = false;
+            local is_create = false;
+            local reward_group = TryGetProp(info, "RewardGroup", "None");
+            -- if reward_group == "Gacha_TP2_Season_001" or string.find(reward_group, "Gacha_Blessed_CUBE_001") ~= nil  then                
+            --     is_create = false;
+            -- end
+            if reward_group == 'Gacha_TP2_001' then
+                is_create = true;
                 end
     
             if info.Group == "NPC" and is_create == true then

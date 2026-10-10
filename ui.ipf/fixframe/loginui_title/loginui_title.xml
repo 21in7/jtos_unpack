@@ -7,10 +7,14 @@
 	<draw drawtitlebar="false" drawframe="false"/>
 	<script fadeinScp="None" fadeoutScp="None"/>
 	<option hideable="false" closebutton="false"/>
+	<script OpenScp="LOGIN_TITLE_OPEN" CloseScp="LOGIN_TITLE_CLOSE"/>
 	<userconfig FRAME_WIDTH="2000" FRAME_WIDTH_WIDE="2640"/>
 	<controls>
-		<picture name="bgbg" rect="0 0 6000 3000" margin="0 0 0 0" layout_gravity="center center" image="bg_w" stretch="true"/>
-		<picture name="login_img" rect="0 0 1920 1080" margin="0 0 0 0" layout_gravity="center center" image="login_img7f" stretch="true">
+		<picture name="screenmask" rect="0 0 4096 4096" hittest="false" image="fullblack" stretch="true"/>
+		<groupbox name="gbox" rect="0 0 1920 1080" margin="0 0 0 0" layout_gravity="center center" draw="true" hittestbox="true" resizebyparent="false" skin="relic_frame_bg"/>
+		<video name="video" rect="0 0 1920 1080" margin="0 0 0 0" video="None" layout_gravity="center center" stretch="true" playrepeat="true"/> 
+		<!-- <picture name="login_img" rect="0 0 1920 1080" margin="0 0 0 0" layout_gravity="center center" image="login_img9f" stretch="true" > -->
+
 			<!-- <uieffect effect="I_screen_logo019_levitation_red2" scale="4.5" sound="None" offset="200 -150" playtime="2" duration="0" conditon="Always" event="None"/>
 			<uieffect effect="I_screen_logo019_levitation_red2" scale="4.5" sound="None" offset="180 400" playtime="2" duration="0" conditon="Always" event="None"/>
 			<uieffect effect="I_screen_logo019_levitation_red2" scale="4.5" sound="None" offset="-300 350" playtime="2" duration="0" conditon="Always" event="None"/>
@@ -77,7 +81,7 @@
 			<uieffect effect="None" scale="15" sound="None" offset="0 0" playtime="1.3" duration="0" conditon="Always" event="None"/>
 			<uieffect effect="None" scale="15" sound="None" offset="0 0" playtime="1.3" duration="0" conditon="Always" event="None"/>
 			<uieffect effect="None" scale="15" sound="None" offset="0 0" playtime="1.3" duration="0" conditon="Always" event="None"/> -->
-		</picture>
+		<!-- </picture> -->
 		<picture name="login_dummy" rect="0 0 2560 1080" margin="0 0 0 0" layout_gravity="center center" image="None" stretch="false">
 			<uieffect effect="None" scale="15" sound="None" offset="0 0" playtime="1.3" duration="0" conditon="Always" event="None"/>
 		</picture>
@@ -85,6 +89,72 @@
 		<picture name="r1_logo_title_kor" rect="0 0 300 45" margin="-750 450 0 0" layout_gravity="center center" image="None" serviceNation="KOR" stretch="true"/>
 		<picture name="r1_logo_title_tw" rect="0 0 300 45" margin="-750 450 0 0" layout_gravity="center center" image="login3" serviceNation="TAIWAN" stretch="true"/>
 		<picture name="r1_logo1" rect="0 0 400 209" margin="-750 350 0 0" layout_gravity="center center" image="None" stretch="true"/>
-		
+		<!-- ===== 로그인 배경 캐릭터 =====
+		     angle 은 시계방향 각도(정수)이고 control 중심을 축으로 돈다. 숫자만 고치면 위치는 그대로 두고
+		     기울기만 바뀐다. 격자 변형 경로도 같은 축·같은 각도로 돌고 클릭 좌표는 역회전해 판정하므로,
+		     회전된 상태에서도 잡히는 위치가 보이는 위치와 일치한다.
+		     rect 는 반드시 정사각형으로 유지할 것. 텍스처가 '캐릭터 대각선 = 한 변'인 1024 정사각 캔버스라
+		     정사각 rect 안에서는 어떤 각도로 돌려도 잘리지 않는다. 가로세로를 다르게 주면 그림이 늘어진다.
+		     캐릭터를 키우고 줄일 때는 rect 두 값을 같은 수로 바꾼다.
+		     region 좌표는 회전 전 1024x1024 텍스처 기준이다 — 각도를 바꿔도 다시 잡을 필요가 없다.
+		     B 를 먼저 선언해 A(풀)가 위에 오도록 한다 — 선언 순서가 그리는 순서다. -->
+		<deformpicture name="login_bg_char_b" rect="0 0 1225 1225" margin="-648 200 0 0" layout_gravity="center center"
+				hittest="true" image="Dlg_login_bg_char_b" stretch="true" angle="20" gridcolumns="64"
+				grabradius="350" maxdisplacement="130" stiffness="220" damping="13">
+			<!-- 귀 끝자락 두 곳. radius 를 작게 잡아 끝부분만 잡히고, falloff 로 귀 전체가 완만하게 딸려온다. -->
+			<region x="159" y="228" radius="200" falloffradius="300"/>
+			<region x="848" y="148" radius="200" falloffradius="300"/>
+			<idle breathamplitude="0.015" breathperiod="4.6"/>
+			<dragsounds grab="mon_haming_hit" pull="m_slime_dark_hit" release="skl_eff_poporion_toy" pullthreshold="0.08"/>
+		</deformpicture>
+		<deformpicture name="login_bg_char_a" rect="0 0 1061 1061" margin="-646 -298 0 0" layout_gravity="center center"
+				hittest="true" image="Dlg_login_bg_char_a" stretch="true" angle="150" gridcolumns="64"
+				grabradius="350" maxdisplacement="130" stiffness="220" damping="13">
+			<!-- 풀잎 세 장의 끝자락. 왼쪽 / 가운데 / 오른쪽 순이다. -->
+			<region x="154" y="535" radius="80" falloffradius="300"/>
+			<region x="256" y="262" radius="80" falloffradius="300"/>
+			<region x="615" y="159" radius="80" falloffradius="300"/>
+			<idle breathamplitude="0.015" breathperiod="5.2"/>
+			<dragsounds grab="mon_onion_hit" pull="m_slime_dark_hit" release="skl_eff_poporion_toy" pullthreshold="0.08"/>
+		</deformpicture>
+
+		<!-- ===== 포포리온 (레이어 분리) =====
+		     아래 2장은 같은 2201x1832 캔버스를 공유하므로 rect / margin / layout_gravity 가 반드시 동일해야 한다.
+		     위치나 크기를 옮길 때는 두 줄을 항상 같이 고칠 것. 하나만 바꾸면 손이 몸에서 어긋난다.
+		     선언 순서가 그리는 순서다: 머리+얼굴 -> 앞 손.
+		     '포포 머리 합친거.psd' 기준이라 파란 머리가 얼굴과 한 장으로 합쳐져 있다. 즉 볼을 당기면
+		     머리도 함께 늘어난다 (경계 어긋남이 없는 대신 머리는 고정되지 않는다).
+		     손만 별도 <picture> 이므로 손은 구조적으로 당겨지지 않는다. -->
+		<deformpicture name="login_popolion_deform" rect="0 0 847 705" margin="658 233 0 0" layout_gravity="center center"
+				hittest="true" image="Dlg_port_popolion_face" stretch="true" gridcolumns="96" grabradius="700"
+				maxdisplacement="260" stiffness="220" damping="13">
+			<!-- 볼 홍조 실측 중심 (564,950) / (1524,716). 캐릭터가 기울어진 자세라 좌우 높이가 다르다.
+			     홍조 반경은 좌 128 / 우 144.
+			     radius        = 잡히는 영역. 볼만 잡으려면 작게 둔다.
+			     falloffradius = 변형이 퍼지는 영역. 넓게 둘수록 곡선이 완만해져 격자가 안 접힌다.
+
+			     격자가 뾰족하게 깨지는 건(fold-over) 이웃 정점의 변위 차이가 격자 간격을 넘을 때다.
+			     안전 조건은 max|falloff 기울기| x maxdisplacement < 1 이고 gridcolumns 와는 무관하다.
+			     지금 조합(grabradius 700 / falloffradius 600)의 한계는 약 325 이며 260 은 그 80% 다.
+			     maxdisplacement 를 더 키우려면 두 반경을 함께 키울 것. -->
+			<region x="564" y="950" radius="150" falloffradius="600"/>
+			<region x="1524" y="716" radius="150" falloffradius="600"/>
+			<!-- 대기 중 호흡. 격자를 세로로 미세하게 부풀렸다 꺼뜨린다 (프레임 텍스처 없음).
+			     breathamplitude = 이미지 크기 대비 비율. 0.018 이면 세로 약 1.8%(원본 33px, 화면 12px).
+			                       위쪽만 부풀도록 아래 가운데를 축으로 잡아 손 레이어와 어긋나지 않는다.
+			     breathperiod    = 들숨+날숨 한 번에 걸리는 초. 사람 호흡은 3~5초가 자연스럽다.
+			     당기는 중에도 멈추지 않고 변형 위에 그대로 겹친다. -->
+			<idle breathamplitude="0.018" breathperiod="3.0"/>
+			<dragsounds grab="mon_popolion_hit" pull="m_slime_dark_hit" release="skl_eff_poporion_toy" pullthreshold="0.08"/>
+		</deformpicture>
+		<picture name="login_popolion_front" rect="0 0 847 705" margin="658 233 0 0" layout_gravity="center center"
+				hittest="false" image="Dlg_port_popolion_front" stretch="true"/>
 	</controls>
 </uiframe>
+
+
+<!-- maxdisplacement: 최대 당김 길이
+grabradius: 주변 그림이 함께 늘어나는 범위
+<region radius>: 잡을 수 있는 볼 영역
+stiffness: 원래 모양으로 돌아가려는 힘
+damping: 흔들림을 줄이는 정도 -->

@@ -2,7 +2,7 @@
 
 -- 방어력, 치저, 블록, 치유력, 공격력, 치발감소, 추가 대미지
 function GET_EP16_NECK_02_POINT(item)
-    local min, max = GET_ITEM_ATK(item)
+    local min, max = GET_ITEM_ATK(item)        
     local avg = (min + max) * 0.5
     
     local def = math.floor(avg * 10)
@@ -27,7 +27,7 @@ function GET_EP16_NECK_02_POINT(item)
     if mspd > 10 then
         mspd = 10
     end
-
+    
     return def, crtdr, blk, heal, atk, crthr, add_dmg, mspd
 end
 
@@ -57,6 +57,80 @@ function GET_EP16_BRC_02_POINT(item)
     if mspd > 5 then
         mspd = 5
     end
+
+    return def, crtdr, blk, heal, atk, crthr, add_dmg, mspd
+end
+
+-- 550제 이후 공용(칸트리베)
+function GET_EP18_NECK_02_POINT(item)
+    -- 1. 입력값 확인
+    local min, max = GET_ITEM_ATK(item)    
+    local avg = (min + max) * 0.5
+
+    -- 2. 성장 상수
+    local GEN_GROWTH = 1.005        -- 세대당 0.5% 증가
+
+    -- 3. 세대(Generation) 계산
+    local lv = TryGetProp(item, 'UseLv', 0)
+    local gen_diff = math.max(0, math.floor((lv - 550) / 20))  
+        
+    -- 4. avg 기반 기준 수치 계산
+    local ref_def     = math.floor(avg * 10)
+    local ref_crtdr   = math.floor(avg * 0.25)
+    local ref_blk     = math.floor(avg * 0.25)
+    local ref_heal    = math.floor(avg * 0.7)
+    local ref_atk     = math.floor(avg * 1.6) + 10000
+    local ref_crthr   = math.floor(avg * 0.28)
+    local ref_add_dmg = math.floor(avg * 0.65)
+
+    -- 5. 세대 성장률 적용 (전 스탯 동일 0.5%)
+    local gen_mult = GEN_GROWTH ^ gen_diff
+
+    local def     = math.floor(ref_def * gen_mult)
+    local crtdr   = math.floor(ref_crtdr * gen_mult)
+    local blk     = math.floor(ref_blk * gen_mult)
+    local heal    = math.floor(ref_heal * gen_mult)
+    local atk     = math.floor(ref_atk * gen_mult)
+    local crthr   = math.floor(ref_crthr * gen_mult)
+    local add_dmg = math.floor(ref_add_dmg * gen_mult)
+
+    local mspd = 10
+
+    return def, crtdr, blk, heal, atk, crthr, add_dmg, mspd
+end
+-- 550제 이후 공용(칸트리베)
+function GET_EP18_BRC_02_POINT(item)
+    -- 1. 입력값 확인
+    local min, max = GET_ITEM_ATK(item)
+    local avg = (min + max) * 0.5
+
+    local GEN_GROWTH = 1.005        -- 세대당 0.5% 증가
+
+    -- 3. 세대(Generation) 계산
+    local lv = TryGetProp(item, 'UseLv', 0)
+    local gen_diff = math.max(0, math.floor((lv - 550) / 20))
+
+    -- 4. avg 기반 기준 수치 계산
+    local ref_def     = math.floor(avg * 5)
+    local ref_crtdr   = math.floor(avg * 0.125)
+    local ref_blk     = math.floor(avg * 0.125)
+    local ref_heal    = math.floor(avg * 0.35)
+    local ref_atk     = math.floor(avg * 0.8) + 5000
+    local ref_crthr   = math.floor(avg * 0.14)
+    local ref_add_dmg = math.floor(avg * 0.325)
+
+    -- 5. 세대 성장률 적용 (전 스탯 동일 0.5%)
+    local gen_mult = GEN_GROWTH ^ gen_diff
+
+    local def     = math.floor(ref_def * gen_mult)
+    local crtdr   = math.floor(ref_crtdr * gen_mult)
+    local blk     = math.floor(ref_blk * gen_mult)
+    local heal    = math.floor(ref_heal * gen_mult)
+    local atk     = math.floor(ref_atk * gen_mult)
+    local crthr   = math.floor(ref_crthr * gen_mult)
+    local add_dmg = math.floor(ref_add_dmg * gen_mult)
+
+    local mspd = 5
 
     return def, crtdr, blk, heal, atk, crthr, add_dmg, mspd
 end
@@ -97,8 +171,23 @@ local function make_shared_upgrade_acc_table()
     material_table[530]['Ring'] = {}
     material_table[530]['Ring']['JurateCertificate'] = 5000
     material_table[530]['Ring']['misc_BlessedStone_1'] = 1
-    material_table[530]['Neck']['misc_ore28'] = 100
+    material_table[530]['Ring']['misc_ore28'] = 100
     material_table[530]['Ring']['misc_ep17_acc_NoTrade'] = 12
+
+    -- EP18
+    material_table[550] = {}
+    material_table[550]['Neck'] = {}
+    material_table[550]['Neck']['AustejaCertificate'] = 5000
+    material_table[550]['Neck']['misc_BlessedStone_2'] = 1
+    material_table[550]['Neck']['misc_ore29'] = 100
+    material_table[550]['Neck']['misc_ep18_acc_NoTrade'] = 12
+
+    material_table[550]['Ring'] = {}
+    material_table[550]['Ring']['AustejaCertificate'] = 5000
+    material_table[550]['Ring']['misc_BlessedStone_2'] = 1 -- 최고급 축복받은 조각
+    material_table[550]['Ring']['misc_ore29'] = 100        -- 엘타스 가루
+    material_table[550]['Ring']['misc_ep18_acc_NoTrade'] = 12 -- 변경필요
+
 
     -- 값 세팅
     value_grade_table['EP16_NECK_01'] = {} -- 피크티스 네클리스
@@ -119,26 +208,30 @@ local function make_shared_upgrade_acc_table()
     value_grade_table['EP17_Kalentis_NECK_04'] = {} -- 트리우카스 네클리스
     value_grade_table['EP17_Kalentis_BRC_04'] = {} -- 트리우카스 네클리스
 
-    value_atk_table['EP16_NECK_01'] = 4000 -- 피크티스 네클리스
-    value_atk_table['EP16_BRC_01'] = 2000 -- 피크티스 네클리스    
-    value_atk_table['EP16_NECK_02'] = 4000 -- 칸트리베 네클리스
-    value_atk_table['EP16_BRC_02'] = 4000 -- 칸트리베 네클리스    
-    value_atk_table['EP16_NECK_04'] = 4000 -- 트리우카스 네클리스
-    value_atk_table['EP16_BRC_04'] = 4000 -- 트리우카스 네클리스
+    -- EP18
+    value_grade_table['EP18_NECK_01'] = {} -- 피크티스 네클리스
+    value_grade_table['EP18_BRC_01'] = {} -- 피크티스 네클리스
+    value_grade_table['EP18_NECK_03'] = {} -- 주오다 네클리스
+    value_grade_table['EP18_BRC_03'] = {} -- 주오다 네클리스
+    value_grade_table['EP18_NECK_04'] = {} -- 트리우카스 네클리스
+    value_grade_table['EP18_BRC_04'] = {} -- 트리우카스 네클리스
 
-    value_atk_table['EP17_Kalentis_NECK_01'] = 4800 -- 피크티스 네클리스
-    value_atk_table['EP17_Kalentis_BRC_01'] = 2400 -- 피크티스 네클리스
-    value_atk_table['EP17_Kalentis_NECK_03'] = 4800 -- 주오다 네클리스
-    value_atk_table['EP17_Kalentis_BRC_03'] = 2400 -- 주오다 네클리스
-    value_atk_table['EP17_Kalentis_NECK_04'] = 4800 -- 트리우카스 네클리스
-    value_atk_table['EP17_Kalentis_BRC_04'] = 2400 -- 트리우카스 네클리스
-    
+
+
     value_grade_table['EP17_Kalentis_NECK_01'][0] = {2250, 675}
     value_grade_table['EP17_Kalentis_BRC_01'][0] = {1125, 338}
     value_grade_table['EP17_Kalentis_NECK_03'][0] = {4200, 1260}
     value_grade_table['EP17_Kalentis_BRC_03'][0] = {2100, 630}
     value_grade_table['EP17_Kalentis_NECK_04'][0] = {2626, 788}
     value_grade_table['EP17_Kalentis_BRC_04'][0] = {1313, 394}
+
+    -- EP18
+    value_grade_table['EP18_NECK_01'][0] = {2250, 675}
+    value_grade_table['EP18_BRC_01'][0] = {1125, 338}
+    value_grade_table['EP18_NECK_03'][0] = {4200, 1260}
+    value_grade_table['EP18_BRC_03'][0] = {2100, 630}
+    value_grade_table['EP18_NECK_04'][0] = {2626, 788}
+    value_grade_table['EP18_BRC_04'][0] = {1313, 394}
 
     for i = 1, 20 do
         value_grade_table['EP16_NECK_01'][i] = {112 * i, 33 * i}
@@ -156,6 +249,14 @@ local function make_shared_upgrade_acc_table()
         value_grade_table['EP17_Kalentis_BRC_03'][i] = {2100, 630}
         value_grade_table['EP17_Kalentis_NECK_04'][i] = {2626, 788}
         value_grade_table['EP17_Kalentis_BRC_04'][i] = {1313, 394}
+
+        -- EP18
+        value_grade_table['EP18_NECK_01'][i] = {2250, 675}
+        value_grade_table['EP18_BRC_01'][i] = {1125, 338}
+        value_grade_table['EP18_NECK_03'][i] = {4200, 1260}
+        value_grade_table['EP18_BRC_03'][i] = {2100, 630}
+        value_grade_table['EP18_NECK_04'][i] = {2626, 788}
+        value_grade_table['EP18_BRC_04'][i] = {1313, 394}
     end
 
     value_grade_table['EP16_NECK_01'][20] = {2250, 675}
@@ -173,11 +274,51 @@ local function make_shared_upgrade_acc_table()
     value_grade_table['EP17_Kalentis_BRC_03'][20] = {2100, 630}
     value_grade_table['EP17_Kalentis_NECK_04'][20] = {2626, 788}
     value_grade_table['EP17_Kalentis_BRC_04'][20] = {1313, 394}
+
+    -- EP18
+    value_grade_table['EP18_NECK_01'][20] = {2250, 675}
+    value_grade_table['EP18_BRC_01'][20] = {1125, 338}
+    value_grade_table['EP18_NECK_03'][20] = {4200, 1260}
+    value_grade_table['EP18_BRC_03'][20] = {2100, 630}
+    value_grade_table['EP18_NECK_04'][20] = {2626, 788}
+    value_grade_table['EP18_BRC_04'][20] = {1313, 394}
+
+
+    -- 추가 공격력 세팅
+    -- 추가 공격력 세팅
+    value_atk_table['EP16_NECK_01'] = 4000 -- 피크티스 네클리스
+    value_atk_table['EP16_BRC_01'] = 2000 -- 피크티스 브레이슬릿    
+    value_atk_table['EP16_NECK_02'] = 4000 -- 칸트리베 네클리스
+    value_atk_table['EP16_BRC_02'] = 4000 -- 칸트리베 브레이슬릿    
+    value_atk_table['EP16_NECK_04'] = 4000 -- 트리우카스 네클리스
+    value_atk_table['EP16_BRC_04'] = 4000 -- 트리우카스 브레이슬릿
+
+    value_atk_table['EP17_Kalentis_NECK_01'] = 4800 -- 피크티스 네클리스
+    value_atk_table['EP17_Kalentis_BRC_01'] = 2400 -- 피크티스 브레이슬릿
+    value_atk_table['EP17_Kalentis_NECK_03'] = 4800 -- 주오다 네클리스
+    value_atk_table['EP17_Kalentis_BRC_03'] = 2400 -- 주오다 브레이슬릿
+    value_atk_table['EP17_Kalentis_NECK_04'] = 4800 -- 트리우카스 네클리스
+    value_atk_table['EP17_Kalentis_BRC_04'] = 2400 -- 트리우카스 브레이슬릿
+    
+    -- EP18
+    value_atk_table['EP18_NECK_01'] = 7200 -- 피크티스 네클리스  x1.5
+    value_atk_table['EP18_BRC_01'] = 3600 -- 피크티스 브레이슬릿  x1.5
+    value_atk_table['EP18_NECK_03'] = 7200 -- 주오다 네클리스  x1.5
+    value_atk_table['EP18_BRC_03'] = 3600 -- 주오다 브레이슬릿  x1.5
+    value_atk_table['EP18_NECK_04'] = 7200 -- 트리우카스 네클리스  x1.5
+    value_atk_table['EP18_BRC_04'] = 3600 -- 트리우카스 브레이슬릿  x1.5
 end
 
 make_shared_upgrade_acc_table()
 
+-- 무기/방어구/악세 조건 동일
 shared_upgrade_acc.is_valid_item = function(item)
+    -- 장신구(목걸이/팔찌) 전용 — 일반 장비는 장비 업그레이드(shared_upgrade_equip) 대상
+    local class_type = TryGetProp(item, 'ClassType', 'None')
+    if class_type ~= 'Neck' and class_type ~= 'Ring' then
+        return false, 'NotValidItem'
+    end
+
     if TryGetProp(item, 'EnableUpgrade', 'None') ~= 'YES' then
         return false, 'NotValidItem'
     end

@@ -15,7 +15,7 @@ function load_evolution_stone_effect_value()
         system_option_setting.SettingsFileLocation = string.format(path_format, session.loginInfo.GetUserID())
         local t, err = load_json(system_option_setting.SettingsFileLocation, system_option_setting.Settings);			
         if err then
-            os.execute('mkdir ' .. PATH.dirname(system_option_setting.SettingsFileLocation))
+            MakeDirectory(PATH.dirname(system_option_setting.SettingsFileLocation))
         else
             system_option_setting.Settings = t;
             system_option_setting.Loaded = true;								
@@ -45,14 +45,53 @@ function get_evolution_stone_effect_value()
     end
 end
 
+local STORYBOOK_GRAPHICS_KEY = 'storybook_graphics'
 
-function SYSTEMOPTION_ON_INIT(addon, frame)
+local function get_system_option_pc_settings()
+	local cid = session.GetMySession():GetCID()
+	if system_option_setting.Settings.pc_id[cid] == nil then
+		system_option_setting.Settings.pc_id[cid] = {}
+	end
+	return system_option_setting.Settings.pc_id[cid]
+end
+
+function get_storybook_graphics_enabled()
+	local settings = get_system_option_pc_settings()
+	if settings[STORYBOOK_GRAPHICS_KEY] == nil or settings[STORYBOOK_GRAPHICS_KEY]['enabled'] == nil then
+		return 1
+	end
+	return settings[STORYBOOK_GRAPHICS_KEY]['enabled']
+end
+
+function save_storybook_graphics_enabled(value)
+	local settings = get_system_option_pc_settings()
+	if settings[STORYBOOK_GRAPHICS_KEY] == nil then
+		settings[STORYBOOK_GRAPHICS_KEY] = {}
+	end
+	settings[STORYBOOK_GRAPHICS_KEY]['enabled'] = value
+	save_json(system_option_setting.SettingsFileLocation, system_option_setting.Settings)
+end
+
+function IS_STORYBOOK_GRAPHICS_ENABLED()
+	return get_storybook_graphics_enabled() == 1
+end
+
+function APPLY_STORYBOOK_GRAPHICS_OPTION()
+	local enabled = get_storybook_graphics_enabled()
+	if graphic ~= nil and graphic.ApplyStorybookGraphicsOption ~= nil then
+		graphic.ApplyStorybookGraphicsOption(enabled)
+	end
+end
+
+
+function SYSTEMOPTION_ON_INIT(addon, frame)		
 	addon:RegisterMsg('IES_VALUE_CHANGE', 'UPDATE_OPERATOR_CONFIG');
 	addon:RegisterMsg('RECEIVE_SERVER_NATION', 'UPDATE_RECEIVE_SERVER_NATION');
 	load_evolution_stone_effect_value()
 	load_fix_headsupdisplay_value()
 	load_OnlySameNationChat_value()
 	load_translation_language_value()
+	APPLY_STORYBOOK_GRAPHICS_OPTION()
 	INIT_GAMESYS_CONFIG(frame);	
 end
 
@@ -101,7 +140,8 @@ function SYSTEMOPTION_CREATE(frame)
 	SET_ENABLE_AUTO_CASTING(frame)
 	SET_POPUP_PICK_ITEM(frame)
 	SET_PICK_ITEM_MESSAGE(frame)
-	SHOW_COLONY_BATTLEMESSAGE(frame);		
+	SET_CONVENIENCE_ADDON_OPTIONS(frame)
+	SHOW_COLONY_BATTLEMESSAGE(frame);
 	SYSTEMOPTION_INIT_TAB(frame);
 end
 
@@ -163,6 +203,68 @@ function SYSTEMOPTION_SYSTEM_VIEW(frame)
 	SYSTEMOPTION_GBOX_SHOW_WINDOW_SETTING(frame, "gameBox", 1);
 	SYSTEMOPTION_GBOX_SHOW_WINDOW_SETTING(frame, "uiModeBox", 1);
 	SYSTEMOPTION_GBOX_SHOW_WINDOW_SETTING(frame, "gamePVPSetting", 0);
+end
+
+local function SET_CONVENIENCE_ADDON_OPTION(frame, checkName, isEnabledScp, manageName)
+	local enabledCheck = GET_CHILD_RECURSIVELY(frame, checkName, "ui::CCheckBox")
+	if enabledCheck == nil then
+		return
+	end
+	local manageButton = nil
+	if manageName ~= nil then
+		manageButton = GET_CHILD_RECURSIVELY(frame, manageName, "ui::CButton")
+	end
+
+	local isEnabledFunc = _G[isEnabledScp]
+	if isEnabledFunc == nil then
+		enabledCheck:SetCheck(0)
+		enabledCheck:SetEnable(0)
+		if manageButton ~= nil then
+			manageButton:SetEnable(0)
+		end
+		return
+	end
+
+	local enabled = isEnabledFunc() and 1 or 0
+	enabledCheck:SetCheck(enabled)
+	enabledCheck:SetEnable(1)
+	if manageButton ~= nil then
+		manageButton:SetEnable(enabled)
+	end
+end
+
+function SET_CONVENIENCE_ADDON_OPTIONS(frame)
+	SET_CONVENIENCE_ADDON_OPTION(frame, "Check_EnableQuickActionBoard", "QUICKACTIONBOARD_IS_ENABLED", "QuickActionBoardManage")
+	SET_CONVENIENCE_ADDON_OPTION(frame, "Check_EnableFieldLoot", "FIELDLOOT_IS_ENABLED")
+	SET_CONVENIENCE_ADDON_OPTION(frame, "Check_EnableMinimapRegionInfo", "MINIMAP_REGION_INFO_IS_ENABLED")
+end
+
+local function CONFIG_CONVENIENCE_ADDON_ENABLED(ctrl, setEnabledScp)
+	local topFrame = ctrl:GetTopParentFrame()
+	local setEnabledFunc = _G[setEnabledScp]
+	if setEnabledFunc ~= nil then
+		setEnabledFunc(ctrl:IsChecked())
+	end
+	SET_CONVENIENCE_ADDON_OPTIONS(topFrame)
+end
+
+function CONFIG_QUICKACTIONBOARD_ENABLED(frame, ctrl)
+	CONFIG_CONVENIENCE_ADDON_ENABLED(ctrl, "QUICKACTIONBOARD_SET_ENABLED")
+end
+
+function CONFIG_FIELDLOOT_ENABLED(frame, ctrl)
+	CONFIG_CONVENIENCE_ADDON_ENABLED(ctrl, "FIELDLOOT_SET_ENABLED")
+end
+
+function CONFIG_MINIMAP_REGION_INFO_ENABLED(frame, ctrl)
+	CONFIG_CONVENIENCE_ADDON_ENABLED(ctrl, "MINIMAP_REGION_INFO_SET_ENABLED")
+end
+
+function OPEN_QUICKACTIONBOARD_MANAGER()
+	if QUICKACTIONBOARD_IS_ENABLED == nil or QUICKACTIONBOARD_IS_ENABLED() == false then
+		return
+	end
+	ui.OpenFrame("quickactionboard")
 end
 
 function SYSTEMOPTION_GRAPHIC_VIEW(frame)
@@ -435,6 +537,11 @@ function INIT_GRAPHIC_CONFIG(frame)
 	local Check_Enable_Daylight = GET_CHILD_RECURSIVELY(frame, "Check_Enable_Daylight", "ui::CCheckBox");
 	if Check_Enable_Daylight ~= nil then
 		Check_Enable_Daylight:SetCheck(config.GetEnableDayLight());
+	end
+
+	local storybookGraphics = GET_CHILD_RECURSIVELY(frame, "check_StorybookGraphics", "ui::CCheckBox");
+	if storybookGraphics ~= nil then
+		storybookGraphics:SetCheck(get_storybook_graphics_enabled());
 	end
 	
 	local performance_limit_text = GET_CHILD_RECURSIVELY(frame, "performance_limit_text");
@@ -1165,6 +1272,15 @@ function SET_ENABLE_DAYLIGHT_OPTION(frame, ctrl, str, num)
 	local isEnable = ctrl:IsChecked();
     config.SetEnableDayLight(isEnable);
 	config.SaveConfig();
+end
+
+function CONFIG_STORYBOOK_GRAPHICS(frame, ctrl, str, num)
+	local isEnable = 0;
+	if ctrl:IsChecked() == 1 or ctrl:IsChecked() == true then
+		isEnable = 1;
+	end
+	save_storybook_graphics_enabled(isEnable);
+	APPLY_STORYBOOK_GRAPHICS_OPTION();
 end
 
 function CONFIG_COOLDOWN_DECIMAL_POINT_SEC(frame, ctrl, str, num)

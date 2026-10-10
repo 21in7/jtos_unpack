@@ -14,5 +14,5 @@ function MINIMIZED_CERTIFICATE_SHOP_BUTTON_CLICK(parent, ctrl)
 		ui.CloseFrame('earthtowershop')
 	end
 
-	REQ_AustejaCertificate_SHOP_OPEN()
+	REQ_SauleCertificate_SHOP_OPEN()
 end

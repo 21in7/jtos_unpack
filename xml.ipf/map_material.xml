@@ -361,7 +361,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="21" Name="snow_flower" KorName="하얀 눈꽃 발자국 착용시 발생" MaterialItem="None">
+	<Material ID="21" Name="snow_flower" KorName="하얀 눈꽃 발자국 착용시 발생" MaterialItem="None" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_ice" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_ice_land"/>
@@ -379,7 +379,7 @@
 			<Sound From="walk_left" To="step_ice"/>
 		</Anim>
 	</Material>
-	<Material ID="22" Name="good_stamp" KorName="참 잘했어요 도장" MaterialItem="misc_soil">
+	<Material ID="22" Name="good_stamp" KorName="참 잘했어요 도장" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1.3" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -397,7 +397,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="25" Name="special_marin" KorName="바다의 가호" MaterialItem="None">
+	<Material ID="25" Name="special_marin" KorName="바다의 가호" MaterialItem="None" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_water007" Scale="0.7" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_ice_land"/>
@@ -415,7 +415,7 @@
 			<Sound From="walk_left" To="step_ice"/>
 		</Anim>
 	</Material>
-	<Material ID="26" Name="rabbit_stamp" KorName="토끼 스탬프" MaterialItem="misc_soil">
+	<Material ID="26" Name="rabbit_stamp" KorName="토끼 스탬프" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -433,7 +433,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="27" Name="horse_stamp" KorName="마패 스탬프" MaterialItem="misc_soil">
+	<Material ID="27" Name="horse_stamp" KorName="마패 스탬프" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -451,7 +451,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="28" Name="pumpkin_stamp" KorName="호박 스탬프" MaterialItem="misc_soil">
+	<Material ID="28" Name="pumpkin_stamp" KorName="호박 스탬프" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -469,7 +469,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="29" Name="thorn_stamp" KorName="길티네 가시" MaterialItem="misc_soil">
+	<Material ID="29" Name="thorn_stamp" KorName="길티네 가시" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -487,7 +487,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="30" Name="valentine_01_stamp" KorName="달콤함이 팡팡" MaterialItem="misc_soil">
+	<Material ID="30" Name="valentine_01_stamp" KorName="달콤함이 팡팡" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -505,7 +505,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="31" Name="korean_pattern" KorName="꽃 무늬 단청" MaterialItem="misc_soil">
+	<Material ID="31" Name="korean_pattern" KorName="꽃 무늬 단청" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -523,7 +523,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="32" Name="magicsquare_red" KorName="변신 마법진: 하트" MaterialItem="misc_soil">
+	<Material ID="32" Name="magicsquare_red" KorName="변신 마법진: 하트" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -541,7 +541,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="33" Name="magicsquare_yellow" KorName="변신 마법진: 다이아" MaterialItem="misc_soil">
+	<Material ID="33" Name="magicsquare_yellow" KorName="변신 마법진: 다이아" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -559,7 +559,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="34" Name="12ANIMAL_JUMP" KorName="도깨비왕 강림" MaterialItem="misc_soil">
+	<Material ID="34" Name="12ANIMAL_JUMP" KorName="도깨비왕 강림" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -577,7 +577,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="35" Name="20MAGICAL01_JUMP" KorName="마법진 스페이드" MaterialItem="misc_soil">
+	<Material ID="35" Name="20MAGICAL01_JUMP" KorName="마법진 스페이드" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -595,7 +595,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="36" Name="20MAGICAL02_JUMP" KorName="마법진 클로버" MaterialItem="misc_soil">
+	<Material ID="36" Name="20MAGICAL02_JUMP" KorName="마법진 클로버" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -613,7 +613,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="37" Name="Effect_catagnan" KorName="냥타냥 이펙트" MaterialItem="None">
+	<Material ID="37" Name="Effect_catagnan" KorName="냥타냥 이펙트" MaterialItem="None" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -657,7 +657,7 @@
 			<Particle From="F_pc_run_blank_dummy" To="F_pc_effectitem_catagnan_ride" Scale="1" ForceConvert="NO"/>
 		</Anim>
 	</Material>
-	<Material ID="38" Name="ridepet_ep14rider" KorName="토스 데이비슨" MaterialItem="None">
+	<Material ID="38" Name="ridepet_ep14rider" KorName="토스 데이비슨" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="skl_eff_pet_ep14rider_landing"/>
@@ -667,7 +667,7 @@
 			<Sound From="pc_war_jump" To="skl_eff_pet_ep14rider_jump"/>
 		</Anim>
 	</Material>
-	<Material ID="39" Name="ridepet_ep14egypt" KorName="태양의 배" MaterialItem="None">
+	<Material ID="39" Name="ridepet_ep14egypt" KorName="태양의 배" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="skl_eff_pet_ep14egypt_landing"/>
@@ -677,7 +677,7 @@
 			<Sound From="pc_war_jump" To="skl_eff_pet_ep14egypt_jump"/>
 		</Anim>
 	</Material>
-	<Material ID="40" Name="Effect_Stamp_Leaf" KorName="너구리의 나뭇잎" MaterialItem="misc_soil">
+	<Material ID="40" Name="Effect_Stamp_Leaf" KorName="너구리의 나뭇잎" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1.3" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -695,7 +695,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="41" Name="ridepet_scooter" KorName="포포 스쿠터" MaterialItem="None">
+	<Material ID="41" Name="ridepet_scooter" KorName="포포 스쿠터" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="skl_eff_pet_ep14rider_landing"/>
@@ -705,7 +705,7 @@
 			<Sound From="pc_war_jump" To="skl_eff_scooter_jump"/>
 		</Anim>
 	</Material>
-	<Material ID="42" Name="Effect_Stamp_Nightrabbit" KorName="쿨쿨 나이트래빗" MaterialItem="misc_soil">
+	<Material ID="42" Name="Effect_Stamp_Nightrabbit" KorName="쿨쿨 나이트래빗" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1.3" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -723,7 +723,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="43" Name="good_stamp_jp" KorName="참 잘했어요 도장" MaterialItem="misc_soil">
+	<Material ID="43" Name="good_stamp_jp" KorName="참 잘했어요 도장" MaterialItem="misc_soil" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1.3" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -741,7 +741,7 @@
 			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="44" Name="ridepet_dragonboat" KorName="용주" MaterialItem="None">
+	<Material ID="44" Name="ridepet_dragonboat" KorName="용주" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="F_pc_jump_smoke" Scale="1" ForceConvert="NO"/>
 			<Sound From="pc_war_jump_2" To="skl_eff_pet_ep14egypt_landing"/>
@@ -751,7 +751,7 @@
 			<Sound From="pc_war_jump" To="skl_eff_pet_ep14egypt_jump"/>
 		</Anim>
 	</Material>
-	<Material ID="45" Name="effect_ep15elf" KorName="요정 발자국 이펙트" MaterialItem="None">
+	<Material ID="45" Name="effect_ep15elf" KorName="요정 발자국 이펙트" MaterialItem="None" OverrideGroup="EffectCostume">
 		<Anim Name="LAND">
 			<Particle From="F_pc_jump_smoke" To="Shockwave_GrowingGrass_Green_01" Scale="0.1" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;90;0"/>
 			<Sound From="pc_war_jump_2" To="step_dry_land"/>
@@ -811,28 +811,88 @@
 			<Sound From="vulture" To="step_soil"/>
 		</Anim>
 	</Material>
-	<Material ID="46" Name="effect_capybara" KorName="카피바라 발자국 이펙트" MaterialItem="None">
+	<Material ID="46" Name="effect_capybara" KorName="카피바라 발자국 이펙트" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="RUN_RIDE">
 			<Particle From="F_pc_run_blank_dummy" To="Stomp_CapybaraFootprint_Black_01" Scale="1.2" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="90;0;90"/>
 			<Sound From="walk_left" To="walk_left"/>
 		</Anim>
 	</Material>
-	<Material ID="47" Name="effect_elephant" KorName="코끼리 발자국 이펙트" MaterialItem="None">
+	<Material ID="47" Name="effect_elephant" KorName="코끼리 발자국 이펙트" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="RUN_RIDE">
 			<Particle From="F_pc_run_blank_dummy" To="Stomp_ElephantFootprint_LightBrown_01" Scale="1" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;90"/>
 			<Sound From="walk_left" To="walk_left"/>
 		</Anim>
 	</Material>
-	<Material ID="48" Name="effect_tiger_white" KorName="백호 발자국 이펙트" MaterialItem="None">
+	<Material ID="48" Name="effect_tiger_white" KorName="백호 발자국 이펙트" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="RUN_RIDE">
 			<Particle From="F_pc_run_blank_dummy" To="Stomp_TigerSpiritFootprint_White_01" Scale="1" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;90;0"/>
 			<Sound From="walk_left" To="walk_left"/>
 		</Anim>
 	</Material>
-	<Material ID="49" Name="effect_chariot_white" KorName="전차 바퀴 이펙트" MaterialItem="None">
+	<Material ID="49" Name="effect_chariot_white" KorName="전차 바퀴 이펙트" MaterialItem="None" OverrideGroup="RidePet">
 		<Anim Name="RUN_RIDE">
 			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_Dust_LightBrown_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
 			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+	</Material>
+	<Material ID="50" Name="effect_harpseal" KorName="물개 달리기 이펙트" MaterialItem="None" OverrideGroup="EffectCostume">
+		<Anim Name="RUN_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="ARUN_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="RUN">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="WALK">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="DASH">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="RUN_DASH_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="step_soil"/>
+		</Anim>
+		<Anim Name="RUN_DASH">
+			<Particle From="F_pc_run_blank_dummy" To="AerialExplosion_FrostMagic_Cyan_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="step_soil"/>
+		</Anim>
+	</Material>
+	<Material ID="51" Name="effect_arbordy" KorName="숲의 수호자 이펙트" MaterialItem="None" OverrideGroup="RidePet">
+		<Anim Name="RUN_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="ARUN_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="RUN">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="WALK">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="DASH">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="walk_left"/>
+		</Anim>
+		<Anim Name="RUN_DASH_RIDE">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="step_soil"/>
+		</Anim>
+		<Anim Name="RUN_DASH">
+			<Particle From="F_pc_run_blank_dummy" To="Stomp_DivineDeerFootprint_Yellow_01" Scale="0.5" ForceConvert="NO" UnityEffect="YES" UnityEffectRotateAngle="0;0;0"/>
+			<Sound From="walk_left" To="step_soil"/>
 		</Anim>
 	</Material>
 </Map_materials>

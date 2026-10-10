@@ -5,11 +5,6 @@ function MINIMIZEDALARM_ON_INIT(addon, frame)
 end
 
 function ON_PVP_PLAYING_UPDATE(frame, msg, argStr,argNum)
-	--[[ if config.GetServiceNation() == 'PAPAYA' then
-		frame:ShowWindow(0)
-		return
-	end ]]
-
 	if TUTORIAL_CLEAR_CHECK(GetMyPCObject()) == false then
 		frame:ShowWindow(0)
 		return
@@ -20,7 +15,7 @@ function ON_PVP_PLAYING_UPDATE(frame, msg, argStr,argNum)
 		frame:ShowWindow(1);
 		local pic = GET_CHILD_RECURSIVELY(frame,"pic")
 		pic:SetEventScript(ui.LBUTTONUP,"OPEN_INDUNINFO_TAB_BY_ARG")
-		pic:SetEventScriptArgString(ui.LBUTTONUP,"6")
+		pic:SetEventScriptArgString(ui.LBUTTONUP,"5")
 		pic:SetEventScriptArgNumber(ui.LBUTTONUP,2)
 	else
 		frame:ShowWindow(0);
@@ -28,10 +23,6 @@ function ON_PVP_PLAYING_UPDATE(frame, msg, argStr,argNum)
 end
 
 function GET_PVP_TYPE()
-	-- local diff = PVP_MINE_GET_DIFF_TIME()
-	-- if diff > -900 and diff <= 1800 then
-	-- 	return "PVP_MINE"
-	-- end
 	if true == IsHaveCommandLine("-NOPVP") then
 		return nil
 	end
@@ -76,13 +67,13 @@ function ON_PVP_MINE_STATE_UPDATE(frame,msg,argStr,argNum)
 		pic:SetEnable(0)
 		frame:ShowWindow(1)
 		pic:SetEventScript(ui.LBUTTONUP,"OPEN_INDUNINFO_TAB_BY_ARG")
-		pic:SetEventScriptArgString(ui.LBUTTONUP,"6")
+		pic:SetEventScriptArgString(ui.LBUTTONUP,"5")
 		pic:SetEventScriptArgNumber(ui.LBUTTONUP,1)
 	elseif argStr == "ENABLE" then
 		frame:ShowWindow(1)
 		pic:SetEnable(1)
 		pic:SetEventScript(ui.LBUTTONUP,"OPEN_INDUNINFO_TAB_BY_ARG")
-		pic:SetEventScriptArgString(ui.LBUTTONUP,"6")
+		pic:SetEventScriptArgString(ui.LBUTTONUP,"5")
 		pic:SetEventScriptArgNumber(ui.LBUTTONUP,1)
 	elseif argStr == "UNABLE" then
 		frame:ShowWindow(1)

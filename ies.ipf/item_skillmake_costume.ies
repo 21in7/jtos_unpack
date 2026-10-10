@@ -62,3 +62,5 @@ ClassID,ClassName,SkillName,Theme,Keyword,Option,BuffName
 61,"EP13_costume_Com_123_W","tcance_transfrom_girl","Tcance","","","ITEM_BUFF_TCANCE_GIRL"
 62,"EP13_costume_Com_124_W","tcance_transfrom_boy","Tcance","","","ITEM_BUFF_TCANCE_BOY"
 63,"EP13_costume_Com_125_W","tcance_transfrom_girl","Tcance","","","ITEM_BUFF_TCANCE_GIRL"
+64,"costume_ep18onsenyukata_m","OnsenYukataFormChange_Male","OnsenYukata","Male","","OnsenYukata_Male_Buff"
+65,"costume_ep18onsenyukata_f","OnsenYukataFormChange_Female","OnsenYukata","Female","","OnsenYukata_Female_Buff"

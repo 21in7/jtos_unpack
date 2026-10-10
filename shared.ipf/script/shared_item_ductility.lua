@@ -3,7 +3,7 @@
 
 shared_item_ductility = {}
 
-shared_item_ductility.is_able_to_ductility = function(item, index)    
+shared_item_ductility.is_able_to_ductility = function(item, index)
     if TryGetProp(item, 'EnableDuctility', 'None') == 'NO' then
         return false, 'CantDuctilityEquipment'
     end
@@ -49,7 +49,7 @@ shared_item_ductility.is_able_to_ductility = function(item, index)
             return false, 'CantDuctilityEquipment'
         end
     end
-
+    
     return true, 'None'
 end
 
@@ -72,8 +72,10 @@ shared_item_ductility.is_able_to_ductility_option = function(item,index)
     return true, 'None'
 end
 
-shared_item_ductility.is_able_to_ductility_without_index = function(item)
-    if TryGetProp(item, 'EnableDuctility', 'None') == 'NO' then
+shared_item_ductility.is_able_to_ductility_without_index = function(item)    
+    local group_name = TryGetProp(item, 'GroupName', 'None')
+
+    if TryGetProp(item, 'EnableDuctility', 'None') == 'None' or TryGetProp(item, 'EnableDuctility', 'None') == 'NO' then
         return false, 'CantDuctilityEquipment'
     end
 
@@ -89,10 +91,9 @@ shared_item_ductility.is_able_to_ductility_without_index = function(item)
         return false, 'OnlyUseBelongingItem'
     end
 
-    local group_name = TryGetProp(item, 'GroupName', 'None')
     if group_name == 'SHOULDER' or group_name == 'BELT' then
         return true
-    end
+    end    
 
     return false
 end
@@ -138,7 +139,7 @@ shared_item_ductility.get_ductility_cost_table = function(item)
     end
     local group_name = TryGetProp(item, 'GroupName', 'None')
     local count = TryGetProp(item, 'Ductility_Count', 0) 
-
+    
     local misc_base = 1
     local coin_base = 300
     local ore_base = 150
@@ -230,6 +231,30 @@ shared_item_ductility.get_ductility_cost_table = function(item)
         cost_count = math.floor(cost_count)
         cost_count = math.min(cost_count, 3000)
         cost_list['misc_ore29'] = math.floor(cost_count) * 1
+        valid = true
+    elseif lv == 560 then
+        local cost_count = misc_base * math.pow(1.05, count)
+        if group_name == 'SHOULDER' then
+            cost_count = misc_base * math.pow(1.01, count)
+            cost_count = math.floor(cost_count)
+            cost_count = math.min(cost_count, 20)
+            cost_list['piece_EP18_fierce_shoulder'] = math.floor(cost_count) * 1
+        elseif group_name == 'BELT' then
+            cost_count = misc_base * math.pow(1.01, count)
+            cost_count = math.floor(cost_count)
+            cost_count = math.min(cost_count, 20)
+            cost_list['piece_EP18_penetration_belt'] = math.floor(cost_count) * 1
+        end
+
+        cost_count = coin_base * math.pow(1.01, count)
+        cost_count = math.floor(cost_count)
+        cost_count = math.min(cost_count, 30000)
+        cost_list['SauleCertificate'] = math.floor(cost_count) * 3
+
+        cost_count = ore_base * math.pow(1.01, count)
+        cost_count = math.floor(cost_count)
+        cost_count = math.min(cost_count, 3000)
+        cost_list['misc_ore30'] = math.floor(cost_count) * 1
         valid = true
     end
 

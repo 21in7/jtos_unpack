@@ -104,7 +104,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="388">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -147,7 +147,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="713">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -190,7 +190,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1140">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -233,7 +233,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1596">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -334,7 +334,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="2696">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.5"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -974,7 +974,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1350">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -1641,7 +1641,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="388">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -1675,7 +1675,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="713">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -1709,7 +1709,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1140">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -1743,7 +1743,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1596">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -1829,7 +1829,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="2696">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.5"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>
@@ -2515,7 +2515,7 @@
 				<Scp Scp="C_UNITY_EFFECT_ATTACH" Client="YES" UseSleep="NO" Time="1350">
 					<Str Str="Swing_LightAura_Yellow_02"/>
 					<Num Num="1.2"/>
-					<Num Num="0"/>
+					<Num Num="180"/>
 					<Num Num="-10"/>
 					<Num Num="180"/>
 					<Str Str="MID"/>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by imc (imc) -->
+<uiframe name="guild_dress_room_pose_select" x="0" y="" width="420" height="580">
+	<frame fullheight="false" fasthide="true" layout_gravity="center center" margin="0 0 0 0" draw="true"/>
+	<skin frameskin="test_skin_01"/>
+	<draw drawtitlebar="false"/>
+	<input moveable="true" hittestframe="true" moveintitlebar="true"/>
+	<option visible="false" hideable="true" closebutton="false" moveable="false" alwaysVisible="false"/>
+	<sound opensound="inven_win_open" closesound="inven_win_close"/>
+	<layer layerlevel="110"/>
+	<script OpenScp="GUILD_DRESS_ROOM_POSE_SELECT_OPEN" CloseScp="GUILD_DRESS_ROOM_POSE_SELECT_CLOSE"/>
+	<controls>
+		<groupbox name="title_bg" rect="0 0 413 40" margin="0 0 0 0" layout_gravity="center top" draw="true" hittestbox="false" resizebyparent="false" scrollbar="false" image="guild_dress_room_popup_title_bg"/>
+		<richtext name="title" parent="title_bg" margin="0 5 0 0" rect="0 0 200 30" layout_gravity="center top" caption="{@st43}제스처 선택{/}" fontname="white_16_ol"/>
+		<picture name="question" rect="0 0 28 28" margin="10 7 0 0" layout_gravity="left top" image="guild_dress_room_popup_question" texttooltip="{@st59b}제스처 선택{nl}{@st59s}미리보기 캐릭터의 제스처를 선택할 수 있습니다."/>
+		<picture name="close" rect="0 0 28 28" margin="0 7 10 0" layout_gravity="right top" LBtnUpArgNum="" LBtnUpScp="ui.CloseFrame(&apos;guild_dress_room_pose_select&apos;)" MouseOffAnim="btn_mouseoff" MouseOnAnim="btn_mouseover" clicksound="button_click_big" image="guild_dress_room_popup_close" oversound="button_over" texttooltip="{@st59}제스처 선택 창을 닫습니다{/}"/>
+		<groupbox name="main_bg" rect="0 0 420 460" margin="0 80 0 0" layout_gravity="left top" draw="false" hittestbox="false" resizebyparent="false" resizebyresolution="false" scrollbar="false" skin="None"/>
+	</controls>
+</uiframe>

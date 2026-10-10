@@ -14,6 +14,9 @@ function PICKUP_ON_CUPOLE_ACTIVATE(frame, msg, argStr, argNum)
     SET_PICKUP_BTN(frame)
     if frame:GetName() == "cupole_item" then
         SET_CUPOLE_GACHA_COLOR(frame)
+        SET_CUPOLE_LIST(frame);
+    else
+        CREATE_PICKUP_CUPOLE_LIST(frame)
     end
 end
 
@@ -29,7 +32,6 @@ function OPEN_CUPOLE_PICKUP(frame)
     SET_CURRENT_CUPOLE_PICKUP_ITEM_VALUE_COLOR(frame)
     frame:RunUpdateScript("UPDATE_CUPOLE")
     PICKUP_CUPOLE_SELECT(InfoBG,nil,nil,DEFAULT_INDEX)
-    CHNAGE_ALL_CUPOLE_UIMODEL_STATE(1)
     
     local PickupListBG = GET_CHILD_RECURSIVELY(frame,"PickupListBG")
     PickupListBG:SetScrollBarSkinName("verticalscrollbar3")
@@ -38,7 +40,10 @@ end
 
 function CLOSE_CUPOLE_PICKUP(frame)
     frame:StopUpdateScript("UPDATE_CUPOLE")
-    CHNAGE_ALL_CUPOLE_UIMODEL_STATE(0)
+    local preview = GET_CUPOLE_PICKUP_PREVIEW(frame)
+    if preview ~= nil then
+        preview:ClearModel()
+    end
 end
 
 function CREATE_PICKUP_CUPOLE_LIST(frame)
@@ -52,6 +57,10 @@ function CREATE_PICKUP_CUPOLE_LIST(frame)
     -- end
 
     local PickupListBG = GET_CHILD_RECURSIVELY(frame, "PickupListBG")
+    if PickupListBG == nil then
+        return ;
+    end
+
     local offset = {OFFSET_X, OFFSET_Y}
     for k,v in pairs(Pickuplist) do
         local clsname = TryGetProp(v, "ClassName", "None")
@@ -154,13 +163,12 @@ function PICKUP_CUPOLE_SELECT(parent, ctrl, argStr, argNum)
     local bg = parent:GetParent();
     FRAME_CHILD_COLORTONE_CLEAR(bg)
     FRAME_COLOR_CHANGE(parent, "FF5CFFD1");
-    REMOVE_ALL_CUPOLE_UIMODEL()
     local ItemPic = GET_CHILD_RECURSIVELY(frame, "ItemPic")
     local MainCharacter = GET_CHILD_RECURSIVELY(frame, "MainCharacter")
 
     if argNum > 0 then
         SET_CURRENT_CUPOLE_SELECT_INDEX(argNum)
-        frame:RunUpdateScript("KUPOLE_UIMODEL_IN_PICKUP",0.2)
+        KUPOLE_UIMODEL_IN_PICKUP(frame, argNum)
         local cls = GET_CUPOLE_CLASS_BY_INDEX(argNum)
         SET_SELECT_CUPOLE_NAME(frame, argNum)
         CUPOLE_INFO_SELECT(bg, nil, nil ,0)    
@@ -174,6 +182,10 @@ function PICKUP_CUPOLE_SELECT(parent, ctrl, argStr, argNum)
         CUPOLE_INFO_SELECT(bg, nil, nil ,2)    
         MainCharacter:ShowWindow(0)
         ItemPic:ShowWindow(1)
+        local preview = GET_CUPOLE_PICKUP_PREVIEW(frame)
+        if preview ~= nil then
+            preview:ClearModel()
+        end
     end
 end
 
@@ -185,53 +197,46 @@ function CUPOLE_INFO_SELECT(frame, ctrl, argStr, argNum)
     local EffectBG = GET_CHILD_RECURSIVELY(grand_parent, "EffectBG")
     local SelectBG = GET_CHILD_RECURSIVELY(grand_parent, "SelectBG")
     local ItemBG = GET_CHILD_RECURSIVELY(grand_parent, "ItemBG")
-    local Skill = GET_CHILD(SelectBG, "Skill")
-    local Effect = GET_CHILD(SelectBG, "Effect")
+    local SkillTabBtn = GET_CHILD(SelectBG, "SkillTabBtn")
+    local EffectTabBtn = GET_CHILD(SelectBG, "EffectTabBtn")
     local Item = GET_CHILD(SelectBG, "Item")
-    local Skl_light= GET_CHILD(SelectBG, "Skl_light")
-    local Eft_light= GET_CHILD(SelectBG, "Eft_light")
 
-    local skilltxt = ClMsg("KupoleSkill")
-    local effecttxt = ClMsg("KupoleEffect")
     local itemtext = ClMsg("KupoleURExplain")
 
-    Skill:ShowWindow(1)
-    Effect:ShowWindow(1)
+    local skillTabWidth = SkillTabBtn:GetWidth()
+    local skillTabHeight = SkillTabBtn:GetHeight()
+    local effectTabWidth = EffectTabBtn:GetWidth()
+    local effectTabHeight = EffectTabBtn:GetHeight()
+
+    SkillTabBtn:ShowWindow(1)
+    EffectTabBtn:ShowWindow(1)
+    SkillTabBtn:SetImage(argNum == 0 and "cupole_ui_view_tab_btn_clicked" or "cupole_ui_view_tab_btn")
+    EffectTabBtn:SetImage(argNum == 1 and "cupole_ui_view_tab_btn_clicked" or "cupole_ui_view_tab_btn")
+    SkillTabBtn:Resize(skillTabWidth, skillTabHeight)
+    EffectTabBtn:Resize(effectTabWidth, effectTabHeight)
 
     local index = GET_CURRENT_CUPOLE_SELECT_INDEX();
     if argNum == 0 then
         SkillBG:ShowWindow(1)
         EffectBG:ShowWindow(0)
-        Skl_light:ShowWindow(1)
-        Eft_light:ShowWindow(0)
         Item:ShowWindow(0)
         ItemBG:ShowWindow(0)
         SET_CUPOLE_SKILL_INFO(SkillBG, index)
-        skilltxt = "{@st66d}{s22}" .. skilltxt .. "{/}";
-        effecttxt = "{@st66d}{s22}{#6B6889}" .. effecttxt;
 
     elseif argNum == 1 then
         SkillBG:ShowWindow(0)
         EffectBG:ShowWindow(1)
-        Skl_light:ShowWindow(0)
-        Eft_light:ShowWindow(1)
         Item:ShowWindow(0)
         ItemBG:ShowWindow(0)
         SET_CUPOLE_EFFECT_INFO(EffectBG, index)
-        skilltxt = "{@st66d}{s22}{#6B6889}" .. skilltxt;
-        effecttxt = "{@st66d}{s22}" .. effecttxt .. "{/}";
     elseif argNum == 2 then
         SkillBG:ShowWindow(0)
         EffectBG:ShowWindow(0)
-        Skl_light:ShowWindow(0)
-        Eft_light:ShowWindow(0)
         Item:ShowWindow(1)
         ItemBG:ShowWindow(1)
-        Skill:ShowWindow(0)
-        Effect:ShowWindow(0)    
+        SkillTabBtn:ShowWindow(0)
+        EffectTabBtn:ShowWindow(0)
     end
-    Skill:SetText(skilltxt)
-    Effect:SetText(effecttxt)
 
     local Itemexp = GET_CHILD(ItemBG,"Itemexp")
     Itemexp:SetTextByKey("explan", itemtext)
@@ -258,7 +263,9 @@ function EARN_PICKUP_CUPOLE(frame, ctrl, argStr, argNum)
         local cls = GET_CUPOLE_RATIO_INFO_BY_INDEX(index)
         local ratioindex = TryGetProp(cls, "ClassID", 0)
         local type = 2 -- 0:단차 1:10연차 2:픽업
-        type = type .. ' ' .. ratioindex;
+        local clsid = GET_PICKUP_CLASSID_BY_GROUP("cupole_normal_gacha_banner")
+
+        type = type .. ' ' .. ratioindex..' '..clsid;
         pc.ReqExecuteTx_Item("CUPOLE_RECRUIT", 0, type)
     end
 end
@@ -320,8 +327,8 @@ function SET_PICKUP_BTN(frame)
     local earnbtn = GET_CHILD_RECURSIVELY(frame, "earnbtn")
     local cost = GET_CUPOLE_PICKUP_PROP_COUNT()
     if cost >= 300 then
-        earnbtn:SetSkinName("cupole_greenbtn")
+        earnbtn:SetSkinName("cupole_border_btn")
     else
-        earnbtn:SetSkinName("cupole_graybtn")
+        earnbtn:SetSkinName("cupole_border2_btn")
     end
 end

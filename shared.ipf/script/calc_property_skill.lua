@@ -2883,14 +2883,13 @@ end
 
 -- done , 해당 함수 내용은 cpp로 이전되었습니다. 변경 사항이 있다면 반드시 프로그램팀에 알려주시기 바랍니다.
 function SCR_GET_Mijin_no_jutsu_Ratio(skill)
-
-    local pc = GetSkillOwner(skill);
-    local abil = GetAbility(pc, "Shinobi3") 
-    local value = 0
-    if abil ~= nil then 
-        return SCR_ABIL_ADD_SKILLFACTOR_TOOLTIP(abil);
+    local value = 5
+    local pc = GetSkillOwner(skill)
+    if pc ~= nil then
+        value = GET_PVP_TARGET_COUNT(pc, value)
     end
-
+    
+    return value;
 end
 
 -- done , 해당 함수 내용은 cpp로 이전되었습니다. 변경 사항이 있다면 반드시 프로그램팀에 알려주시기 바랍니다.
@@ -15829,8 +15828,8 @@ function SCR_COMMON_COOLDOWN_DECREASE(pc, skill, basicCoolDown)
         return basicCoolDown
     end
 
-    -- 일부 스킬 그룹의 쿨타임 체크를 로직에서 제외.
-    if CHECK_EXCEPT_COOLDOWNGROUP(skill, "Sledger_BigBang") == true then
+    -- 그룹2(아이템·버프·카드 등 공용) 쿨감 무시 — skill.xml Keyword="IgnoreCommonCoolDownReduce"로만 관리 (구 Sledger_BigBang 그룹 하드코딩 대체, 증가 효과 포함 전면 제외는 구 빅뱅 처리와 동일. 그룹1 패스·시안 젬은 IgnoreSkillCoolDownReduce 별도 키워드 2026-09-09)
+    if CHECK_SKILL_KEYWORD(skill, "IgnoreCommonCoolDownReduce") == 1 then
         return basicCoolDown;
     end
 
@@ -15904,25 +15903,13 @@ function SCR_COMMON_COOLDOWN_DECREASE(pc, skill, basicCoolDown)
         end
     end
     
-    -- RadaOption 라다의 축복
-    local rada_cooldown = GetExProp(pc, 'rada_cooldown')
-    if rada_cooldown > 0 then
-        rada_cooldown = 1 - rada_cooldown / 100        
-        basicCoolDown = basicCoolDown * rada_cooldown
+    -- SauleOption 사울레의 축복
+    local saule_cooldown = GetExProp(pc, 'saule_cooldown')
+    if saule_cooldown > 0 then
+        saule_cooldown = 1 - saule_cooldown / 100
+        basicCoolDown = basicCoolDown * saule_cooldown
     end
 
-    rada_cooldown = GetExProp(pc, 'jurate_cooldown')
-    if rada_cooldown > 0 then
-        rada_cooldown = 1 - rada_cooldown / 100        
-        basicCoolDown = basicCoolDown * rada_cooldown
-    end
-
-    rada_cooldown = GetExProp(pc, 'austeja_cooldown')
-    if rada_cooldown > 0 then
-        rada_cooldown = 1 - rada_cooldown / 100        
-        basicCoolDown = basicCoolDown * rada_cooldown
-    end
-    
     -- 여신의 전언: 불꽃의 기억 쿨다운 감소
     local earring_raid_cooldown = GetExProp(pc, 'earring_raid_cooldown')
     if earring_raid_cooldown > 0 then

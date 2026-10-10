@@ -172,8 +172,8 @@ end
 
 function GET_RECIPE_MATERIAL_INFO(recipeCls, index,pc)
     local clsName = "Item_"..index.."_1";
-	local itemName = recipeCls[clsName];
-	if itemName == "None" then
+	local itemName = TryGetProp(recipeCls, clsName, 'None');
+	if not itemName or itemName == "None" then
 		return nil;
     end
     

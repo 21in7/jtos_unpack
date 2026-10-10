@@ -2942,6 +2942,10 @@ function SCR_ABIL_CLOWN13_INACTIVE(self, ability)
 end
 
 function SCR_ABIL_Daoshi21_ACTIVE(self, ability)
+    if IsPVPServer(self) == 1 or IsPVPField(self) == 1 or IsJoinColonyWarMap(self) == 1 then
+        return;
+    end
+
     local skl = GetSkill(self, "Daoshi_PhantomEradication")
     if skl ~= nil then
         SetSkillOverHeat(self, skl.ClassName, 0)
@@ -4765,4 +4769,20 @@ end
 
 function SCR_ABIL_HERMIT_INACTIVE(self, ability)
     RemoveBuff(self, "FlowOfSpace_Dummy_Buff")
+end
+
+function SCR_ABIL_GRIMMARK_ACTIVE(self, ability)
+    AddBuff(self, self, "Grimmark_Dummy_Buff", 99, 0, 0, 1)
+end
+
+function SCR_ABIL_GRIMMARK_INACTIVE(self, ability)
+    RemoveBuff(self, "Grimmark_Dummy_Buff")
+end
+
+function SCR_ABIL_COMMODORE_ACTIVE(self, ability)
+    AddBuff(self, self, "Zeroing_Dummy_Buff", 99, 0, 0, 1)
+end
+
+function SCR_ABIL_COMMODORE_INACTIVE(self, ability)
+    RemoveBuff(self, "Zeroing_Dummy_Buff")
 end

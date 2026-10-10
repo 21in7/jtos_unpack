@@ -113,8 +113,10 @@ function SET_BLACK_MARKET_ICON(frame, itemCls, active_id)
 end
 
 function SET_BALCK_MARKET_TOOLTIP(icon, itemCls)
-    SET_ITEM_TOOLTIP_BY_NAME(icon, itemCls.ClassName)
-    icon:SetTooltipOverlap(1)
+    if itemCls ~= nil then
+        SET_ITEM_TOOLTIP_BY_NAME(icon, itemCls.ClassName)
+        icon:SetTooltipOverlap(1)
+    end
 end
 
 function SET_BALCK_MARKET_ITEM_NAME(frame, itemCls, active_id)    
@@ -311,7 +313,7 @@ function SET_BM_SCHEDULE(frame)
     scheduleGbox:RemoveAllChild();    
     local sysTime = geTime.GetServerSystemTime();
     local nowTime = string.format("%04d-%02d-%02d %02d:%02d:%02d", sysTime.wYear, sysTime.wMonth, sysTime.wDay, sysTime.wHour, sysTime.wMinute, sysTime.wSecond)
-    local posY = 45;
+    local posY = -40;
     local OffsetY = 120;
     local number = 0;
     local MaxNumber = 100;
